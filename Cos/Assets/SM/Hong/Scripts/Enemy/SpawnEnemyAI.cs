@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,9 +7,7 @@ public class SpawnEnemyAI : MonoBehaviour
 {
     float patrolSpeed = 2f;
     float chaseSpeed = 5f;
-    float patrolWaitTime = 3f;
     public float attackRange;
-    float detectionAngle = 360f;
     public int hp;
 
     private Animator m_Animator;

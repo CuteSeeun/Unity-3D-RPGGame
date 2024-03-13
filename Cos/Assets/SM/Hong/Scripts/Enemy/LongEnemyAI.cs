@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class LongEnemyAI : MonoBehaviour
 {
     float patrolSpeed = 2f;
-    float chaseSpeed = 5f;
     float patrolWaitTime = 3f;
     public float detectionRange;
     public float attackRange;
