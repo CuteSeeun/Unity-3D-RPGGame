@@ -193,6 +193,11 @@ namespace Assets.Player.Scripts
             animator.SetInteger("state", _state);
         }
 
+        protected void Attack2Release()
+        {
+            animator.SetTrigger("attack2Release");
+        }
+
         protected void Attack2End()
         {
             _isDirty = false;

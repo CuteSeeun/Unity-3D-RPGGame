@@ -51,14 +51,15 @@ namespace Assets.Player.Scripts
 
         public void OnAttack2(InputAction.CallbackContext context)
         {
-            Attack2();
             if (context.interaction is HoldInteraction)
             {
+                Attack2();
             }
             else if (context.interaction is PressInteraction)
             {
                 Attack2End();
             }
+            Debug.Log(context);
         }
         #endregion ========================================================
     }
