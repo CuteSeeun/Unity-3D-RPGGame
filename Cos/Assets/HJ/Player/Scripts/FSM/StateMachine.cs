@@ -27,9 +27,8 @@ namespace Assets.Player.Scripts.FSM
         public void OnUpdate()
         {
             // 매 프레임마다 OnUpdate가 반환하는 다음 상태로 전환
-            ChangeState(
-                states[current].OnUpdate(_animator) // current State에 해당하는 IState를 불러와 실행, 다음 상태를 반환
-                );
+            ChangeState(states[current].OnUpdate(_animator) // current State에 해당하는 IState를 불러와 실행, 다음 상태를 반환
+                       );
         }
 
         // 다음 State로 전환

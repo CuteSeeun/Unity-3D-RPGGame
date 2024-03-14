@@ -59,7 +59,6 @@ namespace Assets.Player.Scripts
             {
                 Attack2End();
             }
-            Debug.Log(context);
         }
         #endregion ========================================================
     }
