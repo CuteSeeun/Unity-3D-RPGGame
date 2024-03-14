@@ -4,27 +4,22 @@ using UnityEngine;
 
 public class HealingLight : MonoBehaviour
 {
-    public int healAmount = 100; // ÇÃ·¹ÀÌ¾î¿¡°Ô È¸º¹½ÃÅ³ Ã¼·Â·®
+    public int heal = 100; // í”Œë ˆì´ì–´ì—ê²Œ íšŒë³µì‹œí‚¬ ì²´ë ¥ëŸ‰
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(1);
-        // Ãæµ¹ÇÑ °´Ã¼°¡ ÇÃ·¹ÀÌ¾îÀÎÁö È®ÀÎ
+        // ì¶©ëŒí•œ ê°ì²´ê°€ í”Œë ˆì´ì–´ì¸ì§€ í™•ì¸
         if (other.CompareTag("Player"))
         {
-            Debug.Log(2);
-            // ÇÃ·¹ÀÌ¾îÀÇ HealthController ½ºÅ©¸³Æ®¸¦ °¡Á®¿È
-            // HealthController playerHealth = other.GetComponent<HealthController>();
+            Debug.Log("Perfect Healing");
+            
+            // í”Œë ˆì´ì–´ì˜ ì²´ë ¥ì„ ëª¨ë‘ íšŒë³µì‹œí‚¤ëŠ” ì½”ë“œ í•„ìš”
+            
 
-            // HealthController ½ºÅ©¸³Æ®°¡ Á¸ÀçÇÏ¸é
-            //if (playerHealth != null)
-            //{
-            // ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀ» ¸ğµÎ È¸º¹
-            //playerHealth.Heal(playerHealth.maxHealth);
-
-            // ÇØ´ç °´Ã¼¸¦ ÆÄ±«
+            // í•´ë‹¹ ê°ì²´ë¥¼ íŒŒê´´
             Destroy(gameObject);
-            //}
+            
         }
     }
 }

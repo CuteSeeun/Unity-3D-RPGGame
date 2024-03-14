@@ -7,13 +7,15 @@ public class Arrow1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 1.0f);
+        //화살의 수명을 3초로 제한한다
+        Destroy(gameObject, 3.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += -Vector3.forward * Time.deltaTime * 10;
+        //20의 속도로 날아간다
+        transform.position += -Vector3.forward * Time.deltaTime * 20;
 
     }
 }
