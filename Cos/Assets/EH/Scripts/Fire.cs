@@ -6,6 +6,7 @@ public class Fire : MonoBehaviour
 {
     public void OnTriggerStay(Collider other)
     {
+        Debug.Log(1);
         StartCoroutine("Firework");
     }
 
@@ -13,7 +14,7 @@ public class Fire : MonoBehaviour
     {
         yield return null; 
 
-        //코루틴에 플레이어에게 데미지를 준다는 코드를 넣어야함(hit함수를 2초마다 호출하는 코드)
+        //코루틴에 플레이어에게 데미지를 준다는 코드를 넣어야함(hit함수를 2초마다 호출하는 코드?)
     }
     void Hit()
     {

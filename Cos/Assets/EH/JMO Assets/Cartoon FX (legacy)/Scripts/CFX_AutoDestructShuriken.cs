@@ -17,10 +17,6 @@ public class CFX_AutoDestructShuriken : MonoBehaviour
 	{
 		StartCoroutine("CheckIfAlive");
 	}
-    private void OnDisable()
-    {
-        
-    }
 
     IEnumerator CheckIfAlive ()
 	{

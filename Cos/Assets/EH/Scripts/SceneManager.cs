@@ -7,19 +7,23 @@ public class SceneManger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        // Player ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®°¡ ¾Æ´Ï¸é ¹Ù·Î ¹İÈ¯
+        // Player íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ê°€ ì•„ë‹ˆë©´ ë°”ë¡œ ë°˜í™˜
         if (!other.CompareTag("Player"))
             return;
 
-        // ÇöÀç È°¼ºÈ­µÈ ¾ÀÀÌ¸§À» ¾ò´Â´Ù.
+        Debug.Log("player Triggered");
+
+        // í˜„ì¬ í™œì„±í™”ëœ ì”¬ì´ë¦„ì„ ì–»ëŠ”ë‹¤.
         Scene nowScene = SceneManager.GetActiveScene();
 
         switch (nowScene.name)
         {
             case "Dongeon Enterance":
+                Debug.Log(nowScene);
                 SceneManager.LoadScene("Dongeon First");
                 break;
             case "Dongeon First":
+                Debug.Log(nowScene);
                 SceneManager.LoadScene("Dongeon Enterance");
                 break;
 
