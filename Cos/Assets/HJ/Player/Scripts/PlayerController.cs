@@ -44,20 +44,20 @@ namespace Assets.Player.Scripts
             Dodge();
         }
 
-        public void OnAttack1(InputAction.CallbackContext context)
+        public void OnAttackA(InputAction.CallbackContext context)
         {
-            Attack1();
+            AttackA();
         }
 
-        public void OnAttack2(InputAction.CallbackContext context)
+        public void OnAttackB(InputAction.CallbackContext context)
         {
             if (context.interaction is HoldInteraction)
             {
-                Attack2();
+                AttackB();
             }
             else if (context.interaction is PressInteraction)
             {
-                Attack2End();
+                AttackBEnd();
             }
         }
         #endregion ========================================================

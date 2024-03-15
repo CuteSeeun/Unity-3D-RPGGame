@@ -15,7 +15,7 @@ namespace Assets.Player.Scripts.FSM
 
         // Controller란?
         // Data에 접근해서 Data의 갱신을 요청하고 Data가 갱신되면 갱신된 데이터를 바탕으로 유저에게 전달
-        // Machine을 가지는 주인에 대한 참조
+        // Machine을 가지는 주인에 대한 참조. 다른 Monobehaviour 참조를 해야 할 필요가 많음.
         public CharacterController owner;
 
         public State current; // 현재 상태

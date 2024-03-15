@@ -25,6 +25,7 @@ namespace Assets.Player.Scripts
         protected virtual void Start()
         {
             animator.SetInteger("type", _type);
+            SetType();
         }
 
         protected virtual void Update()
@@ -36,13 +37,11 @@ namespace Assets.Player.Scripts
                 switch (_state)
                 {
                     case 2:
-                        DodgeUpdate();
                         break;
                     case 3:
-                        Attack1Update();
                         break;
                     case 4:
-                        Attack2Update();
+                        AttackBUpdate();
                         break;
                     case 5:
                         HitAUpdate();
@@ -58,19 +57,18 @@ namespace Assets.Player.Scripts
         protected virtual void FixedUpdate()
         {
             if (!_isDirty)
-                MoveFixedUpdate();
+            {
+            }
             else
             {
                 switch (_state)
                 {
                     case 2:
-                        DodgeFixedUpdate();
                         break;
                     case 3:
-                        Attack1FixedUpdate();
                         break;
                     case 4:
-                        Attack2FixedUpdate();
+                        AttackBFixedUpdate();
                         break;
                     case 5:
                         HitAFixedUpdate();
@@ -82,109 +80,74 @@ namespace Assets.Player.Scripts
             }
         }
 
-        // Move--------------------------------------------------------------
+        // Type ------------------------------------------------------------
+        private int _attackAComboMax;
+        private void SetType()
+        {
+            switch (_type)
+            {
+                case 0:
+                    _attackAComboMax = 2;
+                    break;
+                case 1:
+                    _attackAComboMax = 4;
+                    break;
+                case 2:
+                    _attackAComboMax = 2;
+                    break;
+                case 3:
+                    _attackAComboMax = 2;
+                    break;
+                case 4:
+                    _attackAComboMax = 1;
+                    break;
+            }
+        }
+
+        // Move --------------------------------------------------------------
+        public float speed { get => _speed; }
         [SerializeField] float _speed = 5f;
         public virtual float horizontal { get; set; }
         public virtual float vertical { get; set; }
-        public Vector3 moveDirection { get => _moveDirection; }
+        public Vector3 moveDirection { get => _moveDirection; set => _moveDirection = value; }
         protected Vector3 _moveDirection;
+        public float moveFloat { get => _moveFloat;  }
         private float _moveFloat;
+        public float velocity { get => _velocity; }
         protected float _velocity = 1;
+
         protected void MoveUpdate()
         {
             _moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
             _moveFloat = _moveDirection.magnitude * _velocity;
 
-            _state = 1;
-            animator.SetInteger("state", _state);
             animator.SetFloat("moveFloat", _moveFloat);
         }
 
-        protected void MoveFixedUpdate()
-        {
-            if (_moveDirection != Vector3.zero)
-            {
-                transform.rotation = Quaternion.LookRotation(_moveDirection);
-                transform.position += _moveDirection * _velocity * _speed * Time.fixedDeltaTime;
-            }
-        }
-
-        // Dodge-----------------------------------------------------------------
+        // Dodge -----------------------------------------------------------------
+        public float dodgeSpeed { get => _dodgeSpeed; }
         [SerializeField] float _dodgeSpeed = 10f;
-        private float _dodgeSpeedLeft;
+        public float dodgeTime { get => _dodgeTime; }
         [SerializeField] float _dodgeTime = 0.5f;
-        [SerializeField] float _dodgeTimeInverse = 1f;
-        private float _dodgeTimeLeft;
 
+        public float dodgeTimeInverse { get => _dodgeTimeInverse; }
+        [SerializeField] float _dodgeTimeInverse = 1f;
+        
         protected void Dodge()
         {
-            if (!_isDirty && _moveDirection.magnitude != 0)
-            {
-                _motionDirection = _moveDirection;
-                _dodgeSpeedLeft = _dodgeSpeed;
-                _dodgeTimeLeft = _dodgeTime;
-
-                _isDirty = true;
-                _state = 2;
-                animator.SetInteger("state", _state);
-            }
+            animator.SetInteger("state", 2);
         }
 
-        protected void DodgeUpdate()
-        { }
+        // AttackA -----------------------------------------------------------------
+        public int attackAComboMax { get => _attackAComboMax; }
 
-        protected void DodgeFixedUpdate()
+        protected void AttackA()
         {
-            _dodgeSpeedLeft -= _dodgeSpeed * _dodgeTimeInverse * Time.fixedDeltaTime;
-            _dodgeTimeLeft -= Time.fixedDeltaTime;
-            transform.position += _motionDirection * _dodgeSpeedLeft * Time.fixedDeltaTime;
-
-            if (_dodgeTimeLeft < 0)
-            {
-                _isDirty = false;
-            }
-        }
-
-        // Attack1-----------------------------------------------------------------
-        [SerializeField] float _attackTime;
-        private float _attackTimeLeft;
-        [SerializeField] int _attack1ComboMax;
-        private int _attack1Combo;
-
-        protected void Attack1()
-        {
-            if (!_isDirty)
-            {
-                _motionDirection = _moveDirection;
-                _attackTimeLeft = _attackTime;
-
-                _isDirty = true;
-                _state = 3;
-                animator.SetInteger("state", _state);
-                animator.SetTrigger("attack1");
-
-                animator.SetInteger("attack1Combo", _attack1Combo++);
-
-                if (_attack1Combo > _attack1ComboMax - 1)
-                    _attack1Combo = 0;
-            }
-        }
-
-        protected void Attack1Update()
-        { }
-
-        protected void Attack1FixedUpdate()
-        {
-            _attackTimeLeft -= Time.fixedDeltaTime;
-
-            if (_attackTimeLeft < 0)
-            {
-                _isDirty = false;
-            }
+            animator.SetInteger("state", 3);
         }
 
         // Attack2-----------------------------------------------------------
-        protected void Attack2()
+        protected void AttackB()
         {
             animator.SetTrigger("attack2");
 
@@ -193,21 +156,23 @@ namespace Assets.Player.Scripts
             animator.SetInteger("state", _state);
         }
 
-        protected void Attack2Release()
+        protected void AttackBRelease()
         {
-            animator.SetTrigger("attack2Release");
+            _isDirty = false;
+            _state = 1;
+            animator.SetInteger("state", _state);
         }
 
-        protected void Attack2End()
+        protected void AttackBEnd()
         {
             _isDirty = false;
         }
 
-        protected void Attack2Update()
+        protected void AttackBUpdate()
         {
 
         }
-        protected void Attack2FixedUpdate()
+        protected void AttackBFixedUpdate()
         {
 
         }
