@@ -12,6 +12,8 @@ public class CloseEnemyAI : MonoBehaviour
     public float attackRange;
     float detectionAngle = 360f;
     public int hp;
+    public int currentHp;
+    
 
     private Animator m_Animator;
     private NavMeshAgent agent;
@@ -22,7 +24,7 @@ public class CloseEnemyAI : MonoBehaviour
     private bool isDeath;
     private float attackTimer;
 
-    // Ãß°¡µÈ ÄÚµå: °¨Áö ¹üÀ§¿Í °ø°İ ¹üÀ§¸¦ ½Ã°¢È­ÇÏ±â À§ÇÑ »ö»ó º¯¼ö
+    // ì¶”ê°€ëœ ì½”ë“œ: ê°ì§€ ë²”ìœ„ì™€ ê³µê²© ë²”ìœ„ë¥¼ ì‹œê°í™”í•˜ê¸° ìœ„í•œ ìƒ‰ìƒ ë³€ìˆ˜
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
 
@@ -35,6 +37,7 @@ public class CloseEnemyAI : MonoBehaviour
         isPatrolling = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
+        currentHp = hp;
     }
 
     void Update()
@@ -83,9 +86,10 @@ public class CloseEnemyAI : MonoBehaviour
             attackTimer = 0;
             Debug.Log(attackTimer);
         }
-        if (hp <= 0 && !isDeath)
+        if (currentHp <= 0 && !isDeath)
         {
             m_Animator.SetTrigger("isDeath");
+            agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
         }
@@ -109,7 +113,7 @@ public class CloseEnemyAI : MonoBehaviour
     {
         m_Animator.SetTrigger("isAttack");
         attackTimer = 3;
-        // °ø°İ µ¿ÀÛ ±¸Çö
+        // ê³µê²© ë™ì‘ êµ¬í˜„
     }
 
     Vector3 GetRandomPatrolDestination()
@@ -124,11 +128,11 @@ public class CloseEnemyAI : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // °¨Áö ¹üÀ§ ½Ã°¢È­
+        // ê°ì§€ ë²”ìœ„ ì‹œê°í™”
         Gizmos.color = detectionColor;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
-        // °ø°İ ¹üÀ§ ½Ã°¢È­
+        // ê³µê²© ë²”ìœ„ ì‹œê°í™”
         Gizmos.color = attackColor;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
@@ -165,5 +169,10 @@ public class CloseEnemyAI : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+    void Hit()
+    {
+        //ë°ë¯¸ì§€ ê°€í•˜ëŠ” ì½”ë“œ êµ¬í˜„
     }
 }

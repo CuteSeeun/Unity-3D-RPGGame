@@ -1,9 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class MageEnemyAI : MonoBehaviour
 {
@@ -169,5 +167,10 @@ public class MageEnemyAI : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+    void Hit()
+    {
+        //데미지 가하는 코드 구현
     }
 }

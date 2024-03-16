@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class SpawnEnemyAI : MonoBehaviour
 {
-    float patrolSpeed = 2f;
     float chaseSpeed = 5f;
     public float attackRange;
     public int hp;
@@ -28,7 +27,6 @@ public class SpawnEnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         isChasing = true;
         agent.isStopped = false;
-        agent.speed = patrolSpeed;
         Invoke("Spawn", 3);
     }
 
@@ -110,5 +108,9 @@ public class SpawnEnemyAI : MonoBehaviour
     {
         m_Animator.SetTrigger("isSpawn");
         isSpawn = true;
+    }
+    void Hit()
+    {
+        //데미지 가하는 코드 구현
     }
 }
