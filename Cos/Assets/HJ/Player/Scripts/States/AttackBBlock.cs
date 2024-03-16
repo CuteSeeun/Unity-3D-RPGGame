@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using CharacterController = Assets.Player.Scripts.CharacterController;
 
 namespace Assets.HJ.Player.Scripts.States
 {
-    public class Move : StateMachineBehaviour
+    public class AttackBBlock : StateMachineBehaviour
     {
         Animator animator;
         Transform transform;
@@ -12,26 +11,18 @@ namespace Assets.HJ.Player.Scripts.States
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.SetInteger("state", 1);
             transform = animator.transform;
             characterController = animator.GetComponent<CharacterController>();
-            characterController.moveDirection = Vector3.zero;
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Debug.Log(1);
-            if (animator.GetInteger("state") == 1)
+            if (characterController.moveDirection != Vector3.zero)
             {
-                Debug.Log(2);
-                if (characterController.moveDirection != Vector3.zero)
-                {
-                    Debug.Log(3);
-                    transform.rotation = Quaternion.LookRotation(characterController.moveDirection);
-                }
-
-                transform.position += characterController.moveDirection * characterController.velocity * characterController.speed * Time.fixedDeltaTime;
+                transform.rotation = Quaternion.LookRotation(characterController.moveDirection);
             }
+
+            //transform.position += characterController.moveDirection * 0.5f * characterController.speed * Time.fixedDeltaTime;
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -39,16 +30,16 @@ namespace Assets.HJ.Player.Scripts.States
 
         }
 
-        // OnStateMove is called right after Animator.OnAnimatorMove()
+        // OnStateMove : Animator.OnAnimatorMove() 바로 뒤에 호출됩니다.
         //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         //{
-        //    // Implement code that processes and affects root motion
+        //    // 루트 모션을 처리하고 영향을 미치는 코드 구현
         //}
 
-        // OnStateIK is called right after Animator.OnAnimatorIK()
+        // OnStateIK: Animator.OnAnimatorIK() 바로 뒤에 호출됩니다.
         //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         //{
-        //    // Implement code that sets up animation IK (inverse kinematics)
+        //    // 애니메이션 IK(inverse kinematics)를 설정하는 코드 구현
         //}
     }
 }

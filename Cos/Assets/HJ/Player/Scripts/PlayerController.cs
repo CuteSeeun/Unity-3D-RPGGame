@@ -1,5 +1,4 @@
 using UnityEngine;
-using Assets.Player.Scripts.FSM;
 using CharacterController = Assets.Player.Scripts.CharacterController;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
@@ -57,7 +56,7 @@ namespace Assets.Player.Scripts
             }
             else if (context.interaction is PressInteraction)
             {
-                AttackBEnd();
+                AttackBRelease();
             }
         }
         #endregion ========================================================

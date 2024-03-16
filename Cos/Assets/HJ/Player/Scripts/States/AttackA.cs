@@ -10,7 +10,6 @@ namespace Assets.HJ.Player.Scripts.States
         CharacterController characterController;
 
         private Vector3 _AttackADirection;
-        private int _attackACombo;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -26,12 +25,12 @@ namespace Assets.HJ.Player.Scripts.States
                 _AttackADirection = transform.forward;
             }
 
-            _attackACombo++;
+            characterController.attackACombo++;
 
-            if (_attackACombo > characterController.attackAComboMax)
-                _attackACombo = 1;
+            if (characterController.attackACombo > characterController.attackAComboMax)
+                characterController.attackACombo = 1;
 
-            animator.SetInteger("attackACombo", _attackACombo);
+            animator.SetInteger("attackACombo", characterController.attackACombo);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -51,9 +50,9 @@ namespace Assets.HJ.Player.Scripts.States
         //}
 
         // OnStateIK: Animator.OnAnimatorIK() 바로 뒤에 호출됩니다.
-        override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-            // 애니메이션 IK(inverse kinematics)를 설정하는 코드 구현
-        }
+        //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    // 애니메이션 IK(inverse kinematics)를 설정하는 코드 구현
+        //}
     }
 }

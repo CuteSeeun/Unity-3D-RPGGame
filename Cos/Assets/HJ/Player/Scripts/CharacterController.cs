@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Assets.Player.Scripts.FSM;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 namespace Assets.Player.Scripts
@@ -12,8 +11,6 @@ namespace Assets.Player.Scripts
         protected Transform transform;
         [SerializeField] Animator animator;
 
-        private bool _isDirty = false;
-        private int _state;
         private Vector3 _motionDirection;
         [SerializeField] int _type;
 
@@ -25,63 +22,22 @@ namespace Assets.Player.Scripts
         protected virtual void Start()
         {
             animator.SetInteger("type", _type);
+            animator.SetInteger("attackACombo", 1);
             SetType();
         }
 
         protected virtual void Update()
         {
-            if (!_isDirty)
-                MoveUpdate();
-            else
-            {
-                switch (_state)
-                {
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        AttackBUpdate();
-                        break;
-                    case 5:
-                        HitAUpdate();
-                        break;
-                    case 6:
-                        HitBUpdate();
-                        break;
-
-                }
-            }
+            MoveUpdate();
         }
 
         protected virtual void FixedUpdate()
         {
-            if (!_isDirty)
-            {
-            }
-            else
-            {
-                switch (_state)
-                {
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        AttackBFixedUpdate();
-                        break;
-                    case 5:
-                        HitAFixedUpdate();
-                        break;
-                    case 6:
-                        HitBFixedUpdate();
-                        break;
-                }
-            }
         }
 
         // Type ------------------------------------------------------------
         private int _attackAComboMax;
+
         private void SetType()
         {
             switch (_type)
@@ -140,32 +96,27 @@ namespace Assets.Player.Scripts
 
         // AttackA -----------------------------------------------------------------
         public int attackAComboMax { get => _attackAComboMax; }
+        public int attackACombo { get => _attackACombo; set => _attackACombo = value; }
+        private int _attackACombo = 1;
 
         protected void AttackA()
         {
             animator.SetInteger("state", 3);
         }
 
-        // Attack2-----------------------------------------------------------
+        // AttackB-----------------------------------------------------------
         protected void AttackB()
         {
-            animator.SetTrigger("attack2");
-
-            _isDirty = true;
-            _state = 4;
-            animator.SetInteger("state", _state);
+            animator.SetInteger("state", 4);
         }
 
         protected void AttackBRelease()
         {
-            _isDirty = false;
-            _state = 1;
-            animator.SetInteger("state", _state);
+            animator.SetInteger("state", 1);
         }
 
         protected void AttackBEnd()
         {
-            _isDirty = false;
         }
 
         protected void AttackBUpdate()
@@ -184,9 +135,7 @@ namespace Assets.Player.Scripts
         public void HitA()
         {
             _hitATimeLeft = _hitATime;
-            _isDirty = true;
-            _state = 5;
-            animator.SetInteger("state", _state);
+            animator.SetInteger("state", 5);
             animator.SetTrigger("hitA");
             Debug.Log("HitA");
         }
@@ -199,27 +148,19 @@ namespace Assets.Player.Scripts
         protected void HitAFixedUpdate()
         {
             _hitATimeLeft -= Time.fixedDeltaTime;
-
-            if (_hitATimeLeft < 0)
-            {
-                _isDirty = false;
-            }
         }
 
         // HitB-----------------------------------------------------------
         [SerializeField] float _hitBTime = 1f;
         private float _hitBTimeLeft;
-        [SerializeField] float _hitBSpeed = 10f;
+        [SerializeField] float _hitBSpeed = 5f;
         private float _hitBSpeedLeft;
 
         public void HitB()
         {
             _hitBTimeLeft = _hitBTime;
             _hitBSpeedLeft = _hitBSpeed;
-            _isDirty = true;
-            _state = 6;
-            _state = 6;
-            animator.SetInteger("state", _state);
+            animator.SetInteger("state", 6);
             animator.SetTrigger("hitB");
             Debug.Log("HitB");
         }
@@ -234,12 +175,6 @@ namespace Assets.Player.Scripts
             _hitBTimeLeft -= Time.fixedDeltaTime;
             _hitBSpeedLeft -= _hitBSpeed * Time.fixedDeltaTime;
             transform.position += new Vector3(0,0,1) * _hitBSpeedLeft * Time.fixedDeltaTime;
-
-
-            if (_hitBTimeLeft < 0)
-            {
-                _isDirty = false;
-            }
         }
     }
 }
