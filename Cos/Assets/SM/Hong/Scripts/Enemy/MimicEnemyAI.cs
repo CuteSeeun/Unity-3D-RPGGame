@@ -3,9 +3,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SpawnEnemyAI : MonoBehaviour
+public class MimicEnemyAI : MonoBehaviour
 {
-    float chaseSpeed = 5f;
+    float chaseSpeed = 3f;
     public float attackRange;
     public int hp;
 
@@ -14,7 +14,7 @@ public class SpawnEnemyAI : MonoBehaviour
     private Transform player;
     private bool isChasing;
     private bool isDeath;
-    private bool isSpawn;
+    private bool isOpen;
     private float attackTimer;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
@@ -27,21 +27,25 @@ public class SpawnEnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         isChasing = true;
         agent.isStopped = false;
-        Invoke("Spawn", 3);
+        agent.stoppingDistance = 3;
+        attackTimer = 3;
     }
 
     void Update()
     {
-        if (isSpawn)
+        if (isOpen)
         {
-            agent.isStopped = false;           
+            if(!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Open"))
+            {
+                agent.isStopped = false;
+            }
             if (isChasing)
             {
                 agent.speed = chaseSpeed;
                 if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
                 {
                     agent.isStopped = false;
-                    m_Animator.SetInteger("state", 2);
+                    m_Animator.SetInteger("state", 0);
                     transform.LookAt(player.position);
                     agent.SetDestination(player.position);
                 }
@@ -66,8 +70,9 @@ public class SpawnEnemyAI : MonoBehaviour
                 isDeath = true;
                 Invoke("Death", 2);
             }
-            if(attackTimer > 0)
+            if (attackTimer > 0)
             {
+                Debug.Log(attackTimer);
                 attackTimer -= Time.deltaTime;
             }
             if (attackTimer < 0)
@@ -103,11 +108,16 @@ public class SpawnEnemyAI : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-    public void Spawn()
+    private void OnTriggerStay(Collider other)
     {
-        m_Animator.SetTrigger("isSpawn");
-        isSpawn = true;
+        if(other.CompareTag("Player"))
+        {
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                m_Animator.SetTrigger("isOpen");
+                isOpen = true;
+            }
+        }
     }
     void Hit()
     {

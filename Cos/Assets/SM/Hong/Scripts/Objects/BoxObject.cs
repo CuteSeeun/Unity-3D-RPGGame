@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BoxObject : MonoBehaviour
 {
-    private float hp = 1;
+    public float hp = 1;
+    bool isDestroy;
     public GameObject potion;
     public GameObject item;
+    public GameObject destroyEffect;
     void Start()
     {
         
@@ -14,9 +16,11 @@ public class BoxObject : MonoBehaviour
 
     void Update()
     {
-        if(hp < 0)
+        if(hp <= 0 && !isDestroy)
         {
+            isDestroy = true;
             ItemSpawn();
+            Instantiate(destroyEffect,transform.position,Quaternion.identity);
         }
     }
 
@@ -32,5 +36,11 @@ public class BoxObject : MonoBehaviour
         {
             Instantiate(item, transform.position, Quaternion.identity);
         }
+        Destroy();
+    }
+
+    void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
