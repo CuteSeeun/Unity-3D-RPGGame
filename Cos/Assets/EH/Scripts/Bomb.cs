@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+    public int bombdamage = 5;
     public float delay = 3f;
     public Vector3 offset_pos = Vector3.zero;   
 
@@ -20,6 +21,8 @@ public class Bomb : MonoBehaviour
             obj.SetActive(true);
             //오브젝트 삭제를 불러와 1초후 실행한다.
             Invoke("DestroyObject", 1f);
+
+            //플레이어에게 데미지 주는 코드 필요
         }
     }
 

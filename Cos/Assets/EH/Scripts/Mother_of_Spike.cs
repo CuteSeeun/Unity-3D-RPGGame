@@ -16,10 +16,4 @@ public class Mother_of_Spike : MonoBehaviour
             }
         }
     }
-
-
-    void Update()
-    {
-        
-    }
 }
