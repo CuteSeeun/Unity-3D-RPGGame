@@ -5,31 +5,29 @@ using UnityEngine;
 public class LeverDoor : MonoBehaviour
 {
     Animator d_Animator;
-    Animator l_Animator;
-    bool isOpen;
+    public GameObject doorLock;
     void Start()
     {
         d_Animator = GetComponent<Animator>();
-        l_Animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-        if(l_Animator.GetCurrentAnimatorStateInfo(0).IsName("LeverOn") && !isOpen)
-        {
-            isOpen = true;
-            d_Animator.SetTrigger("isOpen");
-        }
+       
     }
 
     private void OnTriggerStay(Collider other)
-    {
-        if(other.CompareTag("Player"))
+    {      
+        if (!doorLock.activeSelf)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            Debug.Log("해제");
+            if (other.CompareTag("Player"))
             {
-                Debug.Log("당김");
-                l_Animator.SetTrigger("isLever");
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Debug.Log("열림");
+                    d_Animator.SetTrigger("isOpen");
+                }
             }
         }
     }
