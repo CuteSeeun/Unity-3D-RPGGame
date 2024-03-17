@@ -6,7 +6,7 @@ public class TrapBehaviour : MonoBehaviour
 {
 
     public GameObject Smog;
-    public GameObject Trap;
+    public GameObject Shake;
     Rigidbody rb;
     void Start()
     {
@@ -22,7 +22,7 @@ public class TrapBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            Destroy(Trap, 2f);
+            Destroy(Shake, 2f);
             Invoke("Smogtrigger", 2f);
         }
 
