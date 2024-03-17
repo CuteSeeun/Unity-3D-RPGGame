@@ -13,8 +13,8 @@ public class Dodge : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        transform = animator.transform;
         characterController = animator.GetComponent<CharacterController>();
+        transform = animator.transform;
 
         if (characterController.moveDirection.magnitude != 0)
         {
@@ -24,6 +24,8 @@ public class Dodge : StateMachineBehaviour
         {
             _dodgeDirection = transform.forward;
         }
+
+        transform.rotation = Quaternion.LookRotation(_dodgeDirection);
 
         _dodgeSpeedLeft = characterController.dodgeSpeed;
         _dodgeTimeLeft = characterController.dodgeTime;

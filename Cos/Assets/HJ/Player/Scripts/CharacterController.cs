@@ -115,66 +115,29 @@ namespace Assets.Player.Scripts
             animator.SetInteger("state", 1);
         }
 
-        protected void AttackBEnd()
-        {
-        }
-
-        protected void AttackBUpdate()
-        {
-
-        }
-        protected void AttackBFixedUpdate()
-        {
-
-        }
-
         // HitA-----------------------------------------------------------
-        [SerializeField] float _hitATime = 0.5f;
-        private float _hitATimeLeft;
-
         public void HitA()
         {
-            _hitATimeLeft = _hitATime;
             animator.SetInteger("state", 5);
-            animator.SetTrigger("hitA");
-            Debug.Log("HitA");
-        }
-
-        protected void HitAUpdate()
-        {
-
-        }
-
-        protected void HitAFixedUpdate()
-        {
-            _hitATimeLeft -= Time.fixedDeltaTime;
         }
 
         // HitB-----------------------------------------------------------
-        [SerializeField] float _hitBTime = 1f;
-        private float _hitBTimeLeft;
-        [SerializeField] float _hitBSpeed = 5f;
-        private float _hitBSpeedLeft;
+        public float hitBTime { get => _hitBTime; }
+        private float _hitBTime = 1f;
+
+
+        public float hitBSpeed { get => _hitBSpeed; }
+        private float _hitBSpeed = 5f;
 
         public void HitB()
         {
-            _hitBTimeLeft = _hitBTime;
-            _hitBSpeedLeft = _hitBSpeed;
             animator.SetInteger("state", 6);
-            animator.SetTrigger("hitB");
-            Debug.Log("HitB");
         }
 
-        protected void HitBUpdate()
+        // Death
+        public void Death()
         {
-
-        }
-
-        protected void HitBFixedUpdate()
-        {
-            _hitBTimeLeft -= Time.fixedDeltaTime;
-            _hitBSpeedLeft -= _hitBSpeed * Time.fixedDeltaTime;
-            transform.position += new Vector3(0,0,1) * _hitBSpeedLeft * Time.fixedDeltaTime;
+            animator.SetInteger("state", 7);
         }
     }
 }

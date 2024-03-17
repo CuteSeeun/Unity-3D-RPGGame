@@ -1,24 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using CharacterController = Assets.Player.Scripts.CharacterController;
 
 public class HitB : StateMachineBehaviour
 {
-    CharacterController controller;
+    CharacterController characterController;
+    Transform transform;
+    private float _hitBTimeLeft;
+    private float _hitBSpeedLeft;
+    // private Vector3 적 방향
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        characterController = animator.GetComponent<CharacterController>();
+        transform = animator.transform;
 
+        _hitBTimeLeft = characterController.hitBTime;
+        _hitBSpeedLeft = characterController.hitBSpeed;
+
+        // 적 방향 계산
+        // transform.rotation = Quaternion.LookRotation( 적 방향으로 회전 );
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        _hitBTimeLeft -= Time.fixedDeltaTime;
+        _hitBSpeedLeft -= characterController.hitBSpeed * Time.fixedDeltaTime;
+        transform.position += -transform.forward * _hitBSpeedLeft * Time.fixedDeltaTime;
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetInteger("state", 1);

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using CharacterController = Assets.Player.Scripts.CharacterController;
 
 namespace Assets.HJ.Player.Scripts.States
@@ -20,13 +19,10 @@ namespace Assets.HJ.Player.Scripts.States
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Debug.Log(1);
             if (animator.GetInteger("state") == 1)
             {
-                Debug.Log(2);
                 if (characterController.moveDirection != Vector3.zero)
                 {
-                    Debug.Log(3);
                     transform.rotation = Quaternion.LookRotation(characterController.moveDirection);
                 }
 
