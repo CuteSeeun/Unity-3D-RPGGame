@@ -1,18 +1,25 @@
+using GSpawn;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Assets.Player.Scripts
 {
-    public abstract class CharacterController : MonoBehaviour
+    public abstract class CharacterController : MonoBehaviour, IHp
     {
         protected Transform transform;
         [SerializeField] Animator animator;
 
         private Vector3 _motionDirection;
         [SerializeField] int _type;
+
+        public GameObject weapon1;
+        public GameObject weapon2;
+        public GameObject weapon3;
 
         private void Awake()
         {
@@ -21,6 +28,9 @@ namespace Assets.Player.Scripts
 
         protected virtual void Start()
         {
+            _hp = _hpMax;
+            onHpMin += () => Death();
+
             animator.SetInteger("type", _type);
             animator.SetInteger("attackACombo", 1);
             SetType();
@@ -33,6 +43,82 @@ namespace Assets.Player.Scripts
 
         protected virtual void FixedUpdate()
         {
+        }
+
+        // IHp -------------------------------------------------------------
+        public float hp
+        {
+            get
+            {
+                return _hp;
+            }
+            set
+            {
+                _hp = Mathf.Clamp(value, 0, _hpMax);
+
+                if (_hp == value)
+                    return;
+
+                _hp = value;
+
+                if (value <= 0)
+                    onHpMin?.Invoke();
+                else if (value >= _hpMax)
+                    onHpMax?.Invoke();
+            }
+        }
+        [SerializeField] private float _hp;
+        public float hpMax { get => _hpMax; }
+        [SerializeField] private float _hpMax = 100;
+
+        public event Action<float> onHpChanged;
+        public event Action<float> onHpDepleted;
+        public event Action<float> onHpRecovered;
+        public event Action onHpMin;
+        public event Action onHpMax;
+
+        public void Hit(float damage)
+        {
+            HitA();
+            DepleteHp(damage);
+        }
+
+        /*
+        public void Hit(bool powerAttack, float damage)
+        {
+            if (powerAttack == false)
+            {
+                HitA();
+            }
+            else if (powerAttack == true)
+            {
+                HitB();
+            }
+
+            DepleteHp(damage);
+        }
+        */
+
+        /*
+        public void Hit(float damage)
+        {
+            DepleteHp(damage);
+        }
+        */
+
+        public void DepleteHp(float amount)
+        {
+            if (amount <= 0)
+                return;
+
+            hp -= amount;
+            onHpDepleted?.Invoke(amount);
+        }
+
+        public void RecoverHp(float amount)
+        {
+            hp += amount;
+            onHpRecovered?.Invoke(amount);
         }
 
         // Type ------------------------------------------------------------
@@ -80,6 +166,12 @@ namespace Assets.Player.Scripts
             animator.SetFloat("moveFloat", _moveFloat);
         }
 
+        public void AttackAComboReset()
+        {
+            animator.SetInteger("state", 1);
+            Debug.Log("리셋");
+        }
+
         // Dodge -----------------------------------------------------------------
         public float dodgeSpeed { get => _dodgeSpeed; }
         [SerializeField] float _dodgeSpeed = 10f;
@@ -125,8 +217,8 @@ namespace Assets.Player.Scripts
         public float hitBTime { get => _hitBTime; }
         private float _hitBTime = 1f;
 
-
         public float hitBSpeed { get => _hitBSpeed; }
+
         private float _hitBSpeed = 5f;
 
         public void HitB()

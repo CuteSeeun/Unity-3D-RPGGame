@@ -9,12 +9,14 @@ namespace Assets.HJ.Player.Scripts.States
         Transform transform;
         CharacterController characterController;
 
-        private Vector3 _AttackADirection;
-
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             transform = animator.transform;
             characterController = animator.GetComponent<CharacterController>();
+
+            characterController.weapon1.SetActive(false);
+            characterController.weapon2.SetActive(false);
+            characterController.weapon3.SetActive(true);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

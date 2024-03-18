@@ -9,7 +9,11 @@ namespace Assets.HJ.Player.Scripts.States
         Transform transform;
         CharacterController characterController;
 
-        private Vector3 _AttackADirection;
+        private Vector3 _attackADirection;
+
+        [SerializeField] float _attackRange;
+        [SerializeField] float _attackArc;
+        [SerializeField] float _inputDelay;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -18,19 +22,14 @@ namespace Assets.HJ.Player.Scripts.States
 
             if (characterController.moveDirection.magnitude != 0)
             {
-                _AttackADirection = characterController.moveDirection;
+                _attackADirection = characterController.moveDirection;
             }
             else
             {
-                _AttackADirection = transform.forward;
+                _attackADirection = transform.forward;
             }
 
-            characterController.attackACombo++;
-
-            if (characterController.attackACombo > characterController.attackAComboMax)
-                characterController.attackACombo = 1;
-
-            animator.SetInteger("attackACombo", characterController.attackACombo);
+            characterController.StartCoroutine("AttackAComboReset", 0.5f);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -40,7 +39,7 @@ namespace Assets.HJ.Player.Scripts.States
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.SetInteger("state", 1);
+
         }
 
         // OnStateMove : Animator.OnAnimatorMove() 바로 뒤에 호출됩니다.

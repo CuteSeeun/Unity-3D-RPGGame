@@ -9,7 +9,6 @@ namespace Assets.HJ.Player.Scripts.States
         Transform transform;
         CharacterController characterController;
 
-        private Vector3 _AttackADirection;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

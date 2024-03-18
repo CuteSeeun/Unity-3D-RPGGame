@@ -2277,7 +2277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7316244844636965441
 Transform:
   m_ObjectHideFlags: 0
@@ -2314,13 +2314,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7165327779322845451}
   _type: 2
+  weapon1: {fileID: 1966399025846359769}
+  weapon2: {fileID: 0}
+  weapon3: {fileID: 0}
+  _hp: 0
+  _hpMax: 100
   _speed: 5
   _dodgeSpeed: 10
   _dodgeTime: 0.5
   _dodgeTimeInverse: 1
-  _hitATime: 0.5
-  _hitBTime: 1
-  _hitBSpeed: 5
 --- !u!95 &7165327779322845451
 Animator:
   serializedVersion: 5
