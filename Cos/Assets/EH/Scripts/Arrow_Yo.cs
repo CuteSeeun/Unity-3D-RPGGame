@@ -19,7 +19,7 @@ public class Arrow_Yo : MonoBehaviour
 
         //transform.forward
         //transform.up
-        transform.position += transform.up * Time.deltaTime * 3;
+        transform.position += transform.forward * Time.deltaTime * 5;
          
     }
 }
