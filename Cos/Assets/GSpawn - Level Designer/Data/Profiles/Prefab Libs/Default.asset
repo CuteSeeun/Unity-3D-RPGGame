@@ -1,0 +1,856 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6725926888245796319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Poision Trap
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 3ce5bbfa-fa3c-45af-8a39-f3aa824c98cd
+  _prefabAsset: {fileID: 5873043190594594721, guid: 481fbd3eca4f480499f7d77f4054c944,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 5873043190594594721, guid: 481fbd3eca4f480499f7d77f4054c944,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -66.43, y: 1.54, z: 88.64}
+    _rotation: {x: -0, y: -0, z: -0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 1, z: 0}
+  _uiSelected: 0
+--- !u!114 &-5635790021739571104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: axe_2handed
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: be618b2a-4cd8-46b5-8a10-43e0bebaee1f
+  _prefabAsset: {fileID: 7730170801503146986, guid: 61b41520c30a5cf4bb8e7a52ea9a64d7,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 7730170801503146986, guid: 61b41520c30a5cf4bb8e7a52ea9a64d7,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -50.260002, y: 4.83, z: 111.6}
+    _rotation: {x: 0.7071068, y: 0.7071068, z: -0, w: 0}
+    _scale: {x: 3.000001, y: 3.000001, z: 3.0000014}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 3.7186472, y: 5.173887, z: 0.78540266}
+  _uiSelected: 0
+--- !u!114 &-5005311866116813570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Bomb
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: cdead38a-7be0-4408-a70e-243982faf326
+  _prefabAsset: {fileID: 5701755091433817176, guid: 5b5edb40a11c57e4d8f2c0fdce0eff55,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 5701755091433817176, guid: 5b5edb40a11c57e4d8f2c0fdce0eff55,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 4.470001, y: -2.31, z: -13}
+    _rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+    _scale: {x: 2, y: 2, z: 2}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0.7651755, y: 0.8461634, z: 0.72772515}
+  _uiSelected: 0
+--- !u!114 &-4951279572898609150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: HP 1
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: e7bc15d2-0c59-43dd-8fff-1f0a6fb7fd14
+  _prefabAsset: {fileID: 5228428565054073936, guid: 92f710bb51db62c47971879c765a9e43,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 5228428565054073936, guid: 92f710bb51db62c47971879c765a9e43,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -9.349998, y: -0.8299999, z: -9.089996}
+    _rotation: {x: -0, y: -0, z: -0, w: 1}
+    _scale: {x: 2, y: 2, z: 2}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 0, z: 0.03999996}
+  _uiSelected: 0
+--- !u!114 &-3766394781873019883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: floor_tile_extralarge_grates
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 45430b96-887a-415b-9d13-e731ae72d270
+  _prefabAsset: {fileID: 7163952439052720436, guid: caac9a246a8cd9c42a2066b713a33dd9,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 7163952439052720436, guid: caac9a246a8cd9c42a2066b713a33dd9,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 0, y: 0.5, z: 0}
+    _rotation: {x: -0, y: -0, z: -0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 8, y: 1.13, z: 8}
+  _uiSelected: 0
+--- !u!114 &-1439341871786791853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Pillar deco
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: e0c02ce7-803f-4d03-bb0d-6a1db03640c4
+  _prefabAsset: {fileID: 2991109115534533010, guid: a0d7c6da8a24b594c978da94a4653204,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 2991109115534533010, guid: a0d7c6da8a24b594c978da94a4653204,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -3.57, y: 0, z: 4.27}
+    _rotation: {x: 0, y: 1, z: 0, w: 0}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 2.2320025, y: 4, z: 1.7101638}
+  _uiSelected: 0
+--- !u!114 &-926348611874706550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: CFXR Fire Breath
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 8d5dc38e-c8cd-4006-a21a-4a7502ea5457
+  _prefabAsset: {fileID: 6054391504238521054, guid: b200e6f279f40544884eddf256e83f6c,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 6054391504238521054, guid: b200e6f279f40544884eddf256e83f6c,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -61.93, y: -0.69, z: 100.13}
+    _rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+    _scale: {x: 1, y: 1.0000002, z: 1.0000002}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 0.2999997, z: 0.9000002}
+  _uiSelected: 0
+--- !u!114 &-725807454957791092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: invisible wall
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 05e37b27-7996-474a-b565-b3c00a493368
+  _prefabAsset: {fileID: 7546630624579967779, guid: 989d60e773caab149989f2039195ff03,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 7546630624579967779, guid: 989d60e773caab149989f2039195ff03,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 0, y: 2, z: -3}
+    _rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+    _scale: {x: 2.0000005, y: 4, z: 2.0000005}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 0, z: 0}
+  _uiSelected: 0
+--- !u!114 &-658645121734823318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Wall
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 9e5c3a8d-6321-4437-b3c4-5497ddee6963
+  _prefabAsset: {fileID: 6622988118902063851, guid: 7f033ef72f5f28f4bb007afed1b641df,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 6622988118902063851, guid: 7f033ef72f5f28f4bb007afed1b641df,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 5.78, y: 5.28, z: 47.35}
+    _rotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 4, y: 4, z: 1}
+  _uiSelected: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d27d60231fbfd54a8dd0a2b498f7841, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  _profileName: Default
+  _libs:
+  - {fileID: 2715714514266582791}
+--- !u!114 &622085547180615638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: portal_vfx_red
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 18de5a6a-a27d-477b-bccb-61cff017b3bf
+  _prefabAsset: {fileID: 2673272537043551913, guid: b8da9eef4fbf13e438c3f3a3bc1152a4,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 2673272537043551913, guid: b8da9eef4fbf13e438c3f3a3bc1152a4,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 1.97, y: 0, z: 4.68}
+    _rotation: {x: -0, y: -0, z: -0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 0, z: 0}
+  _uiSelected: 0
+--- !u!114 &723573801166781332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Flame Tile
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: b203447e-046a-4f18-86c8-6f2dfd90378b
+  _prefabAsset: {fileID: 5658257503518017345, guid: cecdc89247028ff4080eabfdad43eb30,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 5658257503518017345, guid: cecdc89247028ff4080eabfdad43eb30,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -72.01, y: 0, z: 109}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 8, y: 1.1500001, z: 8}
+  _uiSelected: 0
+--- !u!114 &1052320657543679245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: wall_doorway (1)
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: b9b58deb-1835-4cc8-8e17-9aa4f9abc834
+  _prefabAsset: {fileID: 4129532036625667330, guid: f23a75cc0e55da14a94e39f5c6591490,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 4129532036625667330, guid: f23a75cc0e55da14a94e39f5c6591490,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 43.6, y: -2, z: 27}
+    _rotation: {x: -0, y: 0.38268346, z: -0, w: 0.9238795}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 4, y: 4, z: 1}
+  _uiSelected: 0
+--- !u!114 &1645960789488508676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Dongeon Tile(1 - big)
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: aeed55f1-22f9-4715-9ad0-05bec2dd5f0b
+  _prefabAsset: {fileID: 2357870696084604151, guid: 72e18c23c9139c34d9706c1b64f9576d,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 2357870696084604151, guid: 72e18c23c9139c34d9706c1b64f9576d,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 5.71, y: 1.29, z: 1}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 4, y: 0.15, z: 4}
+  _uiSelected: 0
+--- !u!114 &2715714514266582791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b09c502d52d26944bd03a0b831a19c4, type: 3}
+  m_Name: Prefabs
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 1d7af5d4-d57f-4b6b-9a53-6c2db9cb5a05
+  _parentLib: {fileID: 0}
+  _directChildren: []
+  _prefabsVisibleInManager: 1
+  _libName: Prefabs
+  _folderPath:
+    _path: Assets/EH/Prefabs
+    _reveresedPath: Prefabs/EH/Assets
+  _prefabs:
+  - {fileID: 9014079080287055151}
+  - {fileID: -5635790021739571104}
+  - {fileID: -5005311866116813570}
+  - {fileID: 3037240115913850686}
+  - {fileID: -926348611874706550}
+  - {fileID: 4373497133150548449}
+  - {fileID: 6218134009549570734}
+  - {fileID: 1645960789488508676}
+  - {fileID: 4707224770000347044}
+  - {fileID: 7405370162290224811}
+  - {fileID: 723573801166781332}
+  - {fileID: -3766394781873019883}
+  - {fileID: -4951279572898609150}
+  - {fileID: -725807454957791092}
+  - {fileID: 3293839700930105279}
+  - {fileID: 5939702373991237182}
+  - {fileID: -1439341871786791853}
+  - {fileID: -6725926888245796319}
+  - {fileID: 622085547180615638}
+  - {fileID: 8765680122443813380}
+  - {fileID: 7723577891104295248}
+  - {fileID: 7237798500166411021}
+  - {fileID: -658645121734823318}
+  - {fileID: 1052320657543679245}
+  _uiSelected: 1
+--- !u!114 &3037240115913850686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: CFXR Explosion 1
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 4390a5d5-0c52-418c-a52d-8ac7998fece8
+  _prefabAsset: {fileID: 6050120384427999956, guid: 644fee84091d8d941bd39cfc44add667,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 6050120384427999956, guid: 644fee84091d8d941bd39cfc44add667,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 0.31, y: -0, z: 6.39}
+    _rotation: {x: 0.7071068, y: 0, z: 0, w: 0.70710677}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 0, z: 0.5}
+  _uiSelected: 0
+--- !u!114 &3293839700930105279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: mimic
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 9276c5ea-0e85-418c-acc5-c3ccde06b5cd
+  _prefabAsset: {fileID: 3438445727222583229, guid: 2624ead31fb0f1944a9cfbdc5bd95551,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 3438445727222583229, guid: 2624ead31fb0f1944a9cfbdc5bd95551,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -56.06, y: 0.1, z: 105.02}
+    _rotation: {x: -0, y: -0, z: -0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 2.2215962, y: 1.5623373, z: 1.2807757}
+  _uiSelected: 0
+--- !u!114 &4373497133150548449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: c0f8e405-9721-421d-a790-db6d79e5d82c
+  _prefabAsset: {fileID: 3808059350413485409, guid: e645410447cbcfd41a91ce27e60c3280,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 3808059350413485409, guid: e645410447cbcfd41a91ce27e60c3280,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -60.021, y: 0.658, z: 108.02}
+    _rotation: {x: 0, y: -0, z: -0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 2.221596, y: 1.5786915, z: 1.280776}
+  _uiSelected: 0
+--- !u!114 &4707224770000347044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Dongeon Tile(1)
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 26b46e8a-f3bc-48b9-8682-69437ba10268
+  _prefabAsset: {fileID: 4787953949957730315, guid: e72191cce0c1888489272751a2c09055,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 4787953949957730315, guid: e72191cce0c1888489272751a2c09055,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 3.28, y: 0.65088654, z: -0.4854641}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 2, y: 0.15, z: 2}
+  _uiSelected: 1
+--- !u!114 &5939702373991237182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Mother_of_Spike
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 257d0ac8-e1fc-4d69-aa9c-f18d0c64bb00
+  _prefabAsset: {fileID: 3755265154730599347, guid: caea46d99e298c74697cab66b48b3f83,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 3755265154730599347, guid: caea46d99e298c74697cab66b48b3f83,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -70, y: 1, z: 80}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 4, y: 2.3000002, z: 4}
+  _uiSelected: 0
+--- !u!114 &6218134009549570734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Cracked_WALL
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 4c259dc0-4f0b-4c6f-a11f-7d715abe418e
+  _prefabAsset: {fileID: 117794832573183272, guid: 62c31916ae5748244977b1775b1b789f,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 117794832573183272, guid: 62c31916ae5748244977b1775b1b789f,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -49.92, y: 0, z: 108.39}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 4, y: 4, z: 1.2593896}
+  _uiSelected: 0
+--- !u!114 &7237798500166411021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Trap
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 571dc5be-7014-46d0-ab21-3241da87b41d
+  _prefabAsset: {fileID: 5144349230992740324, guid: f1b1858170140f348b7d511ecfb800a1,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 5144349230992740324, guid: f1b1858170140f348b7d511ecfb800a1,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 2, y: 0.15, z: 4}
+  _uiSelected: 0
+--- !u!114 &7405370162290224811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Explosion Effect
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 26db178d-8c58-44ef-9911-2dedeb793f23
+  _prefabAsset: {fileID: 8988181386140431800, guid: 4d549978642879740bc100b34ebce047,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 8988181386140431800, guid: 4d549978642879740bc100b34ebce047,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -61.927, y: 1.166, z: 105.931}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 0.20000005, z: 0}
+  _uiSelected: 0
+--- !u!114 &7723577891104295248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Stair
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 83bdd30d-a76f-4114-8206-8724393ee0c8
+  _prefabAsset: {fileID: 3705036157038348632, guid: 0ca592b29c2d6344696804072dae2e70,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 3705036157038348632, guid: 0ca592b29c2d6344696804072dae2e70,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 0.055968285, y: 0.65088654, z: -0.4854641}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 4, y: 5.1, z: 4}
+  _uiSelected: 0
+--- !u!114 &8765680122443813380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Smog
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: 8c8c0871-036f-480e-8573-8b721cee7804
+  _prefabAsset: {fileID: 2211613272257591330, guid: 4eee9a7e76abdd94c835f56217100e02,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 2211613272257591330, guid: 4eee9a7e76abdd94c835f56217100e02,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: 0, y: 0, z: 0}
+    _rotation: {x: -0, y: -0, z: -0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0, y: 0, z: 0}
+  _uiSelected: 0
+--- !u!114 &9014079080287055151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfdaf7f2c4c1d04580d676ed3717f21, type: 3}
+  m_Name: Arrow yo bro!
+  m_EditorClassIdentifier: 
+  _guid:
+    _guidString: af541ea8-1814-44d7-8316-143e57255e51
+  _prefabAsset: {fileID: 115150247991169448, guid: f481195b3bc7ec94d91b81451b97d560,
+    type: 3}
+  _preview:
+    _prefabAsset: {fileID: 115150247991169448, guid: f481195b3bc7ec94d91b81451b97d560,
+      type: 3}
+    _texture: {fileID: 0}
+    _yaw: 0
+    _pitch: 0
+  _sceneToObjectGroup:
+    _serializedKeys: []
+    _serializedValues: []
+  _spawnGuideTransformTRS:
+    _position: {x: -51.3, y: 1.31, z: 95.93}
+    _rotation: {x: -0, y: 1, z: -0, w: 0}
+    _scale: {x: 2, y: 2.5, z: 2}
+  _modularSnapVerticalStep: 0
+  _surfaceSnapAppliedOffsetFromSurface: 0
+  _modelSize: {x: 0.23467991, y: 1.8713663, z: 0.20325264}
+  _uiSelected: 0
