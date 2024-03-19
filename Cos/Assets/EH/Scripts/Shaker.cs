@@ -26,8 +26,8 @@ public class Shaker : MonoBehaviour
     {
         if (effectPrefab != null)
         {
-                GameObject effectInstance = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-                Destroy(effectInstance, 1f);    
+            GameObject effectInstance = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+            Destroy(effectInstance, 1f);
         }
     }
 

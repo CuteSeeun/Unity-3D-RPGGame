@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mother_of_Spike : MonoBehaviour
 {
+    private int delay = 1;
     public Animator Spike;
     public void OnTriggerEnter(Collider other)
     {
@@ -12,8 +13,13 @@ public class Mother_of_Spike : MonoBehaviour
         {
             if(Spike != null)
             {
-                Spike.SetTrigger("isWork");
+                Invoke("SpikeWork", delay);
             }
         }
+    }
+
+    private void SpikeWork()
+    {
+        Spike.SetTrigger("isWork");
     }
 }
