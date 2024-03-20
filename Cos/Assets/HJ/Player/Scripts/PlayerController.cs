@@ -46,7 +46,6 @@ namespace Assets.Player.Scripts
         public void OnAttackA(InputAction.CallbackContext context)
         {
             AttackA();
-            Debug.Log(1);
         }
 
         public void OnAttackB(InputAction.CallbackContext context)

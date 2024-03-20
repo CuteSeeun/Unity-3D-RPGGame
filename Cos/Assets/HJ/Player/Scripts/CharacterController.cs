@@ -21,6 +21,9 @@ namespace Assets.Player.Scripts
         public GameObject weapon2;
         public GameObject weapon3;
 
+        public bool invincible { get => invincible; set => invincible = value; }
+        private bool _invincible;
+
         private void Awake()
         {
             transform = GetComponent<Transform>();
@@ -76,30 +79,35 @@ namespace Assets.Player.Scripts
         public event Action<float> onHpRecovered;
         public event Action onHpMin;
         public event Action onHpMax;
-
         public void Hit(float damage)
         {
-            HitA();
-            DepleteHp(damage);
-        }
-
-        /*
-        public void Hit(bool powerAttack, float damage)
-        {
-            if (powerAttack == false)
-            {
-                HitA();
-            }
-            else if (powerAttack == true)
+            if (invincible == false)
             {
                 HitB();
-            }
 
-            DepleteHp(damage);
+                DepleteHp(damage);
+            }
         }
-        */
 
         /*
+        public void Hit(float damage, bool powerAttack, Vector3 direction)
+        {
+            if (invincible == false)
+            {
+                if (powerAttack == false)
+                {
+                    HitA();
+                }
+                else if (powerAttack == true)
+                {
+                    HitB();
+                    transform.rotation = Quaternion.LookRotation(direction);
+                }
+
+                DepleteHp(damage);
+            }
+        }
+        
         public void Hit(float damage)
         {
             DepleteHp(damage);
@@ -169,7 +177,6 @@ namespace Assets.Player.Scripts
         public void AttackAComboReset()
         {
             animator.SetInteger("state", 1);
-            Debug.Log("리셋");
         }
 
         // Dodge -----------------------------------------------------------------
@@ -180,20 +187,58 @@ namespace Assets.Player.Scripts
 
         public float dodgeTimeInverse { get => _dodgeTimeInverse; }
         [SerializeField] float _dodgeTimeInverse = 1f;
+
+        public float invincibleTime { get => _invincibleTime; }
+        private float _invincibleTime = 0.5f;
         
         protected void Dodge()
         {
             animator.SetInteger("state", 2);
         }
 
+        public void InvincibleEnd()
+        {
+            invincible = false;
+        }
+
+        // Attack --------------------------------------------------------------
+        public float attackRange { set => _attackRange = value; }
+        [SerializeField] float _attackRange;
+        public float attackAngle { set => _attackAngle = value; }
+        [SerializeField] float _attackAngle;
+        [SerializeField] float _attackAngleInnerProduct;
+        public LayerMask attackLayerMask { set => _attackLayerMask = value; }
+        [SerializeField] LayerMask _attackLayerMask;
+
+        public void Attack()
+        {
+            // 공격 거리 내 모든 적 탐색
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                      _attackRange,
+                                                      Vector3.up,
+                                                      0,
+                                                      _attackLayerMask);
+
+            // 공격 각도에 따른 내적 계산
+            _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+            // 내적으로 공격각도 구하기
+            foreach (RaycastHit hit in hits)
+            {
+                if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+                {
+                    // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                    Debug.Log(hit);
+                }
+            }
+        }
+
         // AttackA -----------------------------------------------------------------
-        public int attackAComboMax { get => _attackAComboMax; }
-        public int attackACombo { get => _attackACombo; set => _attackACombo = value; }
-        private int _attackACombo = 1;
 
         protected void AttackA()
         {
             animator.SetInteger("state", 3);
+            Attack();
         }
 
         // AttackB-----------------------------------------------------------

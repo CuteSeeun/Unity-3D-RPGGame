@@ -359,7 +359,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0
 --- !u!1101 &-7744446823208456096
 AnimatorStateTransition:
@@ -620,7 +623,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0
 --- !u!1102 &-5894704912457472817
 AnimatorState:
@@ -1200,7 +1206,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0
 --- !u!1102 &-1207850684116653296
 AnimatorState:
@@ -1363,7 +1372,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0
 --- !u!1102 &-278986290584152390
 AnimatorState:
@@ -1680,7 +1692,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0.3
 --- !u!114 &2018972119203059676
 MonoBehaviour:
@@ -1696,7 +1711,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0.3
 --- !u!1109 &2051088414967166594
 AnimatorTransition:
@@ -1792,7 +1810,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0
 --- !u!1101 &2603304286420947501
 AnimatorStateTransition:
@@ -2156,8 +2177,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageRate: 1
-  _attackRange: 0
-  _attackArc: 0
+  _attackRange: 2.5
+  _attackAngle: 60
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _comboResetTime: 0.3
 --- !u!206 &5669443586783866538
 BlendTree:
@@ -2376,7 +2400,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0
 --- !u!1101 &6604213153357129516
 AnimatorStateTransition:
@@ -2468,7 +2495,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageRate: 1
   _attackRange: 0
-  _attackArc: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   _comboResetTime: 0
 --- !u!1107 &7127227341441055103
 AnimatorStateMachine:
