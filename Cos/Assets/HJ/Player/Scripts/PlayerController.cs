@@ -1,5 +1,4 @@
 using UnityEngine;
-using Assets.Player.Scripts.FSM;
 using CharacterController = Assets.Player.Scripts.CharacterController;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
@@ -44,20 +43,21 @@ namespace Assets.Player.Scripts
             Dodge();
         }
 
-        public void OnAttack1(InputAction.CallbackContext context)
+        public void OnAttackA(InputAction.CallbackContext context)
         {
-            Attack1();
+            AttackA();
+            Debug.Log(1);
         }
 
-        public void OnAttack2(InputAction.CallbackContext context)
+        public void OnAttackB(InputAction.CallbackContext context)
         {
-            Attack2();
             if (context.interaction is HoldInteraction)
             {
+                AttackB();
             }
             else if (context.interaction is PressInteraction)
             {
-                Attack2End();
+                AttackBRelease();
             }
         }
         #endregion ========================================================

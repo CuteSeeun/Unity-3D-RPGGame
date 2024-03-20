@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -151,5 +151,10 @@ public class EnemyS_AI : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+    void Hit()
+    {
+        //데미지 가하는 코드 구현
     }
 }

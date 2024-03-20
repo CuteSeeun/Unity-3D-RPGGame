@@ -164,4 +164,9 @@ public class LongEnemyAI : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    void Hit()
+    {
+        //데미지 가하는 코드 구현
+    }
 }
