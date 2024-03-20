@@ -13,6 +13,8 @@ namespace Assets.HJ.Player.Scripts.States
         {
             transform = animator.transform;
             characterController = animator.GetComponent<CharacterController>();
+
+            characterController.Shoot();
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

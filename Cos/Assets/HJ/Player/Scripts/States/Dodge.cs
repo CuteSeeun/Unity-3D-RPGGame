@@ -29,6 +29,9 @@ public class Dodge : StateMachineBehaviour
 
         _dodgeSpeedLeft = characterController.dodgeSpeed;
         _dodgeTimeLeft = characterController.dodgeTime;
+
+        characterController.invincible = true;
+        characterController.Invoke("InvincibleEnd", characterController.invincibleTime);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -11,9 +11,12 @@ namespace Assets.HJ.Player.Scripts.States
 
         private Vector3 _attackADirection;
 
-        [SerializeField] float _damageRate = 1.0f;
+        [SerializeField] float _damageRate;
+
         [SerializeField] float _attackRange;
-        [SerializeField] float _attackArc;
+        [SerializeField] float _attackAngle;
+        [SerializeField] LayerMask _attackLayerMask;
+
         [SerializeField] float _comboResetTime;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -30,7 +33,11 @@ namespace Assets.HJ.Player.Scripts.States
                 _attackADirection = transform.forward;
             }
 
-            //characterController.StartCoroutine("AttackAComboReset", _comboResetTime);
+            characterController.attackRange = _attackRange;
+            characterController.attackAngle = _attackAngle;
+            characterController.attackLayerMask = _attackLayerMask;
+
+
             characterController.Invoke("AttackAComboReset", _comboResetTime);
         }
 
