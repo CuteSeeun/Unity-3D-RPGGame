@@ -5075,7 +5075,7 @@ GameObject:
   - component: {fileID: 430693547}
   - component: {fileID: 430693546}
   m_Layer: 7
-  m_Name: Cylinder
+  m_Name: Sandbag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19172,7 +19172,7 @@ PrefabInstance:
     - target: {fileID: 4980016502053825255, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5318228688305795291, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
@@ -28801,6 +28801,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1346489119434670283, guid: ec957fe55a3a869499dd976acba5c2b6,
+        type: 3}
+      propertyPath: missile
+      value: 
+      objectReference: {fileID: 7943416847674694611, guid: 14d0014c3d2885b46a67baee9e3767ea,
+        type: 3}
     - target: {fileID: 3145698477173681061, guid: ec957fe55a3a869499dd976acba5c2b6,
         type: 3}
       propertyPath: m_Name
@@ -28809,7 +28815,7 @@ PrefabInstance:
     - target: {fileID: 3145698477173681061, guid: ec957fe55a3a869499dd976acba5c2b6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7847954845431315274, guid: ec957fe55a3a869499dd976acba5c2b6,
         type: 3}

@@ -11,7 +11,7 @@ namespace Assets.HJ.Player.Scripts.States
 
         private Vector3 _attackADirection;
 
-        [SerializeField] float _damageRate = 1.0f;
+        [SerializeField] float _damageRate;
 
         [SerializeField] float _attackRange;
         [SerializeField] float _attackAngle;

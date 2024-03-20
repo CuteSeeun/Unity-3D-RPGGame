@@ -1,11 +1,5 @@
-using GSpawn;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Assets.Player.Scripts
 {
@@ -21,8 +15,9 @@ namespace Assets.Player.Scripts
         public GameObject weapon2;
         public GameObject weapon3;
 
-        public bool invincible { get => invincible; set => invincible = value; }
-        private bool _invincible;
+        public GameObject missile;
+
+        public bool invincible;
 
         private void Awake()
         {
@@ -35,8 +30,6 @@ namespace Assets.Player.Scripts
             onHpMin += () => Death();
 
             animator.SetInteger("type", _type);
-            animator.SetInteger("attackACombo", 1);
-            SetType();
         }
 
         protected virtual void Update()
@@ -130,6 +123,7 @@ namespace Assets.Player.Scripts
         }
 
         // Type ------------------------------------------------------------
+        /*
         private int _attackAComboMax;
 
         private void SetType()
@@ -153,6 +147,7 @@ namespace Assets.Player.Scripts
                     break;
             }
         }
+        */
 
         // Move --------------------------------------------------------------
         public float speed { get => _speed; }
@@ -231,6 +226,11 @@ namespace Assets.Player.Scripts
                     Debug.Log(hit);
                 }
             }
+        }
+
+        public void Shoot()
+        {
+            Instantiate(missile, transform.position + transform.forward, transform.rotation);
         }
 
         // AttackA -----------------------------------------------------------------
