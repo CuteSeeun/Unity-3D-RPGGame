@@ -12,7 +12,7 @@ internal interface IHp
     void DepleteHp(float amount);
     void RecoverHp(float amount);
 
-    //void Hit(bool powerAttack, float damage, Vector3 hitDirection);
-    //void Hit(bool powerAttack, float damage);
+    //void Hit(float damage, bool powerAttack, Vector3 hitDirection);
+    //void Hit(float damage, bool powerAttack);
     void Hit(float damage);
 }
