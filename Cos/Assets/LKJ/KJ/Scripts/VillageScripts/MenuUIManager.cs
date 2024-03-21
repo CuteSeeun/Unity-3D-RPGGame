@@ -1,3 +1,4 @@
+using Ricimi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class VillageUIManager : MonoBehaviour
+public class MenuUIManager : MonoBehaviour
 {
     /* 메뉴 UI */
     [Header("Menu UI")]
@@ -27,11 +28,17 @@ public class VillageUIManager : MonoBehaviour
     /* 확인창 예 버튼 동적 할당 */
     [Header("Dynamic Button")]
     public Button yesButton;
+    /* UI 골드 표시 */
+    [Header("Gold")]
+    public TMP_Text goldText;
+    private int _currentGold;
 
     void Update()
     {
+        /* esc 누르면 메뉴 호출 */
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("ESC!!");
             menuUI.SetActive(true);
 
             Cursor.visible = true;
@@ -141,6 +148,40 @@ public class VillageUIManager : MonoBehaviour
         yesButton.onClick.AddListener(() => yesAction());
         // 확인창 자동으로 닫는 리스너 추가
         yesButton.onClick.AddListener(CloseCheck);
+    }
+    #endregion
+    #region 골드 표시 (테스트)
+ 
+    public void PlusGold(int amount)
+    {
+        _currentGold += amount;
+        UpdateGoldText();
+    }
+
+    public void MinusGold(int amount)
+    {
+        _currentGold -= amount;
+        UpdateGoldText();
+    }
+
+    public void UpdateGoldText()
+    {
+        goldText.text = $"{_currentGold.ToString("N0")}G";
+    }
+
+    /* 스테미나 테스트 */
+    public void RandomPlusGold()
+    {
+        int random = UnityEngine.Random.Range(100, 999);
+        PlusGold(random);
+        Debug.Log($"현재 골드 : {_currentGold}, 얻은 골드 : {random}");
+    }
+
+    public void RandomMinusGold()
+    {
+        int random = UnityEngine.Random.Range(100, 999);
+        MinusGold(random);
+        Debug.Log($"현재 골드 : {_currentGold}, 잃은 골드 : {random}");
     }
     #endregion
     #region Scene 이동
