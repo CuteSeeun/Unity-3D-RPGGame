@@ -1,20 +1,33 @@
 using UnityEngine;
-using CharacterController = Assets.Player.Scripts.CharacterController;
+using CharacterController = HJ.CharacterController;
 
-namespace Assets.HJ.Player.Scripts.States
+namespace HJ
 {
-    public class AttackBSpinning : StateMachineBehaviour
+    public class AttackBSpin : StateMachineBehaviour
     {
         Animator animator;
         Transform transform;
         CharacterController characterController;
+
+        [SerializeField] float _damageRate;
+
+        [SerializeField] float _attackRange;
+        [SerializeField] float _attackAngle;
+        [SerializeField] LayerMask _attackLayerMask;
+
+        [SerializeField] float _attackDelayTime;
+        [SerializeField] float _attackRepeatTime;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             transform = animator.transform;
             characterController = animator.GetComponent<CharacterController>();
 
+            characterController.attackRange = _attackRange;
+            characterController.attackAngle = _attackAngle;
+            characterController.attackLayerMask = _attackLayerMask;
 
+            characterController.InvokeRepeating("Attack", _attackDelayTime, _attackRepeatTime);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -24,6 +37,7 @@ namespace Assets.HJ.Player.Scripts.States
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            characterController.CancelInvoke("Attack");
             animator.SetInteger("state", 1);
         }
 

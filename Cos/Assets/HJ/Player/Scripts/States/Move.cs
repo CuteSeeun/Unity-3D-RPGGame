@@ -1,7 +1,7 @@
 using UnityEngine;
-using CharacterController = Assets.Player.Scripts.CharacterController;
+using CharacterController = HJ.CharacterController;
 
-namespace Assets.HJ.Player.Scripts.States
+namespace HJ
 {
     public class Move : StateMachineBehaviour
     {

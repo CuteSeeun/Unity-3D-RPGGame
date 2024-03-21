@@ -2527,7 +2527,7 @@ GameObject:
   - component: {fileID: 5105053903146675633}
   - component: {fileID: 2077308320590480268}
   - component: {fileID: 598281949004524522}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Mage
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2573,12 +2573,20 @@ MonoBehaviour:
   weapon1: {fileID: 3211855753922660956}
   weapon2: {fileID: 3672568851370674339}
   weapon3: {fileID: 0}
+  missile: {fileID: 7109357882407759783, guid: f236c8749a325b9458f688f715452434, type: 3}
+  invincible: 0
   _hp: 0
   _hpMax: 100
   _speed: 5
   _dodgeSpeed: 10
   _dodgeTime: 0.5
   _dodgeTimeInverse: 1
+  _attackRange: 0
+  _attackAngle: 0
+  _attackAngleInnerProduct: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &5105053903146675633
 Animator:
   serializedVersion: 5

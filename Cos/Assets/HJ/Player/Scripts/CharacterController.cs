@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.Player.Scripts
+namespace HJ
 {
     public abstract class CharacterController : MonoBehaviour, IHp
     {
@@ -15,7 +15,7 @@ namespace Assets.Player.Scripts
         public GameObject weapon2;
         public GameObject weapon3;
 
-        public GameObject missile;
+        public Missile missile;
 
         public bool invincible;
 
@@ -63,6 +63,7 @@ namespace Assets.Player.Scripts
                     onHpMax?.Invoke();
             }
         }
+
         [SerializeField] private float _hp;
         public float hpMax { get => _hpMax; }
         [SerializeField] private float _hpMax = 100;
@@ -74,11 +75,25 @@ namespace Assets.Player.Scripts
         public event Action onHpMax;
         public void Hit(float damage)
         {
+            DepleteHp(damage);
+        }
+
+        public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+        {
             if (invincible == false)
             {
-                HitB();
-
+                transform.rotation = hitRotation;
+                transform.Rotate(0, 180, 0);
                 DepleteHp(damage);
+
+                if (powerAttack ==  false)
+                {
+                    HitA();
+                }
+                else
+                {
+                    HitB();
+                }
             }
         }
 
@@ -205,6 +220,11 @@ namespace Assets.Player.Scripts
         public LayerMask attackLayerMask { set => _attackLayerMask = value; }
         [SerializeField] LayerMask _attackLayerMask;
 
+        public bool powerAttack { get => _powerAttack; set => _powerAttack = value; }
+        private bool _powerAttack;
+        public Vector3 attackDirection;
+        private Vector3 _attackDirection;
+
         public void Attack()
         {
             // 공격 거리 내 모든 적 탐색
@@ -223,7 +243,10 @@ namespace Assets.Player.Scripts
                 if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
                 {
                     // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
-                    Debug.Log(hit);
+                    if (hit.collider.TryGetComponent(out IHp iHp))
+                    {
+                        iHp.Hit(1, _powerAttack, transform.rotation);
+                    }
                 }
             }
         }
@@ -231,6 +254,7 @@ namespace Assets.Player.Scripts
         public void Shoot()
         {
             Instantiate(missile, transform.position + transform.forward, transform.rotation);
+            // 미사일 데미지 변수 전달
         }
 
         // AttackA -----------------------------------------------------------------
@@ -238,7 +262,6 @@ namespace Assets.Player.Scripts
         protected void AttackA()
         {
             animator.SetInteger("state", 3);
-            Attack();
         }
 
         // AttackB-----------------------------------------------------------
