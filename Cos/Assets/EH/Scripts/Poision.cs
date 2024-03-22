@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Player.Scripts;
+using HJ;
 public class Poision : MonoBehaviour
 {
     public float poisonDuration = 10f;

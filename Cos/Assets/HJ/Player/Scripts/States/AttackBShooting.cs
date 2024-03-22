@@ -1,7 +1,7 @@
 using UnityEngine;
-using CharacterController = Assets.Player.Scripts.CharacterController;
+using CharacterController = HJ.CharacterController;
 
-namespace Assets.HJ.Player.Scripts.States
+namespace HJ
 {
     public class AttackBShooting: StateMachineBehaviour
     {
@@ -13,6 +13,8 @@ namespace Assets.HJ.Player.Scripts.States
         {
             transform = animator.transform;
             characterController = animator.GetComponent<CharacterController>();
+
+            characterController.Shoot();
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -1,13 +1,7 @@
-using GSpawn;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using static UnityEngine.Rendering.DebugUI;
 
-namespace Assets.Player.Scripts
+namespace HJ
 {
     public abstract class CharacterController : MonoBehaviour, IHp
     {
@@ -21,6 +15,10 @@ namespace Assets.Player.Scripts
         public GameObject weapon2;
         public GameObject weapon3;
 
+        public Missile missile;
+
+        public bool invincible;
+
         private void Awake()
         {
             transform = GetComponent<Transform>();
@@ -32,8 +30,6 @@ namespace Assets.Player.Scripts
             onHpMin += () => Death();
 
             animator.SetInteger("type", _type);
-            animator.SetInteger("attackACombo", 1);
-            SetType();
         }
 
         protected virtual void Update()
@@ -67,6 +63,7 @@ namespace Assets.Player.Scripts
                     onHpMax?.Invoke();
             }
         }
+
         [SerializeField] private float _hp;
         public float hpMax { get => _hpMax; }
         [SerializeField] private float _hpMax = 100;
@@ -76,30 +73,56 @@ namespace Assets.Player.Scripts
         public event Action<float> onHpRecovered;
         public event Action onHpMin;
         public event Action onHpMax;
-
         public void Hit(float damage)
         {
-            HitA();
             DepleteHp(damage);
         }
 
-        /*
-        public void Hit(bool powerAttack, float damage)
+        public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
-            if (powerAttack == false)
+            if (invincible == false)
             {
-                HitA();
-            }
-            else if (powerAttack == true)
-            {
-                HitB();
-            }
+                transform.rotation = hitRotation;
+                transform.Rotate(0, 180, 0);
+                DepleteHp(damage);
 
-            DepleteHp(damage);
+                if (powerAttack ==  false)
+                {
+                    if (_defending == true)
+                    {
+                        HitA();
+                    }
+                    else // (_defending == false)
+                    {
+                        HitA();
+                    }
+                }
+                else // (powerAttack ==  true)
+                {
+                    HitB();
+                }
+            }
         }
-        */
 
         /*
+        public void Hit(float damage, bool powerAttack, Vector3 direction)
+        {
+            if (invincible == false)
+            {
+                if (powerAttack == false)
+                {
+                    HitA();
+                }
+                else if (powerAttack == true)
+                {
+                    HitB();
+                    transform.rotation = Quaternion.LookRotation(direction);
+                }
+
+                DepleteHp(damage);
+            }
+        }
+        
         public void Hit(float damage)
         {
             DepleteHp(damage);
@@ -121,7 +144,21 @@ namespace Assets.Player.Scripts
             onHpRecovered?.Invoke(amount);
         }
 
+        // Defending
+
+        public bool defending { get => _defending; set => _defending = value; }
+        private bool _defending;
+        public float defendingAngle { set => _defendingAngle = value; }
+        private float _defendingAngle;
+        private float _defendingAngleInnerProduct;
+
+        public void Defend()
+        {
+            _defendingAngleInnerProduct = Mathf.Cos(_defendingAngle * Mathf.Deg2Rad);
+        }
+
         // Type ------------------------------------------------------------
+        /*
         private int _attackAComboMax;
 
         private void SetType()
@@ -145,6 +182,13 @@ namespace Assets.Player.Scripts
                     break;
             }
         }
+        */
+
+        // State -------------------------------------------------------------
+        public void StateReset()
+        {
+            animator.SetInteger("state", 1);
+        }
 
         // Move --------------------------------------------------------------
         public float speed { get => _speed; }
@@ -166,12 +210,6 @@ namespace Assets.Player.Scripts
             animator.SetFloat("moveFloat", _moveFloat);
         }
 
-        public void AttackAComboReset()
-        {
-            animator.SetInteger("state", 1);
-            Debug.Log("리셋");
-        }
-
         // Dodge -----------------------------------------------------------------
         public float dodgeSpeed { get => _dodgeSpeed; }
         [SerializeField] float _dodgeSpeed = 10f;
@@ -180,16 +218,67 @@ namespace Assets.Player.Scripts
 
         public float dodgeTimeInverse { get => _dodgeTimeInverse; }
         [SerializeField] float _dodgeTimeInverse = 1f;
+
+        public float invincibleTime { get => _invincibleTime; }
+        private float _invincibleTime = 0.5f;
         
         protected void Dodge()
         {
             animator.SetInteger("state", 2);
         }
 
+        public void InvincibleEnd()
+        {
+            invincible = false;
+        }
+
+        // Attack --------------------------------------------------------------
+        public float attackRange { set => _attackRange = value; }
+        [SerializeField] float _attackRange;
+        public float attackAngle { set => _attackAngle = value; }
+        [SerializeField] float _attackAngle;
+        [SerializeField] float _attackAngleInnerProduct;
+        public LayerMask attackLayerMask { set => _attackLayerMask = value; }
+        [SerializeField] LayerMask _attackLayerMask;
+
+        public bool powerAttack { get => _powerAttack; set => _powerAttack = value; }
+        private bool _powerAttack;
+        public Vector3 attackDirection;
+        private Vector3 _attackDirection;
+
+        public void Attack()
+        {
+            // 공격 거리 내 모든 적 탐색
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                      _attackRange,
+                                                      Vector3.up,
+                                                      0,
+                                                      _attackLayerMask);
+
+            // 공격 각도에 따른 내적 계산
+            _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+            // 내적으로 공격각도 구하기
+            foreach (RaycastHit hit in hits)
+            {
+                if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+                {
+                    // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                    if (hit.collider.TryGetComponent(out IHp iHp))
+                    {
+                        iHp.Hit(1, _powerAttack, transform.rotation);
+                    }
+                }
+            }
+        }
+
+        public void Shoot()
+        {
+            Instantiate(missile, transform.position + transform.forward, transform.rotation);
+            // 미사일 데미지 변수 전달
+        }
+
         // AttackA -----------------------------------------------------------------
-        public int attackAComboMax { get => _attackAComboMax; }
-        public int attackACombo { get => _attackACombo; set => _attackACombo = value; }
-        private int _attackACombo = 1;
 
         protected void AttackA()
         {

@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public GameObject Target;               // Ä«¸Ş¶ó°¡ µû¶ó´Ù´Ò Å¸°Ù
+    public GameObject Target;               // ì¹´ë©”ë¼ê°€ ë”°ë¼ë‹¤ë‹ íƒ€ê²Ÿ
 
-    public float offsetX = -0.0f;            // Ä«¸Ş¶óÀÇ xÁÂÇ¥
-    public float offsetY = 8.0f;           // Ä«¸Ş¶óÀÇ yÁÂÇ¥
-    public float offsetZ = -4.0f;          // Ä«¸Ş¶óÀÇ zÁÂÇ¥
+    public float offsetX = -0.0f;            // ì¹´ë©”ë¼ì˜ xì¢Œí‘œ
+    public float offsetY = 8.0f;           // ì¹´ë©”ë¼ì˜ yì¢Œí‘œ
+    public float offsetZ = -4.0f;          // ì¹´ë©”ë¼ì˜ zì¢Œí‘œ
 
-    public float CameraSpeed = 10.0f;       // Ä«¸Ş¶óÀÇ ¼Óµµ
-    Vector3 TargetPos;                      // Å¸°ÙÀÇ À§Ä¡
+    public float CameraSpeed = 10.0f;       // ì¹´ë©”ë¼ì˜ ì†ë„
+    Vector3 TargetPos;                      // íƒ€ê²Ÿì˜ ìœ„ì¹˜
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Å¸°ÙÀÇ x, y, z ÁÂÇ¥¿¡ Ä«¸Ş¶óÀÇ ÁÂÇ¥¸¦ ´õÇÏ¿© Ä«¸Ş¶óÀÇ À§Ä¡¸¦ °áÁ¤
+        // íƒ€ê²Ÿì˜ x, y, z ì¢Œí‘œì— ì¹´ë©”ë¼ì˜ ì¢Œí‘œë¥¼ ë”í•˜ì—¬ ì¹´ë©”ë¼ì˜ ìœ„ì¹˜ë¥¼ ê²°ì •
         TargetPos = new Vector3(
             Target.transform.position.x + offsetX,
             Target.transform.position.y + offsetY,
             Target.transform.position.z + offsetZ
             );
 
-        // Ä«¸Ş¶óÀÇ ¿òÁ÷ÀÓÀ» ºÎµå·´°Ô ÇÏ´Â ÇÔ¼ö(Lerp)
+        // ì¹´ë©”ë¼ì˜ ì›€ì§ì„ì„ ë¶€ë“œëŸ½ê²Œ í•˜ëŠ” í•¨ìˆ˜(Lerp)
         transform.position = Vector3.Lerp(transform.position, TargetPos, Time.deltaTime * CameraSpeed);
     }
 }

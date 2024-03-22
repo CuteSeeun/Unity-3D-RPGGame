@@ -1,58 +1,64 @@
 using UnityEngine;
-using CharacterController = Assets.Player.Scripts.CharacterController;
+using CharacterController = HJ.CharacterController;
 
-public class Dodge : StateMachineBehaviour
+namespace HJ
 {
-    Animator animator;
-    Transform transform;
-    CharacterController characterController;
-
-    private Vector3 _dodgeDirection;
-    private float _dodgeSpeedLeft;
-    private float _dodgeTimeLeft;
-
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public class Dodge : StateMachineBehaviour
     {
-        characterController = animator.GetComponent<CharacterController>();
-        transform = animator.transform;
+        Animator animator;
+        Transform transform;
+        CharacterController characterController;
 
-        if (characterController.moveDirection.magnitude != 0)
+        private Vector3 _dodgeDirection;
+        private float _dodgeSpeedLeft;
+        private float _dodgeTimeLeft;
+
+        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _dodgeDirection = characterController.moveDirection;
+            characterController = animator.GetComponent<CharacterController>();
+            transform = animator.transform;
+
+            if (characterController.moveDirection.magnitude != 0)
+            {
+                _dodgeDirection = characterController.moveDirection;
+            }
+            else
+            {
+                _dodgeDirection = transform.forward;
+            }
+
+            transform.rotation = Quaternion.LookRotation(_dodgeDirection);
+
+            _dodgeSpeedLeft = characterController.dodgeSpeed;
+            _dodgeTimeLeft = characterController.dodgeTime;
+
+            characterController.invincible = true;
+            characterController.Invoke("InvincibleEnd", characterController.invincibleTime);
         }
-        else
+
+        override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _dodgeDirection = transform.forward;
+            animator.SetInteger("state", 2);
+            _dodgeSpeedLeft -= characterController.dodgeSpeed * characterController.dodgeTimeInverse * Time.fixedDeltaTime;
+            _dodgeTimeLeft -= Time.fixedDeltaTime;
+            transform.position += _dodgeDirection * _dodgeSpeedLeft * Time.fixedDeltaTime;
         }
 
-        transform.rotation = Quaternion.LookRotation(_dodgeDirection);
+        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            animator.SetInteger("state", 1);
+        }
 
-        _dodgeSpeedLeft = characterController.dodgeSpeed;
-        _dodgeTimeLeft = characterController.dodgeTime;
+        // OnStateMove is called right after Animator.OnAnimatorMove()
+        //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    // Implement code that processes and affects root motion
+        //}
+
+        // OnStateIK is called right after Animator.OnAnimatorIK()
+        //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    // Implement code that sets up animation IK (inverse kinematics)
+        //}
     }
-
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.SetInteger("state", 2);
-        _dodgeSpeedLeft -= characterController.dodgeSpeed * characterController.dodgeTimeInverse * Time.fixedDeltaTime;
-        _dodgeTimeLeft -= Time.fixedDeltaTime;
-        transform.position += _dodgeDirection * _dodgeSpeedLeft * Time.fixedDeltaTime;
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.SetInteger("state", 1);
-    }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
-    }
+}
