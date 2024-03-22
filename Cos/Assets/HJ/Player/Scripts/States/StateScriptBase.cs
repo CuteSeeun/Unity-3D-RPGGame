@@ -145,26 +145,26 @@ using UnityEngine;
 // This function is called when the object is loaded.
 // OnEnable cannot be a co-routine.
 
-namespace Assets.HJ.Player.Scripts.States
+namespace HJ
 {
     public class StateScriptBase : StateMachineBehaviour
     {
         // OnStateEnter : transition이 시작되고 state machine이 이 상태를 평가할 때 첫번째 Update 프레임에서 호출됩니다.
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            
+
         }
 
         // OnStateUpdate : OnStateEnter와 OnStateExit 콜백 사이의 각 Update 프레임에서 호출됩니다
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            
+
         }
 
         // OnStateExit : transition이 종료되고 state machine이 이 상태 평가를 마칠 때 마지막 Update 프레임에서 호출됩니다.
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            
+
         }
 
         // OnStateMove : Animator.OnAnimatorMove() 바로 뒤에 호출됩니다.
@@ -179,14 +179,4 @@ namespace Assets.HJ.Player.Scripts.States
             // 애니메이션 IK(inverse kinematics)를 설정하는 코드 구현
         }
     }
-
-
-
-
-
-
-
-
-
-
 }
