@@ -7,29 +7,29 @@ public class EliteEnemy : MonoBehaviour
 {
     float patrolSpeed = 2f;
     float chaseSpeed = 5f;
-    float patrolWaitTime = 3f;
     public float detectionRange;
     public float attackRange;
     float detectionAngle = 360f;
     public int hp;
-    public int currentHp;
-    public float jumpForce;
-    public float fallSpeed;
+    private int currentHp;
+    private float jumpForce = 200;
+    private float fallSpeed = 100;
+    private float rushSpeed = 15;
+    private float stopThreshold = 0.1f; // 오브젝트가 멈춘 것으로 간주하는 속도 임계값
 
 
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
     private Rigidbody rb;
-    private Vector3 patrolDestination;
-    private bool isPatrolling;
     private bool isChasing;
     private bool isDeath;
-    public bool isAttack;
-    public bool isJumping;
-    public bool jump;
-    public float attackTimer;
-    public int attackStack = 0;
+    private bool isAttack;
+    private bool isJumping;
+    private bool jump;
+    private bool isStop;
+    private float attackTimer;
+    private int attackStack = 0;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
@@ -41,7 +41,6 @@ public class EliteEnemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        patrolDestination = GetRandomPatrolDestination();
         isChasing = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
@@ -135,12 +134,10 @@ public class EliteEnemy : MonoBehaviour
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
-            Debug.Log(attackTimer);
         }
         else if (attackTimer < 0)
         {
             attackTimer = 0;
-            Debug.Log(attackTimer);
         }
         if (currentHp <= 0 && !isDeath)
         {
@@ -148,6 +145,15 @@ public class EliteEnemy : MonoBehaviour
             agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
+        }
+        if(m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Rush_Golem"))
+        {
+            agent.isStopped = false;
+            m_Animator.SetInteger("state", 0);
+            Debug.Log("돌진");
+            Vector3 rush = transform.forward;
+            rb.velocity = rush * rushSpeed;
+            transform.LookAt(transform.position + transform.forward);
         }
     }
 
@@ -161,13 +167,14 @@ public class EliteEnemy : MonoBehaviour
     void Rush()
     {
         m_Animator.SetTrigger("isRush");
-        agent.isStopped = true;
+        //transform.LookAt(player.position);
+        //agent.isStopped = true;
         attackTimer = 6;
     }
 
     void Jump()
     {
-        rb.velocity = Vector3.up * jumpForce;
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         Debug.Log("점프");
         isJumping = true;
         attackTimer = 3;
@@ -178,16 +185,6 @@ public class EliteEnemy : MonoBehaviour
     {
         m_Animator.SetTrigger("isCrush");
         attackTimer = 5;
-    }
-
-    Vector3 GetRandomPatrolDestination()
-    {
-        float patrolRadius = 10f;
-        Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
-        randomDirection += transform.position;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, patrolRadius, 1);
-        return hit.position;
     }
 
     void OnDrawGizmosSelected()
@@ -217,10 +214,12 @@ public class EliteEnemy : MonoBehaviour
 
     public void AttackEnd()
     {
+        m_Animator.SetInteger("state", 0);
         agent.isStopped = false;
         isChasing = true;
         isAttack = false;
         jump = false;
+        rb.isKinematic = false;
         attackStack++;
         if(attackStack > 6)
         {
@@ -236,5 +235,25 @@ public class EliteEnemy : MonoBehaviour
     void Hit()
     {
         //데미지 가하는 코드 구현
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (rb.velocity.magnitude < stopThreshold)
+            {
+                Debug.Log("충돌");
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            rb.isKinematic = true;
+            //if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Rush_Golem"))
+            //{
+            //    rb.isKinematic = true;
+            //    rb.velocity = Vector3.zero;
+            //    rb.angularVelocity = Vector3.zero;
+            //}
+        }
     }
 }
