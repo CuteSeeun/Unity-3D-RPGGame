@@ -1,4 +1,4 @@
-using Assets.Player.Scripts;
+using HJ;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

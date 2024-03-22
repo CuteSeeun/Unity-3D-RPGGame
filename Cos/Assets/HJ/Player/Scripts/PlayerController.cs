@@ -1,10 +1,10 @@
 using UnityEngine;
-using CharacterController = Assets.Player.Scripts.CharacterController;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Interactions;
 
-namespace Assets.Player.Scripts
+using CharacterController = HJ.CharacterController;
+
+namespace HJ
 {
     internal class PlayerController : CharacterController
     {
