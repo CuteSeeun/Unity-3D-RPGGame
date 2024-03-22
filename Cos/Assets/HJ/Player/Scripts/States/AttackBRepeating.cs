@@ -21,6 +21,8 @@ namespace HJ
         [SerializeField] bool _canMove;
         [SerializeField] bool _canRotate;
 
+        [SerializeField] bool _isPowerAttack;
+
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             transform = animator.transform;
@@ -29,6 +31,7 @@ namespace HJ
             characterController.attackRange = _attackRange;
             characterController.attackAngle = _attackAngle;
             characterController.attackLayerMask = _attackLayerMask;
+            characterController.powerAttack = _isPowerAttack;
 
             characterController.InvokeRepeating("Attack", _attackDelayTime, _attackRepeatTime);
         }

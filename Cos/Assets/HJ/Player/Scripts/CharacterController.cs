@@ -83,22 +83,20 @@ namespace HJ
         {
             if (invincible == false)
             {
+                if (_defending == true && 180 - Quaternion.Angle(transform.rotation, hitRotation) < _defendingAngle) // 방어중 && 방어 각도 성공
+                {
+                    animator.SetBool("defend", true);
+                    // 방어력 대폭 상승
+                }
+                
+
                 transform.rotation = hitRotation;
                 transform.Rotate(0, 180, 0);
                 DepleteHp(damage);
 
                 if (powerAttack ==  false)
                 {
-                    if (_defending == true)
-                    {
-                        HitA();
-
-                        Debug.Log(Quaternion.Angle(transform.rotation, hitRotation));
-                    }
-                    else // (_defending == false)
-                    {
-                        HitA();
-                    }
+                    HitA();
                 }
                 else // (powerAttack ==  true)
                 {
