@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 8779470545690256105}
   - component: {fileID: 3012359346041678390}
   - component: {fileID: 6611698696509365275}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Rogue
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1037,12 +1037,20 @@ MonoBehaviour:
   weapon1: {fileID: 8950439252500502872}
   weapon2: {fileID: 751906111790940650}
   weapon3: {fileID: 4946995793625435931}
+  missile: {fileID: 8069049544513731857, guid: 14d0014c3d2885b46a67baee9e3767ea, type: 3}
+  invincible: 0
   _hp: 0
   _hpMax: 100
   _speed: 5
   _dodgeSpeed: 10
   _dodgeTime: 0.5
   _dodgeTimeInverse: 1
+  _attackRange: 0
+  _attackAngle: 0
+  _attackAngleInnerProduct: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &8779470545690256105
 Animator:
   serializedVersion: 5

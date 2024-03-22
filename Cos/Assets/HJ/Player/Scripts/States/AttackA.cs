@@ -1,7 +1,7 @@
 using UnityEngine;
-using CharacterController = Assets.Player.Scripts.CharacterController;
+using CharacterController = HJ.CharacterController;
 
-namespace Assets.HJ.Player.Scripts.States
+namespace HJ
 {
     public class AttackA : StateMachineBehaviour
     {
@@ -9,7 +9,7 @@ namespace Assets.HJ.Player.Scripts.States
         Transform transform;
         CharacterController characterController;
 
-        private Vector3 _attackADirection;
+        private Quaternion _attackDirection;
 
         [SerializeField] float _damageRate;
 
@@ -17,28 +17,35 @@ namespace Assets.HJ.Player.Scripts.States
         [SerializeField] float _attackAngle;
         [SerializeField] LayerMask _attackLayerMask;
 
+        [SerializeField] float _attackDelayTime;
+
+        [SerializeField] bool _isCombo;
         [SerializeField] float _comboResetTime;
+
+        [SerializeField] bool _isDoubleAttack;
+        [SerializeField] float _DoubleAttackDelayTime;
+
+        [SerializeField] bool _isPowerAttack;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             transform = animator.transform;
             characterController = animator.GetComponent<CharacterController>();
 
-            if (characterController.moveDirection.magnitude != 0)
-            {
-                _attackADirection = characterController.moveDirection;
-            }
-            else
-            {
-                _attackADirection = transform.forward;
-            }
-
             characterController.attackRange = _attackRange;
             characterController.attackAngle = _attackAngle;
             characterController.attackLayerMask = _attackLayerMask;
+            characterController.powerAttack = _isPowerAttack;
 
+            characterController.Invoke("Attack", _attackDelayTime);
 
-            characterController.Invoke("AttackAComboReset", _comboResetTime);
+            if (_isCombo)
+            {
+                characterController.Invoke("StateReset", _comboResetTime);
+            }
+            
+            if(_isDoubleAttack)
+                characterController.Invoke("Attack", _DoubleAttackDelayTime);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
