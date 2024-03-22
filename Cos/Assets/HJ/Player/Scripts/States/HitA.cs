@@ -5,12 +5,17 @@ namespace HJ
 {
     public class HitA : StateMachineBehaviour
     {
-        CharacterController controller;
+        Animator _animator;
+        CharacterController _controller;
+
+        [SerializeField] float _stateResetTime;
 
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            _controller = animator.GetComponent<CharacterController>();
 
+            _controller.StateReset();
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -8,9 +8,12 @@ namespace HJ
         [SerializeField] float _speed;
         [SerializeField] float _timer;
 
-        [SerializeField] LayerMask _layerMask;
+        [SerializeField] LayerMask _attackLayerMask;
         [SerializeField] LayerMask _layerMaskWall;
         [SerializeField] bool _isPiercing;
+        [SerializeField] bool _isPowerAttack;
+        [SerializeField] bool _isExplosive;
+        [SerializeField] float _explosionRadius;
 
         public void Start()
         {
@@ -27,8 +30,48 @@ namespace HJ
             Destroy(gameObject);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (_isPiercing == false)
+            {
+                Destroy(gameObject);
+
+                if(_isExplosive == false)
+                {
+
+                }
+                else // (_isExplosive == true)
+                {
+                    RaycastHit[] hits = Physics.SphereCastAll(transform.position, _explosionRadius, transform.up, 0, _attackLayerMask);
+
+                    foreach (RaycastHit hit in hits)
+                    {
+                        // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                        if (hit.collider.TryGetComponent(out IHp iHp))
+                        {
+                            iHp.Hit(1, _isPowerAttack, transform.rotation);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (other.gameObject.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(1, _isPowerAttack, transform.rotation);
+                }
+
+                if (other.gameObject.layer == _layerMaskWall)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+
+        /*
         private void OnCollisionEnter(Collision collision)
         {
+            Debug.Log(1);
             if (_isPiercing == false)
             {
                 Destroy(this);
@@ -37,7 +80,7 @@ namespace HJ
             {
                 if (collision.gameObject.TryGetComponent(out IHp iHp))
                 {
-                    iHp.Hit(1);
+                    iHp.Hit(1, _isPowerAttack, transform.rotation);
                     Destroy(this);
                 }
 
@@ -47,5 +90,6 @@ namespace HJ
                 }
             }
         }
+        */
     }
 }

@@ -41,7 +41,7 @@ namespace HJ
 
             if (_isCombo)
             {
-                characterController.Invoke("AttackAComboReset", _comboResetTime);
+                characterController.Invoke("StateReset", _comboResetTime);
             }
             
             if(_isDoubleAttack)

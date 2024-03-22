@@ -88,9 +88,16 @@ namespace HJ
 
                 if (powerAttack ==  false)
                 {
-                    HitA();
+                    if (_defending == true)
+                    {
+                        HitA();
+                    }
+                    else // (_defending == false)
+                    {
+                        HitA();
+                    }
                 }
-                else
+                else // (powerAttack ==  true)
                 {
                     HitB();
                 }
@@ -137,6 +144,19 @@ namespace HJ
             onHpRecovered?.Invoke(amount);
         }
 
+        // Defending
+
+        public bool defending { get => _defending; set => _defending = value; }
+        private bool _defending;
+        public float defendingAngle { set => _defendingAngle = value; }
+        private float _defendingAngle;
+        private float _defendingAngleInnerProduct;
+
+        public void Defend()
+        {
+            _defendingAngleInnerProduct = Mathf.Cos(_defendingAngle * Mathf.Deg2Rad);
+        }
+
         // Type ------------------------------------------------------------
         /*
         private int _attackAComboMax;
@@ -164,6 +184,12 @@ namespace HJ
         }
         */
 
+        // State -------------------------------------------------------------
+        public void StateReset()
+        {
+            animator.SetInteger("state", 1);
+        }
+
         // Move --------------------------------------------------------------
         public float speed { get => _speed; }
         [SerializeField] float _speed = 5f;
@@ -182,11 +208,6 @@ namespace HJ
             _moveFloat = _moveDirection.magnitude * _velocity;
 
             animator.SetFloat("moveFloat", _moveFloat);
-        }
-
-        public void AttackAComboReset()
-        {
-            animator.SetInteger("state", 1);
         }
 
         // Dodge -----------------------------------------------------------------

@@ -3832,12 +3832,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -15, y: 15, z: -15}
+  m_LocalRotation: {x: -0.13776433, y: 0.4663383, z: -0.39130428, w: 0.78130054}
+  m_LocalPosition: {x: -20.49038, y: 3.507576, z: -12.7216835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 410087041}
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -4585,7 +4585,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &410087042
@@ -16250,7 +16251,7 @@ PrefabInstance:
     - target: {fileID: 4980016502053825255, guid: 030a8d37a2fe2a9468ae16a3b07f7860,
         type: 3}
       propertyPath: m_Name
-      value: Knight (1)
+      value: Knight Dummy
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 030a8d37a2fe2a9468ae16a3b07f7860,
         type: 3}
@@ -28723,7 +28724,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1306679491}

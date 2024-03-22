@@ -155,7 +155,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -175,13 +175,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _timer: 1
-  _layerMask:
+  _attackLayerMask:
     serializedVersion: 2
     m_Bits: 4096
   _layerMaskWall:
     serializedVersion: 2
     m_Bits: 0
   _isPiercing: 0
+  _isPowerAttack: 1
+  _isExplosive: 1
+  _explosionRadius: 2.5
 --- !u!54 &-1409917488091409278
 Rigidbody:
   m_ObjectHideFlags: 0

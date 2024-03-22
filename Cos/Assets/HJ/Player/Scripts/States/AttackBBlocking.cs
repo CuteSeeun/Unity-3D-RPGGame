@@ -9,10 +9,15 @@ namespace HJ
         Transform transform;
         CharacterController characterController;
 
+        [SerializeField] float _defendingAngle;
+
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             transform = animator.transform;
             characterController = animator.GetComponent<CharacterController>();
+
+            characterController.defendingAngle = _defendingAngle;
+            characterController.defending = true;
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -27,7 +32,7 @@ namespace HJ
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
+            characterController.defending = false;
         }
 
         // OnStateMove : Animator.OnAnimatorMove() 바로 뒤에 호출됩니다.
