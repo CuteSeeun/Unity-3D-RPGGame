@@ -17,12 +17,16 @@ public class EliteEnemyAI : MonoBehaviour
     private Transform player;
     private bool isWaiting = true;
     private bool isJumping;
+    private bool isJump;
     private bool isChasing;
     private bool isDeath;
+    private bool isDirty;
+    private bool isRush;
+    private bool isCrush;
     private float chaseSpeed = 5f;
     private float attackTimer;
     private float detectionRange;
-    private float attackRange;
+    private float attackRange = 5;
     private int attackStack = 0;
 
     public Color detectionColor = Color.yellow;
@@ -34,6 +38,7 @@ public class EliteEnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player").transform;
+        currentHealth = maxHealth;
     }
 
     private void Update()
@@ -41,22 +46,20 @@ public class EliteEnemyAI : MonoBehaviour
         if(isWaiting)
         {
             animator.SetInteger("state", 0);
-            StartCoroutine("Waiting");
+            StartCoroutine(Waiting());
         }
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Spawn"))
         {
-            isChasing = true;
-
             if (isChasing)
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
                 {
                     agent.speed = chaseSpeed;
                     animator.SetInteger("state", 1);
                     agent.SetDestination(player.position);
                     transform.LookAt(player.position);
                 }
-                else
+                if(isDirty)
                 {
                     agent.isStopped = true;
                     agent.SetDestination(transform.position);
@@ -69,18 +72,22 @@ public class EliteEnemyAI : MonoBehaviour
                         && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))                       
                     {
                         Attack();
-                    }
-                    else if (attackStack == 5 && attackTimer == 0
-                        && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))
-                    {
-                        Jump();
-                    }
+                    }                  
                 }
-                if(attackStack == 2 && attackTimer == 0)
+                if (attackStack == 2 && attackTimer == 0 && isRush == false)
                 {
-                    animator.SetTrigger("isRush");
+                    isRush = true;
+                    Rush();
                 }
-                if(attackTimer > 0)
+                if (attackStack == 5 && attackTimer == 0 && isJumping == false)
+                {
+                    isJump = true;
+                }
+                if(attackStack == 6  && attackTimer == 0 && isCrush == false)
+                {
+                    Crush();
+                }
+                if (attackTimer > 0)
                 {
                     attackTimer -= Time.deltaTime;
                 }
@@ -90,22 +97,37 @@ public class EliteEnemyAI : MonoBehaviour
                 }
             }
         }
-
-        IEnumerator Waiting()
+        if (isJump)
         {
-            isWaiting = false;
-            yield return new WaitForSeconds(3);
+            if (!isJumping)
+            {
+                rb.velocity = Vector3.up * jumpForce;
+                Debug.Log("점프" + isJumping);
+                animator.SetTrigger("Jump");
+                isJumping = true;                
+            }
+            if (isJumping)
+            {
+                if (rb.velocity.y < 0)
+                {
+                    rb.velocity = Vector3.down * fallSpeed;
+                    animator.SetBool("Fall", true);
 
+                    if (transform.position.y <= 0)
+                    {
+                        isJump = false;
+                        isJumping = false;
+                        animator.SetBool("Fall", false);
+                        Debug.Log("착지" + isJumping);
+                    }
+                }
+            }
+            if (transform.position.y > 30)
+            {
+                rb.velocity = Vector3.down * fallSpeed;
+            }
         }
-
-        if (!isJumping )
-        {
-            animator.SetTrigger("Jump");
-            isJumping = true;
-            Invoke("Jump", 0.5f); // Update 메서드에서 호출하지 않습니다.
-        }
-
-        if(currentHealth <=  maxHealth / 2)
+        if (currentHealth <=  maxHealth / 2)
         {
 
         }
@@ -114,30 +136,18 @@ public class EliteEnemyAI : MonoBehaviour
         {
             isDeath = true;
         }
+        Debug.Log(attackStack);
     }
-
-    private void FixedUpdate()
+    IEnumerator Waiting()
     {
-        // Fixed Update 메서드에서 공중에서 떨어지는 로직을 처리합니다.
-        if (isJumping)
+        isWaiting = false;
+        yield return new WaitForSeconds(2);
+        if (!isChasing)
         {
-            if (rb.velocity.y < 0)
-            {
-                rb.velocity = Vector3.down * fallSpeed;         
-                animator.SetBool("Fall",true);
-                
-                if (transform.position.y <= 0)
-                {
-                    isJumping = false;
-                    animator.SetBool("Fall", false);
-                    Debug.Log("착지" + isJumping);
-                }
-            }
+            animator.SetInteger("state", 0);
+            isChasing = true;
         }
-        if(transform.position.y > 30)
-        {
-            rb.velocity = Vector3.down * fallSpeed;
-        }
+
     }
 
     private void OnDrawGizmosSelected()
@@ -154,6 +164,7 @@ public class EliteEnemyAI : MonoBehaviour
     }
     void Attack()
     {
+        isDirty = true;
         agent.isStopped = true;
         animator.SetTrigger("isAttack");
     }
@@ -163,14 +174,23 @@ public class EliteEnemyAI : MonoBehaviour
         agent.isStopped = false;
         attackStack++;
         isWaiting = true;
+        isDirty = false;
     }
 
-    private void Jump()
-    {       
-        // 보스 몬스터를 공중으로 올리고 점프 상태로 설정
-        rb.velocity = Vector3.up * jumpForce;
-        Debug.Log("점프" + isJumping);
-         // 점프 후 타이머 초기화
+    void Rush()
+    {
+        animator.SetTrigger("isRush");
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Rush_Golem"))
+        {
+            isDirty = true;
+        }
+    }
+    void Crush()
+    {
+        isCrush = true;
+        isDirty = true;
+        animator.SetTrigger("isCrush");
+        attackStack = 0;
     }
 
     /* Animation Event로 호출됨

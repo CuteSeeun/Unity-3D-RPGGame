@@ -2271,7 +2271,7 @@ GameObject:
   - component: {fileID: 7165327779322845451}
   - component: {fileID: 1786028193673796828}
   - component: {fileID: 6641391034881712741}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Barbarian
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2317,12 +2317,20 @@ MonoBehaviour:
   weapon1: {fileID: 1966399025846359769}
   weapon2: {fileID: 0}
   weapon3: {fileID: 0}
+  missile: {fileID: 0}
+  invincible: 0
   _hp: 0
   _hpMax: 100
   _speed: 5
   _dodgeSpeed: 10
   _dodgeTime: 0.5
   _dodgeTimeInverse: 1
+  _attackRange: 0
+  _attackAngle: 0
+  _attackAngleInnerProduct: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &7165327779322845451
 Animator:
   serializedVersion: 5
