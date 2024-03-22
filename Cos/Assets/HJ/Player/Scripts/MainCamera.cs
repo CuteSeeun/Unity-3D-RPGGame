@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCamera : MonoBehaviour
+namespace HJ
 {
-    private Transform _transform;
-    [SerializeField] Transform _playerTransform;
-    [SerializeField] Vector3 _cameraOffset;
-
-    void Start()
+    public class MainCamera : MonoBehaviour
     {
-        _transform = GetComponent<Transform>();
-    }
+        private Transform _transform;
+        [SerializeField] Transform _playerTransform;
+        [SerializeField] Vector3 _cameraOffset;
 
-    // Update is called once per frame
-    void Update()
-    {
-        _transform.position = _playerTransform.position + _cameraOffset;
+        void Start()
+        {
+            _transform = GetComponent<Transform>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            _transform.position = _playerTransform.position + _cameraOffset;
+        }
     }
 }
