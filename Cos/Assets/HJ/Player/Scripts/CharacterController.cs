@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace HJ
 {
@@ -91,6 +92,8 @@ namespace HJ
                     if (_defending == true)
                     {
                         HitA();
+
+                        Debug.Log(Quaternion.Angle(transform.rotation, hitRotation));
                     }
                     else // (_defending == false)
                     {
