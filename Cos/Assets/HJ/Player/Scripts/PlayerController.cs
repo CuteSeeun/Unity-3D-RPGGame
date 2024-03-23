@@ -6,7 +6,7 @@ using CharacterController = HJ.CharacterController;
 
 namespace HJ
 {
-    internal class PlayerController : CharacterController
+    public class PlayerController : CharacterController
     {
         protected override void Start()
         {
@@ -58,6 +58,22 @@ namespace HJ
             {
                 AttackBRelease();
             }
+        }
+
+        [SerializeField] LayerMask _layerMaskInteractable;
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if(Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out RaycastHit hit, 2.6f, _layerMaskInteractable))
+            {
+                if(hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
+                {
+                    interactable.Interaction(this.gameObject);
+                }
+            }
+            /*
+            Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 5f, _layerMaskInteractable);
+            Debug.Log(hit.collider.name);
+            */
         }
         #endregion ========================================================
     }
