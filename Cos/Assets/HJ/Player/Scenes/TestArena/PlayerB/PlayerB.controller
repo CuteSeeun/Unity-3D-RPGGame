@@ -212,7 +212,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.033
   _attackRepeatTime: 0.667
   _canMove: 1
@@ -425,7 +425,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 1
   _comboResetTime: 0
@@ -697,7 +697,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 1
   _comboResetTime: 0
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 1
   _comboResetTime: 0
@@ -1642,7 +1642,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.5
   _isCombo: 1
   _comboResetTime: 0
@@ -1751,7 +1751,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player
+  m_Name: PlayerB
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: state
@@ -1836,7 +1836,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.5
   _attackRepeatTime: 0.667
   _canMove: 0
@@ -2021,14 +2021,14 @@ AnimatorStateMachine:
   - {fileID: -7904806329699182536}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 7127227341441055103}
-    second:
-    - {fileID: -7949476003575362664}
-    - {fileID: 3365902079686085329}
   - first: {fileID: 5400570447597629529}
     second:
     - {fileID: -1619501403062882420}
     - {fileID: 2051088414967166594}
+  - first: {fileID: 7127227341441055103}
+    second:
+    - {fileID: -7949476003575362664}
+    - {fileID: 3365902079686085329}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 600, y: -100, z: 0}
   m_EntryPosition: {x: 420, y: -100, z: 0}
@@ -2106,7 +2106,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.5
   _isCombo: 1
   _comboResetTime: 0.3
@@ -2132,7 +2132,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 1
   _comboResetTime: 0.3
@@ -2216,7 +2216,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.6
   _isCombo: 0
   _comboResetTime: 0
@@ -2264,7 +2264,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.5
   _isCombo: 1
   _comboResetTime: 0
@@ -2315,7 +2315,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.6
   _isCombo: 0
   _comboResetTime: 0
@@ -2413,7 +2413,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.5
   _isCombo: 0
   _comboResetTime: 0
@@ -2836,7 +2836,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 1
   _comboResetTime: 0.3
@@ -3066,7 +3066,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 1
   _comboResetTime: 0
@@ -3168,7 +3168,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 1
   _comboResetTime: 0
@@ -3518,7 +3518,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2048
   _attackDelayTime: 0.3
   _isCombo: 0
   _comboResetTime: 0

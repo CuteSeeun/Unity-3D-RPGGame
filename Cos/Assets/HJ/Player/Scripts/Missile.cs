@@ -32,6 +32,7 @@ namespace HJ
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.name);
             if (_isPiercing == false)
             {
                 Destroy(gameObject);
@@ -71,24 +72,7 @@ namespace HJ
         /*
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log(1);
-            if (_isPiercing == false)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                if (collision.gameObject.TryGetComponent(out IHp iHp))
-                {
-                    iHp.Hit(1, _isPowerAttack, transform.rotation);
-                    Destroy(this);
-                }
-
-                if (collision.gameObject.layer == _layerMaskWall)
-                {
-                    Destroy(this);
-                }
-            }
+            Debug.Log(collision.gameObject.name);
         }
         */
     }

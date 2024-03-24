@@ -27,6 +27,9 @@ namespace HJ
 
         [SerializeField] bool _isPowerAttack;
 
+        [SerializeField] bool _isInvincible;
+        [SerializeField] float _invincibleTime;
+
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             transform = animator.transform;
@@ -44,8 +47,14 @@ namespace HJ
                 characterController.Invoke("StateReset", _comboResetTime);
             }
             
-            if(_isDoubleAttack)
+            if (_isDoubleAttack)
                 characterController.Invoke("Attack", _DoubleAttackDelayTime);
+
+            if (_isInvincible)
+            {
+                characterController.invincible = true;
+                characterController.Invoke("InvincibleEnd", _invincibleTime);
+            }
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

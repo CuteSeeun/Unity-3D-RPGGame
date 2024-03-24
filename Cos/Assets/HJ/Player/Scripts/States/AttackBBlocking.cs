@@ -33,7 +33,7 @@ namespace HJ
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             characterController.defending = false;
-            animator.SetBool("defend", false);
+            animator.SetInteger("state", 1);
         }
 
         // OnStateMove : Animator.OnAnimatorMove() 바로 뒤에 호출됩니다.

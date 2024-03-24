@@ -81,14 +81,17 @@ namespace HJ
 
         public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
-            if (invincible == false)
+            if (invincible == false || defending)
             {
                 if (_defending == true && 180 - Quaternion.Angle(transform.rotation, hitRotation) < _defendingAngle) // 방어중 && 방어 각도 성공
                 {
-                    animator.SetBool("defend", true);
+                    transform.rotation = hitRotation;
+                    transform.Rotate(0, 180, 0);
+                    animator.SetInteger("state", 11);
                     // 방어력 대폭 상승
+                    DepleteHp(damage);
+                    return;
                 }
-                
 
                 transform.rotation = hitRotation;
                 transform.Rotate(0, 180, 0);
@@ -149,6 +152,8 @@ namespace HJ
 
         public bool defending { get => _defending; set => _defending = value; }
         private bool _defending;
+        public bool defend { get => _defend; set => _defend = value; }
+        private bool _defend;
         public float defendingAngle { set => _defendingAngle = value; }
         private float _defendingAngle;
         private float _defendingAngleInnerProduct;
@@ -186,6 +191,23 @@ namespace HJ
         */
 
         // State -------------------------------------------------------------
+
+        // states
+        // 0 
+        // 1 Move
+        // 2 Dodge
+        // 3 AttackA
+        // 4 AttackB
+        // 5 HitA
+        // 6 HitB
+        // 7 Death
+        // 8 Raise?
+        // 9 Interact
+        // 10 UseItem
+        // 11 Blocking
+        // 12 필살기
+
+        // -------------------------------------------------------------------
         public void StateReset()
         {
             animator.SetInteger("state", 1);
