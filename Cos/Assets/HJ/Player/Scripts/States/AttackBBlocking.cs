@@ -3,49 +3,37 @@ using CharacterController = HJ.CharacterController;
 
 namespace HJ
 {
-    public class AttackBBlocking : StateMachineBehaviour
+    public class AttackBBlockHit : StateMachineBehaviour
     {
         Animator animator;
         Transform transform;
-        CharacterController characterController;
+        CharacterController _characterController;
 
         [SerializeField] float _defendingAngle;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             transform = animator.transform;
-            characterController = animator.GetComponent<CharacterController>();
-
-            characterController.defendingAngle = _defendingAngle;
-            characterController.defending = true;
+            _characterController = animator.GetComponent<CharacterController>();
+            _characterController.defendingAngle = _defendingAngle;
+            _characterController.defending = true;
+            animator.SetInteger("state", 4);
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (characterController.moveDirection != Vector3.zero)
+            if (_characterController.moveDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.LookRotation(characterController.moveDirection);
+                transform.rotation = Quaternion.LookRotation(_characterController.moveDirection);
             }
 
-            transform.position += characterController.moveDirection * 0.5f * characterController.speed * Time.fixedDeltaTime;
+            transform.position += _characterController.moveDirection * 0.5f * _characterController.speed * Time.fixedDeltaTime;
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            characterController.defending = false;
-            animator.SetInteger("state", 1);
+            _characterController.defending = false;
+            //animator.SetInteger("state", 1);
         }
-
-        // OnStateMove : Animator.OnAnimatorMove() 바로 뒤에 호출됩니다.
-        //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // 루트 모션을 처리하고 영향을 미치는 코드 구현
-        //}
-
-        // OnStateIK: Animator.OnAnimatorIK() 바로 뒤에 호출됩니다.
-        //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // 애니메이션 IK(inverse kinematics)를 설정하는 코드 구현
-        //}
     }
 }

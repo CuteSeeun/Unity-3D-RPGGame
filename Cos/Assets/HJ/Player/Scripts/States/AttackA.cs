@@ -1,3 +1,4 @@
+using Scene_Teleportation_Kit.Scripts.player;
 using UnityEngine;
 using CharacterController = HJ.CharacterController;
 
@@ -14,6 +15,7 @@ namespace HJ
         [SerializeField] float _damageRate;
 
         [SerializeField] float _attackRange;
+        [Range (0, 180f)]
         [SerializeField] float _attackAngle;
         [SerializeField] LayerMask _attackLayerMask;
 
@@ -29,6 +31,9 @@ namespace HJ
 
         [SerializeField] bool _isInvincible;
         [SerializeField] float _invincibleTime;
+
+        private bool _isPlayer;
+        PlayerController playerController;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -55,6 +60,13 @@ namespace HJ
                 characterController.invincible = true;
                 characterController.Invoke("InvincibleEnd", _invincibleTime);
             }
+
+            _isPlayer = animator.TryGetComponent<PlayerController>(out playerController);
+            if (_isPlayer)
+            {
+                playerController.sp -= playerController.attackASp;
+                playerController.isSpRecover = false;
+            }
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -64,7 +76,10 @@ namespace HJ
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
+            if (_isPlayer)
+            {
+                playerController.isSpRecover = true;
+            }
         }
 
         // OnStateMove : Animator.OnAnimatorMove() 바로 뒤에 호출됩니다.

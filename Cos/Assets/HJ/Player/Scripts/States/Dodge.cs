@@ -13,6 +13,9 @@ namespace HJ
         private float _dodgeSpeedLeft;
         private float _dodgeTimeLeft;
 
+        private bool _isPlayer;
+        PlayerController playerController;
+
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             characterController = animator.GetComponent<CharacterController>();
@@ -34,6 +37,13 @@ namespace HJ
 
             characterController.invincible = true;
             characterController.Invoke("InvincibleEnd", characterController.invincibleTime);
+
+            _isPlayer = animator.TryGetComponent<PlayerController>(out playerController);
+            if (_isPlayer)
+            {
+                playerController.sp -= playerController.dodgeSp;
+                playerController.isSpRecover = false;
+            }
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -46,6 +56,11 @@ namespace HJ
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if (_isPlayer)
+            {
+                playerController.isSpRecover = true;
+            }
+
             animator.SetInteger("state", 1);
         }
 

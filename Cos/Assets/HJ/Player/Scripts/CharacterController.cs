@@ -7,7 +7,7 @@ namespace HJ
     public abstract class CharacterController : MonoBehaviour, IHp
     {
         protected Transform transform;
-        [SerializeField] Animator animator;
+        [SerializeField] protected Animator animator;
 
         private Vector3 _motionDirection;
         [SerializeField] int _type;
@@ -18,7 +18,11 @@ namespace HJ
 
         public Missile missile;
 
+        public GameObject potion;
+
         public bool invincible;
+
+        public bool isPlayer;
 
         private void Awake()
         {
@@ -51,12 +55,10 @@ namespace HJ
             }
             set
             {
-                _hp = Mathf.Clamp(value, 0, _hpMax);
+                _hp = Mathf.Clamp(value, 0, _hpMax); // _hp를 value를 0~_hpMax 사잇값으로 변환해서 대입
 
-                if (_hp == value)
+                if (_hp == value) // 문제없이 들어가면 return
                     return;
-
-                _hp = value;
 
                 if (value <= 0)
                     onHpMin?.Invoke();
@@ -79,20 +81,10 @@ namespace HJ
             DepleteHp(damage);
         }
 
-        public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+        public virtual void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
-            if (invincible == false || defending)
+            if (invincible == false)
             {
-                if (_defending == true && 180 - Quaternion.Angle(transform.rotation, hitRotation) < _defendingAngle) // 방어중 && 방어 각도 성공
-                {
-                    transform.rotation = hitRotation;
-                    transform.Rotate(0, 180, 0);
-                    animator.SetInteger("state", 11);
-                    // 방어력 대폭 상승
-                    DepleteHp(damage);
-                    return;
-                }
-
                 transform.rotation = hitRotation;
                 transform.Rotate(0, 180, 0);
                 DepleteHp(damage);
@@ -154,7 +146,7 @@ namespace HJ
         private bool _defending;
         public bool defend { get => _defend; set => _defend = value; }
         private bool _defend;
-        public float defendingAngle { set => _defendingAngle = value; }
+        public float defendingAngle { get => _defendingAngle ; set => _defendingAngle = value; }
         private float _defendingAngle;
         private float _defendingAngleInnerProduct;
 
@@ -208,6 +200,11 @@ namespace HJ
         // 12 필살기
 
         // -------------------------------------------------------------------
+        public void StateCancle()
+        {
+            animator.SetInteger("state", 0);
+        }
+
         public void StateReset()
         {
             animator.SetInteger("state", 1);
@@ -250,6 +247,11 @@ namespace HJ
             animator.SetInteger("state", 2);
         }
 
+        public void InvincibleStart()
+        {
+            invincible = true;
+        }
+
         public void InvincibleEnd()
         {
             invincible = false;
@@ -263,6 +265,8 @@ namespace HJ
         [SerializeField] float _attackAngleInnerProduct;
         public LayerMask attackLayerMask { set => _attackLayerMask = value; }
         [SerializeField] LayerMask _attackLayerMask;
+
+        public float damageRate;
 
         public bool powerAttack { get => _powerAttack; set => _powerAttack = value; }
         private bool _powerAttack;
@@ -338,10 +342,32 @@ namespace HJ
             animator.SetInteger("state", 6);
         }
 
-        // Death
+        // Death -----------------------------------------------------------
         public void Death()
         {
             animator.SetInteger("state", 7);
+        }
+
+        // Interact --------------------------------------------------------
+        [SerializeField] LayerMask _layerMaskInteractable;
+
+        public void Interact()
+        {
+            animator.SetInteger("state", 9);
+
+            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out RaycastHit hit, 2.6f, _layerMaskInteractable))
+            {
+                if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
+                {
+                    interactable.Interaction(this.gameObject);
+                }
+            }
+        }
+
+        // UseItem ----------------------------------------------------------
+        public void UseItem()
+        {
+            animator.SetInteger("state", 10);
         }
     }
 }
