@@ -5,14 +5,13 @@ using UnityEngine.AI;
 
 public class EliteEnemy : MonoBehaviour
 {
-    float patrolSpeed = 2f;
     float chaseSpeed = 5f;
     public float detectionRange;
     public float attackRange;
     float detectionAngle = 360f;
     public int hp;
     private int currentHp;
-    private float jumpForce = 200;
+    private float jumpForce = 50;
     private float fallSpeed = 100;
     private float rushSpeed = 15;
     private float stopThreshold = 0.1f; // 오브젝트가 멈춘 것으로 간주하는 속도 임계값
@@ -22,12 +21,12 @@ public class EliteEnemy : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     private Rigidbody rb;
+    public GameObject grounded;
     private bool isChasing;
     private bool isDeath;
     private bool isAttack;
     private bool isJumping;
     private bool jump;
-    private bool isStop;
     private float attackTimer;
     private int attackStack = 0;
 
@@ -43,7 +42,6 @@ public class EliteEnemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         isChasing = true;
         agent.isStopped = false;
-        agent.speed = patrolSpeed;
         currentHp = hp;
     }
 
@@ -60,6 +58,11 @@ public class EliteEnemy : MonoBehaviour
                 transform.LookAt(player.position);
                 agent.SetDestination(player.position);
                 agent.stoppingDistance = 3;
+            }
+            else if(m_Animator.GetCurrentAnimatorStateInfo(0).IsName("isRush_Golem"))
+            {
+                transform.LookAt(player.position);
+                agent.isStopped = true;
             }
             else
             {
@@ -129,6 +132,7 @@ public class EliteEnemy : MonoBehaviour
         }
         if (transform.position.y > 30)
         {
+            transform.position = new Vector3(player.position.x, transform.position.y,player.position.z);
             rb.velocity = Vector3.down * fallSpeed;
         }
         if (attackTimer > 0)
@@ -174,7 +178,7 @@ public class EliteEnemy : MonoBehaviour
 
     void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.velocity = Vector3.up * jumpForce;
         Debug.Log("점프");
         isJumping = true;
         attackTimer = 3;
@@ -185,8 +189,19 @@ public class EliteEnemy : MonoBehaviour
     {
         m_Animator.SetTrigger("isCrush");
         attackTimer = 5;
+        Invoke("Grounded", 2f);
     }
 
+    void Grounded()
+    {
+        grounded.SetActive(true);
+        Invoke("Disgrounded", 1.5f);
+    }
+
+    void Disgrounded()
+    {
+        grounded.SetActive(false);
+    }
     void OnDrawGizmosSelected()
     {
         // 감지 범위 시각화
@@ -225,6 +240,14 @@ public class EliteEnemy : MonoBehaviour
         {
             attackStack = 0;
         }
+        if(attackStack == 2 || attackStack == 5)
+        {
+            attackRange = 100;
+        }
+        else
+        {
+            attackRange = 5;
+        }
     }
 
     public void Death()
@@ -239,7 +262,7 @@ public class EliteEnemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !isJumping)
         {
             if (rb.velocity.magnitude < stopThreshold)
             {
@@ -248,12 +271,6 @@ public class EliteEnemy : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
             }
             rb.isKinematic = true;
-            //if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Rush_Golem"))
-            //{
-            //    rb.isKinematic = true;
-            //    rb.velocity = Vector3.zero;
-            //    rb.angularVelocity = Vector3.zero;
-            //}
         }
     }
 }
