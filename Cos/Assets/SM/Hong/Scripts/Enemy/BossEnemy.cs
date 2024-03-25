@@ -18,7 +18,7 @@ public class BossEnemy : MonoBehaviour
     NavMeshAgent agent;
     Transform player;
     public GameObject skulMissile;
-    public ParticleSystem explosion;
+    public GameObject explosion;
     public ParticleSystem fire;
     private bool isChasing;
     private bool isDeath;
@@ -39,6 +39,7 @@ public class BossEnemy : MonoBehaviour
         currentHp = maxHp;
         agent.stoppingDistance = 3;
         fire.Stop();
+        explosion.SetActive(false);
     }
 
     void Update()
@@ -142,6 +143,7 @@ public class BossEnemy : MonoBehaviour
     {
         animator.SetTrigger("isCharge");
         attackTimer = 4;
+        explosion.SetActive(true);
     }
 
     void Tel()
@@ -261,6 +263,7 @@ public class BossEnemy : MonoBehaviour
         isChasing = true;
         isAttack = false;
         isSkul = false;
+        explosion.SetActive(false);
         attackStack++;
         if (attackStack > 6)
         {

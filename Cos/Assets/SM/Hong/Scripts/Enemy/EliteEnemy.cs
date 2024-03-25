@@ -22,6 +22,7 @@ public class EliteEnemy : MonoBehaviour
     private Transform player;
     private Rigidbody rb;
     public GameObject grounded;
+    public GameObject jumpImpact;
     private bool isChasing;
     private bool isDeath;
     private bool isAttack;
@@ -43,6 +44,7 @@ public class EliteEnemy : MonoBehaviour
         isChasing = true;
         agent.isStopped = false;
         currentHp = hp;
+        jumpImpact.SetActive(false);
     }
 
     void Update()
@@ -107,6 +109,7 @@ public class EliteEnemy : MonoBehaviour
                             break;
                         case 6:
                             Crush();
+                            jumpImpact.SetActive(false);
                             isAttack = true;
                             break;
                     }
@@ -127,6 +130,7 @@ public class EliteEnemy : MonoBehaviour
                     isAttack = false;
                     m_Animator.SetBool("Fall", false);
                     Debug.Log("착지" + isJumping);
+                    jumpImpact.SetActive(true);
                 }
             }
         }
