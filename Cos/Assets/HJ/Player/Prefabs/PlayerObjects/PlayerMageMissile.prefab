@@ -151,18 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a0bf50632be2d4694afae4f0ef8248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
-  _timer: 1
-  _attackLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
+  _missileTimer: 1
   _layerMaskWall:
     serializedVersion: 2
     m_Bits: 0
-  _isPiercing: 0
-  _isPowerAttack: 1
-  _isExplosive: 1
-  _explosionRadius: 2.5
 --- !u!54 &-335006048458017209
 Rigidbody:
   m_ObjectHideFlags: 0

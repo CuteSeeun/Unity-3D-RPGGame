@@ -31,7 +31,7 @@ namespace HJ
             get => _stamina;
             set { _stamina = Mathf.Clamp(value, 0, _spMax); }
         }
-        private float _stamina;
+        [SerializeField] float _stamina;
         private float _spMax = 100;
         private float _spRecovery = 35;
         public bool isSpRecover { get => _isSpRecover; set => _isSpRecover = value; }
@@ -94,21 +94,11 @@ namespace HJ
                 _velocity = 1.0f;
         }
 
-        // 개편 필요
-        public float dodgeSp { get => _dodgeSp; set => _dodgeSp = value; }
-        private float _dodgeSp = 30;
         public void OnDodge(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
-                if (stamina < _dodgeSp)
-                {
-                    return;
-                }
-                else
-                {
-                    Dodge();
-                }
+                Dodge();
             }
         }
 

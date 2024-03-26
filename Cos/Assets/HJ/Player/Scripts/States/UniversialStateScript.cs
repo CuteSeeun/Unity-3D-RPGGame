@@ -8,11 +8,11 @@ namespace HJ
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             GetComponents(animator, stateInfo);
-            StaminaEnter(stateInfo);
             ResetEnter();
+            StaminaEnter(stateInfo);
             AdvanceEnter();
             AttackEnter();
-            Invincible();
+            InvincibleEnter();
             ItemEnter();
         }
 
@@ -27,6 +27,7 @@ namespace HJ
             ResetExit();
             AttackExit();
             StaminaExit();
+            InvincibleExit();
         }
 
         [Header("Get Components")] //======================================================================================================================================================
@@ -47,6 +48,8 @@ namespace HJ
         [SerializeField] bool _useStamina;
         private bool _staminaEnough;
         [SerializeField] float _staminaRequired;
+        [SerializeField] bool _isStaminaDelayEnd;
+        [SerializeField] bool _isStaminaDelayTime;
         [Range(0, 2f)]
         [SerializeField] float _StaminaDelayTime;
         private void StaminaEnter(AnimatorStateInfo stateInfo)
@@ -62,7 +65,11 @@ namespace HJ
                     if (_staminaEnough)
                     {
                         _playerController.StaminaRecoverStop();
-                        _playerController.Invoke("StaminaRecoverStart", _StaminaDelayTime * _stateLength);
+
+                        if (_isStaminaDelayTime)
+                        {
+                            _playerController.Invoke("StaminaRecoverStart", _StaminaDelayTime * _stateLength);
+                        }
                     }
                 }
                 else // (_isRepeatingAttack == true)
@@ -83,6 +90,11 @@ namespace HJ
             {
                 _playerController.StaminaRecoverStart();
                 _playerController.CancelInvoke("StaminaUse");
+            }
+
+            if (_isStaminaDelayEnd)
+            {
+                _playerController.StaminaRecoverStart();
             }
         }
 
@@ -161,8 +173,14 @@ namespace HJ
         [Space(10f)]
         [SerializeField] bool _isAttack; // 1타 여부
         [SerializeField] bool _isPowerAttack; // 넉백 여부
+
+        [Space(10f)]
         [SerializeField] bool _isRangedAttack; // 사격 여부
         [SerializeField] Missile _missile; // 미사일
+        [SerializeField] float _missileSpeed;
+        [SerializeField] float _missileTimer;
+        [SerializeField] bool _isPiercing;
+        [SerializeField] bool _isExplosive;
 
         [Range(0, 1f)]
         [SerializeField] float _attackDelayTime; // 1타 타이밍
@@ -181,35 +199,36 @@ namespace HJ
                 _characterController.attackRange = _attackRange;
                 _characterController.attackAngle = _attackAngle;
                 _characterController.attackLayerMask = _attackLayerMask;
-                _characterController.powerAttack = _isPowerAttack;
+                _characterController.isPowerAttack = _isPowerAttack;
 
-                _characterController.Invoke("Attack", _attackDelayTime * _stateLength);
-
-                if (_isDoubleAttack)
+                if (_isRepeatingAttack == false)
                 {
-                    _characterController.Invoke("Attack", _doubleAttackDelayTime * _stateLength);
+                    _characterController.Invoke("Attack", _attackDelayTime * _stateLength);
+
+                    if (_isDoubleAttack)
+                    {
+                        _characterController.Invoke("Attack", _doubleAttackDelayTime * _stateLength);
+                    }
                 }
-            }
-            else if (_isRepeatingAttack)
-            {
-                _characterController.damageRate = _attackDamageRate;
-                _characterController.attackRange = _attackRange;
-                _characterController.attackAngle = _attackAngle;
-                _characterController.attackLayerMask = _attackLayerMask;
-                _characterController.powerAttack = _isPowerAttack;
-                
-                _characterController.InvokeRepeating("Attack", _attackDelayTime * _stateLength, _attackRepeatingTime * _stateLength);
+                else // (_isRepeatingAttack == true)
+                {
+                    _characterController.InvokeRepeating("Attack", _attackDelayTime * _stateLength, _attackRepeatingTime * _stateLength);
+                }
             }
 
             if (_isRangedAttack)
             {
                 _characterController.missile = _missile;
-                // _missile.attackDamage = _characterController.attackDamage
-                // _missile.damageRate = _attackDamageRate;
-                // _missile.attackRange = _attackRange;
-                // _missile.attackAngle = _attackAngle;
-                // _missile.attackLayerMask = _attackLayerMask;
-                // _missile.powerAttack = _isPowerAttack;
+                
+                // 이 시점에 생성되지 않아서 적용 안되는듯.
+                _missile.isPiercing = _isPiercing;
+                _missile.isExplosive = _isExplosive;
+                _missile.attack = _characterController.attack;
+                _missile.attackDamageRate = _attackDamageRate;
+                _missile.attackRange = _attackRange;
+                _missile.attackAngle = _attackAngle;
+                _missile.attackLayerMask = _attackLayerMask;
+                _missile.isPowerAttack = _isPowerAttack;
 
                 _characterController.Invoke("Shoot", _attackDelayTime * _stateLength);
             }
@@ -225,10 +244,17 @@ namespace HJ
         [Header("Invincible")] //==============================================================================================================================================================
         [SerializeField] bool _isInvincible; // 무적 여부
         [SerializeField] float _invincibleTime; // 무적 시간
-        private void Invincible()
+        private void InvincibleEnter()
         {
             _characterController.InvincibleStart();
             _characterController.Invoke("InvincibleEnd", _invincibleTime);
+        }
+        private void InvincibleExit()
+        {
+            if (_isInvincible)
+            {
+                _characterController.InvincibleEnd();
+            }
         }
 
         [Header("Item")] //==============================================================================================================================================================

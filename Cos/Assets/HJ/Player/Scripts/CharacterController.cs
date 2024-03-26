@@ -153,12 +153,14 @@ namespace HJ
         public float damageRate { set => _damageRate = value; }
         private float _damageRate;
 
+        // 데미지 이거 개편좀
+        public float attack { get => _attack; }
         [SerializeField] float _attack;
         public float attackWeapon { get => _attackWeapon; set => _attackWeapon = value; }
         private float _attackWeapon;
 
-        public bool powerAttack { get => _powerAttack; set => _powerAttack = value; }
-        private bool _powerAttack;
+        public bool isPowerAttack { get => _isPowerAttack; set => _isPowerAttack = value; }
+        private bool _isPowerAttack;
 
 
         public void Attack()
@@ -181,7 +183,7 @@ namespace HJ
                     // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
                     if (hit.collider.TryGetComponent(out IHp iHp))
                     {
-                        iHp.Hit(_attack * _damageRate, _powerAttack, transform.rotation);
+                        iHp.Hit(_attack * _damageRate, _isPowerAttack, transform.rotation);
                     }
                 }
             }
@@ -198,7 +200,7 @@ namespace HJ
 
         // [("Invincible")] ===============================================================================================================================================================
         public bool invincible { get => _invincible; set => _invincible = value; }
-        private bool _invincible;
+        [SerializeField] private bool _invincible;
         public void InvincibleStart()
         {
             _invincible = true;
@@ -286,11 +288,6 @@ namespace HJ
         }
 
         // [("State 6 HitB")] =============================================================================================================================================================
-        public float hitBTime { get => _hitBTime; }
-        private float _hitBTime = 1f;
-        public float hitBSpeed { get => _hitBSpeed; }
-        private float _hitBSpeed = 5f;
-
         public void HitB()
         {
             animator.SetInteger("state", 6);

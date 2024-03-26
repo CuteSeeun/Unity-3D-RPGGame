@@ -300,6 +300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -322,6 +324,10 @@ MonoBehaviour:
   _isPowerAttack: 1
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.3
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -548,6 +554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -570,6 +578,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.5
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -648,6 +660,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -670,6 +684,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.4
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -723,6 +741,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 20
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -745,6 +765,10 @@ MonoBehaviour:
   _isPowerAttack: 1
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.5
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -823,7 +847,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 35
-  _StaminaDelayTime: 2
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
+  _StaminaDelayTime: 1.8
   _resetStart: 1
   _resetEnd: 0
   _resetDelayed: 0
@@ -845,6 +871,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -1019,6 +1049,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 0
   _staminaRequired: 0
+  _isStaminaDelayEnd: 0
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 2
   _resetStart: 1
   _resetEnd: 0
@@ -1041,6 +1073,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -1280,6 +1316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 5
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -1302,6 +1340,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.4
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -1402,6 +1444,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 15
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -1424,6 +1468,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.35
   _isDoubleAttack: 1
   _doubleAttackDelayTime: 0.65
@@ -1502,6 +1550,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -1524,6 +1574,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.5
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -1571,6 +1625,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 0
   _staminaRequired: 0
+  _isStaminaDelayEnd: 0
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0
   _resetStart: 1
   _resetEnd: 0
@@ -1593,6 +1649,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -1643,6 +1703,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 25
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -1655,7 +1717,7 @@ MonoBehaviour:
   _canTurn: 0
   _advanceSpeed: 0
   _advanceSpeedReduce: 0
-  _attackDamageRate: 0
+  _attackDamageRate: 1.5
   _attackRange: 0
   _attackAngle: 0
   _attackLayerMask:
@@ -1666,6 +1728,10 @@ MonoBehaviour:
   _isRangedAttack: 1
   _missile: {fileID: 7109357882407759783, guid: f236c8749a325b9458f688f715452434,
     type: 3}
+  _missileSpeed: 10
+  _missileTimer: 1
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.3
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -1880,6 +1946,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -1902,6 +1970,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.3
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -1977,6 +2049,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 0
   _resetEnd: 0
@@ -1999,6 +2073,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.3
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2068,7 +2146,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useStamina: 1
-  _staminaRequired: 20
+  _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -2091,6 +2171,10 @@ MonoBehaviour:
   _isPowerAttack: 1
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.3
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2243,6 +2327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 15
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -2265,6 +2351,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.4
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2290,6 +2380,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -2312,6 +2404,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.4
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2492,6 +2588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 15
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -2514,6 +2612,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.5
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2539,6 +2641,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 0
   _staminaRequired: 0
+  _isStaminaDelayEnd: 0
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0
   _resetStart: 1
   _resetEnd: 0
@@ -2561,6 +2665,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2633,6 +2741,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 0
   _staminaRequired: 0
+  _isStaminaDelayEnd: 0
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0
   _resetStart: 0
   _resetEnd: 0
@@ -2655,6 +2765,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2680,6 +2794,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 20
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 0
   _resetEnd: 0
@@ -2702,6 +2818,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2727,6 +2847,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 5
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -2749,6 +2871,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.4
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -2876,9 +3002,9 @@ AnimatorStateMachine:
   - {fileID: -3923126993766453068}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 7127227341441055103}
-    second: []
   - first: {fileID: 5400570447597629529}
+    second: []
+  - first: {fileID: 7127227341441055103}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 420, y: -100, z: 0}
@@ -2929,6 +3055,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 15
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -2951,6 +3079,10 @@ MonoBehaviour:
   _isPowerAttack: 1
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.3
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -3245,6 +3377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 0
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 1
   _resetStart: 0
   _resetEnd: 0
@@ -3267,6 +3401,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -3292,6 +3430,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 0
   _staminaRequired: 0
+  _isStaminaDelayEnd: 0
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0
   _resetStart: 1
   _resetEnd: 0
@@ -3314,6 +3454,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -3559,6 +3703,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 0
   _staminaRequired: 0
+  _isStaminaDelayEnd: 0
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0
   _resetStart: 1
   _resetEnd: 0
@@ -3581,6 +3727,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -3779,7 +3929,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 10
-  _StaminaDelayTime: 0.95
+  _isStaminaDelayEnd: 0
+  _isStaminaDelayTime: 1
+  _StaminaDelayTime: 0.5
   _resetStart: 1
   _resetEnd: 0
   _resetDelayed: 0
@@ -3801,6 +3953,10 @@ MonoBehaviour:
   _isPowerAttack: 1
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.2
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -4011,6 +4167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 30
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 0
   _resetEnd: 0
@@ -4033,6 +4191,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -4058,6 +4220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 20
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 0
   _resetEnd: 0
@@ -4080,6 +4244,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0.5
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -4511,6 +4679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 0
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 0
   _resetEnd: 0
@@ -4533,6 +4703,10 @@ MonoBehaviour:
   _isPowerAttack: 0
   _isRangedAttack: 0
   _missile: {fileID: 0}
+  _missileSpeed: 0
+  _missileTimer: 0
+  _isPiercing: 0
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
@@ -4587,6 +4761,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useStamina: 1
   _staminaRequired: 0
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
   _resetStart: 1
   _resetEnd: 0
@@ -4599,7 +4775,7 @@ MonoBehaviour:
   _canTurn: 0
   _advanceSpeed: 0
   _advanceSpeedReduce: 0
-  _attackDamageRate: 0
+  _attackDamageRate: 2
   _attackRange: 0
   _attackAngle: 0
   _attackLayerMask:
@@ -4610,6 +4786,10 @@ MonoBehaviour:
   _isRangedAttack: 1
   _missile: {fileID: 8069049544513731857, guid: 14d0014c3d2885b46a67baee9e3767ea,
     type: 3}
+  _missileSpeed: 20
+  _missileTimer: 0.5
+  _isPiercing: 1
+  _isExplosive: 0
   _attackDelayTime: 0
   _isDoubleAttack: 0
   _doubleAttackDelayTime: 0
