@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
+using HJ;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EliteEnemy : MonoBehaviour
+public class EliteEnemy : MonoBehaviour, IHp
 {
     float chaseSpeed = 5f;
     public float detectionRange;
     public float attackRange;
     float detectionAngle = 360f;
-    public int hp;
     private int currentHp;
     private float jumpForce = 50;
     private float fallSpeed = 100;
@@ -35,6 +36,15 @@ public class EliteEnemy : MonoBehaviour
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
 
+    public event Action<float> onHpChanged;
+    public event Action<float> onHpDepleted;
+    public event Action<float> onHpRecovered;
+    public event Action onHpMin;
+    public event Action onHpMax;
+
+    public float hp { get; set; }
+    public float hpMax { get; }
+
     void Start()
     {
         m_Animator = GetComponent<Animator>();
@@ -43,8 +53,8 @@ public class EliteEnemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         isChasing = true;
         agent.isStopped = false;
-        currentHp = hp;
         jumpImpact.SetActive(false);
+        hp = hpMax;
     }
 
     void Update()
@@ -276,5 +286,32 @@ public class EliteEnemy : MonoBehaviour
             }
             rb.isKinematic = true;
         }
+    }
+
+    public void DepleteHp(float amount)
+    {
+        hp -= amount;
+        onHpChanged?.Invoke(hp);
+        if (hp <= 0)
+        {
+            hp = 0;
+            onHpDepleted?.Invoke(amount);
+            onHpMin?.Invoke();
+        }
+    }
+
+    public void RecoverHp(float amount)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+    {
+        DepleteHp(damage);
+    }
+
+    public void Hit(float damage)
+    {
+        DepleteHp(damage);
     }
 }

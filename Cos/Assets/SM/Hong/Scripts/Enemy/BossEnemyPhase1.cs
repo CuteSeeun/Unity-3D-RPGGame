@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossEnemy : MonoBehaviour
+public class BossEnemyPhase1 : MonoBehaviour
 {
     float chaseSpeed = 8f;
     public float detectionRange;
