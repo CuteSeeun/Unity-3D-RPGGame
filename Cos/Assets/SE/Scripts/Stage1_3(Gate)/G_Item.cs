@@ -4,7 +4,28 @@ using UnityEngine;
 
 public class G_Item : MonoBehaviour
 {
-    public GameObject G_DoorItemEffect;
+    //public GameObject Light;
+
+    [SerializeField] private Light getLight;
+    public bool flashOn;
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.F))
+    //        {
+    //            Light.SetActive(true); 
+    //        }
+    //    }
+    //}
+
+    public void TurnOnOff()
+    {
+        if (flashOn)
+            getLight.intensity = 0;
+        else getLight.intensity = 10;
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -12,7 +33,7 @@ public class G_Item : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                G_DoorItemEffect.SetActive(true); //이펙트가 꺼져있는게 기본값
+                flashOn = !flashOn;
             }
         }
     }

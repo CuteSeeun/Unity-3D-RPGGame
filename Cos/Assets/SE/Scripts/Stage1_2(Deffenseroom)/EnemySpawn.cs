@@ -32,7 +32,7 @@ public class EnemySpawn : MonoBehaviour
        //     Spawning();
         //}
     //}
-    private void Spawning()
+     void Spawning()
     {
         StartCoroutine("RandomSpawn");
         Invoke("Stop", SpawnStop);

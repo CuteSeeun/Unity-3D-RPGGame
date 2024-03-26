@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawn2 : MonoBehaviour
 {
+    public GameObject ItemLock;
+
     public GameObject enemyPrefab; // 스폰할 적 프리팹
     public Transform[] spawnPoints; // 적이 스폰될 위치 배열
     public float initialSpawnDelay = 2f; // 초기 스폰 지연 시간
@@ -13,7 +15,17 @@ public class EnemySpawn2 : MonoBehaviour
 
     private int currentWave = 0; // 현재 wave
 
-    void Start()
+   
+
+    private void OnTriggerEnter (Collider other)
+    {
+        if (!ItemLock.activeSelf)
+        {
+            StartSpawn();
+        }
+    }
+
+    void StartSpawn()
     {
         // 초기 스폰 지연 후에 반복적으로 스폰 코루틴 호출
         InvokeRepeating("SpawnEnemies", initialSpawnDelay, repeatSpawnDelay);

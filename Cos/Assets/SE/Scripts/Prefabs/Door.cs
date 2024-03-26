@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    
+
     private Animator door; //애니메이터 컴포넌트 참조
     public bool isOpen; //문 초기 상태 닫힘
 
@@ -32,10 +34,12 @@ public class Door : MonoBehaviour
     {
         CheckDoorConditions();
 
-       
+
         if (isOpen)
         {
             door.SetBool("isOpen", true);
         }
     }
+
+
 }
