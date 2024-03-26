@@ -26,4 +26,6 @@ public class CameraMove : MonoBehaviour
         // 카메라의 움직임을 부드럽게 하는 함수(Lerp)
         transform.position = Vector3.Lerp(transform.position, TargetPos, Time.deltaTime * CameraSpeed);
     }
+
+
 }

@@ -7,7 +7,7 @@ public class SFX_Manager : MonoBehaviour
     //사운드 매니저 싱글톤 선언
     public static SFX_Manager Instance = null;
     //카메라 변수 선언
-    public Camera Camera;
+    public CameraMove Camera;
     //오디오 소스 변수 선언
     public AudioSource BGM;
     public enum ESfxSound
@@ -35,7 +35,7 @@ public class SFX_Manager : MonoBehaviour
         {
             Camera.GetComponent<AudioSource>();
         }
-        BGMPLAY("LEGACY - A Fight in the Fields MP3");
+        BGMPLAY("LEGACY - A Slave To No One MP3");
 
 
     }
@@ -68,7 +68,7 @@ public class SFX_Manager : MonoBehaviour
         //브금을 플레이한다.
         BGM.Play();
     }
-    public void OneShot(string soundname)
+    public void VFX(string soundname)
     {
 
         // clip 선언
