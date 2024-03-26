@@ -21,7 +21,6 @@ namespace HJ
             _isPlayer = animator.TryGetComponent<PlayerController>(out playerController);
             if (_isPlayer)
             {
-                playerController.sp -= playerController.attackASp;
                 playerController.isSpRecover = false;
             }
         }

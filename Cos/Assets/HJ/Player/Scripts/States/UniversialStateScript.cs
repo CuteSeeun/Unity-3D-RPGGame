@@ -8,30 +8,25 @@ namespace HJ
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             GetComponents(animator, stateInfo);
-            Stamina();
-
-            if (_staminaEnough)
-            {
-                ResetEnter();
-                AttackEnter();
-                Invincible();
-            } 
+            StaminaEnter(stateInfo);
+            ResetEnter();
+            AdvanceEnter();
+            AttackEnter();
+            Invincible();
+            ItemEnter();
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (_staminaEnough)
-            {
-                MoveUpdate();
-            }
+            MoveUpdate();
+            AdvanceUpdate();
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (_staminaEnough)
-            {
-                ResetExit();
-            }
+            ResetExit();
+            AttackExit();
+            StaminaExit();
         }
 
         [Header("Get Components")] //======================================================================================================================================================
@@ -48,27 +43,49 @@ namespace HJ
             _stateLength = stateInfo.length;
         }
 
-        [Header("Stamina")]
+        [Header("Stamina")] //========================================================================================================================
         [SerializeField] bool _useStamina;
         private bool _staminaEnough;
         [SerializeField] float _staminaRequired;
-        [Range(0, 1f)]
+        [Range(0, 2f)]
         [SerializeField] float _StaminaDelayTime;
-        private void Stamina()
+        private void StaminaEnter(AnimatorStateInfo stateInfo)
         {
-            if (_useStamina && _playerController.sp > _staminaRequired)
+            if (_useStamina)
             {
-                _staminaEnough = true;
-                _playerController.sp -= _staminaRequired;
-                _playerController.StaminaRecoverStop();
-                _playerController.Invoke("StaminaRecoverStart", _StaminaDelayTime * _stateLength);
+                _playerController.staminaRequired = _staminaRequired;
+
+                if (_isRepeatingAttack == false)
+                {
+                    _staminaEnough = _playerController.StaminaUse();
+
+                    if (_staminaEnough)
+                    {
+                        _playerController.StaminaRecoverStop();
+                        _playerController.Invoke("StaminaRecoverStart", _StaminaDelayTime * _stateLength);
+                    }
+                }
+                else // (_isRepeatingAttack == true)
+                {
+                    _playerController.StaminaRecoverStop();
+                    _playerController.InvokeRepeating("StaminaUse", 0, _attackRepeatingTime * _stateLength);
+                }
             }
             else
             {
-                _staminaEnough = false;
-                _characterController.StateCancle();
+                _staminaEnough = true;
             }
         }
+
+        private void StaminaExit()
+        {
+            if (_isRepeatingAttack)
+            {
+                _playerController.StaminaRecoverStart();
+                _playerController.CancelInvoke("StaminaUse");
+            }
+        }
+
 
         [Header("Reset Timing")] //========================================================================================================================================================
         [SerializeField] bool _resetStart;
@@ -105,6 +122,35 @@ namespace HJ
             }
         }
 
+        [Header("Advance")] //=============================================================================================================================================================
+        // 닷지나 HitB 보고 쓰기
+        [SerializeField] bool _isAdvance;
+        [SerializeField] bool _canTurn;
+        [SerializeField] float _advanceSpeed;
+        [SerializeField] float _advanceSpeedReduce;
+        private float _advanceSpeedLeft;
+
+        private void AdvanceEnter()
+        {
+            if (_isAdvance)
+            {
+                if (_canTurn && _characterController.moveDirection != Vector3.zero)
+                {
+                    _transform.rotation = Quaternion.LookRotation(_characterController.moveDirection);
+                }
+
+                _advanceSpeedLeft = _advanceSpeed;
+            }
+        }
+        private void AdvanceUpdate()
+        {
+            if(_isAdvance)
+            {
+                _characterController.transform.position += _advanceSpeedLeft * _characterController.transform.forward * Time.fixedDeltaTime;
+                _advanceSpeedLeft -= _advanceSpeedReduce * Time.fixedDeltaTime;
+            }
+        }
+
         [Header("Attack")] //==============================================================================================================================================================
         [SerializeField] float _attackDamageRate; // 데미지 배율
         [SerializeField] float _attackRange;
@@ -113,9 +159,11 @@ namespace HJ
         [SerializeField] LayerMask _attackLayerMask;
 
         [Space(10f)]
-        [SerializeField] bool _isRangedAttack; // 사격 여부
-        [SerializeField] bool _isPowerAttack; // 넉백 여부
         [SerializeField] bool _isAttack; // 1타 여부
+        [SerializeField] bool _isPowerAttack; // 넉백 여부
+        [SerializeField] bool _isRangedAttack; // 사격 여부
+        [SerializeField] Missile _missile; // 미사일
+
         [Range(0, 1f)]
         [SerializeField] float _attackDelayTime; // 1타 타이밍
         [SerializeField] bool _isDoubleAttack; // 2타 여부
@@ -127,40 +175,50 @@ namespace HJ
 
         private void AttackEnter()
         {
-            _characterController.damageRate = _attackDamageRate;
-            _characterController.attackRange = _attackRange;
-            _characterController.attackAngle = _attackAngle;
-            _characterController.attackLayerMask = _attackLayerMask;
-            _characterController.powerAttack = _isPowerAttack;
-
             if (_isAttack)
             {
-                if (_isRangedAttack == false)
-                {
-                    _characterController.Invoke("Attack", _attackDelayTime);
+                _characterController.damageRate = _attackDamageRate;
+                _characterController.attackRange = _attackRange;
+                _characterController.attackAngle = _attackAngle;
+                _characterController.attackLayerMask = _attackLayerMask;
+                _characterController.powerAttack = _isPowerAttack;
 
-                    if (_isDoubleAttack)
-                    {
-                        _characterController.Invoke("Attack", _doubleAttackDelayTime);
-                    }
+                _characterController.Invoke("Attack", _attackDelayTime * _stateLength);
 
-                    _characterController.Invoke("Attack", _attackDelayTime * _stateLength);
-                }
-                else
+                if (_isDoubleAttack)
                 {
-                    _characterController.Invoke("Shoot", _attackDelayTime * _stateLength);
+                    _characterController.Invoke("Attack", _doubleAttackDelayTime * _stateLength);
                 }
             }
             else if (_isRepeatingAttack)
             {
-                // InvokeRepeating("Attack", _attackDelayTime, _attackRepeatingTime * _stateLength);
+                _characterController.damageRate = _attackDamageRate;
+                _characterController.attackRange = _attackRange;
+                _characterController.attackAngle = _attackAngle;
+                _characterController.attackLayerMask = _attackLayerMask;
+                _characterController.powerAttack = _isPowerAttack;
+                
+                _characterController.InvokeRepeating("Attack", _attackDelayTime * _stateLength, _attackRepeatingTime * _stateLength);
+            }
+
+            if (_isRangedAttack)
+            {
+                _characterController.missile = _missile;
+                // _missile.attackDamage = _characterController.attackDamage
+                // _missile.damageRate = _attackDamageRate;
+                // _missile.attackRange = _attackRange;
+                // _missile.attackAngle = _attackAngle;
+                // _missile.attackLayerMask = _attackLayerMask;
+                // _missile.powerAttack = _isPowerAttack;
+
+                _characterController.Invoke("Shoot", _attackDelayTime * _stateLength);
             }
         }
         private void AttackExit()
         {
             if (_isRepeatingAttack)
             {
-                //CancleInvoke
+                _characterController.CancelInvoke("Attack");
             }
         }
 
@@ -171,6 +229,34 @@ namespace HJ
         {
             _characterController.InvincibleStart();
             _characterController.Invoke("InvincibleEnd", _invincibleTime);
+        }
+
+        [Header("Item")] //==============================================================================================================================================================
+        [SerializeField] bool _weapon1;
+        [SerializeField] bool _weapon2;
+        [SerializeField] bool _weapon3;
+        [SerializeField] bool _potion;
+        private void ItemEnter()
+        {
+            if (_weapon1)
+                _characterController.weapon1.SetActive(true);
+            else
+                _characterController.weapon1.SetActive(false);
+            
+            if (_weapon2)
+                _characterController.weapon2.SetActive(true);
+            else
+                _characterController.weapon2.SetActive(false);
+            
+            if (_weapon3)
+                _characterController.weapon3.SetActive(true);
+            else
+                _characterController.weapon3.SetActive(false);
+
+            if (_potion)
+                _characterController.potion.SetActive(true);
+            else
+                _characterController.potion.SetActive(false);
         }
     }
 }

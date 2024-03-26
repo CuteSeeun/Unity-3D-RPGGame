@@ -11,19 +11,12 @@ namespace HJ
         protected override void Start()
         {
             base.Start();
-            sp = _spMax;
+            StaminaStart();
         }
         protected override void Update()
         {
             base.Update();
-
-            if (_isSpRecover)
-            {
-                if (sp < _spMax)
-                {
-                    sp += _spRecovery * Time.deltaTime;
-                }
-            }
+            StaminaUpdate();
         }
 
         protected override void FixedUpdate()
@@ -31,29 +24,35 @@ namespace HJ
             base.FixedUpdate();
         }
 
-        // SP -------------------------------------------------------------
-        private float _spMax = 100;
+        // SP =============================================================================================================================================================================
 
-        /*
-        public float sp 
-        { 
-            get => _sp;
-            set
-            {
-                _sp = Mathf.Clamp(value, 0, _spMax);
-
-                if (_sp == value)
-                    return;
-            }
+        public float stamina
+        {
+            get => _stamina;
+            set { _stamina = Mathf.Clamp(value, 0, _spMax); }
         }
-        private float _sp;
-        */
-
-        public float sp;
-
+        private float _stamina;
+        private float _spMax = 100;
+        private float _spRecovery = 35;
         public bool isSpRecover { get => _isSpRecover; set => _isSpRecover = value; }
         private bool _isSpRecover;
-        private float _spRecovery = 35;
+        public float staminaRequired { set => _staminaRequired = value; }
+        private float _staminaRequired;
+
+        private void StaminaStart()
+        {
+            stamina = _spMax;
+        }
+        private void StaminaUpdate()
+        {
+            if (_isSpRecover)
+            {
+                if (stamina < _spMax)
+                {
+                    stamina += _spRecovery * Time.deltaTime;
+                }
+            }
+        }
         public void StaminaRecoverStart()
         {
             _isSpRecover = true;
@@ -62,6 +61,22 @@ namespace HJ
         {
             _isSpRecover = false;
         }
+
+        public bool StaminaUse()
+        {
+            if (stamina > _staminaRequired)
+            {
+                stamina -= _staminaRequired;
+                StaminaRecoverStop();
+                return true;
+            }
+            else
+            {
+                StateCancle();
+                return false;
+            }
+        }
+
 
         #region InputSystem ===============================================
         public void OnMove(InputAction.CallbackContext context)
@@ -79,13 +94,14 @@ namespace HJ
                 _velocity = 1.0f;
         }
 
+        // 개편 필요
         public float dodgeSp { get => _dodgeSp; set => _dodgeSp = value; }
         private float _dodgeSp = 30;
         public void OnDodge(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
-                if (sp < _dodgeSp)
+                if (stamina < _dodgeSp)
                 {
                     return;
                 }
@@ -96,24 +112,14 @@ namespace HJ
             }
         }
 
-        public float attackASp { get => _attackASp; set => _attackASp = value;} 
-        [SerializeField] float _attackASp;
         public void OnAttackA(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
-                if (sp < _attackASp)
-                {
-                    return;
-                }
-                else
-                {
-                    AttackA();
-                }
+                AttackA();
             }
         }
 
-        [SerializeField] float _attackBSp;
         public void OnAttackB(InputAction.CallbackContext context)
         {
             if (context.interaction is HoldInteraction)
@@ -143,6 +149,7 @@ namespace HJ
         }
         #endregion ========================================================
 
+        // 개편 필요
         public override void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
             if (defending == true && 180 - Quaternion.Angle(transform.rotation, hitRotation) < defendingAngle) // 방어중 && 방어 각도 성공
@@ -153,15 +160,15 @@ namespace HJ
                 // 방어력 대폭 상승
                 //DepleteHp(damage);
 
-                if (sp > damage)
+                if (stamina > damage)
                 {
-                    sp -= damage;
+                    stamina -= damage;
                     animator.SetInteger("state", 11);
                 }
                 else
                 {
-                    hp -= (damage-sp);
-                    sp = 0;
+                    hp -= (damage-stamina);
+                    stamina = 0;
                     animator.SetInteger("state", 3);
                 }
 
