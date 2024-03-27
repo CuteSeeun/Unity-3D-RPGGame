@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class LoginManager : MonoBehaviour
 {
-    #region ¼³Á¤Ã¢ ¿­°í ´İ±â
+    #region ì„¤ì •ì°½ ì—´ê³  ë‹«ê¸°
     [Header("SettingUI On/Off")]
     [SerializeField] private GameObject _settingUI;
 
@@ -22,7 +22,7 @@ public class LoginManager : MonoBehaviour
         _settingUI.SetActive(false);
     }
     #endregion
-    #region °ÔÀÓ ½ÃÀÛ½Ã ·Î±×ÀÎ Ã¢ ¿­±â, X ´©¸£¸é ´İ±â
+    #region ê²Œì„ ì‹œì‘ì‹œ ë¡œê·¸ì¸ ì°½ ì—´ê¸°, X ëˆ„ë¥´ë©´ ë‹«ê¸°
     [Header("Login On/Off")]
     [SerializeField] private GameObject _logInUI;
 
@@ -36,13 +36,13 @@ public class LoginManager : MonoBehaviour
         _logInUI.SetActive(false); 
     }
     #endregion
-    #region °ÔÀÓ Á¾·á (ÇöÀç´Â Å×½ºÆ®¾ÀÀ¸·Î ÀÌµ¿)
+    #region ê²Œì„ ì¢…ë£Œ (í˜„ì¬ëŠ” í…ŒìŠ¤íŠ¸ì”¬ìœ¼ë¡œ ì´ë™)
     public void Quit()
     {
         SceneManager.LoadScene("TestGameQuit");
     }
     #endregion
-    #region ·Î±×ÀÎ ÇÏ¸é ·ÎµùÃ¢À¸·Î ÀÌµ¿
+    #region ë¡œê·¸ì¸ í•˜ë©´ ë¡œë”©ì°½ìœ¼ë¡œ ì´ë™
     
     public void AttemptLogin()
     {
@@ -54,13 +54,13 @@ public class LoginManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("·Î±×ÀÎ ½ÇÆĞ");
+                Debug.LogError("ë¡œê·¸ì¸ ì‹¤íŒ¨");
             }
         });
               
     }
     #endregion
-    #region È¸¿ø°¡ÀÔÃ¢ ¿­°í ´İ±â
+    #region íšŒì›ê°€ì…ì°½ ì—´ê³  ë‹«ê¸°
     [Header("RegisterUI On/Off")]
     [SerializeField] private GameObject _registerUI;
 
@@ -74,8 +74,8 @@ public class LoginManager : MonoBehaviour
         _registerUI.SetActive(false);
     }
     #endregion
-    #region InputField ÀÌ¹ÌÁö ¼û±â±â
-    // InputField ¿Í Image ¸¦ 1´ë1 ¸ÅÄªÇÏ±â À§ÇÑ Dictionary.
+    #region InputField ì´ë¯¸ì§€ ìˆ¨ê¸°ê¸°
+    // InputField ì™€ Image ë¥¼ 1ëŒ€1 ë§¤ì¹­í•˜ê¸° ìœ„í•œ Dictionary.
     private Dictionary<TMP_InputField, GameObject> _inputFieldImageMap = new Dictionary<TMP_InputField, GameObject>();
 
     [Header("ImageToHide")]
@@ -98,26 +98,26 @@ public class LoginManager : MonoBehaviour
     public GameObject passwordRegisterImage;
     public GameObject passwordCheckImage;
     #endregion
-    #region Tab Å°·Î InputField Æ÷Ä¿½º ÀÌµ¿
-    // ÇöÀç È°¼ºÈ­ µÈ ÆĞ³Î ½Äº°ÇÏ´Â enum.    
+    #region Tab í‚¤ë¡œ InputField í¬ì»¤ìŠ¤ ì´ë™
+    // í˜„ì¬ í™œì„±í™” ëœ íŒ¨ë„ ì‹ë³„í•˜ëŠ” enum.    
     public enum ActivePanel {Login, Register}
     [Header("InputField Focus")]
     public ActivePanel activePanel;
 
     
-    // ·Î±×ÀÎ InputFields
+    // ë¡œê·¸ì¸ InputFields
     public List<TMP_InputField> inputFieldsLogin;
-    // È¸¿ø°¡ÀÔ InputFields
+    // íšŒì›ê°€ì… InputFields
     public List<TMP_InputField> inputFieldsRegister;
     #endregion
-    #region ÀÌ¸ŞÀÏ ÀúÀå
+    #region ì´ë©”ì¼ ì €ì¥
     [Header("SaveEmail")]
-    // ÀÌ¸ŞÀÏ InputField.
+    // ì´ë©”ì¼ InputField.
     public TMP_InputField emailInputField;
-    // ÀÌ¸ŞÀÏ ÀúÀå Åä±Û
+    // ì´ë©”ì¼ ì €ì¥ í† ê¸€
     public Toggle saveEmailToggle;
 
-    // PlayerPrefs ¿¡¼­ ÀÌ¸ŞÀÏ ÀúÀåÇÒ¶§ »ç¿ëÇÒ Å°
+    // PlayerPrefs ì—ì„œ ì´ë©”ì¼ ì €ì¥í• ë•Œ ì‚¬ìš©í•  í‚¤
     private const string EmailKey = "UserEmail";
 
 
@@ -125,8 +125,8 @@ public class LoginManager : MonoBehaviour
 
     void Start()
     {
-        #region InputField ÀÌ¹ÌÁö ¼û±â±â
-        // °¢ InputField ¿Í Image ¸ÅÄª
+        #region InputField ì´ë¯¸ì§€ ìˆ¨ê¸°ê¸°
+        // ê° InputField ì™€ Image ë§¤ì¹­
         /* -----------------------------Login------------------------------- */
         _inputFieldImageMap.Add(emailLogin, emailLoginImage);
         _inputFieldImageMap.Add(passwordLogin, passwordLoginImage);
@@ -136,17 +136,17 @@ public class LoginManager : MonoBehaviour
         _inputFieldImageMap.Add(passwordRegister, passwordRegisterImage);
         _inputFieldImageMap.Add(passwordCheckRegister, passwordCheckImage);
 
-        // ¸ğµç InputField ¿¡ Listener Ãß°¡.
+        // ëª¨ë“  InputField ì— Listener ì¶”ê°€.
         foreach (var pair in _inputFieldImageMap)
         {
             pair.Key.onValueChanged.AddListener((value) => ToggleImage(pair.Key, value));
         }
         #endregion
-        #region ÀÌ¸ŞÀÏ ÀúÀå
-        // ¾Û ½ÃÀÛ½Ã ÀúÀåµÈ ÀÌ¸ŞÀÏ ºÒ·¯¿À±â.
+        #region ì´ë©”ì¼ ì €ì¥
+        // ì•± ì‹œì‘ì‹œ ì €ì¥ëœ ì´ë©”ì¼ ë¶ˆëŸ¬ì˜¤ê¸°.
         LoadEmail();
 
-        // Åä±Û ¹öÆ°¿¡ µû¶ó ÀÌ¸ŞÀÏ ÀúÀå ¿©ºÎ °áÁ¤.
+        // í† ê¸€ ë²„íŠ¼ì— ë”°ë¼ ì´ë©”ì¼ ì €ì¥ ì—¬ë¶€ ê²°ì •.
         saveEmailToggle.onValueChanged.AddListener(OnToggleChanged);
 
         #endregion
@@ -154,11 +154,11 @@ public class LoginManager : MonoBehaviour
 
     void Update()
     {
-        #region Tab Å°·Î InputField Æ÷Ä¿½º ÀÌµ¿
-        // tab Å°¸¦ ´©¸£¸é NavigateThroughInputField ¸Ş¼­µå ½ÇÇà.
+        #region Tab í‚¤ë¡œ InputField í¬ì»¤ìŠ¤ ì´ë™
+        // tab í‚¤ë¥¼ ëˆ„ë¥´ë©´ NavigateThroughInputField ë©”ì„œë“œ ì‹¤í–‰.
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            // ÅÇº°·Î È°¼ºÈ­
+            // íƒ­ë³„ë¡œ í™œì„±í™”
             switch (activePanel)
             {
                 case ActivePanel.Login:
@@ -173,49 +173,49 @@ public class LoginManager : MonoBehaviour
         #endregion
     }
 
-    #region Tab Å°·Î InputField Æ÷Ä¿½º ÀÌµ¿
+    #region Tab í‚¤ë¡œ InputField í¬ì»¤ìŠ¤ ì´ë™
 
-    /* InputField Æ÷Ä¿½º ¼³Á¤ */
+    /* InputField í¬ì»¤ìŠ¤ ì„¤ì • */
     public void NavigateThroughInputField(List<TMP_InputField> inputFields)
     {
         for (int i = 0; i < inputFields.Count; i++)
         {
             if (inputFields[i].isFocused)
             {
-                // ´ÙÀ½ InputField °è»ê.
+                // ë‹¤ìŒ InputField ê³„ì‚°.
                 int nextIndex = (i + 1) % inputFields.Count;
-                // ´ÙÀ½ InputField ¿¡ Æ÷Ä¿½º ¼³Á¤.
+                // ë‹¤ìŒ InputField ì— í¬ì»¤ìŠ¤ ì„¤ì •.
                 inputFields[nextIndex].Select();
-                // ´ÙÀ½ InputField È°¼ºÈ­.
+                // ë‹¤ìŒ InputField í™œì„±í™”.
                 inputFields[nextIndex].ActivateInputField();
                 break;
             }
         }
     }
 
-    // InputField Æ÷Ä¿½º È°¼ºÈ­ ÆĞ³Î
+    // InputField í¬ì»¤ìŠ¤ í™œì„±í™” íŒ¨ë„
     public void SetActivePanel(ActivePanel panel)
     {
         activePanel = panel;
     }
 
-    // InputField Login Ã¢¿¡¼­ Æ÷Ä¿½º È°¼ºÈ­.
+    // InputField Login ì°½ì—ì„œ í¬ì»¤ìŠ¤ í™œì„±í™”.
     public void SetActivePanelToLogin()
     {
         SetActivePanel(LoginManager.ActivePanel.Login);
     }
-    // InputField Register Ã¢¿¡¼­ Æ÷Ä¿½º È°¼ºÈ­.
+    // InputField Register ì°½ì—ì„œ í¬ì»¤ìŠ¤ í™œì„±í™”.
     public void SetActivePanelToRegister()
     {
         SetActivePanel(LoginManager.ActivePanel.Register);
     }
     #endregion
 
-    #region InputField ÀÌ¹ÌÁö ¼û±â±â
-    // ÀÌ¹ÌÁö È°¼ºÈ­ / ºñÈ°¼ºÈ­ ÇÏ´Â ¸Ş¼­µå
+    #region InputField ì´ë¯¸ì§€ ìˆ¨ê¸°ê¸°
+    // ì´ë¯¸ì§€ í™œì„±í™” / ë¹„í™œì„±í™” í•˜ëŠ” ë©”ì„œë“œ
     void ToggleImage(TMP_InputField inputField, string inputValue)
     {
-        // ÇØ´ç InputField ¿¡ ¿¬°áµÈ ÀÌ¹ÌÁö È°¼ºÈ­ / ºñÈ°¼ºÈ­.
+        // í•´ë‹¹ InputField ì— ì—°ê²°ëœ ì´ë¯¸ì§€ í™œì„±í™” / ë¹„í™œì„±í™”.
         if (_inputFieldImageMap.TryGetValue(inputField, out GameObject Image))
         {
             Image.SetActive(string .IsNullOrEmpty(inputValue));
@@ -223,17 +223,17 @@ public class LoginManager : MonoBehaviour
     }
     #endregion
 
-    #region ÀÌ¸ŞÀÏ ÀúÀå
+    #region ì´ë©”ì¼ ì €ì¥
     public void OnToggleChanged(bool isOn)
     {
         if (isOn)
         {
-            // Åä±ÛÀÌ On ÀÏ¶§ ÇöÀç InputField ÀÇ ÀÌ¸ŞÀÏ ÁÖ¼Ò ÀúÀå.
+            // í† ê¸€ì´ On ì¼ë•Œ í˜„ì¬ InputField ì˜ ì´ë©”ì¼ ì£¼ì†Œ ì €ì¥.
             SaveEmail();
         }
         else
         {
-            // Åä±ÛÀÌ Off ÀÏ¶§ ÀúÀåµÈ ÀÌ¸ŞÀÏ ÁÖ¼Ò »èÁ¦.
+            // í† ê¸€ì´ Off ì¼ë•Œ ì €ì¥ëœ ì´ë©”ì¼ ì£¼ì†Œ ì‚­ì œ.
             PlayerPrefs.DeleteKey(EmailKey);
         }
     }
@@ -250,12 +250,12 @@ public class LoginManager : MonoBehaviour
         {
             string saveEmail = PlayerPrefs.GetString(EmailKey);
             emailInputField.text = saveEmail;
-            // ÀúÀåµÈ ÀÌ¸ŞÀÏÀÌ ÀÖÀ¸¸é Åä±ÛÀÌ true ÀÎ »óÅÂ·Î ¼³Á¤.
+            // ì €ì¥ëœ ì´ë©”ì¼ì´ ìˆìœ¼ë©´ í† ê¸€ì´ true ì¸ ìƒíƒœë¡œ ì„¤ì •.
             saveEmailToggle.isOn = true;
         }
         else
         {
-            // ÀúÀåµÈ ÀÌ¸ŞÀÏÀÌ ¾øÀ¸¸é Åä±ÛÀÌ false ÀÎ »óÅÂ·Î ¼³Á¤.
+            // ì €ì¥ëœ ì´ë©”ì¼ì´ ì—†ìœ¼ë©´ í† ê¸€ì´ false ì¸ ìƒíƒœë¡œ ì„¤ì •.
             saveEmailToggle.isOn = false;
         }
         
