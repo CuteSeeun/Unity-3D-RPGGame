@@ -1,48 +1,63 @@
+using Scene_Teleportation_Kit.Scripts.player;
 using System;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace HJ
 {
     public abstract class CharacterController : MonoBehaviour, IHp
     {
-        protected Transform transform;
-        [SerializeField] Animator animator;
-
-        private Vector3 _motionDirection;
-        [SerializeField] int _type;
-
-        public GameObject weapon1;
-        public GameObject weapon2;
-        public GameObject weapon3;
-
-        public Missile missile;
-
-        public bool invincible;
-
         private void Awake()
         {
-            transform = GetComponent<Transform>();
+            GetComponentAwake();
         }
-
         protected virtual void Start()
         {
-            _hp = _hpMax;
+            HealthStart();
             onHpMin += () => Death();
 
-            animator.SetInteger("type", _type);
+            CharacterInfoStart();
         }
-
         protected virtual void Update()
         {
             MoveUpdate();
         }
-
         protected virtual void FixedUpdate()
         {
+
         }
 
-        // IHp -------------------------------------------------------------
+        [Header ("Get Component")] //======================================================================================================================================================
+        protected Transform transform;
+        protected Animator animator;
+        private void GetComponentAwake()
+        {
+            transform = GetComponent<Transform>();
+            animator = GetComponent<Animator>();
+        }
+
+        [Header ("CharacterInfo")] //======================================================================================================================================================
+        [SerializeField] int _type;
+        public GameObject weapon1;
+        public GameObject weapon2;
+        public GameObject weapon3;
+        public Missile missile;
+        public GameObject potion;
+
+        public bool isPlayer;
+
+        public float speed { get => _speed; }
+        [SerializeField] float _speed = 5f;
+
+        public float attack { get => _attack; }
+        [SerializeField] float _attack;
+        [SerializeField] protected float _armor;
+
+        private void CharacterInfoStart()
+        {
+            animator.SetInteger("type", _type);
+        }
+
+        // [("IHp")]// ====================================================================================================================================================================
         public float hp
         {
             get
@@ -51,23 +66,22 @@ namespace HJ
             }
             set
             {
-                _hp = Mathf.Clamp(value, 0, _hpMax);
+                _hp = Mathf.Clamp(value, 0, _hpMax); // _hp를 value를 0~_hpMax 사잇값으로 변환해서 대입
 
-                if (_hp == value)
+                if (_hp == value) // 문제없이 들어가면 return
                     return;
 
-                _hp = value;
-
-                if (value <= 0)
+                if (value < 1)
+                {
                     onHpMin?.Invoke();
+                }
                 else if (value >= _hpMax)
                     onHpMax?.Invoke();
             }
         }
-
         [SerializeField] private float _hp;
         public float hpMax { get => _hpMax; }
-        [SerializeField] private float _hpMax = 100;
+        private float _hpMax = 100;
 
         public event Action<float> onHpChanged;
         public event Action<float> onHpDepleted;
@@ -79,58 +93,27 @@ namespace HJ
             DepleteHp(damage);
         }
 
-        public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+        public virtual void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
-            if (invincible == false)
+            Debug.Log(damage * (10 / _armor));
+
+            if (_invincible == false)
             {
                 transform.rotation = hitRotation;
                 transform.Rotate(0, 180, 0);
-                DepleteHp(damage);
-
+                
                 if (powerAttack ==  false)
                 {
-                    if (_defending == true)
-                    {
-                        HitA();
-
-                        Debug.Log(Quaternion.Angle(transform.rotation, hitRotation));
-                    }
-                    else // (_defending == false)
-                    {
-                        HitA();
-                    }
+                    HitA();
                 }
                 else // (powerAttack ==  true)
                 {
                     HitB();
                 }
+
+                DepleteHp(damage * (10 / _armor));
             }
         }
-
-        /*
-        public void Hit(float damage, bool powerAttack, Vector3 direction)
-        {
-            if (invincible == false)
-            {
-                if (powerAttack == false)
-                {
-                    HitA();
-                }
-                else if (powerAttack == true)
-                {
-                    HitB();
-                    transform.rotation = Quaternion.LookRotation(direction);
-                }
-
-                DepleteHp(damage);
-            }
-        }
-        
-        public void Hit(float damage)
-        {
-            DepleteHp(damage);
-        }
-        */
 
         public void DepleteHp(float amount)
         {
@@ -140,114 +123,48 @@ namespace HJ
             hp -= amount;
             onHpDepleted?.Invoke(amount);
         }
-
         public void RecoverHp(float amount)
         {
             hp += amount;
             onHpRecovered?.Invoke(amount);
         }
 
-        // Defending
+        // [("Health")] ===================================================================================================================================================================
+        private void HealthStart()
+        {
+            _hp = _hpMax;
+        }
 
+        // [("Defending")] ================================================================================================================================================================
         public bool defending { get => _defending; set => _defending = value; }
         private bool _defending;
-        public float defendingAngle { set => _defendingAngle = value; }
+        public bool defend { get => _defend; set => _defend = value; }
+        private bool _defend;
+        public float defendingAngle { get => _defendingAngle ; set => _defendingAngle = value; }
         private float _defendingAngle;
-        private float _defendingAngleInnerProduct;
 
-        public void Defend()
-        {
-            _defendingAngleInnerProduct = Mathf.Cos(_defendingAngle * Mathf.Deg2Rad);
-        }
-
-        // Type ------------------------------------------------------------
-        /*
-        private int _attackAComboMax;
-
-        private void SetType()
-        {
-            switch (_type)
-            {
-                case 0:
-                    _attackAComboMax = 2;
-                    break;
-                case 1:
-                    _attackAComboMax = 4;
-                    break;
-                case 2:
-                    _attackAComboMax = 2;
-                    break;
-                case 3:
-                    _attackAComboMax = 2;
-                    break;
-                case 4:
-                    _attackAComboMax = 1;
-                    break;
-            }
-        }
-        */
-
-        // State -------------------------------------------------------------
-        public void StateReset()
-        {
-            animator.SetInteger("state", 1);
-        }
-
-        // Move --------------------------------------------------------------
-        public float speed { get => _speed; }
-        [SerializeField] float _speed = 5f;
-        public virtual float horizontal { get; set; }
-        public virtual float vertical { get; set; }
-        public Vector3 moveDirection { get => _moveDirection; set => _moveDirection = value; }
-        protected Vector3 _moveDirection;
-        public float moveFloat { get => _moveFloat;  }
-        private float _moveFloat;
-        public float velocity { get => _velocity; }
-        protected float _velocity = 1;
-
-        protected void MoveUpdate()
-        {
-            _moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
-            _moveFloat = _moveDirection.magnitude * _velocity;
-
-            animator.SetFloat("moveFloat", _moveFloat);
-        }
-
-        // Dodge -----------------------------------------------------------------
-        public float dodgeSpeed { get => _dodgeSpeed; }
-        [SerializeField] float _dodgeSpeed = 10f;
-        public float dodgeTime { get => _dodgeTime; }
-        [SerializeField] float _dodgeTime = 0.5f;
-
-        public float dodgeTimeInverse { get => _dodgeTimeInverse; }
-        [SerializeField] float _dodgeTimeInverse = 1f;
-
-        public float invincibleTime { get => _invincibleTime; }
-        private float _invincibleTime = 0.5f;
-        
-        protected void Dodge()
-        {
-            animator.SetInteger("state", 2);
-        }
-
-        public void InvincibleEnd()
-        {
-            invincible = false;
-        }
-
-        // Attack --------------------------------------------------------------
+        // [("Attack")] ===================================================================================================================================================================
         public float attackRange { set => _attackRange = value; }
-        [SerializeField] float _attackRange;
+        private float _attackRange;
         public float attackAngle { set => _attackAngle = value; }
-        [SerializeField] float _attackAngle;
-        [SerializeField] float _attackAngleInnerProduct;
+        private float _attackAngle;
+        private float _attackAngleInnerProduct;
         public LayerMask attackLayerMask { set => _attackLayerMask = value; }
-        [SerializeField] LayerMask _attackLayerMask;
+        private LayerMask _attackLayerMask;
+        public float attackDamageRate { set => _attackDamageRate = value; }
+        private float _attackDamageRate;
 
-        public bool powerAttack { get => _powerAttack; set => _powerAttack = value; }
-        private bool _powerAttack;
-        public Vector3 attackDirection;
-        private Vector3 _attackDirection;
+        public bool isPowerAttack { get => _isPowerAttack; set => _isPowerAttack = value; }
+        private bool _isPowerAttack;
+
+        public bool isPiercing { get => _isPiercing; set => _isPiercing = value; } 
+        private bool _isPiercing;
+        public bool isExplosive { get => _isExplosive; set => _isExplosive = value; }
+        private bool _isExplosive;
+        public float missileSpeed { get => _missileSpeed; set => _missileSpeed = value; }
+        private float _missileSpeed;
+        public float missileTimer { get => _missileTimer; set => _missileTimer = value; }
+        private float _missileTimer;
 
         public void Attack()
         {
@@ -269,7 +186,8 @@ namespace HJ
                     // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
                     if (hit.collider.TryGetComponent(out IHp iHp))
                     {
-                        iHp.Hit(1, _powerAttack, transform.rotation);
+                        float _random = UnityEngine.Random.Range(0.75f, 1.25f);
+                        iHp.Hit(_attack * _attackDamageRate * _random, _isPowerAttack, transform.rotation);
                     }
                 }
             }
@@ -277,18 +195,96 @@ namespace HJ
 
         public void Shoot()
         {
-            Instantiate(missile, transform.position + transform.forward, transform.rotation);
-            // 미사일 데미지 변수 전달
+            Missile _missile = Instantiate(missile, transform.position + transform.forward, transform.rotation);
+            //_missile.missileSpeed = _missileSpeed;
+            //_missile.missileTimer = missileTimer;
+            //_missile.isPiercing = _isPiercing;
+            //_missile.isExplosive = _isExplosive;
+            _missile.attack = _attack;
+            //_missile.attackDamageRate = _attackDamageRate;
+            //_missile.attackRange = _attackRange;
+            //_missile.attackAngle = _attackAngle;
+            //_missile.attackLayerMask = _attackLayerMask;
+            //_missile.isPowerAttack = _isPowerAttack;
         }
 
-        // AttackA -----------------------------------------------------------------
+        // Legacy
+        public Vector3 attackDirection { get => _attackDirection; set => _attackDirection = value; }
+        private Vector3 _attackDirection;
 
+        // [("Invincible")] ===============================================================================================================================================================
+        public bool invincible { get => _invincible; set => _invincible = value; }
+        [SerializeField] private bool _invincible;
+        public void InvincibleStart()
+        {
+            _invincible = true;
+        }
+        public void InvincibleEnd()
+        {
+            _invincible = false;
+        }
+
+        // [("States")] ===================================================================================================================================================================
+
+        // states
+        // 0 
+        // 1 Move
+        // 2 Dodge
+        // 3 AttackA
+        // 4 AttackB
+        // 5 HitA
+        // 6 HitB
+        // 7 Death
+        // 8 Raise?
+        // 9 Interact
+        // 10 UseItem
+        // 11 Blocking
+        // 12 필살기?
+
+        // [("State Escape")] =============================================================================================================================================================
+        public void StateCancle()
+        {
+            animator.SetInteger("state", 0);
+        }
+
+        public void StateReset()
+        {
+            animator.SetInteger("state", 1);
+        }
+
+        // [("State 1 Move")] =============================================================================================================================================================
+        public virtual float horizontal { get; set; }
+        public virtual float vertical { get; set; }
+        public Vector3 moveDirection { get => _moveDirection; set => _moveDirection = value; }
+        private Vector3 _moveDirection;
+        public float moveFloat { get => _moveFloat;  }
+        private float _moveFloat;
+
+        protected void MoveUpdate()
+        {
+            _moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
+            _moveFloat = _moveDirection.magnitude * _velocity;
+
+            animator.SetFloat("moveFloat", _moveFloat);
+        }
+
+        // Legacy
+        public float velocity { get => _velocity; }
+        protected float _velocity = 1;
+
+        // [("State 2 Dodge")] ============================================================================================================================================================
+        protected void Dodge()
+        {
+            animator.SetInteger("state", 2);
+        }
+
+        // [("State 3 AttackA")] ==========================================================================================================================================================
         protected void AttackA()
         {
             animator.SetInteger("state", 3);
         }
 
-        // AttackB-----------------------------------------------------------
+        // [("State 4 AttackB")] ==========================================================================================================================================================
         protected void AttackB()
         {
             animator.SetInteger("state", 4);
@@ -299,29 +295,50 @@ namespace HJ
             animator.SetInteger("state", 1);
         }
 
-        // HitA-----------------------------------------------------------
+        // [("State 5 HitA")] =============================================================================================================================================================
         public void HitA()
         {
             animator.SetInteger("state", 5);
         }
 
-        // HitB-----------------------------------------------------------
-        public float hitBTime { get => _hitBTime; }
-        private float _hitBTime = 1f;
-
-        public float hitBSpeed { get => _hitBSpeed; }
-
-        private float _hitBSpeed = 5f;
-
+        // [("State 6 HitB")] =============================================================================================================================================================
         public void HitB()
         {
             animator.SetInteger("state", 6);
         }
 
-        // Death
+        // [("State 7 Death")] ============================================================================================================================================================
         public void Death()
         {
             animator.SetInteger("state", 7);
+            Destroy(this);
+            Destroy(GetComponent<Rigidbody>());
+            Destroy(GetComponent<CapsuleCollider>());
         }
+
+        // [("State 8")] ==================================================================================================================================================================
+
+        // [("State 9 Interact")] =========================================================================================================================================================
+        [SerializeField] LayerMask _layerMaskInteractable;
+
+        public void Interact()
+        {
+            animator.SetInteger("state", 9);
+
+            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out RaycastHit hit, 2.6f, _layerMaskInteractable))
+            {
+                if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
+                {
+                    interactable.Interaction(this.gameObject);
+                }
+            }
+        }
+
+        // [("State 10 UseItem)] ==========================================================================================================================================================
+        public void UseItem()
+        {
+            animator.SetInteger("state", 10);
+        }
+
     }
 }
