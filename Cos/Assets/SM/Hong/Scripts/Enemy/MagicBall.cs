@@ -7,6 +7,7 @@ public class MagicBall : MonoBehaviour
     public float speed;
     public GameObject target;
     public GameObject owner;
+    public GameObject effect;
     Rigidbody rb;
     void Start()
     {
@@ -23,5 +24,15 @@ public class MagicBall : MonoBehaviour
     public void del()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            Instantiate(effect, transform.position, Quaternion.identity);
+            //플레이어어게 데미지를 주는 함수 호출
+            Destroy(gameObject);
+        }
     }
 }
