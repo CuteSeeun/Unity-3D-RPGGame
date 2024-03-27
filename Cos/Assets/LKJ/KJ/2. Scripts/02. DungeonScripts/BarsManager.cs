@@ -36,17 +36,17 @@ public class BarsManager : MonoBehaviour
 
     void Start()
     {
-        // 초기 체력 설정.
+        /* 초기 체력 설정. */
         _currentHealth = maxHealth;
-        // 슬라이더의 최대값을 최대 체력으로 설정.
+        /* 슬라이더의 최대값을 최대 체력으로 설정. */
         healthSlider.maxValue = maxHealth;
         UpdateHealthUI();
 
-        // 초기 스테미나 설정
+        /* 초기 스테미나 설정 */
         _currentStamina = maxStamina;
-        // 슬라이더의 최대값을 최대 스테미너로 설정.
+        /* 슬라이더의 최대값을 최대 스테미너로 설정. */
         staminaSlider.maxValue = maxStamina;
-        // 슬라이더의 값 초기화.
+        /* 슬라이더의 값 초기화. */
         staminaSlider.value = _currentStamina;
     }
 
@@ -89,11 +89,11 @@ public class BarsManager : MonoBehaviour
     }
     #endregion
 
-    // 체력바 업데이트
+    /* 체력바 업데이트 */
     void UpdateHealthUI()
     {
         Debug.Log($"Current Health: {_currentHealth}, Max Health: {maxHealth}, Slider Value: {healthSlider.value}");
-        // Slider, 텍스트 업데이트.
+        /* Slider, 텍스트 업데이트. */
         healthSlider.value = _currentHealth;
         healthCur.text = $"{_currentHealth}";
         healthMax.text = $"{maxHealth}";
@@ -106,14 +106,14 @@ public class BarsManager : MonoBehaviour
         if (_currentStamina < maxStamina)
         {
             Debug.Log($"Current SP : {_currentStamina}, Max SP : {maxStamina}, Slider Value : {staminaSlider.value}");
-            // 스테미나가 시간에 따라 자동으로 채워짐.
+            /* 스테미나가 시간에 따라 자동으로 채워짐. */
             _currentStamina += staminaRecoveryRate * Time.deltaTime;
-            // 최대 스테미너 넘지 않음.
+            /* 최대 스테미너 넘지 않음. */
             _currentStamina = Mathf.Min(_currentStamina, maxStamina);
-            // 슬라이더 업데이트
+            /* 슬라이더 업데이트 */
             staminaSlider.value = _currentStamina;
-            // 텍스트 업데이트
-            // 정수로 변환하여 소수점 안나오게 함.
+            /* 텍스트 업데이트 */
+            /* 정수로 변환하여 소수점 안나오게 함. */
             staminaCur.text = Mathf.RoundToInt(_currentStamina).ToString();
             staminaMax.text = $"{maxStamina}";
         }

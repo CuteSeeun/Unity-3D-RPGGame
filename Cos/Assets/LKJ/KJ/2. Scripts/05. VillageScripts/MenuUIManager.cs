@@ -42,6 +42,8 @@ public class MenuUIManager : MonoBehaviour
             menuUI.SetActive(true);
 
             Cursor.visible = true;
+
+            PauseGame();
         }
     }
     #region 메뉴 팝업
@@ -51,6 +53,20 @@ public class MenuUIManager : MonoBehaviour
         menuUI.SetActive(false);
 
         Cursor.visible = false;
+
+        ResumeGame();
+    }
+    #endregion
+    #region 메뉴 팝업시 일시정지
+    public void PauseGame()
+    {
+        Debug.Log("멈춤");
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        Debug.Log("재생");
+        Time.timeScale = 1;
     }
     #endregion
     #region 장비 팝업
