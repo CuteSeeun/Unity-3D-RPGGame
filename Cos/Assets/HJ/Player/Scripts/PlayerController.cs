@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -83,7 +84,7 @@ namespace HJ
         public int potionNumber { get => _potionNumber; set => _potionNumber = value; }
         [SerializeField] int _potionNumber;
         [SerializeField] float _potionHp;
-
+        public GameObject potiondrinking;
         private void PotionStart()
         {
             _potionNumber = _maxPotion;
@@ -92,7 +93,16 @@ namespace HJ
         {
             potionNumber--;
             RecoverHp(_potionHp);
+            GameObject _potiondrinking = Instantiate(potiondrinking, transform.position + new Vector3 (0, 0.5f, 0), Quaternion.identity);
+            Destroy(_potiondrinking, 1.5f);
         }
+        
+            
+            
+                
+            
+        
+
         #region InputSystem ===============================================
         public void OnMove(InputAction.CallbackContext context)
         {

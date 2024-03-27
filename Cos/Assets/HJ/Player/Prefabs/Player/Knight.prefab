@@ -1294,7 +1294,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1735453807295806356}
+  m_Father: {fileID: 7933872179298663290}
   m_LocalEulerAnglesHint: {x: 0.0000048265388, y: 2.0679641e-13, z: 0.0000012272997}
 --- !u!1 &4076560227156303009
 GameObject:
@@ -1592,6 +1592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7630361002812702112}
+  - component: {fileID: 3301725636225516499}
   - component: {fileID: 4146984308123209413}
   - component: {fileID: 7243156815149692018}
   - component: {fileID: 778159948968593507}
@@ -1603,7 +1604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7630361002812702112
 Transform:
   m_ObjectHideFlags: 0
@@ -1627,6 +1628,29 @@ Transform:
   - {fileID: 4700065263589467635}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3301725636225516499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4980016502053825255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9230ecd07cd10946b0cfc19cda760b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab_Snow_slash: {fileID: 4028003514871116236, guid: a87c4eb79eda58d47bdfc8f717008084,
+    type: 3}
+  _prefab_stab_medium_Blue: {fileID: 3001654169633478907, guid: c100616984aa4bb45a1bb4562502a434,
+    type: 3}
+  _prefab_Blocking: {fileID: 1779824874370692977, guid: fbbc80e7eee31634699b061cae719efa,
+    type: 3}
+  _prefab_blockattack: {fileID: 2113051519755747170, guid: 2ae81e31127b1654a9560530c809fbc7,
+    type: 3}
+  delay: 1
+  delay2: 0.5
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &4146984308123209413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,12 +1677,11 @@ MonoBehaviour:
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
-    m_Bits: 33280
+    m_Bits: 0
   _stamina: 0
   _maxPotion: 5
   _potionNumber: 0
   _potionHp: 50
-
 --- !u!95 &7243156815149692018
 Animator:
   serializedVersion: 5
