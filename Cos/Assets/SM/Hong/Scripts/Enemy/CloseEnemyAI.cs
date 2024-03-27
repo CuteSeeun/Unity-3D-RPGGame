@@ -1,9 +1,10 @@
 using System.Collections;
+using HJ;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CloseEnemyAI : MonoBehaviour
+public class CloseEnemyAI : MonoBehaviour, IHp
 {
     float patrolSpeed = 2f;
     float chaseSpeed = 5f;
@@ -27,6 +28,16 @@ public class CloseEnemyAI : MonoBehaviour
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
+
+    public event System.Action<float> onHpChanged;
+    public event System.Action<float> onHpDepleted;
+    public event System.Action<float> onHpRecovered;
+    public event System.Action onHpMin;
+    public event System.Action onHpMax;
+
+    float IHp.hp { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    public float hpMax => throw new System.NotImplementedException();
 
     void Start()
     {
@@ -174,5 +185,25 @@ public class CloseEnemyAI : MonoBehaviour
     void Hit()
     {
         //데미지 가하는 코드 구현
+    }
+
+    public void DepleteHp(float amount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void RecoverHp(float amount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Hit(float damage)
+    {
+        throw new System.NotImplementedException();
     }
 }
