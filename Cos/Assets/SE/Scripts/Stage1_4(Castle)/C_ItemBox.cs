@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class C_ItemBox : MonoBehaviour
-    //온트리거스테이 태그_플레이 -> f키 누르면 박스 열림 (에너미 문이 열림:에너미 문 콜라이더가 할거)
+    //온트리거스테이 태그_플레이 -> f키 누르면 박스 열림 
 {
     public GameObject ItemBox;
+    public GameObject Door;
 
     private Animator animator;
     public bool isBox;
@@ -26,6 +27,7 @@ public class C_ItemBox : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     StartCoroutine(DisableItemBox());
+                    
                 }
 
             }
@@ -35,5 +37,10 @@ public class C_ItemBox : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         ItemBox.SetActive(false);
+
+        if (Door != null)
+        {
+            Door.GetComponent<Animator>().Play("Door");
+        }
     }
 }

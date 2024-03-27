@@ -18911,9 +18911,7 @@ GameObject:
   - component: {fileID: 4763181831872321036}
   - component: {fileID: 8888686654126962132}
   - component: {fileID: 8769307855822734916}
-  - component: {fileID: 6054559188117209665}
   - component: {fileID: 2353208009525775616}
-  - component: {fileID: 7380743182303310743}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -18987,28 +18985,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6054559188117209665
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4260461385754116655}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5779197439840542771, guid: a8f084c64c72670478674c1147c98dcb, type: 3}
 --- !u!95 &2353208009525775616
 Animator:
   serializedVersion: 5
@@ -19030,19 +19006,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7380743182303310743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4260461385754116655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb2a7d37b18dab4db7a33d4a19c87da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOpen: 0
 --- !u!1 &4310332665227487556
 GameObject:
   m_ObjectHideFlags: 0
