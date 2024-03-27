@@ -1,3 +1,4 @@
+using Scene_Teleportation_Kit.Scripts.player;
 using System;
 using UnityEngine;
 
@@ -47,11 +48,9 @@ namespace HJ
         public float speed { get => _speed; }
         [SerializeField] float _speed = 5f;
 
-        [SerializeField] float _armor;
-        // 공격력
-        // 무기공격력
-        // 방어력
-        // 갑옷방어력
+        public float attack { get => _attack; }
+        [SerializeField] float _attack;
+        [SerializeField] protected float _armor;
 
         private void CharacterInfoStart()
         {
@@ -80,7 +79,7 @@ namespace HJ
                     onHpMax?.Invoke();
             }
         }
-        private float _hp;
+        [SerializeField] private float _hp;
         public float hpMax { get => _hpMax; }
         private float _hpMax = 100;
 
@@ -96,6 +95,8 @@ namespace HJ
 
         public virtual void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
+            Debug.Log(damage * (10 / _armor));
+
             if (_invincible == false)
             {
                 transform.rotation = hitRotation;
@@ -110,7 +111,7 @@ namespace HJ
                     HitB();
                 }
 
-                DepleteHp(damage * (_hpMax / (_hpMax + _armor)));
+                DepleteHp(damage * (10 / _armor));
             }
         }
 
@@ -150,18 +151,20 @@ namespace HJ
         private float _attackAngleInnerProduct;
         public LayerMask attackLayerMask { set => _attackLayerMask = value; }
         private LayerMask _attackLayerMask;
-        public float damageRate { set => _damageRate = value; }
-        private float _damageRate;
-
-        // 데미지 이거 개편좀
-        public float attack { get => _attack; }
-        [SerializeField] float _attack;
-        public float attackWeapon { get => _attackWeapon; set => _attackWeapon = value; }
-        private float _attackWeapon;
+        public float attackDamageRate { set => _attackDamageRate = value; }
+        private float _attackDamageRate;
 
         public bool isPowerAttack { get => _isPowerAttack; set => _isPowerAttack = value; }
         private bool _isPowerAttack;
 
+        public bool isPiercing { get => _isPiercing; set => _isPiercing = value; } 
+        private bool _isPiercing;
+        public bool isExplosive { get => _isExplosive; set => _isExplosive = value; }
+        private bool _isExplosive;
+        public float missileSpeed { get => _missileSpeed; set => _missileSpeed = value; }
+        private float _missileSpeed;
+        public float missileTimer { get => _missileTimer; set => _missileTimer = value; }
+        private float _missileTimer;
 
         public void Attack()
         {
@@ -183,7 +186,8 @@ namespace HJ
                     // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
                     if (hit.collider.TryGetComponent(out IHp iHp))
                     {
-                        iHp.Hit(_attack * _damageRate, _isPowerAttack, transform.rotation);
+                        float _random = UnityEngine.Random.Range(0.75f, 1.25f);
+                        iHp.Hit(_attack * _attackDamageRate * _random, _isPowerAttack, transform.rotation);
                     }
                 }
             }
@@ -191,7 +195,17 @@ namespace HJ
 
         public void Shoot()
         {
-            Instantiate(missile, transform.position + transform.forward, transform.rotation);
+            Missile _missile = Instantiate(missile, transform.position + transform.forward, transform.rotation);
+            //_missile.missileSpeed = _missileSpeed;
+            //_missile.missileTimer = missileTimer;
+            //_missile.isPiercing = _isPiercing;
+            //_missile.isExplosive = _isExplosive;
+            _missile.attack = _attack;
+            //_missile.attackDamageRate = _attackDamageRate;
+            //_missile.attackRange = _attackRange;
+            //_missile.attackAngle = _attackAngle;
+            //_missile.attackLayerMask = _attackLayerMask;
+            //_missile.isPowerAttack = _isPowerAttack;
         }
 
         // Legacy
@@ -297,6 +311,9 @@ namespace HJ
         public void Death()
         {
             animator.SetInteger("state", 7);
+            Destroy(this);
+            Destroy(GetComponent<Rigidbody>());
+            Destroy(GetComponent<CapsuleCollider>());
         }
 
         // [("State 8")] ==================================================================================================================================================================
@@ -322,5 +339,6 @@ namespace HJ
         {
             animator.SetInteger("state", 10);
         }
+
     }
 }

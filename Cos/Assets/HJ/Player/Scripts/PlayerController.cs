@@ -12,6 +12,7 @@ namespace HJ
         {
             base.Start();
             StaminaStart();
+            PotionStart();
         }
         protected override void Update()
         {
@@ -77,7 +78,21 @@ namespace HJ
             }
         }
 
+        // [Potion] ====================================================================================================================================================================
+        [SerializeField] int _maxPotion;
+        public int potionNumber { get => _potionNumber; set => _potionNumber = value; }
+        [SerializeField] int _potionNumber;
+        [SerializeField] float _potionHp;
 
+        private void PotionStart()
+        {
+            _potionNumber = _maxPotion;
+        }
+        protected void UsePotion()
+        {
+            potionNumber--;
+            RecoverHp(_potionHp);
+        }
         #region InputSystem ===============================================
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -134,7 +149,10 @@ namespace HJ
         {
             if (context.performed)
             {
-                UseItem();
+                if (_potionNumber > 0 && hp <= hpMax -1)
+                {
+                    UseItem();
+                }
             }
         }
         #endregion ========================================================
@@ -146,18 +164,15 @@ namespace HJ
             {
                 transform.rotation = hitRotation;
                 transform.Rotate(0, 180, 0);
-                
-                // 방어력 대폭 상승
-                //DepleteHp(damage);
 
-                if (stamina > damage)
+                if (stamina > damage * (10 / _armor))
                 {
-                    stamina -= damage;
+                    stamina -= damage * (10 / _armor);
                     animator.SetInteger("state", 11);
                 }
                 else
                 {
-                    hp -= (damage-stamina);
+                    hp -= ((damage * (10 / _armor)) - stamina);
                     stamina = 0;
                     animator.SetInteger("state", 3);
                 }

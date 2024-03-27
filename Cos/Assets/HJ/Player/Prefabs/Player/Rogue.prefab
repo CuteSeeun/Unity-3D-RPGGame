@@ -1032,7 +1032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7847954845431315274
 Transform:
   m_ObjectHideFlags: 0
@@ -1068,28 +1068,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be11e4895dbbda248afd07b889ba6ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8779470545690256105}
   _type: 3
   weapon1: {fileID: 4946995793625435931}
   weapon2: {fileID: 751906111790940650}
   weapon3: {fileID: 8950439252500502872}
   missile: {fileID: 8069049544513731857, guid: 14d0014c3d2885b46a67baee9e3767ea, type: 3}
   potion: {fileID: 4390448168507416641}
-  invincible: 0
   isPlayer: 1
-  _armor: 0
-  _hp: 0
-  _hpMax: 100
   _speed: 5
-  _dodgeSpeed: 10
-  _dodgeTime: 0.5
-  _dodgeTimeInverse: 1
-  _attackDamage: 10
-  damageRate: 0
-  attackDirection: {x: 0, y: 0, z: 0}
+  _attack: 10
+  _armor: 10
+  _hp: 0
+  _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
     m_Bits: 33280
+  _stamina: 0
+  _maxPotion: 0
+  _potionNumber: 0
+  _potionHp: 50
 --- !u!95 &8779470545690256105
 Animator:
   serializedVersion: 5
@@ -1342,7 +1339,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &3148015943586681109
 GameObject:

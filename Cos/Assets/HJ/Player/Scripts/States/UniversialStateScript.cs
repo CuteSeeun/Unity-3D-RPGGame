@@ -31,10 +31,10 @@ namespace HJ
         }
 
         [Header("Get Components")] //======================================================================================================================================================
-        CharacterController _characterController;
-        PlayerController _playerController;
-        Transform _transform;
-        float _stateLength;
+        protected CharacterController _characterController;
+        protected PlayerController _playerController;
+        protected Transform _transform;
+        protected float _stateLength;
         private void GetComponents(Animator animator, AnimatorStateInfo stateInfo)
         {
             _characterController = animator.GetComponent<CharacterController>();
@@ -177,10 +177,10 @@ namespace HJ
         [Space(10f)]
         [SerializeField] bool _isRangedAttack; // 사격 여부
         [SerializeField] Missile _missile; // 미사일
-        [SerializeField] float _missileSpeed;
-        [SerializeField] float _missileTimer;
-        [SerializeField] bool _isPiercing;
-        [SerializeField] bool _isExplosive;
+        //[SerializeField] float _missileSpeed;
+        //[SerializeField] float _missileTimer;
+        //[SerializeField] bool _isPiercing;
+        //[SerializeField] bool _isExplosive;
 
         [Range(0, 1f)]
         [SerializeField] float _attackDelayTime; // 1타 타이밍
@@ -193,14 +193,14 @@ namespace HJ
 
         private void AttackEnter()
         {
+            _characterController.attackDamageRate = _attackDamageRate;
+            _characterController.attackRange = _attackRange;
+            _characterController.attackAngle = _attackAngle;
+            _characterController.attackLayerMask = _attackLayerMask;
+            _characterController.isPowerAttack = _isPowerAttack;
+
             if (_isAttack)
             {
-                _characterController.damageRate = _attackDamageRate;
-                _characterController.attackRange = _attackRange;
-                _characterController.attackAngle = _attackAngle;
-                _characterController.attackLayerMask = _attackLayerMask;
-                _characterController.isPowerAttack = _isPowerAttack;
-
                 if (_isRepeatingAttack == false)
                 {
                     _characterController.Invoke("Attack", _attackDelayTime * _stateLength);
@@ -219,16 +219,11 @@ namespace HJ
             if (_isRangedAttack)
             {
                 _characterController.missile = _missile;
-                
-                // 이 시점에 생성되지 않아서 적용 안되는듯.
-                _missile.isPiercing = _isPiercing;
-                _missile.isExplosive = _isExplosive;
-                _missile.attack = _characterController.attack;
-                _missile.attackDamageRate = _attackDamageRate;
-                _missile.attackRange = _attackRange;
-                _missile.attackAngle = _attackAngle;
-                _missile.attackLayerMask = _attackLayerMask;
-                _missile.isPowerAttack = _isPowerAttack;
+
+                //_characterController.missileSpeed = _missileSpeed;
+                //_characterController.missileTimer = _missileTimer;
+                //_characterController.isPiercing = _isPiercing;
+                //_characterController.isExplosive = _isExplosive;
 
                 _characterController.Invoke("Shoot", _attackDelayTime * _stateLength);
             }
