@@ -16,7 +16,6 @@ namespace HJ
         void RecoverHp(float amount);
 
         void Hit(float damage, bool powerAttack, Quaternion hitRotation);
-        //void Hit(float damage, bool powerAttack);
         void Hit(float damage);
     }
 }

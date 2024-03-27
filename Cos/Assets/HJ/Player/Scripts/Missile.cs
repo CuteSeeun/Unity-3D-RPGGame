@@ -5,90 +5,104 @@ namespace HJ
 {
     public class Missile : MonoBehaviour
     {
-        [SerializeField] float _speed;
-        [SerializeField] float _timer;
-
-        [SerializeField] LayerMask _attackLayerMask;
-        [SerializeField] LayerMask _layerMaskWall;
-        [SerializeField] bool _isPiercing;
-        [SerializeField] bool _isPowerAttack;
-        [SerializeField] bool _isExplosive;
-        [SerializeField] float _explosionRadius;
-
         public void Start()
         {
-            Invoke("TimeOut", _timer);
+            MissileMoveStart();
         }
 
         public void FixedUpdate()
         {
-            transform.position += _speed * transform.forward * Time.fixedDeltaTime;
+            MissileMoveFixedUpdate();
         }
 
+        //public float missileSpeed { set => _missileSpeed = value; }
+        [SerializeField] private float _missileSpeed;
+        //public float missileTimer { set => _missileTimer = value; }
+        [SerializeField] private float _missileTimer;
+
+        private void MissileMoveStart()
+        {
+            Invoke("TimeOut", _missileTimer);
+        }
+        private void MissileMoveFixedUpdate()
+        {
+            transform.position += _missileSpeed * transform.forward * Time.fixedDeltaTime;
+        }
         private void TimeOut()
         {
             Destroy(gameObject);
         }
 
-        private void OnTriggerEnter(Collider other)
+        //public bool isPiercing { get => _isPiercing; set => _isPiercing = value; }
+        [SerializeField] private bool _isPiercing;
+        //public bool isExplosive { get => _isExplosive; set => _isExplosive = value; }
+        [SerializeField] private bool _isExplosive;
+
+        public float attack { set => _attack = value; }
+        [SerializeField] private float _attack;
+        //public float attackDamageRate { set => _attackDamageRate = value; }
+        [SerializeField] private float _attackDamageRate;
+
+        //public float attackRange { set => _attackRange = value; }
+        [SerializeField] private float _attackRange;
+        //public float attackAngle { set => _attackAngle = value; }
+        private float _attackAngle;
+        private float _attackAngleInnerProduct;
+        //public LayerMask attackLayerMask { set => _attackLayerMask = value; }
+        [SerializeField] private LayerMask _attackLayerMask;
+
+        //public bool isPowerAttack { set => _isPowerAttack = value; }
+        [SerializeField] private bool _isPowerAttack;
+
+        [SerializeField] LayerMask _layerMaskWall;
+
+        private void OnTriggerEnter(Collider coliderHit)
         {
-            if (_isPiercing == false)
+            if (coliderHit.gameObject.layer == 12) // 공격 대상에 박으면 작동
             {
-                Destroy(gameObject);
-
-                if(_isExplosive == false)
-                {
-
-                }
-                else // (_isExplosive == true)
-                {
-                    RaycastHit[] hits = Physics.SphereCastAll(transform.position, _explosionRadius, transform.up, 0, _attackLayerMask);
-
-                    foreach (RaycastHit hit in hits)
-                    {
-                        // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
-                        if (hit.collider.TryGetComponent(out IHp iHp))
-                        {
-                            iHp.Hit(1, _isPowerAttack, transform.rotation);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (other.gameObject.TryGetComponent(out IHp iHp))
-                {
-                    iHp.Hit(1, _isPowerAttack, transform.rotation);
-                }
-
-                if (other.gameObject.layer == _layerMaskWall)
+                if (_isPiercing == false)
                 {
                     Destroy(gameObject);
                 }
+
+
+                if (_isExplosive == false)
+                {
+                    Hit(coliderHit);
+                }
+                else // (_isExplosive == true)
+                {
+                    RaycastHit[] hits = Physics.SphereCastAll(transform.position, _attackRange, transform.up, 0, _attackLayerMask);
+
+                    //_attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+                    foreach (RaycastHit hit in hits)
+                    {
+                        Hit(hit.collider);
+                    }
+                }
+            }
+
+            if (coliderHit.gameObject.layer == _layerMaskWall) // 벽에 박으면 터짐
+            {
+
+            }
+            
+        }
+
+        private void Hit(Collider coliderHit)
+        {
+            if (coliderHit.gameObject.TryGetComponent(out IHp iHp))
+            {
+                float _random = UnityEngine.Random.Range(0.75f, 1.25f);
+                iHp.Hit( _attack * _attackDamageRate * _random, _isPowerAttack, transform.rotation);
             }
         }
 
         /*
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log(1);
-            if (_isPiercing == false)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                if (collision.gameObject.TryGetComponent(out IHp iHp))
-                {
-                    iHp.Hit(1, _isPowerAttack, transform.rotation);
-                    Destroy(this);
-                }
-
-                if (collision.gameObject.layer == _layerMaskWall)
-                {
-                    Destroy(this);
-                }
-            }
+            Debug.Log(collision.gameObject.name);
         }
         */
     }

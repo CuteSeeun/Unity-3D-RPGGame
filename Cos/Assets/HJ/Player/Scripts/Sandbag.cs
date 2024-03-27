@@ -41,7 +41,8 @@ namespace HJ
         public event Action onHpMin;
         public event Action onHpMax;
 
-        [SerializeField] GameObject _hitLight;
+        [SerializeField] GameObject _hitALight;
+        [SerializeField] GameObject _hitBLight;
 
         public void DepleteHp(float amount)
         {
@@ -60,14 +61,22 @@ namespace HJ
 
         public void Hit(float damage)
         {
-            _hitLight.SetActive(true);
+            _hitALight.SetActive(true);
             Invoke("HitOff", 0.1f);
         }
 
         public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
-            _hitLight.SetActive(true);
-            Invoke("HitOff", 0.1f);
+            if (powerAttack == false)
+            {
+                _hitALight.SetActive(true);
+                Invoke("HitAOff", 0.1f);
+            }
+            else
+            {
+                _hitBLight.SetActive(true);
+                Invoke("HitBOff", 0.1f);
+            }
         }
         // ----------------------------------------------------------------------------------------------------
 
@@ -83,9 +92,14 @@ namespace HJ
 
         }
 
-        private void HitOff()
+        private void HitAOff()
         {
-            _hitLight.SetActive(false);
+            _hitALight.SetActive(false);
+        }
+
+        private void HitBOff()
+        {
+            _hitBLight.SetActive(false);
         }
     }
 }
