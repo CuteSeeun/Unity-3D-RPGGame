@@ -19,12 +19,10 @@ public class P_SliderFloor : MonoBehaviour //조건이 맞으면 애니메이션
         if (!Light1.GetComponent<Light>().enabled &&
             !Light2.GetComponent<Light>().enabled &&
             !Light3.GetComponent<Light>().enabled &&
-            Item == null)
+            !Item)
         {
-            if (animator != null) 
-            {
-                animator.Play("P_SlideFloor");
-            }
+            animator.SetTrigger("isOpen");
+            
         }
     }
 

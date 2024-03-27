@@ -2,40 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_Portion : MonoBehaviour
+public class M_Light1 : MonoBehaviour
 {
-    public GameObject DoorLock;
-    public GameObject Portion;
-    public GameObject Gate;
+    Light myLight;
+    public GameObject Pillar;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        myLight = GetComponent<Light>();
+        myLight.enabled = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                DoorLock.SetActive(false);
-                Destroy(Portion);
+                myLight.enabled = !myLight.enabled;
 
-                Animator animator = Gate.GetComponent<Animator>();
+                if (myLight.enabled == true)
+                {
+                    Animator animator = Pillar.GetComponent<Animator>();
                     if (animator != null)
                     {
                         animator.SetTrigger("isOpen");
                     }
-                
+                }
             }
-        }
     }
 }
