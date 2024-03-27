@@ -157,6 +157,7 @@ namespace HJ
         }
         #endregion ========================================================
 
+
         // 개편 필요
         public override void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
@@ -182,5 +183,6 @@ namespace HJ
 
             base.Hit(damage, powerAttack, hitRotation);
         }
+
     }
 }

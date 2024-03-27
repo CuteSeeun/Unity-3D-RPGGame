@@ -1289,9 +1289,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4045688364818110861}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000005860104, y: 1.2081922e-15, z: 0.000000019466935, w: 1}
-  m_LocalPosition: {x: 0.000000004556949, y: -0.0000000027572362, z: -0.000000019596566}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_LocalRotation: {x: -0.00000013718513, y: -0.39108443, z: -0.92035484, w: 0.000000107538995}
+  m_LocalPosition: {x: 0, y: 0.14814727, z: -0.15364681}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1735453807295806356}
@@ -1486,7 +1486,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7933872179298663290}
-  - {fileID: 8997795673258476715}
   m_Father: {fileID: 4579365554214405031}
   m_LocalEulerAnglesHint: {x: -0.00000027842805, y: -0.00000075941057, z: 160.61063}
 --- !u!1 &4576590185005096886
@@ -1659,6 +1658,7 @@ MonoBehaviour:
   _maxPotion: 5
   _potionNumber: 0
   _potionHp: 50
+
 --- !u!95 &7243156815149692018
 Animator:
   serializedVersion: 5
@@ -2132,6 +2132,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.0000002, z: 1.0000002}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8997795673258476715}
   - {fileID: 3281022539024273149}
   - {fileID: 1512372369333387948}
   m_Father: {fileID: 1735453807295806356}
