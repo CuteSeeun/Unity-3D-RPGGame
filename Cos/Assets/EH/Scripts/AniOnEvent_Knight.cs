@@ -6,10 +6,10 @@ using UnityEngine;
 public class AniOnEvent_Knight : MonoBehaviour
 {
     public GameObject _prefab_Snow_slash;
-    public GameObject stab_medium_Blue;
+    public GameObject _prefab_stab_medium_Blue;
     public GameObject _prefab_Blocking;
   
-    public GameObject blockattack;
+    public GameObject _prefab_blockattack;
     //public float spawnDistance = 1f;
     public float delay = 1f;
     public float delay2 = 0.5f;
@@ -41,11 +41,7 @@ public class AniOnEvent_Knight : MonoBehaviour
         StartCoroutine(Block_hit());
 
     }
-    public void Hit_B()
-    {
-        StartCoroutine(hit_B());
-
-    }
+   
     public void Block_Attack()
     {
         StartCoroutine(block_attack());
@@ -68,7 +64,7 @@ public class AniOnEvent_Knight : MonoBehaviour
         //이펙트 활성화
         obj.SetActive(true);
         //SFX_Manager 에서 상속받은 인스탄스로 효과음 삽입
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Player_Knight_attack");
 
         //딜레이 조정 후 이펙트 삭제
         yield return new WaitForSeconds(delay);
@@ -85,7 +81,7 @@ public class AniOnEvent_Knight : MonoBehaviour
         obj.transform.rotation = effectRotation;
         obj.transform.Rotate(Vector3.forward, -90f, Space.Self);
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Player_Knight_attack");
 
 
         yield return new WaitForSeconds(delay2);
@@ -101,7 +97,7 @@ public class AniOnEvent_Knight : MonoBehaviour
         obj.transform.rotation = effectRotation;
         
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Player_Knight_attack");
         yield return new WaitForSeconds(delay2);
         Destroy(obj);
 
@@ -109,14 +105,14 @@ public class AniOnEvent_Knight : MonoBehaviour
     IEnumerator Attack4()
     {
         Vector3 characterForward = transform.forward;
-        GameObject obj = Instantiate(stab_medium_Blue, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(_prefab_stab_medium_Blue, transform.position, Quaternion.identity);
         obj.transform.position += Vector3.up * 0.5f;
         obj.transform.position += offset;//obj.transform.forward ;// * -1.2f;
         Quaternion effectRotation = Quaternion.LookRotation(characterForward);
         obj.transform.rotation = effectRotation;
         obj.transform.Rotate(Vector3.up, -90f, Space.Self);
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Player_Knight_attack");
 
 
         yield return new WaitForSeconds(delay2);
@@ -134,7 +130,7 @@ public class AniOnEvent_Knight : MonoBehaviour
         obj.transform.rotation = effectRotation;
 
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("Shield_defending");
+        SFX_Manager.Instance.VFX("Player_Shield_defending");
         yield return new WaitForSeconds(delay2);
         Destroy(obj);
 
@@ -142,31 +138,18 @@ public class AniOnEvent_Knight : MonoBehaviour
     IEnumerator block_attack()
     {
         Vector3 characterForward = transform.forward;
-        GameObject obj = Instantiate(blockattack, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(_prefab_blockattack, transform.position, Quaternion.identity);
         obj.transform.position += Vector3.forward * 1f;
         obj.transform.position += Vector3.up * 1f;
         Quaternion effectRotation = Quaternion.LookRotation(characterForward);
         obj.transform.rotation = effectRotation;
 
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("Shield_defending");
+        SFX_Manager.Instance.VFX("Player_Shield_attack");
         yield return new WaitForSeconds(delay2);
         Destroy(obj);
 
     }
 
-    IEnumerator hit_B()
-    {
-        Vector3 characterForward = transform.forward;
-        GameObject obj = Instantiate(_prefab_Blocking, transform.position, Quaternion.identity);
-        obj.transform.position += Vector3.up * 1f;
-        Quaternion effectRotation = Quaternion.LookRotation(characterForward);
-        obj.transform.rotation = effectRotation;
-
-        obj.SetActive(true);
-        SFX_Manager.Instance.VFX("Shield_defending");
-        yield return new WaitForSeconds(delay2);
-        Destroy(obj);
-
-    }
+   
 }

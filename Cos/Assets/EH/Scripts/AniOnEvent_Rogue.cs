@@ -5,40 +5,47 @@ using UnityEngine;
 
 public class AniOnEvent_Rogue : MonoBehaviour
 {
-    public GameObject _prefab_Snow_slash;
-    public GameObject _prefab_Blocking;
+    public GameObject _prefab_Electro_slash;
+    public GameObject _prefab_slash_medium_green;
+    public GameObject _prefab_slash_medium_green1;
+    public GameObject _prefab_stab_medium_DeepOcean;
     public float delay = 1f;
     public float delay2 = 0.5f;
-    public void ATTACK1()
+    public Vector3 offset = Vector3.zero;
+    public void SLASH1()
     {
-        StartCoroutine(Attack1());
+        StartCoroutine(slash1_1());
+        StartCoroutine(slash1_2());
     }
-    public void ATTACK2()
+    public void SLASH2()
     {
-        StartCoroutine(Attack2());
+        StartCoroutine(slash2_1());
+        StartCoroutine(slash2_2());
 
     }
-    public void ATTACK3()
+    public void SLASH3_1()
     {
-        StartCoroutine(Attack3());
+        StartCoroutine(slash3_1());
 
     }
-    public void Block_Hit()
+    public void SLASH3_2()
     {
-        StartCoroutine(Block_hit());
+        StartCoroutine(slash3_2());
 
     }
-    public void Hit_B()
+    
+    public void USE_CROSSBOW()
     {
-        StartCoroutine(hit_B());
+        StartCoroutine(use_crossbos());
 
     }
-    IEnumerator Attack1()
+   
+    IEnumerator slash1_1()
     {
         //캐릭터의 현재 방향
         Vector3 characterForward = transform.forward;
         //이펙트 스노우 슬래쉬(프리펩) 생성
-        GameObject obj = Instantiate(_prefab_Snow_slash, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(_prefab_Electro_slash, transform.position, Quaternion.identity);
         //이펙트 위치 중간으로 조정
         obj.transform.position += Vector3.up * 1.5f;
         obj.transform.position += Vector3.forward * 1f;
@@ -56,43 +63,108 @@ public class AniOnEvent_Rogue : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Destroy(obj);
     }
+    IEnumerator slash1_2()
+    {
+        
+        Vector3 characterForward = transform.forward;
+        
+        GameObject obj = Instantiate(_prefab_slash_medium_green, transform.position, Quaternion.identity);
+        
+        obj.transform.position += Vector3.up * 1.5f;
+        obj.transform.position += Vector3.forward * 1f;
+        Quaternion effectRotation = Quaternion.LookRotation(characterForward);
+        obj.transform.rotation = effectRotation;
+        
+        obj.transform.Rotate(Vector3.forward, 45f, Space.Self);
+        
+        obj.SetActive(true);
+        
+        SFX_Manager.Instance.VFX("swordman");
+
+        
+        yield return new WaitForSeconds(delay);
+        Destroy(obj);
+    }
 
 
-    IEnumerator Attack2()
+    IEnumerator slash2_1()
     {
         Vector3 characterForward = transform.forward;
-        GameObject obj = Instantiate(_prefab_Snow_slash, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(_prefab_stab_medium_DeepOcean, transform.position, Quaternion.identity);
+        obj.transform.position += Vector3.up * 1.5f;
+        obj.transform.position += Vector3.right * -1.5f;
+        Quaternion effectRotation = Quaternion.LookRotation(characterForward);
+        obj.transform.rotation = effectRotation;
+        obj.transform.Rotate(Vector3.forward, 0f, Space.Self);
+        obj.SetActive(true);
+        SFX_Manager.Instance.VFX("swordman");
+
+
+        yield return new WaitForSeconds(delay);
+        Destroy(obj);
+
+    }
+    IEnumerator slash2_2()
+    {
+        Vector3 characterForward = transform.forward;
+        GameObject obj = Instantiate(_prefab_stab_medium_DeepOcean, transform.position, Quaternion.identity);
+        obj.transform.position += Vector3.up * 1.5f;
+        obj.transform.position += Vector3.right * 1.5f;
+        Quaternion effectRotation = Quaternion.LookRotation(characterForward);
+        obj.transform.rotation = effectRotation;
+        obj.transform.Rotate(Vector3.forward, 0f, Space.Self);
+        obj.SetActive(true);
+        SFX_Manager.Instance.VFX("swordman");
+
+
+        yield return new WaitForSeconds(delay);
+        Destroy(obj);
+
+    }
+    IEnumerator slash3_1()
+    {
+        Vector3 characterForward = transform.forward;
+        
+        GameObject obj = Instantiate(_prefab_Electro_slash, transform.position, Quaternion.identity);
+        
+        obj.transform.position += Vector3.up * 1.5f;
+        obj.transform.position += Vector3.forward * 1f;
+        
+        Quaternion effectRotation = Quaternion.LookRotation(characterForward);
+        obj.transform.rotation = effectRotation;
+        
+        obj.transform.Rotate(Vector3.forward, -45f, Space.Self);
+        
+        obj.SetActive(true);
+        
+        SFX_Manager.Instance.VFX("swordman");
+
+        
+        yield return new WaitForSeconds(delay);
+        Destroy(obj);
+
+    }
+    IEnumerator slash3_2()
+    {
+        Vector3 characterForward = transform.forward;
+        GameObject obj = Instantiate(_prefab_slash_medium_green1, transform.position, Quaternion.identity);
         obj.transform.position += Vector3.up * 1.5f;
         Quaternion effectRotation = Quaternion.LookRotation(characterForward);
         obj.transform.rotation = effectRotation;
-        obj.transform.Rotate(Vector3.forward, -90f, Space.Self);
+        obj.transform.Rotate(Vector3.forward, 90f, Space.Self);
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Player_Knight_attack");
 
 
         yield return new WaitForSeconds(delay2);
         Destroy(obj);
 
     }
-    IEnumerator Attack3()
+
+    IEnumerator use_crossbos()
     {
         Vector3 characterForward = transform.forward;
-        GameObject obj = Instantiate(_prefab_Snow_slash, transform.position, Quaternion.identity);
-        obj.transform.position += Vector3.up * 1f;
-        Quaternion effectRotation = Quaternion.LookRotation(characterForward);
-        obj.transform.rotation = effectRotation;
-
-        obj.SetActive(true);
-        SFX_Manager.Instance.VFX("swordman");
-        yield return new WaitForSeconds(delay2);
-        Destroy(obj);
-
-    }
-
-    IEnumerator Block_hit()
-    {
-        Vector3 characterForward = transform.forward;
-        GameObject obj = Instantiate(_prefab_Blocking, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(_prefab_Electro_slash, transform.position, Quaternion.identity);
         obj.transform.position += Vector3.forward * 1f;
         obj.transform.position += Vector3.up * 1f;
         Quaternion effectRotation = Quaternion.LookRotation(characterForward);
@@ -105,18 +177,5 @@ public class AniOnEvent_Rogue : MonoBehaviour
 
     }
 
-    IEnumerator hit_B()
-    {
-        Vector3 characterForward = transform.forward;
-        GameObject obj = Instantiate(_prefab_Blocking, transform.position, Quaternion.identity);
-        obj.transform.position += Vector3.up * 1f;
-        Quaternion effectRotation = Quaternion.LookRotation(characterForward);
-        obj.transform.rotation = effectRotation;
-
-        obj.SetActive(true);
-        SFX_Manager.Instance.VFX("Shield_defending");
-        yield return new WaitForSeconds(delay2);
-        Destroy(obj);
-
-    }
+    
 }

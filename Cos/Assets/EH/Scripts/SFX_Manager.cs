@@ -31,11 +31,11 @@ public class SFX_Manager : MonoBehaviour
     //브금 오디오소스 변수가 널일때 카메라에 있는 오디오소스를 열고 브금플레이( 브금 확정 시 변경 )함수를 실행
     public void Start()
     {
-        if (BGM == null)
+        /*if (BGM == null)
         {
             Camera.GetComponent<AudioSource>();
         }
-        BGMPLAY("LEGACY - A Slave To No One MP3");
+        BGMPLAY("LEGACY - A Slave To No One MP3");*/
 
 
     }
