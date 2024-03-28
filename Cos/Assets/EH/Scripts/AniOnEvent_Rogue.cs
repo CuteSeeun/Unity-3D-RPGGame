@@ -57,7 +57,7 @@ public class AniOnEvent_Rogue : MonoBehaviour
         //이펙트 활성화
         obj.SetActive(true);
         //SFX_Manager 에서 상속받은 인스탄스로 효과음 삽입
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Thief attack");
 
         //딜레이 조정 후 이펙트 삭제
         yield return new WaitForSeconds(delay);
@@ -78,10 +78,7 @@ public class AniOnEvent_Rogue : MonoBehaviour
         obj.transform.Rotate(Vector3.forward, 45f, Space.Self);
         
         obj.SetActive(true);
-        
-        SFX_Manager.Instance.VFX("swordman");
-
-        
+                        
         yield return new WaitForSeconds(delay);
         Destroy(obj);
     }
@@ -97,7 +94,7 @@ public class AniOnEvent_Rogue : MonoBehaviour
         obj.transform.rotation = effectRotation;
         obj.transform.Rotate(Vector3.forward, 0f, Space.Self);
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Thief attack");
 
 
         yield return new WaitForSeconds(delay);
@@ -114,9 +111,7 @@ public class AniOnEvent_Rogue : MonoBehaviour
         obj.transform.rotation = effectRotation;
         obj.transform.Rotate(Vector3.forward, 0f, Space.Self);
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("swordman");
-
-
+        
         yield return new WaitForSeconds(delay);
         Destroy(obj);
 
@@ -137,7 +132,7 @@ public class AniOnEvent_Rogue : MonoBehaviour
         
         obj.SetActive(true);
         
-        SFX_Manager.Instance.VFX("swordman");
+        SFX_Manager.Instance.VFX("Thief attack");
 
         
         yield return new WaitForSeconds(delay);
@@ -153,7 +148,7 @@ public class AniOnEvent_Rogue : MonoBehaviour
         obj.transform.rotation = effectRotation;
         obj.transform.Rotate(Vector3.forward, 90f, Space.Self);
         obj.SetActive(true);
-        SFX_Manager.Instance.VFX("Player_Knight_attack");
+        
 
 
         yield return new WaitForSeconds(delay2);
