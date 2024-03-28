@@ -2518,13 +2518,13 @@ AnimatorController:
   m_Name: Player
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: state
+  - m_Name: type
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: type
+  - m_Name: state
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2963,9 +2963,9 @@ AnimatorStateMachine:
   - {fileID: -3923126993766453068}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 5400570447597629529}
-    second: []
   - first: {fileID: 7127227341441055103}
+    second: []
+  - first: {fileID: 5400570447597629529}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 420, y: -100, z: 0}
@@ -4308,7 +4308,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -170, y: 0, z: 0}
-  m_EntryPosition: {x: -170, y: 70, z: 0}
+  m_EntryPosition: {x: -180, y: 100, z: 0}
   m_ExitPosition: {x: 940, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 930, y: 120, z: 0}
   m_DefaultState: {fileID: 8244855739144628307}
