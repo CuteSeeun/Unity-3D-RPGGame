@@ -2536,12 +2536,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: attackACombo
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
@@ -2948,7 +2942,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 6030008905434249520}
     m_Position: {x: 100, y: 100, z: 0}
-
   - serializedVersion: 1
     m_State: {fileID: -2448504423198289211}
     m_Position: {x: 100, y: 200, z: 0}
@@ -2970,9 +2963,9 @@ AnimatorStateMachine:
   - {fileID: -3923126993766453068}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 7127227341441055103}
-    second: []
   - first: {fileID: 5400570447597629529}
+    second: []
+  - first: {fileID: 7127227341441055103}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 420, y: -100, z: 0}
