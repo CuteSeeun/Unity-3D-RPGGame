@@ -311,7 +311,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1.5
@@ -561,7 +561,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
@@ -663,7 +663,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 0.5
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
@@ -1580,7 +1580,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
@@ -2333,7 +2333,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1.5
@@ -2382,7 +2382,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
@@ -2521,7 +2521,7 @@ AnimatorController:
   - m_Name: state
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 1
+    m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: type
@@ -2580,7 +2580,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1.5
@@ -2823,7 +2823,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 0.5
@@ -2963,9 +2963,9 @@ AnimatorStateMachine:
   - {fileID: -3923126993766453068}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 5400570447597629529}
-    second: []
   - first: {fileID: 7127227341441055103}
+    second: []
+  - first: {fileID: 5400570447597629529}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 420, y: -100, z: 0}
@@ -3027,7 +3027,7 @@ MonoBehaviour:
   _canRotate: 0
   _moveSpeed: 0
   _isAdvance: 1
-  _canTurn: 0
+  _canTurn: 1
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
   _attackDamageRate: 1.5
