@@ -1,16 +1,17 @@
-using GSpawn;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class G_Door : MonoBehaviour
+public class B_Door : MonoBehaviour
 {
+    // 문 열리는 조건 : item 모두 null일때
+
+    public GameObject Item1;
+    public GameObject Item2;
+
+
     private Animator door; //애니메이터 컴포넌트 참조
     public bool isOpen; //문 초기 상태 닫힘
-
-    public GameObject Light1;
-    public GameObject Light2;
-    public GameObject DoorLock;
 
     private void Start()
     {
@@ -19,13 +20,9 @@ public class G_Door : MonoBehaviour
 
     private void Update()
     {
-        Light light1 = Light1.GetComponent<Light>();
-        Light light2 = Light2.GetComponent<Light>();
-
-        if (light1.enabled && light2.enabled)
+        // item이 모두 null 일때 애니메이션 재생
+        if (Item1 == null && Item2 == null)
         {
-            DoorLock.SetActive(false);
-
             if (Input.GetKeyDown(KeyCode.F))
             {
                 isOpen = true;
