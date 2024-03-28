@@ -17,8 +17,9 @@ public class M_Light : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             if (Input.GetKeyDown(KeyCode.F))
-                {
+            {
                 myLight.enabled = !myLight.enabled;
 
                 if (myLight.enabled == true)
@@ -30,5 +31,6 @@ public class M_Light : MonoBehaviour
                     }
                 }
             }
+        }
     }
-}
+ }
