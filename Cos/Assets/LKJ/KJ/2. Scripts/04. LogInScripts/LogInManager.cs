@@ -39,9 +39,13 @@ public class LoginManager : MonoBehaviour
     #region 게임 종료 (현재는 테스트씬으로 이동)
     public void Quit()
     {
-        SceneManager.LoadScene("TestGameQuit");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
-    #endregion
+#endregion
     #region 로그인 하면 로딩창으로 이동
     
     public void AttemptLogin()

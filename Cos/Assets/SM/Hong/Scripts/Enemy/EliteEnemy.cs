@@ -45,6 +45,8 @@ public class EliteEnemy : MonoBehaviour, IHp
     public float hp { get; set; }
     public float hpMax { get; }
 
+    
+
     void Start()
     {
         m_Animator = GetComponent<Animator>();

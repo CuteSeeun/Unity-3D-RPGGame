@@ -35,7 +35,7 @@ public class C_ItemBox : MonoBehaviour
     }
     IEnumerator DisableItemBox()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         ItemBox.SetActive(false);
 
         if (Door != null)
