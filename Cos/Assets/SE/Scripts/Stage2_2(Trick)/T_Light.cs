@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class M_Light2 : MonoBehaviour
+public class T_Light : MonoBehaviour
 {
+    //자기 조명 킬거임. 그 조명 초기에 !enabled. f키 누르면 enabled. enabled되면 문 애니메이션 재생.
     Light myLight;
-    public GameObject Pillar;
-
-    // Start is called before the first frame update
-    void Start()
+    public GameObject Door;
+    private void Start()
     {
         myLight = GetComponent<Light>();
         myLight.enabled = false;
@@ -22,13 +21,10 @@ public class M_Light2 : MonoBehaviour
             {
                 myLight.enabled = !myLight.enabled;
 
-                if (myLight.enabled == true)
+                Animator animator = Door.GetComponent<Animator>();
+                if (animator != null)
                 {
-                    Animator animator = Pillar.GetComponent<Animator>();
-                    if (animator != null)
-                    {
-                        animator.SetTrigger("isOpen");
-                    }
+                    animator.SetTrigger("isOpen");
                 }
             }
         }
