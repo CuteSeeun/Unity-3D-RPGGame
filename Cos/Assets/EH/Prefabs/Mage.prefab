@@ -2533,7 +2533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3587126592412609114
 Transform:
   m_ObjectHideFlags: 0
@@ -2568,25 +2568,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be11e4895dbbda248afd07b889ba6ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 5105053903146675633}
   _type: 4
   weapon1: {fileID: 3211855753922660956}
   weapon2: {fileID: 3672568851370674339}
   weapon3: {fileID: 0}
   missile: {fileID: 7109357882407759783, guid: f236c8749a325b9458f688f715452434, type: 3}
-  invincible: 0
-  _hp: 0
-  _hpMax: 100
+  potion: {fileID: 1249361212731301935, guid: 05bf430fca960214b8d5cc3e6920e92a, type: 3}
+  isPlayer: 0
   _speed: 5
-  _dodgeSpeed: 10
-  _dodgeTime: 0.5
-  _dodgeTimeInverse: 1
-  _attackRange: 0
-  _attackAngle: 0
-  _attackAngleInnerProduct: 0
-  _attackLayerMask:
+  _attack: 0
+  _armor: 0
+  _hp: 0
+  _invincible: 0
+  _layerMaskInteractable:
     serializedVersion: 2
     m_Bits: 0
+  _stamina: 0
+  _maxPotion: 5
+  _potionNumber: 0
+  _potionHp: 0
+  potiondrinking: {fileID: 0}
 --- !u!95 &5105053903146675633
 Animator:
   serializedVersion: 5
@@ -2754,6 +2755,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1d8bcbe3-b811-446c-9542-54331264e3d5
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5b2c1e59-110b-4691-8930-b4f958a21aa8
+    m_ActionName: Player/Interact[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f1ed11d-2184-4564-addd-a89606e214df
+    m_ActionName: Player/UseItem[/Keyboard/u]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
