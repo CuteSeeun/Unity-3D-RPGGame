@@ -1,20 +1,51 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SFX_Manager : MonoBehaviour
+
+public class SingletonLazy<T> : MonoBehaviour where T : class
+{
+    private static readonly Lazy<T> _instance =
+        new Lazy<T>(() =>
+        {
+            T instance = FindObjectOfType(typeof(T)) as T;
+
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("SingletonLazy");
+                instance = obj.AddComponent(typeof(T)) as T;
+
+                DontDestroyOnLoad(obj);
+            }
+            else
+            {
+                Destroy(instance as GameObject);
+            }
+
+            return instance;
+        });
+
+    public static T Instance
+    {
+        get
+        {
+            return _instance.Value;
+        }
+    }
+}
+
+public class SFX_Manager : SingletonLazy<SFX_Manager>
 {
     //사운드 매니저 싱글톤 선언
-    public static SFX_Manager Instance = null;
+    
     //카메라 변수 선언
     public CameraMove Camera;
     //오디오 소스 변수 선언
     public AudioSource BGM;
-    public enum ESfxSound
-    {
-        NONE = -1,
-        Arrow_SFX,
-    }
+
+
+    
     //유니티에서 접근 가능한 프라이빗 오디오클립 리스트 컴포넌넌트 SFX변수 선언
     [SerializeField]
     private List<AudioClip> _audioClips_sfx;
@@ -25,7 +56,7 @@ public class SFX_Manager : MonoBehaviour
     //가장 먼저 사운드매니저의 싱글톤 인스턴스 설정
     private void Awake()
     {
-        Instance = this;
+     
 
     }
     //브금 오디오소스 변수가 널일때 카메라에 있는 오디오소스를 열고 브금플레이( 브금 확정 시 변경 )함수를 실행
