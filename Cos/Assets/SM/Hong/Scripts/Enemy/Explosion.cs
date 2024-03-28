@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HJ;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -7,7 +8,7 @@ public class Explosion : MonoBehaviour
     Collider col;
     void Start()
     {
-        Invoke("Remove", 3);
+        Invoke("Remove", 2.5f);
         Invoke("Col", 0.75f);
         col = GetComponent<CapsuleCollider>();
         col.enabled = false;
@@ -28,11 +29,11 @@ public class Explosion : MonoBehaviour
         col.enabled = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(other.gameObject.TryGetComponent(out IHp iHp))
         {
-            //플레이어에게 데미지 주기
+            iHp.Hit(5, true, Quaternion.identity);
         }
     }
 }

@@ -22,6 +22,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     private bool isChasing;
     private bool isDeath;
     private float attackTimer;
+    private bool isHit;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
@@ -83,6 +84,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             if (powerAttack == false)
             {
                 m_Animator.SetTrigger("HitA");
+                isHit = true;
                 // 맞은 방향 뒤로 밀리기
                 Vector3 pushDirection = -transform.forward * 2f;
                 ApplyPush(pushDirection);
@@ -90,6 +92,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             else
             {
                 m_Animator.SetTrigger("HitB");
+                isHit = true;
                 // 맞은 방향 뒤로 밀리기
                 Vector3 pushDirection = -transform.forward * 4f;
                 ApplyPush(pushDirection);
@@ -181,6 +184,13 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             attackTimer = 0;
             Debug.Log(attackTimer);
         }
+        if (isHit)
+        {
+            agent.isStopped = true;
+            agent.SetDestination(transform.position);
+            m_Animator.SetInteger("state", 2);
+            Invoke("Move", 0.5f);
+        }
         if (_hp <= 0 && !isDeath)
         {
             m_Animator.SetTrigger("isDeath");
@@ -188,6 +198,11 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             isDeath = true;
             Invoke("Death", 2);
         }
+    }
+
+    void Move()
+    {
+        isHit = false;
     }
 
     IEnumerator Patrol()

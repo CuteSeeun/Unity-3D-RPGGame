@@ -136,7 +136,6 @@ public class EnemyS_AI : MonoBehaviour, IHp
                 {
                     if (collider.CompareTag("Player") && !isAwake)
                     {
-                        // Enemy 태그를 가진 오브젝트가 감지되면 isEnemy를 true로 설정합니다.
                         m_Animator.SetInteger("state", 1);
                         isAwake = true;
                     }

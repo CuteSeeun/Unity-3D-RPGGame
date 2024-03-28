@@ -16,6 +16,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
     private bool isDeath;
     private bool isSpawn;
     private float attackTimer;
+    private bool isHit;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color attackColor = Color.red;
@@ -157,7 +158,18 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
             {
                 attackTimer = 0;
             }
+            if (isHit)
+            {
+                agent.isStopped = true;
+                agent.SetDestination(transform.position);
+                m_Animator.SetInteger("state", 2);
+                Invoke("Move", 0.5f);
+            }
         }
+    }
+    void Move()
+    {
+        isHit = false;
     }
 
     void Attack()

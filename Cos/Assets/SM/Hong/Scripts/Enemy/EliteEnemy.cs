@@ -10,8 +10,6 @@ public class EliteEnemy : MonoBehaviour, IHp
     float chaseSpeed = 5f;
     public float detectionRange;
     public float attackRange;
-    float detectionAngle = 360f;
-    private int currentHp;
     private float jumpForce = 50;
     private float fallSpeed = 100;
     private float rushSpeed = 15;
@@ -36,16 +34,65 @@ public class EliteEnemy : MonoBehaviour, IHp
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
 
-    public event Action<float> onHpChanged;
-    public event Action<float> onHpDepleted;
-    public event Action<float> onHpRecovered;
-    public event Action onHpMin;
-    public event Action onHpMax;
+    float IHp.hp
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = Mathf.Clamp(value, 0, _hpMax);
 
-    public float hp { get; set; }
-    public float hpMax { get; }
+            if (_hp == value)
+                return;
 
-    
+            if (value < 1)
+            {
+                onHpMin?.Invoke();
+            }
+            else if (value >= _hpMax)
+                onHpMax?.Invoke();
+        }
+    }
+    [SerializeField] public float _hp;
+
+    public float hpMax { get => _hpMax; }
+    public float _hpMax = 500;
+
+    public event System.Action<float> onHpChanged;
+    public event System.Action<float> onHpDepleted;
+    public event System.Action<float> onHpRecovered;
+    public event System.Action onHpMin;
+    public event System.Action onHpMax;
+
+    public void DepleteHp(float amount)
+    {
+        if (amount <= 0)
+            return;
+
+        _hp -= amount;
+        onHpDepleted?.Invoke(amount);
+    }
+
+    public void RecoverHp(float amount)
+    {
+
+    }
+
+    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+    {
+        if (!isDeath)
+        {          
+            DepleteHp(damage);
+        }
+    }
+    public void Hit(float damage)
+    {
+        DepleteHp(damage);
+    }
+
+
 
     void Start()
     {
@@ -56,99 +103,115 @@ public class EliteEnemy : MonoBehaviour, IHp
         isChasing = true;
         agent.isStopped = false;
         jumpImpact.SetActive(false);
-        hp = hpMax;
+        _hp = _hpMax;
     }
 
     void Update()
-    {  
-        if (isChasing)
+    {
+        if (!isDeath)
         {
-            agent.speed = chaseSpeed;
-            if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")
-                || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
+
+            foreach (Collider collider in colliders)
             {
-                agent.isStopped = false;
-                m_Animator.SetInteger("state", 1);
-                transform.LookAt(player.position);
-                agent.SetDestination(player.position);
-                agent.stoppingDistance = 3;
+                if (collider.CompareTag("Player") && !isChasing)
+                {
+                    isChasing = true;
+                }
             }
-            else if(m_Animator.GetCurrentAnimatorStateInfo(0).IsName("isRush_Golem"))
+
+            if (isChasing)
             {
-                transform.LookAt(player.position);
-                agent.isStopped = true;
-            }
-            else
-            {
-                agent.isStopped = true;
-                agent.SetDestination(transform.position);
-                transform.LookAt(transform.position + transform.forward);
-            }
-            if (Vector3.Distance(transform.position, player.position) < attackRange
-                && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))
-            {
-                agent.isStopped = true;
-                m_Animator.SetInteger("state", 0);
-                if (attackTimer == 0 && !isAttack && !jump)
-                    switch(attackStack)
-                    {
-                        case 0:
-                            Attack();
-                            isAttack = true;
-                            break;
-                        case 1:
-                            Attack();
-                            isAttack = true;
-                            break;
-                        case 2:
-                            Rush();
-                            isAttack = true;
-                            break;
-                        case 3:
-                            Attack();
-                            isAttack = true;
-                            break;
-                        case 4:
-                            Attack();
-                            isAttack = true;
-                            break;
-                        case 5:
-                            jump = true;
-                            agent.enabled = false;
-                            m_Animator.SetTrigger("Jump");
-                            Invoke("Jump", 0.5f);
-                            isAttack = true;
-                            break;
-                        case 6:
-                            Crush();
-                            jumpImpact.SetActive(false);
-                            isAttack = true;
-                            break;
-                    }
+                agent.speed = chaseSpeed;
+                if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")
+                    || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                {
+                    agent.isStopped = false;
+                    m_Animator.SetInteger("state", 1);
+                    transform.LookAt(player.position);
+                    agent.SetDestination(player.position);
+                    agent.stoppingDistance = 3;
+                }
+                else if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("isRush_Golem"))
+                {
+                    transform.LookAt(player.position);
+                    agent.isStopped = true;
+                }
+                else
+                {
+                    agent.isStopped = true;
+                    agent.SetDestination(transform.position);
+                    transform.LookAt(transform.position + transform.forward);
+                }
+                if (Vector3.Distance(transform.position, player.position) < attackRange
+                    && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))
+                {
+                    agent.isStopped = true;
+                    m_Animator.SetInteger("state", 0);
+                    if (attackTimer == 0 && !isAttack && !jump)
+                        switch (attackStack)
+                        {
+                            case 0:
+                                Attack();
+                                isAttack = true;
+                                break;
+                            case 1:
+                                Attack();
+                                isAttack = true;
+                                break;
+                            case 2:
+                                Rush();
+                                isAttack = true;
+                                break;
+                            case 3:
+                                Attack();
+                                isAttack = true;
+                                break;
+                            case 4:
+                                Attack();
+                                isAttack = true;
+                                break;
+                            case 5:                             
+                                jump = true;
+                                agent.enabled = false;
+                                m_Animator.SetTrigger("Jump");
+                                Invoke("Jump", 0.5f);
+                                isAttack = true;
+                                break;
+                            case 6:
+                                Crush();
+                                jumpImpact.SetActive(false);
+                                isAttack = true;
+                                break;
+                        }
+                }
             }
         }
         if (isJumping)
         {
             if (rb.velocity.y < 0)
-            {
+            {              
                 rb.velocity = Vector3.down * fallSpeed;
                 m_Animator.SetBool("Fall", true);
 
                 if (transform.position.y <= 0)
                 {
+                    DamageJ();
                     isJumping = false;
                     jump = false;
-                    agent.enabled = true;
                     isAttack = false;
+                    agent.enabled = true;
                     m_Animator.SetBool("Fall", false);
                     Debug.Log("착지" + isJumping);
-                    jumpImpact.SetActive(true);
+                    jumpImpact.SetActive(true);               
                 }
             }
         }
         if (transform.position.y > 30)
         {
-            transform.position = new Vector3(player.position.x, transform.position.y,player.position.z);
+            transform.position = new Vector3((player.position  - (player.forward * 2)).x, 
+                transform.position.y,(player.position - (player.forward * 2)).z);
             rb.velocity = Vector3.down * fallSpeed;
         }
         if (attackTimer > 0)
@@ -159,7 +222,7 @@ public class EliteEnemy : MonoBehaviour, IHp
         {
             attackTimer = 0;
         }
-        if (currentHp <= 0 && !isDeath)
+        if (_hp <= 0 && !isDeath)
         {
             m_Animator.SetTrigger("isDeath");
             agent.isStopped = true;
@@ -186,9 +249,7 @@ public class EliteEnemy : MonoBehaviour, IHp
 
     void Rush()
     {
-        m_Animator.SetTrigger("isRush");
-        //transform.LookAt(player.position);
-        //agent.isStopped = true;
+        m_Animator.SetTrigger("isRush");       
         attackTimer = 6;
     }
 
@@ -211,7 +272,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     void Grounded()
     {
         grounded.SetActive(true);
-        Invoke("Disgrounded", 1.5f);
+        Invoke("Disgrounded", 0.7f);
     }
 
     void Disgrounded()
@@ -227,20 +288,6 @@ public class EliteEnemy : MonoBehaviour, IHp
         // 공격 범위 시각화
         Gizmos.color = attackColor;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Vector3 playerDirection = other.transform.position - transform.position;
-            float angle = Vector3.Angle(playerDirection, transform.forward);
-
-            if (angle < detectionAngle && playerDirection.magnitude < detectionRange)
-            {
-                isChasing = true;
-            }
-        }
     }
 
     public void AttackEnd()
@@ -271,49 +318,158 @@ public class EliteEnemy : MonoBehaviour, IHp
         Destroy(gameObject);
     }
 
-    void Hit()
+    public LayerMask _attackLayerMask;
+    float _attackAngleInnerProduct;
+    public float _attackAngle = 45;
+    float attackDamage = 7;
+    float attackDamageA = 10;
+    float attackDamageR = 20;
+    float attackDamageJ = 15;
+    float attackDamageC = 30;
+    void Damage()
     {
-        //데미지 가하는 코드 구현
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  attackRange,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(attackDamage, false, transform.rotation);
+                }
+            }
+        }
+    }
+    void DamageA()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  attackRange,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(attackDamageA, true, transform.rotation);
+                }
+            }
+        }
+    }
+    void DamageR()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  attackRange,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(30 * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(attackDamageR, true, transform.rotation);
+                }
+            }
+        }
+    }
+    void DamageJ()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  6,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(360 * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(attackDamageJ, true, transform.rotation);
+                }
+            }
+        }
+    }
+    void DamageC()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  16,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(50 * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(attackDamageC, true, transform.rotation);
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && !isJumping)
         {
-            if (rb.velocity.magnitude < stopThreshold)
-            {
-                Debug.Log("충돌");
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
+            
+            if(m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Rush_Golem"))
+            {               
+                DamageR();
+
+                if (rb.velocity.magnitude < stopThreshold)
+                {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    Debug.Log("충돌");
+                }
             }
+
             rb.isKinematic = true;
         }
-    }
-
-    public void DepleteHp(float amount)
-    {
-        hp -= amount;
-        onHpChanged?.Invoke(hp);
-        if (hp <= 0)
-        {
-            hp = 0;
-            onHpDepleted?.Invoke(amount);
-            onHpMin?.Invoke();
-        }
-    }
-
-    public void RecoverHp(float amount)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
-    {
-        DepleteHp(damage);
-    }
-
-    public void Hit(float damage)
-    {
-        DepleteHp(damage);
     }
 }
