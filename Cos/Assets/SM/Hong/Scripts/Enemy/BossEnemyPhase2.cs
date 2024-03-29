@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using HJ;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
-public class BossEnemyPhase2 : MonoBehaviour
+public class BossEnemyPhase2 : MonoBehaviour, IHp
 {
     Animator animator;
     Transform player;
@@ -23,14 +24,74 @@ public class BossEnemyPhase2 : MonoBehaviour
     private bool isSpawn;
     private bool isAttack;
     public bool isEnemy;
-    public float attackTimer;
-    public int attackStack;
+    private bool isDeath;
+    private float attackTimer;
+    private int attackStack;
+
+    float IHp.hp
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = Mathf.Clamp(value, 0, _hpMax);
+
+            if (_hp == value)
+                return;
+
+            if (value < 1)
+            {
+                onHpMin?.Invoke();
+            }
+            else if (value >= _hpMax)
+                onHpMax?.Invoke();
+        }
+    }
+    [SerializeField] public float _hp;
+
+    public float hpMax { get => _hpMax; }
+    public float _hpMax = 500;
+
+    public event Action<float> onHpChanged;
+    public event Action<float> onHpDepleted;
+    public event Action<float> onHpRecovered;
+    public event Action onHpMin;
+    public event Action onHpMax;
+
+    public void DepleteHp(float amount)
+    {
+        if (amount <= 0)
+            return;
+
+        _hp -= amount;
+        onHpDepleted?.Invoke(amount);
+    }
+
+    public void RecoverHp(float amount)
+    {
+
+    }
+
+    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+    {
+        if (!isDeath)
+        {
+            DepleteHp(damage);
+        }
+    }
+    public void Hit(float damage)
+    {
+        DepleteHp(damage);
+    }
 
     void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player").transform;
         lightningRange.SetActive(false);
+        _hp = _hpMax;
     }
 
     void Update()
@@ -98,6 +159,16 @@ public class BossEnemyPhase2 : MonoBehaviour
                 }
             }
         }
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
+        {
+            Invoke("Setcol", 3f);
+        }
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
+        {
+            Collider col = GetComponent<SphereCollider>();
+            col.enabled = false;
+        }
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
@@ -118,10 +189,12 @@ public class BossEnemyPhase2 : MonoBehaviour
                 return;
             }
         }
-        isEnemy = false;
-
-
-        
+        isEnemy = false;      
+    }
+    void Setcol()
+    {
+        Collider col = GetComponent<SphereCollider>();
+        col.enabled = true;
     }
 
 
@@ -255,5 +328,28 @@ public class BossEnemyPhase2 : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, spawnRange);
+    }
+
+    bool isDamage;
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.TryGetComponent(out IHp iHp))
+        {
+            isDamage = true;
+            StartCoroutine(Damage(iHp));
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        isDamage = false;
+    }
+
+    private IEnumerator Damage(IHp iHp)
+    {
+        while (isDamage)
+        {
+            iHp.Hit(5);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
