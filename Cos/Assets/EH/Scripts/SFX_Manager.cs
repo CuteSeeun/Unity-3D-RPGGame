@@ -53,12 +53,6 @@ public class SFX_Manager : SingletonLazy<SFX_Manager>
     [SerializeField]
     private List<AudioClip> _audioBGM;
 
-    //가장 먼저 사운드매니저의 싱글톤 인스턴스 설정
-    private void Awake()
-    {
-     
-
-    }
     //브금 오디오소스 변수가 널일때 카메라에 있는 오디오소스를 열고 브금플레이( 브금 확정 시 변경 )함수를 실행
     public void Start()
     {
