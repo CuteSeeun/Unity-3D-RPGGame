@@ -15,9 +15,8 @@ namespace HJ
             MissileMoveFixedUpdate();
         }
 
-        //public float missileSpeed { set => _missileSpeed = value; }
+        [Header ("Missile Info")] //==================================================================
         [SerializeField] private float _missileSpeed;
-        //public float missileTimer { set => _missileTimer = value; }
         [SerializeField] private float _missileTimer;
 
         private void MissileMoveStart()
@@ -33,32 +32,28 @@ namespace HJ
             Destroy(gameObject);
         }
 
-        //public bool isPiercing { get => _isPiercing; set => _isPiercing = value; }
-        [SerializeField] private bool _isPiercing;
-        //public bool isExplosive { get => _isExplosive; set => _isExplosive = value; }
-        [SerializeField] private bool _isExplosive;
+        [Header("Missile Attack")] //==================================================================
+        [SerializeField] bool _isPiercing;
+        [SerializeField] bool _isExplosive;
+        [SerializeField] GameObject _explosionEffect;
+        [SerializeField] float _explosionDestroyDelay;
 
         public float attack { set => _attack = value; }
-        [SerializeField] private float _attack;
-        //public float attackDamageRate { set => _attackDamageRate = value; }
-        [SerializeField] private float _attackDamageRate;
+        [SerializeField] float _attack;
+        [SerializeField] float _attackDamageRate;
 
-        //public float attackRange { set => _attackRange = value; }
-        [SerializeField] private float _attackRange;
-        //public float attackAngle { set => _attackAngle = value; }
-        private float _attackAngle;
-        private float _attackAngleInnerProduct;
-        //public LayerMask attackLayerMask { set => _attackLayerMask = value; }
-        [SerializeField] private LayerMask _attackLayerMask;
+        [SerializeField] float _attackRange;
+        [SerializeField] float _attackAngle;
+        [SerializeField] float _attackAngleInnerProduct;
+        [SerializeField] LayerMask _attackLayerMask;
 
-        //public bool isPowerAttack { set => _isPowerAttack = value; }
-        [SerializeField] private bool _isPowerAttack;
+        [SerializeField] bool _isPowerAttack;
 
         [SerializeField] LayerMask _layerMaskWall;
 
         private void OnTriggerEnter(Collider coliderHit)
         {
-            if (coliderHit.gameObject.layer == 12) // 공격 대상에 박으면 작동
+            if (coliderHit.gameObject.layer == 12)
             {
                 if (_isPiercing == false)
                 {
@@ -72,6 +67,7 @@ namespace HJ
                 }
                 else // (_isExplosive == true)
                 {
+
                     RaycastHit[] hits = Physics.SphereCastAll(transform.position, _attackRange, transform.up, 0, _attackLayerMask);
 
                     //_attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
@@ -80,12 +76,16 @@ namespace HJ
                     {
                         Hit(hit.collider);
                     }
+
+                    GameObject effectInstanse = Instantiate(_explosionEffect, transform.position, transform.rotation);
+                    //SFX_Manager.Instance.VFX(soundName);
+                    Destroy(effectInstanse, _explosionDestroyDelay);
                 }
             }
 
             if (coliderHit.gameObject.layer == _layerMaskWall) // 벽에 박으면 터짐
             {
-
+                Destroy(gameObject);
             }
             
         }
@@ -98,12 +98,5 @@ namespace HJ
                 iHp.Hit( _attack * _attackDamageRate * _random, _isPowerAttack, transform.rotation);
             }
         }
-
-        /*
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log(collision.gameObject.name);
-        }
-        */
     }
 }

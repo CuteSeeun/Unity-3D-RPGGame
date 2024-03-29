@@ -233,6 +233,7 @@ AnimatorState:
   - {fileID: -7479799505825716688}
   m_StateMachineBehaviours:
   - {fileID: 8131111944598873036}
+  - {fileID: 4630612116689313967}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -319,7 +320,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 1
   _isRangedAttack: 0
@@ -569,7 +570,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -671,7 +672,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -748,7 +749,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 1
   _isRangedAttack: 0
@@ -1159,7 +1160,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 15a507dc67d027c47a6bdb876377e2db, type: 2}
+  m_Motion: {fileID: 7400000, guid: c2eb7ee066dff2e4cbee735c353f3528, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1362,7 +1363,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -1486,7 +1487,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -1588,7 +1589,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -1733,7 +1734,7 @@ MonoBehaviour:
   _attackAngle: 0
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 0
   _isPowerAttack: 1
   _isRangedAttack: 1
@@ -1972,7 +1973,7 @@ MonoBehaviour:
   _attackAngle: 45
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -2071,7 +2072,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -2100,7 +2101,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -1941498442093600753}
   m_StateMachineBehaviours:
-  - {fileID: 3505949971544529188}
+  - {fileID: 2598596629364566330}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2156,16 +2157,16 @@ MonoBehaviour:
   _canMove: 0
   _canRotate: 0
   _moveSpeed: 0
-  _isAdvance: 0
-  _canTurn: 0
-  _advanceSpeed: 0
-  _advanceSpeedReduce: 0
+  _isAdvance: 1
+  _canTurn: 1
+  _advanceSpeed: 2
+  _advanceSpeedReduce: 2
   _attackDamageRate: 1
   _attackRange: 2
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 1
   _isRangedAttack: 0
@@ -2341,7 +2342,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -2390,7 +2391,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -2518,13 +2519,13 @@ AnimatorController:
   m_Name: Player
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: state
+  - m_Name: type
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: type
+  - m_Name: state
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2588,7 +2589,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -2762,7 +2763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useStamina: 1
-  _staminaRequired: 20
+  _staminaRequired: 15
   _isStaminaDelayEnd: 1
   _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
@@ -2777,12 +2778,12 @@ MonoBehaviour:
   _canTurn: 0
   _advanceSpeed: 0
   _advanceSpeedReduce: 0
-  _attackDamageRate: 1.5
+  _attackDamageRate: 1
   _attackRange: 3
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -2831,7 +2832,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -3035,7 +3036,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 1
   _isRangedAttack: 0
@@ -3168,6 +3169,55 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &2598596629364566330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a31f4246c8347145aab39bbbb379d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useStamina: 1
+  _staminaRequired: 0
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
+  _StaminaDelayTime: 0
+  _resetStart: 0
+  _resetEnd: 0
+  _resetDelayed: 0
+  _stateResetTime: 0
+  _canMove: 1
+  _canRotate: 1
+  _moveSpeed: 1
+  _isAdvance: 0
+  _canTurn: 0
+  _advanceSpeed: 0
+  _advanceSpeedReduce: 0
+  _attackDamageRate: 0
+  _attackRange: 0
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _isAttack: 0
+  _isPowerAttack: 0
+  _isRangedAttack: 0
+  _missile: {fileID: 0}
+  _attackDelayTime: 0
+  _isDoubleAttack: 0
+  _doubleAttackDelayTime: 0
+  _isRepeatingAttack: 0
+  _attackRepeatingTime: 0
+  _isInvincible: 0
+  _invincibleTime: 0
+  _weapon1: 1
+  _weapon2: 0
+  _weapon3: 0
+  _potion: 0
 --- !u!1101 &2603304286420947501
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3320,55 +3370,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &3505949971544529188
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a31f4246c8347145aab39bbbb379d91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useStamina: 1
-  _staminaRequired: 0
-  _isStaminaDelayEnd: 1
-  _isStaminaDelayTime: 0
-  _StaminaDelayTime: 1
-  _resetStart: 0
-  _resetEnd: 0
-  _resetDelayed: 0
-  _stateResetTime: 0
-  _canMove: 1
-  _canRotate: 1
-  _moveSpeed: 1
-  _isAdvance: 0
-  _canTurn: 0
-  _advanceSpeed: 0
-  _advanceSpeedReduce: 0
-  _attackDamageRate: 0
-  _attackRange: 0
-  _attackAngle: 0
-  _attackLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _isAttack: 0
-  _isPowerAttack: 0
-  _isRangedAttack: 0
-  _missile: {fileID: 0}
-  _attackDelayTime: 0
-  _isDoubleAttack: 0
-  _doubleAttackDelayTime: 0
-  _isRepeatingAttack: 1
-  _attackRepeatingTime: 0
-  _isInvincible: 0
-  _invincibleTime: 0
-  _weapon1: 1
-  _weapon2: 0
-  _weapon3: 0
-  _potion: 0
 --- !u!1101 &3681762461206852498
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3529,7 +3530,7 @@ MonoBehaviour:
   _attackAngle: 60
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 1
   _isRangedAttack: 0
@@ -3570,6 +3571,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &4630612116689313967
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6267c26ac41157c4db047abfb6493511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &4870550651018569035
 AnimatorState:
   serializedVersion: 6
@@ -3893,7 +3906,7 @@ MonoBehaviour:
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 1
   _isRangedAttack: 0
@@ -4013,9 +4026,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1281217728159597772}
   m_Solo: 0
@@ -4156,7 +4169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useStamina: 1
-  _staminaRequired: 20
+  _staminaRequired: 15
   _isStaminaDelayEnd: 1
   _isStaminaDelayTime: 0
   _StaminaDelayTime: 0.95
@@ -4171,12 +4184,12 @@ MonoBehaviour:
   _canTurn: 0
   _advanceSpeed: 0
   _advanceSpeedReduce: 0
-  _attackDamageRate: 1.5
+  _attackDamageRate: 1
   _attackRange: 3
   _attackAngle: 180
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 1
   _isPowerAttack: 0
   _isRangedAttack: 0
@@ -4308,7 +4321,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -170, y: 0, z: 0}
-  m_EntryPosition: {x: -170, y: 70, z: 0}
+  m_EntryPosition: {x: -180, y: 100, z: 0}
   m_ExitPosition: {x: 940, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 930, y: 120, z: 0}
   m_DefaultState: {fileID: 8244855739144628307}
@@ -4709,7 +4722,7 @@ MonoBehaviour:
   _attackAngle: 0
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 331776
   _isAttack: 0
   _isPowerAttack: 0
   _isRangedAttack: 1
