@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HJ;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,7 +9,6 @@ public class MoveTornado : MonoBehaviour
     public float speed = 5f;
     Transform boss;
     NavMeshAgent agent;
-    // Start is called before the first frame update
     void Start()
     {
         Invoke("Move", 1.5f);
@@ -16,7 +16,6 @@ public class MoveTornado : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -27,12 +26,18 @@ public class MoveTornado : MonoBehaviour
         transform.LookAt(boss.position);
         agent.SetDestination(boss.position);
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Boss"))
+        if (other.gameObject.CompareTag("Boss"))
         {
             Destroy(gameObject);
+        }
+        else if (other.gameObject.layer != LayerMask.NameToLayer("Boss")) // 보스 레이어가 아닌 경우에만 데미지를 주도록 합니다.
+        {
+            if (other.gameObject.TryGetComponent(out IHp iHp))
+            {
+                iHp.Hit(5, true, Quaternion.identity);
+            }
         }
     }
 }

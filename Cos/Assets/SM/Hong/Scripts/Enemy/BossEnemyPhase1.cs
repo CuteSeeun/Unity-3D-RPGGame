@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using HJ;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossEnemyPhase1 : MonoBehaviour
+public class BossEnemyPhase1 : MonoBehaviour, IHp
 {
     float chaseSpeed = 8f;
     public float detectionRange;
     public float attackRange;
     float detectionAngle = 360f;
-    public int maxHp;
-    private int currentHp;
     public float skulSpeed;
 
 
@@ -30,13 +29,72 @@ public class BossEnemyPhase1 : MonoBehaviour
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
 
+    float IHp.hp
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = Mathf.Clamp(value, 0, _hpMax);
+
+            if (_hp == value)
+                return;
+
+            if (value < 1)
+            {
+                onHpMin?.Invoke();
+            }
+            else if (value >= _hpMax)
+                onHpMax?.Invoke();
+        }
+    }
+    [SerializeField] public float _hp;
+
+    public float hpMax { get => _hpMax; }
+    public float _hpMax = 500;
+
+    public event System.Action<float> onHpChanged;
+    public event System.Action<float> onHpDepleted;
+    public event System.Action<float> onHpRecovered;
+    public event System.Action onHpMin;
+    public event System.Action onHpMax;
+
+    public void DepleteHp(float amount)
+    {
+        if (amount <= 0)
+            return;
+
+        _hp -= amount;
+        onHpDepleted?.Invoke(amount);
+    }
+
+    public void RecoverHp(float amount)
+    {
+
+    }
+
+    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+    {
+        if (!isDeath)
+        {
+            DepleteHp(damage);
+        }
+    }
+
+    public void Hit(float damage)
+    {
+        DepleteHp(damage);
+    }
+
     void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         fire = GetComponentInChildren<ParticleSystem>();
         player = GameObject.FindWithTag("Player").transform;
-        currentHp = maxHp;
+        _hp = _hpMax;
         agent.stoppingDistance = 3;
         fire.Stop();
         explosion.SetActive(false);
@@ -44,14 +102,23 @@ public class BossEnemyPhase1 : MonoBehaviour
 
     void Update()
     {
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Sit_Boss")
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Sit_Boss")
             && !animator.GetCurrentAnimatorStateInfo(0).IsName("Stand_Boss")
             && !animator.GetCurrentAnimatorStateInfo(0).IsName("Start_Boss"))
         {
-            if(isChasing)
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
+
+            foreach (Collider collider in colliders)
+            {
+                if (collider.CompareTag("Player") && !isChasing)
+                {
+                    isChasing = true;
+                }
+            }
+            if (isChasing)
             {
                 agent.speed = chaseSpeed;
-                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle_Boss")
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle_Boss")
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Run_Boss"))
                 {
                     agent.isStopped = false;
@@ -66,14 +133,14 @@ public class BossEnemyPhase1 : MonoBehaviour
                     agent.SetDestination(transform.position);
                     transform.LookAt(transform.position + transform.forward);
                 }
-                if(Vector3.Distance(transform.position, player.position) < attackRange
+                if (Vector3.Distance(transform.position, player.position) < attackRange
                     && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Boss"))
                 {
                     agent.isStopped = true;
                     animator.SetInteger("state", 0);
-                    if(attackTimer == 0 && !isAttack)
+                    if (attackTimer == 0 && !isAttack)
                     {
-                        switch(attackStack)
+                        switch (attackStack)
                         {
                             case 0:
                                 Attack();
@@ -106,7 +173,7 @@ public class BossEnemyPhase1 : MonoBehaviour
                         }
                     }
                 }
-                if(animator.GetCurrentAnimatorStateInfo(0).IsName("SkulMissile_Boss") && !isSkul)
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("SkulMissile_Boss") && !isSkul)
                 {
                     isSkul = true;
                     Invoke("SkulMissileCross", 1f);
@@ -116,6 +183,16 @@ public class BossEnemyPhase1 : MonoBehaviour
                 }
             }
         }
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("ChargeAttack_Boss"))
+        {
+            Collider col = GetComponent<SphereCollider>();
+            col.enabled = true;
+        }
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ChargeAttack_Boss"))
+        {
+            Collider col = GetComponent<SphereCollider>();
+            col.enabled = false;
+        }
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
@@ -124,13 +201,13 @@ public class BossEnemyPhase1 : MonoBehaviour
         {
             attackTimer = 0;
         }
-        if (currentHp <= 0 && !isDeath)
+        if (_hp <= 0 && !isDeath)
         {
             animator.SetTrigger("isDeath");
             agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
-        }      
+        }
     }
 
     void Attack()
@@ -150,11 +227,11 @@ public class BossEnemyPhase1 : MonoBehaviour
     {
         attackTimer = 5;
         animator.SetTrigger("isTel");
-        if(attackStack == 5)
+        if (attackStack == 5)
         {
             Invoke("Raid", 0.5f);
         }
-        else if(attackStack == 6)
+        else if (attackStack == 6)
         {
             Invoke("Skul", 0.5f);
         }
@@ -213,7 +290,7 @@ public class BossEnemyPhase1 : MonoBehaviour
         GameObject projectile;
 
         // 발사할 방향들을 배열에 저장합니다.
-        Vector3[] directions = 
+        Vector3[] directions =
             { transform.right + transform.forward, transform.right - transform.forward,
             -transform.right + transform.forward, -transform.right - transform.forward };
 
@@ -242,20 +319,6 @@ public class BossEnemyPhase1 : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Vector3 playerDirection = other.transform.position - transform.position;
-            float angle = Vector3.Angle(playerDirection, transform.forward);
-
-            if (angle < detectionAngle && playerDirection.magnitude < detectionRange)
-            {
-                isChasing = true;
-            }
-        }
-    }
-
     public void AttackEnd()
     {
         animator.SetInteger("state", 0);
@@ -282,5 +345,93 @@ public class BossEnemyPhase1 : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.TryGetComponent(out IHp iHp))
+        {
+            iHp.Hit(20, true, transform.rotation);
+        }
+    }
+
+    public LayerMask _attackLayerMask;
+    float _attackAngleInnerProduct;
+    public float _attackAngle = 45;
+    float attackDamage = 7;
+    void Damage()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  attackRange,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(attackDamage, false, transform.rotation);
+                }
+            }
+        }
+    }
+    void DamageA()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  attackRange,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(10, true, transform.rotation);
+                }
+            }
+        }
+    }
+    void DamageE()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  attackRange + 1,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(360 * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(20, true, transform.rotation);
+                }
+            }
+        }
     }
 }

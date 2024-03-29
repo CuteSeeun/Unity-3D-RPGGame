@@ -1,23 +1,22 @@
 using System.Collections;
+using HJ;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LongEnemyAI : MonoBehaviour
+public class LongEnemyAI : MonoBehaviour, IHp
 {
     float patrolSpeed = 2f;
     float patrolWaitTime = 3f;
     public float detectionRange;
     public float attackRange;
     float detectionAngle = 360f;
-    public int hp;
 
     public GameObject arrow;
     public GameObject owner;
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
-    public Transform pos;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isAiming;
@@ -26,6 +25,88 @@ public class LongEnemyAI : MonoBehaviour
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
+
+    float IHp.hp
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = Mathf.Clamp(value, 0, _hpMax);
+
+            if (_hp == value)
+                return;
+
+            if (value < 1)
+            {
+                onHpMin?.Invoke();
+            }
+            else if (value >= _hpMax)
+                onHpMax?.Invoke();
+        }
+    }
+    [SerializeField] public float _hp;
+
+    public float hpMax { get => _hpMax; }
+    public float _hpMax = 30;
+
+    public event System.Action<float> onHpChanged;
+    public event System.Action<float> onHpDepleted;
+    public event System.Action<float> onHpRecovered;
+    public event System.Action onHpMin;
+    public event System.Action onHpMax;
+
+    public void DepleteHp(float amount)
+    {
+        if (amount <= 0)
+            return;
+
+        _hp -= amount;
+        onHpDepleted?.Invoke(amount);
+    }
+
+    public void RecoverHp(float amount)
+    {
+
+    }
+
+    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+    {
+        if (!isDeath)
+        {
+            transform.rotation = hitRotation;
+            transform.Rotate(0, 180, 0);
+
+            if (powerAttack == false)
+            {
+                m_Animator.SetTrigger("HitA");
+                // 맞은 방향 뒤로 밀리기
+                Vector3 pushDirection = -transform.forward * 2f;
+                ApplyPush(pushDirection);
+            }
+            else
+            {
+                m_Animator.SetTrigger("HitB");
+                // 맞은 방향 뒤로 밀리기
+                Vector3 pushDirection = -transform.forward * 4f;
+                ApplyPush(pushDirection);
+            }
+
+            DepleteHp(damage);
+        }
+    }
+    void ApplyPush(Vector3 pushDirection)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(pushDirection, ForceMode.Impulse);
+    }
+
+    public void Hit(float damage)
+    {
+        DepleteHp(damage);
+    }
 
     void Start()
     {
@@ -36,39 +117,54 @@ public class LongEnemyAI : MonoBehaviour
         isPatrolling = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
+        _hp = _hpMax;
     }
 
     void Update()
     {
-        if (isPatrolling)
+        if (!isDeath)
         {
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
+
+            foreach (Collider collider in colliders)
             {
-                m_Animator.SetInteger("state", 0);
-                StartCoroutine(Patrol());
+                if (collider.CompareTag("Player") && !isAiming)
+                {
+                    isAiming = true;
+                }
+            }
+
+            if (isPatrolling)
+            {
+                if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                {
+                    m_Animator.SetInteger("state", 0);
+                    StartCoroutine(Patrol());
+                }
+            }
+            else if (isAiming)
+            {
+                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+                {
+                    agent.isStopped = false;
+                    m_Animator.SetInteger("state", 2);
+                    transform.LookAt(player.position);
+                    Attack();
+                }
+                else
+                {
+                    agent.isStopped = true;
+                    agent.SetDestination(transform.position);
+                    transform.LookAt(player.position);
+                }
+                if (Vector3.Distance(transform.position, player.position) < attackRange)
+                {
+
+                }
             }
         }
-        else if (isAiming)
-        {
-            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
-            {
-                agent.isStopped = false;
-                m_Animator.SetInteger("state", 2);
-                transform.LookAt(player.position);
-                Attack();
-            }
-            else
-            {
-                agent.isStopped = true;
-                agent.SetDestination(transform.position);
-                transform.LookAt(player.position);
-            }
-            if (Vector3.Distance(transform.position, player.position) < attackRange)
-            {
-                
-            }
-        }
-        if (hp <= 0 && !isDeath)
+        if (_hp <= 0 && !isDeath)
         {
             m_Animator.SetTrigger("isDeath");
             isDeath = true;
@@ -132,17 +228,7 @@ public class LongEnemyAI : MonoBehaviour
                 isAiming = true;
             }
         }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            agent.speed = patrolSpeed;
-            isAiming = false;
-            isPatrolling = true;
-            agent.isStopped = false;
-        }
-    }
+    } 
 
     public void AttackEnd()
     {
@@ -153,7 +239,7 @@ public class LongEnemyAI : MonoBehaviour
     public void Shoot()
     {
         //Instantiate(arrow,pos.position,Quaternion.identity);
-        GameObject shootArrow = Instantiate(arrow, pos.position, Quaternion.identity);
+        GameObject shootArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.identity);
         Arrow arrowScript = shootArrow.GetComponent<Arrow>();
         arrowScript.target = GameObject.FindWithTag("Player");
         arrowScript.owner = owner;
@@ -163,10 +249,5 @@ public class LongEnemyAI : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
-    }
-
-    void Hit()
-    {
-        //데미지 가하는 코드 구현
     }
 }

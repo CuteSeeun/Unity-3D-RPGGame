@@ -13,24 +13,24 @@ public class CharacterChanger : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Character1.SetActive(true);
             Character2.SetActive(false);
             Character3.SetActive(false);
             Character4.SetActive(false);
+            Character1.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Character1.SetActive(false);
-            Character2.SetActive(true);
             Character3.SetActive(false);
             Character4.SetActive(false);
+            Character2.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Character1.SetActive(false);
             Character2.SetActive(false);
-            Character3.SetActive(true);
             Character4.SetActive(false);
+            Character3.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
