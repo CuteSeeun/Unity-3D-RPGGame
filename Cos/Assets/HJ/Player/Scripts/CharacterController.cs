@@ -175,8 +175,6 @@ namespace HJ
                                                       0,
                                                       _attackLayerMask);
 
-            
-
             // 공격 각도에 따른 내적 계산
             _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
 

@@ -5,6 +5,15 @@ namespace HJ
 {
     public class AniOnEvent_Barbarian : MonoBehaviour
     {
+        [Header("Potion")] //============================================================================
+        [SerializeField] GameObject _potionEffect;
+        [SerializeField] string _potionSoundName;
+        [SerializeField] float _potionDelay;
+        public void Potion()
+        {
+            StartCoroutine(Effect(_potionEffect, _potionSoundName, _potionDelay));
+        }
+
         [Header("Swing1")] //============================================================================
         [SerializeField] GameObject _barvarianSwing1Effect;
         [SerializeField] string _barvarianSwing1SoundName;
