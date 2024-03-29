@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using HJ;
 using UnityEditor;
+using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,10 @@ public class EliteEnemy : MonoBehaviour, IHp
     private Rigidbody rb;
     public GameObject grounded;
     public GameObject jumpImpact;
+    public GameObject rushImpact;
+    public GameObject jumpEffect;
+    public GameObject isCrushEffect;
+    public ParticleSystem isRush;
     private bool isChasing;
     private bool isDeath;
     private bool isAttack;
@@ -58,7 +63,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     [SerializeField] public float _hp;
 
     public float hpMax { get => _hpMax; }
-    public float _hpMax = 500;
+    public float _hpMax = 300;
 
     public event System.Action<float> onHpChanged;
     public event System.Action<float> onHpDepleted;
@@ -103,6 +108,10 @@ public class EliteEnemy : MonoBehaviour, IHp
         isChasing = true;
         agent.isStopped = false;
         jumpImpact.SetActive(false);
+        rushImpact.SetActive(false);
+        jumpEffect.SetActive(false);
+        isCrushEffect.SetActive(false);
+        isRush.Stop();
         _hp = _hpMax;
     }
 
@@ -154,6 +163,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                         {
                             case 0:
                                 Attack();
+                                isCrushEffect.SetActive(false);
                                 isAttack = true;
                                 break;
                             case 1:
@@ -166,6 +176,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                                 break;
                             case 3:
                                 Attack();
+                                rushImpact.SetActive(false);
                                 isAttack = true;
                                 break;
                             case 4:
@@ -175,7 +186,9 @@ public class EliteEnemy : MonoBehaviour, IHp
                             case 5:                             
                                 jump = true;
                                 agent.enabled = false;
+                                rb.isKinematic = false;
                                 m_Animator.SetTrigger("Jump");
+                                jumpEffect.SetActive(true);
                                 Invoke("Jump", 0.5f);
                                 isAttack = true;
                                 break;
@@ -204,7 +217,8 @@ public class EliteEnemy : MonoBehaviour, IHp
                     agent.enabled = true;
                     m_Animator.SetBool("Fall", false);
                     Debug.Log("착지" + isJumping);
-                    jumpImpact.SetActive(true);               
+                    jumpImpact.SetActive(true);
+                    jumpEffect.SetActive(false);
                 }
             }
         }
@@ -233,7 +247,9 @@ public class EliteEnemy : MonoBehaviour, IHp
         {
             agent.isStopped = false;
             m_Animator.SetInteger("state", 0);
+            rushImpact.SetActive(true);
             Debug.Log("돌진");
+            isRush.Stop();
             Vector3 rush = transform.forward;
             rb.velocity = rush * rushSpeed;
             transform.LookAt(transform.position + transform.forward);
@@ -249,7 +265,8 @@ public class EliteEnemy : MonoBehaviour, IHp
 
     void Rush()
     {
-        m_Animator.SetTrigger("isRush");       
+        m_Animator.SetTrigger("isRush");
+        isRush.Play();
         attackTimer = 6;
     }
 
@@ -265,6 +282,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     void Crush()
     {
         m_Animator.SetTrigger("isCrush");
+        isCrushEffect.SetActive(true);
         attackTimer = 5;
         Invoke("Grounded", 2f);
     }
@@ -297,7 +315,7 @@ public class EliteEnemy : MonoBehaviour, IHp
         isChasing = true;
         isAttack = false;
         jump = false;
-        rb.isKinematic = false;
+        //rb.isKinematic = false;
         attackStack++;
         if(attackStack > 6)
         {
@@ -411,7 +429,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                                                   _attackLayerMask);
 
         // 공격 각도에 따른 내적 계산
-        _attackAngleInnerProduct = Mathf.Cos(360 * Mathf.Deg2Rad);
+        _attackAngleInnerProduct = Mathf.Cos(180 * Mathf.Deg2Rad);
 
         // 내적으로 공격각도 구하기
         foreach (RaycastHit hit in hits)
@@ -436,7 +454,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                                                   _attackLayerMask);
 
         // 공격 각도에 따른 내적 계산
-        _attackAngleInnerProduct = Mathf.Cos(50 * Mathf.Deg2Rad);
+        _attackAngleInnerProduct = Mathf.Cos(45 * Mathf.Deg2Rad);
 
         // 내적으로 공격각도 구하기
         foreach (RaycastHit hit in hits)
@@ -467,9 +485,11 @@ public class EliteEnemy : MonoBehaviour, IHp
                     rb.angularVelocity = Vector3.zero;
                     Debug.Log("충돌");
                 }
+
+                rb.isKinematic = true;
             }
 
-            rb.isKinematic = true;
+            
         }
     }
 }
