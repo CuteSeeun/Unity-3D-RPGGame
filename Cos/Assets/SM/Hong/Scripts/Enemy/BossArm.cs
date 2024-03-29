@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HJ;
 using UnityEngine;
 
 public class BossArm : MonoBehaviour
@@ -22,6 +23,7 @@ public class BossArm : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) < attackRange)
         {
             animator.SetTrigger("isAttack");
+            transform.LookAt(player.position);
         }
 
         if (attackTimer > 0)
@@ -49,5 +51,34 @@ public class BossArm : MonoBehaviour
         // 공격 범위 시각화
         Gizmos.color = attackColor;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    public LayerMask _attackLayerMask;
+    float _attackAngleInnerProduct;
+    public float _attackAngle = 180;
+    void DamageA()
+    {
+        // 공격 거리 내 모든 적 탐색
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                  attackRange,
+                                                  Vector3.up,
+                                                  0,
+                                                  _attackLayerMask);
+
+        // 공격 각도에 따른 내적 계산
+        _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+        // 내적으로 공격각도 구하기
+        foreach (RaycastHit hit in hits)
+        {
+            if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+            {
+                // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
+                if (hit.collider.TryGetComponent(out IHp iHp))
+                {
+                    iHp.Hit(5, true, transform.rotation);
+                }
+            }
+        }
     }
 }

@@ -22,6 +22,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     private bool isChasing;
     private bool isDeath;
     private float attackTimer;
+    private bool isHit;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
@@ -51,7 +52,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     [SerializeField] public float _hp;
 
     public float hpMax { get => _hpMax; }
-    public float _hpMax = 20;
+    public float _hpMax = 30;
 
     public event System.Action<float> onHpChanged;
     public event System.Action<float> onHpDepleted;
@@ -75,19 +76,35 @@ public class CloseEnemyAI : MonoBehaviour, IHp
 
     public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
     {
-        transform.rotation = hitRotation;
-        transform.Rotate(0, 180, 0);
-
-        if(powerAttack == false)
+        if (!isDeath)
         {
-            m_Animator.SetTrigger("HitA");
-        }
-        else
-        {
-            m_Animator.SetTrigger("HitB");
-        }
+            transform.rotation = hitRotation;
+            transform.Rotate(0, 180, 0);
 
-        DepleteHp(damage);
+            if (powerAttack == false)
+            {
+                m_Animator.SetTrigger("HitA");
+                isHit = true;
+                // 맞은 방향 뒤로 밀리기
+                Vector3 pushDirection = -transform.forward * 2f;
+                ApplyPush(pushDirection);
+            }
+            else
+            {
+                m_Animator.SetTrigger("HitB");
+                isHit = true;
+                // 맞은 방향 뒤로 밀리기
+                Vector3 pushDirection = -transform.forward * 4f;
+                ApplyPush(pushDirection);
+            }
+
+            DepleteHp(damage);
+        }
+    }
+    void ApplyPush(Vector3 pushDirection)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(pushDirection, ForceMode.Impulse);
     }
 
     public void Hit(float damage)
@@ -110,6 +127,16 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     {
         if (!isDeath)
         {
+            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
+
+            foreach (Collider collider in colliders)
+            {
+                if (collider.CompareTag("Player") && !isChasing)
+                {
+                    isChasing = true;
+                }
+            }
 
             if (isPatrolling)
             {
@@ -157,6 +184,13 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             attackTimer = 0;
             Debug.Log(attackTimer);
         }
+        if (isHit)
+        {
+            agent.isStopped = true;
+            agent.SetDestination(transform.position);
+            m_Animator.SetInteger("state", 2);
+            Invoke("Move", 0.5f);
+        }
         if (_hp <= 0 && !isDeath)
         {
             m_Animator.SetTrigger("isDeath");
@@ -164,6 +198,11 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             isDeath = true;
             Invoke("Death", 2);
         }
+    }
+
+    void Move()
+    {
+        isHit = false;
     }
 
     IEnumerator Patrol()
@@ -216,29 +255,6 @@ public class CloseEnemyAI : MonoBehaviour, IHp
         Gizmos.DrawLine(transform.position + new Vector3(0, 1, 0), transform.position + new Vector3(0, 1, 0) + rightBoundary * attackRange);
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Vector3 playerDirection = other.transform.position - transform.position;
-            float angle = Vector3.Angle(playerDirection, transform.forward);
-
-            if (angle < detectionAngle && playerDirection.magnitude < detectionRange)
-            {
-                isChasing = true;
-            }
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            agent.speed = patrolSpeed;
-            isChasing = false;
-            isPatrolling = true;
-        }
-    }
-
     public void AttackEnd()
     {
         agent.isStopped = false;
@@ -252,7 +268,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
 
     public LayerMask _attackLayerMask;
     float _attackAngleInnerProduct;
-    float _attackAngle = 45;
+    public float _attackAngle = 45;
     float attackDamage = 5;
     void Damage()
     {
