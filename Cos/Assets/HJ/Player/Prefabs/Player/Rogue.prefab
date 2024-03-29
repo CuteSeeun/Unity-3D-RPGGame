@@ -1021,7 +1021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7847954845431315274}
-  - component: {fileID: 1685734442203625937}
+  - component: {fileID: 8141655838646537716}
   - component: {fileID: 1346489119434670283}
   - component: {fileID: 8779470545690256105}
   - component: {fileID: 3012359346041678390}
@@ -1057,7 +1057,7 @@ Transform:
   - {fileID: 3622262889377213684}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1685734442203625937
+--- !u!114 &8141655838646537716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1066,20 +1066,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 3145698477173681061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f96c83c61bf2cea4d84565604cc8b4f7, type: 3}
+  m_Script: {fileID: 11500000, guid: e3925bd9fc83d4243b72d1b13c45d5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab_Electro_slash: {fileID: 1171201465392465800, guid: 4aa9f30a28a77224ba84b2a2c334c71b,
+  _rogueSlash1Effect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
     type: 3}
-  _prefab_slash_medium_green: {fileID: 1937429643061413968, guid: 253bf4ac45350c249802714ff1221c0a,
+  _rogueSlash1SoundName: Thief attack
+  _rogueSlash1Delay: 1
+  _rogueSlash2Effect: {fileID: 3263452941602113375, guid: 72a33e7e58c7efc478a728450668a590,
     type: 3}
-  _prefab_slash_medium_green1: {fileID: 421131564960347933, guid: c92f6f8133794984dbce7355073c34fd,
+  _rogueSlash2SoundName: Thief attack
+  _rogueSlash2Delay: 1
+  _rogueSlash3_1Effect: {fileID: 7043183771742762698, guid: 19490df282716bf4fba4bf5544fd26ff,
     type: 3}
-  _prefab_stab_medium_DeepOcean: {fileID: 3283572678730909573, guid: 5dc234ef81ff1424facdcc5dd7e43b97,
+  _rogueSlash3_2Effect: {fileID: 7043183771742762698, guid: 1b084599ef6e9974ab3f1e5b6c37799d,
     type: 3}
-  delay: 1
-  delay2: 0.5
-  offset: {x: 0, y: 0, z: 0}
+  _rogueSlash3_1SoundName: Thief attack
+  _rogueSlash3_2SoundName: Thief attack
+  _rogueSlash3_1Delay: 1
+  _rogueSlash3_2Delay: 1
+  _rogueCrossbowEffect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
+    type: 3}
+  _rogueCrossbowSoundName: Shield_defending
+  _rogueCrossbow2Delay: 1
 --- !u!114 &1346489119434670283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,7 +1358,7 @@ Rigidbody:
   m_GameObject: {fileID: 3145698477173681061}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 10
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
