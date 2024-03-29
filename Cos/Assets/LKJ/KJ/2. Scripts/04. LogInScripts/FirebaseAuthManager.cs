@@ -8,232 +8,235 @@ using TMPro;
 using System.Threading.Tasks;
 using System;
 
-
-public class FirebaseAuthManager : MonoBehaviour
+namespace KJ
 {
-    [Header("Firebase")]
-    // Firebase ¸¦ ¾ÈÀüÇÏ°Ô ÃÊ±âÈ­ ÇÏ°í »óÅÂ È®ÀÎÀ» À§ÇØ.
-    public DependencyStatus dependencyStatus;
-    // ·Î±×ÀÎ, È¸¿ø°¡ÀÔ¿¡ »ç¿ë.
-    private FirebaseAuth _auth;
-    // ÀÎÁõÀÌ ¿Ï·áµÈ À¯Àú Á¤º¸.
-    private FirebaseUser _user;
-
-    [Header("LogIn")]
-    // email ÀÔ·ÂÀ» ¹ŞÀ½.
-    public TMP_InputField email;
-    // password ÀÔ·ÂÀ» ¹ŞÀ½.
-    public TMP_InputField password;
-    // ¿À·ù¸Ş½ÃÁö
-    public TMP_Text warningLoginText;
-    // ¼º°ø½Ã ³ªÅ¸³ª´Â ¸Ş½ÃÁö
-    public TMP_Text confirmLoginText;
-
-    [Header("Register")]
-    // username »ı¼º ÀÔ·Â ¹ŞÀ½.
-    public TMP_InputField usernameRegister;
-    // email »ı¼º ÀÔ·Â ¹ŞÀ½.
-    public TMP_InputField emailRegister;
-    // password »ı¼º ÀÔ·ÂÀ» ¹ŞÀ½.
-    public TMP_InputField passwordRegister;
-    // password check ÀÔ·ÂÀ» ¹ŞÀ½.
-    public TMP_InputField passwordCheck;
-    // ¿À·ù ¸Ş½ÃÁö
-    public TMP_Text warningRegisterText;
-    // ¼º°ø½Ã ³ªÅ¸³ª´Â ¸Ş½ÃÁö
-    public TMP_Text ConfrimRegisterText;
-
-    // ½Ì±ÛÅæ ÆĞÅÏ
-    private static FirebaseAuthManager _instance;
-    public static FirebaseAuthManager Instance
+    public class FirebaseAuthManager : MonoBehaviour
     {
-        get
+        [Header("Firebase")]
+        // Firebase ë¥¼ ì•ˆì „í•˜ê²Œ ì´ˆê¸°í™” í•˜ê³  ìƒíƒœ í™•ì¸ì„ ìœ„í•´.
+        public DependencyStatus dependencyStatus;
+        // ë¡œê·¸ì¸, íšŒì›ê°€ì…ì— ì‚¬ìš©.
+        private FirebaseAuth _auth;
+        // ì¸ì¦ì´ ì™„ë£Œëœ ìœ ì € ì •ë³´.
+        private FirebaseUser _user;
+
+        [Header("LogIn")]
+        // email ì…ë ¥ì„ ë°›ìŒ.
+        public TMP_InputField email;
+        // password ì…ë ¥ì„ ë°›ìŒ.
+        public TMP_InputField password;
+        // ì˜¤ë¥˜ë©”ì‹œì§€
+        public TMP_Text warningLoginText;
+        // ì„±ê³µì‹œ ë‚˜íƒ€ë‚˜ëŠ” ë©”ì‹œì§€
+        public TMP_Text confirmLoginText;
+
+        [Header("Register")]
+        // username ìƒì„± ì…ë ¥ ë°›ìŒ.
+        public TMP_InputField usernameRegister;
+        // email ìƒì„± ì…ë ¥ ë°›ìŒ.
+        public TMP_InputField emailRegister;
+        // password ìƒì„± ì…ë ¥ì„ ë°›ìŒ.
+        public TMP_InputField passwordRegister;
+        // password check ì…ë ¥ì„ ë°›ìŒ.
+        public TMP_InputField passwordCheck;
+        // ì˜¤ë¥˜ ë©”ì‹œì§€
+        public TMP_Text warningRegisterText;
+        // ì„±ê³µì‹œ ë‚˜íƒ€ë‚˜ëŠ” ë©”ì‹œì§€
+        public TMP_Text ConfrimRegisterText;
+
+        // ì‹±ê¸€í†¤ íŒ¨í„´
+        private static FirebaseAuthManager _instance;
+        public static FirebaseAuthManager Instance
         {
+            get
+            {
+                if (_instance == null)
+                {
+
+                }
+                return _instance;
+            }
+        }
+
+        void Awake()
+        {
+            // ì‹±ê¸€í†¤ íŒ¨í„´
             if (_instance == null)
             {
-
+                _instance = this;
+                // ì”¬ ì „í™˜ì‹œì—ë„ íŒŒê´´ë˜ì§€ ì•Šê²Œ í•¨
+                DontDestroyOnLoad(gameObject);
             }
-            return _instance;
-        }
-    }
-
-    void Awake()
-    {
-        // ½Ì±ÛÅæ ÆĞÅÏ
-        if (_instance == null)
-        {
-            _instance = this;
-            // ¾À ÀüÈ¯½Ã¿¡µµ ÆÄ±«µÇÁö ¾Ê°Ô ÇÔ
-            DontDestroyOnLoad(gameObject);
-        }
-        else if(_instance != this)
-        {
-            // Áßº¹ ÀÎ½ºÅÏ½º ÆÄ±«
-            Destroy(gameObject);
-        }
-        // Firebase DependencyStatus È®ÀÎÇÔ
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        {
-            // dependencyStatus ¿¡ º¯¼ö ÀúÀå
-            dependencyStatus = task.Result;
-            // dependencyStatus »ç¿ë °¡´ÉÇÑÁö È®ÀÎ.
-            if (dependencyStatus == DependencyStatus.Available)
+            else if (_instance != this)
             {
-                // Firebase ÃÊ±âÈ­
-                InitializeFirebase();
+                // ì¤‘ë³µ ì¸ìŠ¤í„´ìŠ¤ íŒŒê´´
+                Destroy(gameObject);
             }
-            else
+            // Firebase DependencyStatus í™•ì¸í•¨
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
-                // ¿À·ù ¸Ş½ÃÁö Ãâ·Â.
-                Debug.LogError("Firebase ÃÊ±âÈ­ ½ÇÆĞ : " + dependencyStatus);
-            }
-        });
-    }
+                // dependencyStatus ì— ë³€ìˆ˜ ì €ì¥
+                dependencyStatus = task.Result;
+                // dependencyStatus ì‚¬ìš© ê°€ëŠ¥í•œì§€ í™•ì¸.
+                if (dependencyStatus == DependencyStatus.Available)
+                {
+                    // Firebase ì´ˆê¸°í™”
+                    InitializeFirebase();
+                }
+                else
+                {
+                    // ì˜¤ë¥˜ ë©”ì‹œì§€ ì¶œë ¥.
+                    Debug.LogError("Firebase ì´ˆê¸°í™” ì‹¤íŒ¨ : " + dependencyStatus);
+                }
+            });
+        }
 
-    public void InitializeFirebase()
-    {
-        // ÃÊ±âÈ­
-        _auth = FirebaseAuth.DefaultInstance;
-    }
-    
-
-    public void LoginButton(Action<bool> onLoginCompleted)
-    {
-        // ÀÌ¸ŞÀÏ°ú ºñ¹Ğ¹øÈ£¸¦ Àü´ŞÇÏ´Â ·Î±×ÀÎ È£Ãâ.
-        StartCoroutine(Login(email.text, password.text, onLoginCompleted));
-    }
-
-    public void RegisterButton()
-    {
-        // °èÁ¤ »ı¼ºÇÒ ¶§ ÀÌ¸ŞÀÏ°ú ºñ¹Ğ¹øÈ£¸¦ Àü´ŞÇÏ´Â Register È£Ãâ.
-        StartCoroutine(Register(emailRegister.text, passwordRegister.text, usernameRegister.text));
-    }
-
-    IEnumerator Login(string _email, string _password, Action<bool> onLoginCompleted)
-    {
-        // email °ú password ¸¦ Àü´ŞÇÏ¿© firebase ÀÎÁõ ÇÔ¼ö¸¦ È£Ãâ.
-        var LoginTask = _auth.SignInWithEmailAndPasswordAsync(_email, _password);
-        // LoginTask.IsCompleted °¡ ÂüÀÌ µÉ ¶§ ±îÁö ±â´Ù¸².
-        yield return new WaitUntil(predicate: () => LoginTask.IsCompleted);
-        _user = LoginTask.Result.User;
-        if (LoginTask.Exception != null)
+        public void InitializeFirebase()
         {
-            // ¸¸¾à ¿¹¿Ü°¡ ¹ß»ıÇÏ¿© ¿À·ù°¡ ³ªÅ¸³ª¸é
-            Debug.LogWarning(message: $"·Î±×ÀÎ ÇÏ´Âµ¥ ¿¹¿Ü°¡ ¹ß»ıÇÏ¿© ½ÇÆĞ {LoginTask.Exception}");
-            FirebaseException firebaseEx = LoginTask.Exception.GetBaseException() as FirebaseException;
-            AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+            // ì´ˆê¸°í™”
+            _auth = FirebaseAuth.DefaultInstance;
+        }
 
-            string message = "·Î±×ÀÎ ½ÇÆĞ";
-            switch (errorCode)
+
+        public void LoginButton(Action<bool> onLoginCompleted)
+        {
+            // ì´ë©”ì¼ê³¼ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì „ë‹¬í•˜ëŠ” ë¡œê·¸ì¸ í˜¸ì¶œ.
+            StartCoroutine(Login(email.text, password.text, onLoginCompleted));
+        }
+
+        public void RegisterButton()
+        {
+            // ê³„ì • ìƒì„±í•  ë•Œ ì´ë©”ì¼ê³¼ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì „ë‹¬í•˜ëŠ” Register í˜¸ì¶œ.
+            StartCoroutine(Register(emailRegister.text, passwordRegister.text, usernameRegister.text));
+        }
+
+        IEnumerator Login(string _email, string _password, Action<bool> onLoginCompleted)
+        {
+            // email ê³¼ password ë¥¼ ì „ë‹¬í•˜ì—¬ firebase ì¸ì¦ í•¨ìˆ˜ë¥¼ í˜¸ì¶œ.
+            var LoginTask = _auth.SignInWithEmailAndPasswordAsync(_email, _password);
+            // LoginTask.IsCompleted ê°€ ì°¸ì´ ë  ë•Œ ê¹Œì§€ ê¸°ë‹¤ë¦¼.
+            yield return new WaitUntil(predicate: () => LoginTask.IsCompleted);
+            _user = LoginTask.Result.User;
+            if (LoginTask.Exception != null)
             {
-                case AuthError.MissingEmail:
-                    message = "ÀÌ¸ŞÀÏÀ» ÀûÀ¸¼¼¿ä.";
-                    break;
-
-                case AuthError.MissingPassword:
-                    message = "ºñ¹Ğ¹øÈ£¸¦ ÀûÀ¸¼¼¿ä.";
-                    break;
-
-                case AuthError.WrongPassword:
-                    message = "Àß¸øµÈ ºñ¹Ğ¹øÈ£.";
-                    break;
-
-                case AuthError.InvalidEmail:
-                    message = "Àß¸øµÈ ÀÌ¸ŞÀÏ";
-                    break;
-
-                case AuthError.UserNotFound:
-                    message = "°èÁ¤ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.";
-                    break;
-            }
-            warningLoginText.text = message;
-            onLoginCompleted?.Invoke(false);
-            
-        }
-        // Á¦´ë·Î ÀÛµ¿ ÇÑ´Ù¸é.
-        else
-        {
-            Debug.LogFormat("·Î±×ÀÎ ¼º°ø : {0} {1}", _user.Email, _user.DisplayName);
-            warningLoginText.text = "";
-            confirmLoginText.text = "·Î±×ÀÎ ¼º°ø!!";
-            onLoginCompleted?.Invoke(true);
-            
-        }
-    }
-
-    IEnumerator Register(string _email, string _password, string _username)
-    {
-        if (_username == "")
-        {
-            warningRegisterText.text = "´Ğ³×ÀÓÀ» Á¤ÇØÁÖ¼¼¿ä.";
-        }
-        else if (passwordRegister.text != passwordCheck.text)
-        {
-            warningRegisterText.text = " ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä.";
-        }
-        else
-        {
-            var RegisterTask = _auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
-            yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
-
-            // °èÁ¤À» ¸¸µé ¶§ ¿À·ù°¡ ¹ß»ıÇÏ¸é
-            if (RegisterTask.Exception != null)
-            {
-                Debug.LogWarning(message: $"µî·ÏÇÏ´Âµ¥ ¿¹¿Ü°¡ ¹ß»ıÇÏ¿© ½ÇÆĞ {RegisterTask.Exception}");
-                FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
+                // ë§Œì•½ ì˜ˆì™¸ê°€ ë°œìƒí•˜ì—¬ ì˜¤ë¥˜ê°€ ë‚˜íƒ€ë‚˜ë©´
+                Debug.LogWarning(message: $"ë¡œê·¸ì¸ í•˜ëŠ”ë° ì˜ˆì™¸ê°€ ë°œìƒí•˜ì—¬ ì‹¤íŒ¨ {LoginTask.Exception}");
+                FirebaseException firebaseEx = LoginTask.Exception.GetBaseException() as FirebaseException;
                 AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
-                string message = "È¸¿ø°¡ÀÔ ½ÇÆĞ!";
+                string message = "ë¡œê·¸ì¸ ì‹¤íŒ¨";
                 switch (errorCode)
                 {
                     case AuthError.MissingEmail:
-                        message = "ÀÌ¸ŞÀÏÀ» ÀûÀ¸¼¼¿ä.";
+                        message = "ì´ë©”ì¼ì„ ì ìœ¼ì„¸ìš”.";
                         break;
 
                     case AuthError.MissingPassword:
-                        message = "ºñ¹Ğ¹øÈ£¸¦ ÀûÀ¸¼¼¿ä.";
+                        message = "ë¹„ë°€ë²ˆí˜¸ë¥¼ ì ìœ¼ì„¸ìš”.";
                         break;
 
-                    case AuthError.WeakPassword:
-                        message = "ºñ¹Ğ¹øÈ£ÀÇ º¸¾ÈÀÌ Ãë¾àÇÕ´Ï´Ù.";
+                    case AuthError.WrongPassword:
+                        message = "ì˜ëª»ëœ ë¹„ë°€ë²ˆí˜¸.";
                         break;
 
-                    case AuthError.EmailAlreadyInUse:
-                        message = "Áßº¹µÈ ÀÌ¸ŞÀÏÀÔ´Ï´Ù.";
+                    case AuthError.InvalidEmail:
+                        message = "ì˜ëª»ëœ ì´ë©”ì¼";
+                        break;
+
+                    case AuthError.UserNotFound:
+                        message = "ê³„ì •ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
                         break;
                 }
-                warningRegisterText.text = message;
+                warningLoginText.text = message;
+                onLoginCompleted?.Invoke(false);
+
             }
-            // È¸¿ø°¡ÀÔ ¼º°ø.
+            // ì œëŒ€ë¡œ ì‘ë™ í•œë‹¤ë©´.
             else
             {
-                _user = RegisterTask.Result.User;
+                Debug.LogFormat("ë¡œê·¸ì¸ ì„±ê³µ : {0} {1}", _user.Email, _user.DisplayName);
+                warningLoginText.text = "";
+                confirmLoginText.text = "ë¡œê·¸ì¸ ì„±ê³µ!!";
+                onLoginCompleted?.Invoke(true);
 
-                if (_user != null)
+            }
+        }
+
+        IEnumerator Register(string _email, string _password, string _username)
+        {
+            if (_username == "")
+            {
+                warningRegisterText.text = "ë‹‰ë„¤ì„ì„ ì •í•´ì£¼ì„¸ìš”.";
+            }
+            else if (passwordRegister.text != passwordCheck.text)
+            {
+                warningRegisterText.text = " ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”.";
+            }
+            else
+            {
+                var RegisterTask = _auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
+                yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
+
+                // ê³„ì •ì„ ë§Œë“¤ ë•Œ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ë©´
+                if (RegisterTask.Exception != null)
                 {
-                    UserProfile profile = new UserProfile { DisplayName = _username };
+                    Debug.LogWarning(message: $"ë“±ë¡í•˜ëŠ”ë° ì˜ˆì™¸ê°€ ë°œìƒí•˜ì—¬ ì‹¤íŒ¨ {RegisterTask.Exception}");
+                    FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
+                    AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
-                    var ProfileTask = _user.UpdateUserProfileAsync(profile);
-
-                    yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
-
-                    if (ProfileTask.Exception != null)
+                    string message = "íšŒì›ê°€ì… ì‹¤íŒ¨!";
+                    switch (errorCode)
                     {
-                        // »ç¿ëÀÚ Á¤º¸ (username) À» ºÒ·¯¿À´Âµ¥ ¿¹¿Ü°¡ ¹ß»ıÇÏ¸é
-                        Debug.LogWarning(message: $"»ç¿ëÀÚ ÇÁ·ÎÇÊ Á¤º¸¸¦ ¾÷µ¥ÀÌÆ® ÇÏ´Âµ¥ ¿¹¿Ü°¡ ¹ß»ıÇß½À´Ï´Ù. {ProfileTask.Exception}");
-                        FirebaseException firebaseEx = ProfileTask.Exception.GetBaseException() as FirebaseException;
-                        AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
-                        warningRegisterText.text = "À¯Àú ³×ÀÓÀ» ºÒ·¯¿À´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù!";
+                        case AuthError.MissingEmail:
+                            message = "ì´ë©”ì¼ì„ ì ìœ¼ì„¸ìš”.";
+                            break;
+
+                        case AuthError.MissingPassword:
+                            message = "ë¹„ë°€ë²ˆí˜¸ë¥¼ ì ìœ¼ì„¸ìš”.";
+                            break;
+
+                        case AuthError.WeakPassword:
+                            message = "ë¹„ë°€ë²ˆí˜¸ì˜ ë³´ì•ˆì´ ì·¨ì•½í•©ë‹ˆë‹¤.";
+                            break;
+
+                        case AuthError.EmailAlreadyInUse:
+                            message = "ì¤‘ë³µëœ ì´ë©”ì¼ì…ë‹ˆë‹¤.";
+                            break;
                     }
-                    // ¼º°øÇÑ´Ù¸é
-                    else
+                    warningRegisterText.text = message;
+                }
+                // íšŒì›ê°€ì… ì„±ê³µ.
+                else
+                {
+                    _user = RegisterTask.Result.User;
+
+                    if (_user != null)
                     {
-                        Debug.Log("È¸¿ø°¡ÀÔÀÌ ¼º°øÀûÀ¸·Î ÀÌ·ç¾îÁ³½À´Ï´Ù." + _user.DisplayName);
-                        ConfrimRegisterText.text = "È¸¿ø°¡ÀÔ ¼º°ø!!";
-                        warningRegisterText.text = "";
+                        UserProfile profile = new UserProfile { DisplayName = _username };
+
+                        var ProfileTask = _user.UpdateUserProfileAsync(profile);
+
+                        yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
+
+                        if (ProfileTask.Exception != null)
+                        {
+                            // ì‚¬ìš©ì ì •ë³´ (username) ì„ ë¶ˆëŸ¬ì˜¤ëŠ”ë° ì˜ˆì™¸ê°€ ë°œìƒí•˜ë©´
+                            Debug.LogWarning(message: $"ì‚¬ìš©ì í”„ë¡œí•„ ì •ë³´ë¥¼ ì—…ë°ì´íŠ¸ í•˜ëŠ”ë° ì˜ˆì™¸ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. {ProfileTask.Exception}");
+                            FirebaseException firebaseEx = ProfileTask.Exception.GetBaseException() as FirebaseException;
+                            AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+                            warningRegisterText.text = "ìœ ì € ë„¤ì„ì„ ë¶ˆëŸ¬ì˜¤ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤!";
+                        }
+                        // ì„±ê³µí•œë‹¤ë©´
+                        else
+                        {
+                            Debug.Log("íšŒì›ê°€ì…ì´ ì„±ê³µì ìœ¼ë¡œ ì´ë£¨ì–´ì¡ŒìŠµë‹ˆë‹¤." + _user.DisplayName);
+                            ConfrimRegisterText.text = "íšŒì›ê°€ì… ì„±ê³µ!!";
+                            warningRegisterText.text = "";
+                        }
                     }
                 }
             }
         }
     }
+
 }
