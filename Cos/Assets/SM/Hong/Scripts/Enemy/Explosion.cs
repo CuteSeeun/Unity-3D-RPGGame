@@ -8,7 +8,7 @@ public class Explosion : MonoBehaviour
     Collider col;
     void Start()
     {
-        Invoke("Remove", 2.5f);
+        Invoke("Remove", 1.5f);
         Invoke("Col", 0.75f);
         col = GetComponent<CapsuleCollider>();
         col.enabled = false;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using HJ;
 using UnityEngine;
 using UnityEngine.AI;
@@ -329,11 +330,26 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
         Gizmos.DrawWireSphere(transform.position, spawnRange);
     }
 
-    private void OnTriggerStay(Collider other)
+    bool isDamage;
+    private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.TryGetComponent(out IHp iHp))
         {
+            isDamage = true;
+            StartCoroutine(Damage(iHp));
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        isDamage = false;
+    }
+
+    private IEnumerator Damage(IHp iHp)
+    {
+        while (isDamage)
+        {
             iHp.Hit(5);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

@@ -1248,6 +1248,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4146984308123209413, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _invincible
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4980016502053825255, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_Name
@@ -1619,6 +1624,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_Phase2
       objectReference: {fileID: 0}
+    - target: {fileID: 100166, guid: d0da0e4a1ea563e4cbe021713428bd1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: d0da0e4a1ea563e4cbe021713428bd1f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1907,7 +1916,7 @@ PrefabInstance:
     - target: {fileID: 2372816615617410480, guid: c343668abee22f442a6d6bad21a22658,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3145237190359215882, guid: c343668abee22f442a6d6bad21a22658,
         type: 3}
@@ -1958,6 +1967,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3967194182832124448, guid: c343668abee22f442a6d6bad21a22658,
+        type: 3}
+      propertyPath: _hpMax
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

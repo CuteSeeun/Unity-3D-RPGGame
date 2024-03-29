@@ -32,9 +32,12 @@ public class MoveTornado : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.TryGetComponent(out IHp iHp))
+        else if (other.gameObject.layer != LayerMask.NameToLayer("Boss")) // 보스 레이어가 아닌 경우에만 데미지를 주도록 합니다.
         {
-            iHp.Hit(5, true, Quaternion.identity);
+            if (other.gameObject.TryGetComponent(out IHp iHp))
+            {
+                iHp.Hit(5, true, Quaternion.identity);
+            }
         }
     }
 }
