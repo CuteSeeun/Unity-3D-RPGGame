@@ -2400,7 +2400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7316244844636965441}
-  - component: {fileID: 7020408863707393752}
+  - component: {fileID: 3202900629296171114}
   - component: {fileID: 6887089794517959137}
   - component: {fileID: 7165327779322845451}
   - component: {fileID: 1786028193673796828}
@@ -2436,7 +2436,7 @@ Transform:
   - {fileID: 8816611789602669083}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7020408863707393752
+--- !u!114 &3202900629296171114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2445,18 +2445,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8772198589023912327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1f977164e9bb05448136d8ce3ccaeef, type: 3}
+  m_Script: {fileID: 11500000, guid: d9132470b74b702428649bde2301eec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab_Stone_slash: {fileID: 3153472991145048103, guid: 3407e378c048bb5438424b28c7740b48,
+  _barvarianSwing1Effect: {fileID: 6113692818315101535, guid: c4eb36c36c0f9394e98921d70514e0fb,
     type: 3}
-  _prefab_stab_medium_Orange: {fileID: 1295943409540678, guid: 83fafbd057eeb5c45b7c8bc40ee17604,
+  _barvarianSwing1SoundName: Player_barbarian_attack
+  _barvarianSwing1Delay: 1
+  _barvarianSwing2Effect: {fileID: 6113692818315101535, guid: b291107c73758bb4bb628623353c1727,
     type: 3}
-  _prefab_Swinging: {fileID: 6823863113701548011, guid: 19abd5899dd0f2b49a47c7ba5f64a1ce,
+  _barvarianSwing2SoundName: Player_barbarian_attack
+  _barvarianSwing2Delay: 1
+  _barvarianSwing3Effect: {fileID: 8557211520283143189, guid: 89e2419da055c7546be255f6bc472a02,
     type: 3}
-  delay: 1
-  delay2: 0.5
-  offset: {x: 0, y: 0, z: 0}
+  _barvarianSwing3SoundName: Player_barbarian_attack
+  _barvarianSwing3Delay: 1
+  _barvarianSpin1Effect: {fileID: 7823224943387381617, guid: b970f057735f22c4fa72fb7fc87f480a,
+    type: 3}
+  _barvarianSpin1SoundName: '"Player_barbarian_spinningattack"'
+  _barvarianSpin1Delay: 1
+  _barvarianSpin2Effect: {fileID: 7823224943387381617, guid: 676bc19b4a91ebc4eb799985a1ecacc4,
+    type: 3}
+  _barvarianSpin2SoundName: '"Player_barbarian_spinningattack"'
+  _barvarianSpin2Delay: 1
 --- !u!114 &6887089794517959137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2726,7 +2737,7 @@ Rigidbody:
   m_GameObject: {fileID: 8772198589023912327}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 10
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2739,7 +2750,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
