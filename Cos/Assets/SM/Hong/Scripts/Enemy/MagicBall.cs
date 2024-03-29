@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HJ;
 using UnityEngine;
 
 public class MagicBall : MonoBehaviour
@@ -9,6 +10,7 @@ public class MagicBall : MonoBehaviour
     public GameObject owner;
     public GameObject effect;
     Rigidbody rb;
+    private float attackDamage = 5;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -19,6 +21,7 @@ public class MagicBall : MonoBehaviour
     void Update()
     {
         rb.velocity = (target.transform.position - transform.position).normalized * speed;
+        transform.LookAt(target.transform.position);
     }
 
     public void del()
@@ -28,10 +31,11 @@ public class MagicBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.collider.TryGetComponent(out IHp iHp))
         {
             Instantiate(effect, transform.position, Quaternion.identity);
             //플레이어어게 데미지를 주는 함수 호출
+            iHp.Hit(attackDamage, false, transform.rotation);
             Destroy(gameObject);
         }
     }

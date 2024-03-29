@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HJ;
 using UnityEngine;
 
 public class SkulMissile : MonoBehaviour
@@ -7,6 +8,7 @@ public class SkulMissile : MonoBehaviour
     // 이동 속도
     public float moveSpeed = 10f;
     public GameObject explosion;
+    private float attackDamage = 5;
 
     void Update()
     {
@@ -17,11 +19,11 @@ public class SkulMissile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.collider.TryGetComponent(out IHp iHp))
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            //데미지 주는 함수 호출
+            iHp.Hit(attackDamage, true, transform.rotation);
         }
     }
 }

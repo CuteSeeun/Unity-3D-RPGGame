@@ -175,12 +175,19 @@ namespace HJ
                                                       0,
                                                       _attackLayerMask);
 
+            
+
             // 공격 각도에 따른 내적 계산
             _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
 
             // 내적으로 공격각도 구하기
             foreach (RaycastHit hit in hits)
             {
+                float dis = Vector3.Distance(this.transform.position, hit.transform.position);
+
+                //if (dis < 3) { Debug.Log();  }
+            
+
                 if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
                 {
                     // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달

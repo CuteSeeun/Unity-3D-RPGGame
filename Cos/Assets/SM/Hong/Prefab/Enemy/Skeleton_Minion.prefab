@@ -1077,10 +1077,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 37d5e023412bcd145b08b928016f14f1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6557572142869888313}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 37d5e023412bcd145b08b928016f14f1,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2039237112298691493}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 37d5e023412bcd145b08b928016f14f1,
         type: 3}
@@ -1147,27 +1143,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!135 &6557572142869888313
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6038299958198726227}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 20
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2039237112298691493
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1231,7 +1206,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 20
   attackRange: 2
-  hp: 20
   detectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   attackColor: {r: 1, g: 0, b: 0, a: 1}
   _hp: 0
+  _hpMax: 30
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  _attackAngle: 45

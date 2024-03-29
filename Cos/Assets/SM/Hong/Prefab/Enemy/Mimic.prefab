@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1018730387141346027}
   - component: {fileID: 5101186596146619786}
   - component: {fileID: 69175469547666390}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Mimic
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,8 +164,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 3
-  hp: 20
   attackColor: {r: 1, g: 0, b: 0, a: 1}
+  _hp: 0
+  _hpMax: 30
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  _attackAngle: 45
 --- !u!1001 &2815345904659071332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,6 +233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chest_rare_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 162122adc32373b40ae4eac51cd21818,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -302,6 +312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chestTop_rare_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbee0e02c9170824c90b644cd278ba93,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

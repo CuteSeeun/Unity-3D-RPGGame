@@ -6,78 +6,82 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingSceneManager : MonoBehaviour
+namespace KJ
 {
-    void Start()
+    public class LoadingSceneManager : MonoBehaviour
     {
-        #region ½½¶óÀÌ´õ¸¦ ÀÌ¿ëÇØ ·ÎµùÃ¢¿¡¼­ ´ÙÀ½ ¾ÀÀ¸·Î ³Ñ¾î°¡±â.
-        // LoadAsyncSceneCoroutine() À» ÄÚ·çÆ¾À¸·Î ½ÃÀÛ.
-        StartCoroutine(LoadAsyncSceneCoroutine());
-        #endregion
-        #region ·Îµù µ¿¾È °ÔÀÓ ½ºÅä¸® ÅØ½ºÆ® ·£´ıÀ¸·Î »ı¼º
-        // ¸®½ºÆ®¿¡ gameStory ÄÄÆ÷³ÍÆ® Ãß°¡
-        gameStoryList.Add(gameStory);
-        gameStoryList.Add(gameStory2);
-        gameStoryList.Add(gameStory3);
-
-        // ·£´ı ¹üÀ§´Â ¸®½ºÆ® ±æÀÌ
-        _randomNum = Random.Range(0, gameStoryList.Count);
-        randomStory = gameStoryList[_randomNum];
-
-        // ·£´ıÀ¸·Î ¼±ÅÃµÈ ÅØ½ºÆ®¸¸ È°¼ºÈ­ ³ª¸ÓÁö´Â ºñÈ°¼ºÈ­.
-        foreach (var story in gameStoryList)
+        void Start()
         {
-            // ¸ğµç ½ºÅä¸®¸¦ ºñÈ°¼ºÈ­.
-            story.gameObject.SetActive(false);
-        }
-        // ·£´ıÀ¸·Î ¼±ÅÃµÈ ½ºÅä¸® È°¼ºÈ­.
-        randomStory.gameObject.SetActive(true);
-        #endregion
-    }
-    #region ½½¶óÀÌ´õ¸¦ ÀÌ¿ëÇØ ·ÎµùÃ¢¿¡¼­ ´ÙÀ½ ¾ÀÀ¸·Î ³Ñ¾î°¡±â. 
-    [Header("Slider")]
-    public Slider slider;
-    public string sceneName;
+            #region ìŠ¬ë¼ì´ë”ë¥¼ ì´ìš©í•´ ë¡œë”©ì°½ì—ì„œ ë‹¤ìŒ ì”¬ìœ¼ë¡œ ë„˜ì–´ê°€ê¸°.
+            // LoadAsyncSceneCoroutine() ì„ ì½”ë£¨í‹´ìœ¼ë¡œ ì‹œì‘.
+            StartCoroutine(LoadAsyncSceneCoroutine());
+            #endregion
+            #region ë¡œë”© ë™ì•ˆ ê²Œì„ ìŠ¤í† ë¦¬ í…ìŠ¤íŠ¸ ëœë¤ìœ¼ë¡œ ìƒì„±
+            // ë¦¬ìŠ¤íŠ¸ì— gameStory ì»´í¬ë„ŒíŠ¸ ì¶”ê°€
+            gameStoryList.Add(gameStory);
+            gameStoryList.Add(gameStory2);
+            gameStoryList.Add(gameStory3);
 
-    private float _time;
+            // ëœë¤ ë²”ìœ„ëŠ” ë¦¬ìŠ¤íŠ¸ ê¸¸ì´
+            _randomNum = Random.Range(0, gameStoryList.Count);
+            randomStory = gameStoryList[_randomNum];
 
-
-    IEnumerator LoadAsyncSceneCoroutine()
-    {
-        // sceneName À¸·Î ºñµ¿±â Çü½ÄÀ¸·Î ³Ñ¾î°¡°Ô ÇÏ´Â operation »ı¼º.
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        // operation ÀÌ ¿Ï·áµÇ¾îµµ ´ÙÀ½ ¾ÀÀ¸·Î ³Ñ¾î°¡´Â°É ¸·À½.
-        operation.allowSceneActivation = false;
-
-        // operation.isDone ÀÌ false ÀÏ µ¿¾È ¹İº¹.
-        while (!operation.isDone)
-        {
-            // °æ°ú ½Ã°£À» Á¤È®ÇÏ°Ô ´©Àû.
-            _time += Time.deltaTime;
-            // sliderÀÇ ¹ë·ù°ªÀ» 10ÃÊ±îÁö ÁøÇà»óÅÂ Ç¥½Ã
-            slider.value = _time / 10f;
-            
-            // 10ÃÊ°¡ Áö³ª¸é
-            if (_time > 10)
+            // ëœë¤ìœ¼ë¡œ ì„ íƒëœ í…ìŠ¤íŠ¸ë§Œ í™œì„±í™” ë‚˜ë¨¸ì§€ëŠ” ë¹„í™œì„±í™”.
+            foreach (var story in gameStoryList)
             {
-                // ´ÙÀ½ ¾ÀÀ¸·Î ³Ñ¾î°¡µµ·Ï È°¼ºÈ­.
-                operation.allowSceneActivation = true;
+                // ëª¨ë“  ìŠ¤í† ë¦¬ë¥¼ ë¹„í™œì„±í™”.
+                story.gameObject.SetActive(false);
             }
-            
-            //´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â.
-            yield return null;
+            // ëœë¤ìœ¼ë¡œ ì„ íƒëœ ìŠ¤í† ë¦¬ í™œì„±í™”.
+            randomStory.gameObject.SetActive(true);
+            #endregion
         }
+        #region ìŠ¬ë¼ì´ë”ë¥¼ ì´ìš©í•´ ë¡œë”©ì°½ì—ì„œ ë‹¤ìŒ ì”¬ìœ¼ë¡œ ë„˜ì–´ê°€ê¸°. 
+        [Header("Slider")]
+        public Slider slider;
+        public string sceneName;
+
+        private float _time;
+
+
+        IEnumerator LoadAsyncSceneCoroutine()
+        {
+            // sceneName ìœ¼ë¡œ ë¹„ë™ê¸° í˜•ì‹ìœ¼ë¡œ ë„˜ì–´ê°€ê²Œ í•˜ëŠ” operation ìƒì„±.
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+            // operation ì´ ì™„ë£Œë˜ì–´ë„ ë‹¤ìŒ ì”¬ìœ¼ë¡œ ë„˜ì–´ê°€ëŠ”ê±¸ ë§‰ìŒ.
+            operation.allowSceneActivation = false;
+
+            // operation.isDone ì´ false ì¼ ë™ì•ˆ ë°˜ë³µ.
+            while (!operation.isDone)
+            {
+                // ê²½ê³¼ ì‹œê°„ì„ ì •í™•í•˜ê²Œ ëˆ„ì .
+                _time += Time.deltaTime;
+                // sliderì˜ ë°¸ë¥˜ê°’ì„ 10ì´ˆê¹Œì§€ ì§„í–‰ìƒíƒœ í‘œì‹œ
+                slider.value = _time / 10f;
+
+                // 10ì´ˆê°€ ì§€ë‚˜ë©´
+                if (_time > 10)
+                {
+                    // ë‹¤ìŒ ì”¬ìœ¼ë¡œ ë„˜ì–´ê°€ë„ë¡ í™œì„±í™”.
+                    operation.allowSceneActivation = true;
+                }
+
+                //ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°.
+                yield return null;
+            }
+        }
+        #endregion
+        #region ë¡œë”© ë™ì•ˆ ê²Œì„ ìŠ¤í† ë¦¬ í…ìŠ¤íŠ¸ ëœë¤ìœ¼ë¡œ ìƒì„±
+        [Header("RandomText")]
+        public TMP_Text randomStory;
+        public TMP_Text gameStory;
+        public TMP_Text gameStory2;
+        public TMP_Text gameStory3;
+
+        private int _randomNum;
+
+        List<TMP_Text> gameStoryList = new List<TMP_Text>();
+        #endregion
     }
-    #endregion
-    #region ·Îµù µ¿¾È °ÔÀÓ ½ºÅä¸® ÅØ½ºÆ® ·£´ıÀ¸·Î »ı¼º
-    [Header("RandomText")]
-    public TMP_Text randomStory;
-    public TMP_Text gameStory;
-    public TMP_Text gameStory2;
-    public TMP_Text gameStory3;
 
-    private int _randomNum;
-
-    List<TMP_Text> gameStoryList = new List<TMP_Text>();
-    #endregion
 }
