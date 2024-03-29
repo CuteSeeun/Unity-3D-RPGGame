@@ -1,17 +1,25 @@
 using System.Collections;
+using HJ;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MageEnemyAI : MonoBehaviour
+public enum AI
+{
+    None,
+    Idle,
+    Patrol,
+    FollowTarget,
+    AttackTarget,
+}
+
+public class MageEnemyAI : MonoBehaviour, IHp
 {
     float patrolSpeed = 2f;
     float chaseSpeed = 2f;
     float patrolWaitTime = 3f;
     public float detectionRange;
     public float attackRange;
-    float detectionAngle = 360f;
-    public int hp;
 
     private Animator m_Animator;
     private NavMeshAgent agent;
@@ -20,14 +28,97 @@ public class MageEnemyAI : MonoBehaviour
     private bool isPatrolling;
     private bool isChasing;
     private bool isDeath;
+    private bool isAttack;
 
     public GameObject magic;
     public GameObject owner;
-    public Transform pos;
+    [SerializeField] LayerMask targetMask;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
+
+    public event System.Action<float> onHpChanged;
+    public event System.Action<float> onHpDepleted;
+    public event System.Action<float> onHpRecovered;
+    public event System.Action onHpMin;
+    public event System.Action onHpMax;
+
+    float IHp.hp
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = Mathf.Clamp(value, 0, _hpMax);
+
+            if (_hp == value)
+                return;
+
+            if (value < 1)
+            {
+                onHpMin?.Invoke();
+            }
+            else if (value >= _hpMax)
+                onHpMax?.Invoke();
+        }
+    }
+    [SerializeField] public float _hp;
+
+    public float hpMax { get => _hpMax; }
+    public float _hpMax = 30;
+
+    public void DepleteHp(float amount)
+    {
+        if (amount <= 0)
+            return;
+
+        _hp -= amount;
+        onHpDepleted?.Invoke(amount);
+    }
+
+    public void RecoverHp(float amount)
+    {
+
+    }
+
+    public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
+    {
+        if (!isDeath)
+        {
+            transform.rotation = hitRotation;
+            transform.Rotate(0, 180, 0);
+
+            if (powerAttack == false)
+            {
+                m_Animator.SetTrigger("HitA");
+                // 맞은 방향 뒤로 밀리기
+                Vector3 pushDirection = -transform.forward * 2f;
+                ApplyPush(pushDirection);
+            }
+            else
+            {
+                m_Animator.SetTrigger("HitB");
+                // 맞은 방향 뒤로 밀리기
+                Vector3 pushDirection = -transform.forward * 4f;
+                ApplyPush(pushDirection);
+            }
+
+            DepleteHp(damage);
+        }
+    }
+    void ApplyPush(Vector3 pushDirection)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(pushDirection, ForceMode.Impulse);
+    }
+
+    public void Hit(float damage)
+    {
+        DepleteHp(damage);
+    }
 
     void Start()
     {
@@ -38,42 +129,65 @@ public class MageEnemyAI : MonoBehaviour
         isPatrolling = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
+        _hp = _hpMax;
     }
 
     void Update()
     {
-        if (isPatrolling)
+        if (!isDeath)
         {
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, targetMask);
+
+            if (colliders.Length > 0)
             {
-                m_Animator.SetInteger("state", 0);
-                StartCoroutine(Patrol());
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.CompareTag("Player") && !isChasing)
+                    {
+                        isChasing = true;
+                        return;
+                    }
+                }
+            }
+            
+
+            if (isPatrolling)
+            {
+                if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                {
+                    m_Animator.SetInteger("state", 0);
+                    isPatrolling = false;
+                    StartCoroutine(Patrol());
+                }
+            }
+            else if (isChasing)
+            {
+                agent.speed = chaseSpeed;
+                if (GameObject.FindWithTag("Magic") == true)
+                    transform.LookAt(player.position);
+
+                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")
+                    && (GameObject.FindWithTag("Magic") == false))
+                {
+                    m_Animator.SetInteger("state", 1);
+                    transform.LookAt(player.position);
+                    agent.SetDestination(player.position);
+                }
+                else
+                {
+                    agent.SetDestination(transform.position);
+                    transform.LookAt(transform.position + transform.forward);
+                }
+                if ((Vector3.Distance(transform.position, player.position) < attackRange)
+                    && (GameObject.FindWithTag("Magic") == false))
+                {
+                    Attack();
+                    isAttack = true;
+                }
             }
         }
-        else if (isChasing)
-        {
-            agent.speed = chaseSpeed;
-            if(GameObject.FindWithTag("Magic") == true)
-                transform.LookAt(player.position);
-            if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")
-                && (GameObject.FindWithTag("Magic") == false))
-            {
-                m_Animator.SetInteger("state", 1);
-                transform.LookAt(player.position);
-                agent.SetDestination(player.position);
-            }
-            else
-            {
-                agent.SetDestination(transform.position);
-                transform.LookAt(transform.position + transform.forward);
-            }
-            if ((Vector3.Distance(transform.position, player.position) < attackRange) 
-                && (GameObject.FindWithTag("Magic") == false))
-            {
-                Attack();
-            }
-        }
-        if (hp <= 0 && !isDeath)
+        if (_hp <= 0 && !isDeath)
         {
             m_Animator.SetTrigger("isDeath");
             isDeath = true;
@@ -83,7 +197,6 @@ public class MageEnemyAI : MonoBehaviour
 
     IEnumerator Patrol()
     {
-        isPatrolling = false;
         yield return new WaitForSeconds(patrolWaitTime);
         if (!isChasing)
         {
@@ -125,32 +238,9 @@ public class MageEnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Vector3 playerDirection = other.transform.position - transform.position;
-            float angle = Vector3.Angle(playerDirection, transform.forward);
-
-            if (angle < detectionAngle && playerDirection.magnitude < detectionRange)
-            {
-                isChasing = true;
-            }
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            agent.speed = patrolSpeed;
-            isChasing = false;
-            isPatrolling = true;
-        }
-    }
-
     public void Magic()
     {
-        GameObject shootMagic = Instantiate(magic, pos.position, Quaternion.identity);
+        GameObject shootMagic = Instantiate(magic, transform.position + transform.forward, Quaternion.identity);
         MagicBall magicScript = shootMagic.GetComponent<MagicBall>();
         magicScript.target = GameObject.FindWithTag("Player");
         magicScript.owner = owner;
@@ -160,17 +250,12 @@ public class MageEnemyAI : MonoBehaviour
     public void AttackEnd()
     {
         agent.isStopped = false;
-        isChasing = true;
+        isAttack = false;
         m_Animator.SetBool("isAttack",false);
     }
 
     public void Death()
     {
         Destroy(gameObject);
-    }
-
-    void Hit()
-    {
-        //데미지 가하는 코드 구현
     }
 }
