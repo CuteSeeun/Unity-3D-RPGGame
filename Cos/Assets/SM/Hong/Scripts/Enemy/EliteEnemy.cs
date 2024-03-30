@@ -17,6 +17,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     private float stopThreshold = 0.1f; // 오브젝트가 멈춘 것으로 간주하는 속도 임계값
 
 
+    private EnemyHealthBar healthBar;
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
@@ -78,6 +79,10 @@ public class EliteEnemy : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 골렘");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -114,6 +119,11 @@ public class EliteEnemy : MonoBehaviour, IHp
         isCrushEffect.SetActive(false);
         isRush.Stop();
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 골렘");
+        }
     }
 
     void Update()

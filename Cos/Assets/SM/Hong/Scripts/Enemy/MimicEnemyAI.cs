@@ -12,6 +12,7 @@ public class MimicEnemyAI : MonoBehaviour, IHp
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private EnemyHealthBar healthBar;
     private bool isChasing;
     private bool isDeath;
     private bool isOpen;
@@ -58,6 +59,10 @@ public class MimicEnemyAI : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "미믹");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -112,6 +117,11 @@ public class MimicEnemyAI : MonoBehaviour, IHp
         agent.stoppingDistance = 3;
         attackTimer = 3;
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "미믹");
+        }
     }
 
     void Update()

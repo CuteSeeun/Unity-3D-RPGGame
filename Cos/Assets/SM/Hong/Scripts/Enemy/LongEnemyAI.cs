@@ -17,6 +17,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private EnemyHealthBar healthBar;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isAiming;
@@ -64,6 +65,10 @@ public class LongEnemyAI : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 궁수");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -118,6 +123,11 @@ public class LongEnemyAI : MonoBehaviour, IHp
         agent.isStopped = false;
         agent.speed = patrolSpeed;
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 궁수");
+        }
     }
 
     void Update()

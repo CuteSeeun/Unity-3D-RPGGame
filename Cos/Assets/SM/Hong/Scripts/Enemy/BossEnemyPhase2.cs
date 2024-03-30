@@ -9,6 +9,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
 {
     Animator animator;
     Transform player;
+    EnemyHealthBar healthBar;
 
     public GameObject missile;
     public Transform pos;
@@ -66,6 +67,10 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "타락한 마법사(폭주)");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -92,6 +97,11 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
         player = GameObject.FindWithTag("Player").transform;
         lightningRange.SetActive(false);
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "타락한 마법사(폭주)");
+        }
     }
 
     void Update()
