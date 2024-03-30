@@ -30,6 +30,8 @@ namespace HJ
         private void TimeOut()
         {
             Destroy(gameObject);
+            if (_isExplosive)
+                Explosion();
         }
 
         [Header("Missile Attack")] //==================================================================
@@ -67,27 +69,34 @@ namespace HJ
                 }
                 else // (_isExplosive == true)
                 {
-
-                    RaycastHit[] hits = Physics.SphereCastAll(transform.position, _attackRange, transform.up, 0, _attackLayerMask);
-
-                    //_attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
-
-                    foreach (RaycastHit hit in hits)
-                    {
-                        Hit(hit.collider);
-                    }
-
-                    GameObject effectInstanse = Instantiate(_explosionEffect, transform.position, transform.rotation);
-                    //SFX_Manager.Instance.VFX(soundName);
-                    Destroy(effectInstanse, _explosionDestroyDelay);
+                    Explosion();
                 }
             }
 
             if (coliderHit.gameObject.layer == _layerMaskWall) // 벽에 박으면 터짐
             {
                 Destroy(gameObject);
+
+                if (_isExplosive)
+                    Explosion();
             }
             
+        }
+
+        private void Explosion()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, _attackRange, transform.up, 0, _attackLayerMask);
+
+            //_attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+            foreach (RaycastHit hit in hits)
+            {
+                Hit(hit.collider);
+            }
+
+            GameObject effectInstanse = Instantiate(_explosionEffect, transform.position, transform.rotation);
+            //SFX_Manager.Instance.VFX(soundName);
+            Destroy(effectInstanse, _explosionDestroyDelay);
         }
 
         private void Hit(Collider coliderHit)

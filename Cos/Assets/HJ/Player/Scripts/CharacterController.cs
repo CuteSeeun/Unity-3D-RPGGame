@@ -69,7 +69,10 @@ namespace HJ
                 _hp = Mathf.Clamp(value, 0, _hpMax); // _hp를 value를 0~_hpMax 사잇값으로 변환해서 대입
 
                 if (_hp == value) // 문제없이 들어가면 return
+                {
+                    onHpChanged?.Invoke(_hp);
                     return;
+                }
 
                 if (value < 1)
                 {
@@ -77,6 +80,7 @@ namespace HJ
                 }
                 else if (value >= _hpMax)
                     onHpMax?.Invoke();
+                onHpChanged?.Invoke(_hp);
             }
         }
         [SerializeField] private float _hp;
@@ -174,8 +178,6 @@ namespace HJ
                                                       Vector3.up,
                                                       0,
                                                       _attackLayerMask);
-
-            
 
             // 공격 각도에 따른 내적 계산
             _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);

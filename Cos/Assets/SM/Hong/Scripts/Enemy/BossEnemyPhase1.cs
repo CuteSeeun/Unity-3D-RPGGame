@@ -18,6 +18,8 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     Transform player;
     public GameObject skulMissile;
     public GameObject explosion;
+    public GameObject teleportIn;
+    public GameObject teleportOut;
     public ParticleSystem fire;
     private bool isChasing;
     private bool isDeath;
@@ -98,6 +100,8 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
         agent.stoppingDistance = 3;
         fire.Stop();
         explosion.SetActive(false);
+        teleportIn.SetActive(false);
+        teleportOut.SetActive(false);
     }
 
     void Update()
@@ -227,6 +231,8 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     {
         attackTimer = 5;
         animator.SetTrigger("isTel");
+        teleportIn.SetActive(true);
+        teleportOut.SetActive(false);
         if (attackStack == 5)
         {
             Invoke("Raid", 0.5f);
@@ -240,17 +246,21 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     void Raid()
     {
         transform.position = player.position - player.forward * 2f;
+        teleportOut.SetActive(true);
         transform.LookAt(player.position);
         animator.SetTrigger("isRaid");
+        teleportIn.SetActive(false);
     }
 
     void Skul()
     {
         transform.position = new Vector3(0, 0, 0);
+        teleportOut.SetActive(true);
         transform.LookAt(transform.position - Vector3.forward);
         animator.SetTrigger("isSkul");
         attackTimer = 7;
         Invoke("Fire", 0.4f);
+        teleportIn.SetActive(false);
     }
 
     void Fire()

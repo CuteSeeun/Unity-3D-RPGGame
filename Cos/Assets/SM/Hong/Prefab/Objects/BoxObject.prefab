@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxObject
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 810fa447c6500e740bd417cb518c4dab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -130,8 +135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84ce5e4be8d9c24987d651b60e8287f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
   potion: {fileID: 5148181899691751019, guid: af24d5b98d324104484af4746bd59a15, type: 3}
   item: {fileID: 4473988387664013477, guid: 46ce4e75e0d7a9841887e04127aceed4, type: 3}
   destroyEffect: {fileID: 3429282237436523571, guid: 935b7c3f05759414d9b713ef797ebc8f,
     type: 3}
+  _hp: 0
+  _hpMax: 1
