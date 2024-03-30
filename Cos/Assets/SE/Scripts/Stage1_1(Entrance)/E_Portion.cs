@@ -1,41 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HJ;
 
-public class E_Portion : MonoBehaviour
+public class E_Portion : MonoBehaviour, IInteractable
 {
+    [SerializeField] GameObject _interactorLight;
+
     public GameObject DoorLock;
     public GameObject Portion;
     public GameObject Gate;
 
-    // Start is called before the first frame update
-    void Start()
+    public void InteractableOn()
     {
-        
+        _interactorLight.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InteractableOff()
     {
-        
+        _interactorLight.SetActive(false);
     }
 
-    private void OnTriggerStay(Collider other)
+    public void Interaction(GameObject interactor)
     {
-        if (other.CompareTag("Player"))
+        interactor.GetComponent<PlayerController>().potionNumber++;
+        Destroy(Portion);
+
+        DoorLock.SetActive(false);
+        Animator animator = Gate.GetComponent<Animator>();
+        if (animator != null)
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                DoorLock.SetActive(false);
-                Destroy(Portion);
-
-                Animator animator = Gate.GetComponent<Animator>();
-                    if (animator != null)
-                    {
-                        animator.SetTrigger("isOpen");
-                    }
-                
-            }
+            animator.SetTrigger("isOpen");
         }
     }
 }
