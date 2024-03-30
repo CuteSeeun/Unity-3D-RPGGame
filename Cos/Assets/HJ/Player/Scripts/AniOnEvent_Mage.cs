@@ -5,6 +5,15 @@ namespace HJ
 {
     public class AniOnEvent_Mage : MonoBehaviour
     {
+        [Header("Potion")] //============================================================================
+        [SerializeField] GameObject _potionEffect;
+        [SerializeField] string _potionSoundName;
+        [SerializeField] float _potionDelay;
+        public void Potion()
+        {
+            StartCoroutine(Effect(_potionEffect, _potionSoundName, _potionDelay));
+        }
+
         [Header("Spell 1")] //============================================================================
         public GameObject _mageSpell1effect;
         [SerializeField] string _mageSpell1SoundName;
