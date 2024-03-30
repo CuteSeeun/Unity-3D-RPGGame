@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -456,6 +456,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Minion (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -1809,6 +1814,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Minion (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2139,6 +2149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: door_gate (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d7b32979e028a4f86128d68054fdd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3495,7 +3510,7 @@ PrefabInstance:
     - target: {fileID: 388732175456853093, guid: 7bdfb5c5ce6ec5742b91f6eb23421b3f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -131.72282
+      value: -127.76
       objectReference: {fileID: 0}
     - target: {fileID: 388732175456853093, guid: 7bdfb5c5ce6ec5742b91f6eb23421b3f,
         type: 3}
@@ -4153,6 +4168,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Rogue (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7176036534561193731, guid: c05daba54d440ee4a84e2d9dd054fab9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7556397620291102137, guid: c05daba54d440ee4a84e2d9dd054fab9,
         type: 3}
@@ -6283,6 +6303,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -12892,6 +12917,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6636001843397506073, guid: 42d09a4f717a0a9479c37f8529ad7e15,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8609988075850205660, guid: 42d09a4f717a0a9479c37f8529ad7e15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15988,6 +16018,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Minion (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17039,6 +17074,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Rogue
       objectReference: {fileID: 0}
+    - target: {fileID: 7176036534561193731, guid: c05daba54d440ee4a84e2d9dd054fab9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7556397620291102137, guid: c05daba54d440ee4a84e2d9dd054fab9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18021,6 +18061,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9999996, y: 2.5, z: 0.47382656}
   m_Center: {x: -0.9999998, y: 1.0429423, z: -0.00000037252897}
+--- !u!114 &614644495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614644489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb48fe242a17be48b7ce136b89b8c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpen: 0
 --- !u!1001 &616290583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18063,6 +18116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6636001843397506073, guid: 42d09a4f717a0a9479c37f8529ad7e15,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8609988075850205660, guid: 42d09a4f717a0a9479c37f8529ad7e15,
         type: 3}
@@ -26762,6 +26820,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Minion (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27231,6 +27294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: door_gate (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d7b32979e028a4f86128d68054fdd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27738,6 +27806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Minion (61)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -28861,17 +28934,17 @@ PrefabInstance:
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.400002
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.9
+      value: 7.42
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.899994
+      value: -29.86
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
@@ -29183,6 +29256,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Minion (58)
       objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29300,6 +29378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: door_gate (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d7b32979e028a4f86128d68054fdd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30772,12 +30855,12 @@ PrefabInstance:
     - target: {fileID: 7556397620291102137, guid: c05daba54d440ee4a84e2d9dd054fab9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.169998
+      value: 8.38
       objectReference: {fileID: 0}
     - target: {fileID: 7556397620291102137, guid: c05daba54d440ee4a84e2d9dd054fab9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -237.07431
+      value: -238.4
       objectReference: {fileID: 0}
     - target: {fileID: 7556397620291102137, guid: c05daba54d440ee4a84e2d9dd054fab9,
         type: 3}
@@ -31410,6 +31493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6636001843397506073, guid: 42d09a4f717a0a9479c37f8529ad7e15,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8609988075850205660, guid: 42d09a4f717a0a9479c37f8529ad7e15,
         type: 3}
@@ -35480,6 +35568,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Minion (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -38452,6 +38545,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: door_gate
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d7b32979e028a4f86128d68054fdd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38703,6 +38801,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: door_gate (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d7b32979e028a4f86128d68054fdd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39512,6 +39615,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041048897450797946, guid: 9dcc615b205d7c4448c69a4453ec0f54,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041048897450797946, guid: 9dcc615b205d7c4448c69a4453ec0f54,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041048897450797946, guid: 9dcc615b205d7c4448c69a4453ec0f54,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041048897450797946, guid: 9dcc615b205d7c4448c69a4453ec0f54,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041048897450797946, guid: 9dcc615b205d7c4448c69a4453ec0f54,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041048897450797946, guid: 9dcc615b205d7c4448c69a4453ec0f54,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: 6302466407596169095, guid: 9dcc615b205d7c4448c69a4453ec0f54,
         type: 3}
@@ -40559,6 +40692,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 284014220}
+    - targetCorrespondingSourceObject: {fileID: 4858240903352147413, guid: 9dcc615b205d7c4448c69a4453ec0f54,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1437537243}
     - targetCorrespondingSourceObject: {fileID: 4858240903352147413, guid: 9dcc615b205d7c4448c69a4453ec0f54,
         type: 3}
       insertIndex: -1
@@ -41792,7 +41929,7 @@ PrefabInstance:
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -107.85081
+      value: -106.981
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -41802,7 +41939,7 @@ PrefabInstance:
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -209.68404
+      value: -208.36
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -45125,6 +45262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: door_gate (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d7b32979e028a4f86128d68054fdd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46554,6 +46696,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 614644494}
+    - targetCorrespondingSourceObject: {fileID: 1454348544028171890, guid: 42d09a4f717a0a9479c37f8529ad7e15,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 614644495}
   m_SourcePrefab: {fileID: 100100000, guid: 42d09a4f717a0a9479c37f8529ad7e15, type: 3}
 --- !u!4 &1431234578 stripped
 Transform:
@@ -46600,6 +46746,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7100907080457091875}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1437537242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1437537243}
+  - component: {fileID: 1437537244}
+  m_Layer: 19
+  m_Name: col (30)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1437537243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437537242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.66, y: -0.77, z: -0.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1994084730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1437537244
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437537242}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 14, y: 0.2, z: 14}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1439366459 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: d5b0b1034fe45944781c4d3334438ab3,
@@ -47311,6 +47510,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Minion (60)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -48293,6 +48497,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021997664409913055, guid: 7bdfb5c5ce6ec5742b91f6eb23421b3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58331,6 +58540,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Minion (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -65653,6 +65867,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Minion (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67726,10 +67945,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1926811929176350652, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: detectionRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Minion (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -68667,6 +68896,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Minion (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038299958198726227, guid: 860c23196bfa09a419d0eaadc8d28ce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
         type: 3}
@@ -86607,7 +86841,7 @@ PrefabInstance:
     - target: {fileID: 3641972551429001381, guid: ade5c04061077a3459ebce2c4a0021bb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3689607713168287630, guid: ade5c04061077a3459ebce2c4a0021bb,
         type: 3}
@@ -86917,7 +87151,7 @@ PrefabInstance:
     - target: {fileID: 7355129273569808443, guid: ade5c04061077a3459ebce2c4a0021bb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.952
+      value: 2.95
       objectReference: {fileID: 0}
     - target: {fileID: 7355129273569808443, guid: ade5c04061077a3459ebce2c4a0021bb,
         type: 3}
@@ -86927,7 +87161,7 @@ PrefabInstance:
     - target: {fileID: 7355129273569808443, guid: ade5c04061077a3459ebce2c4a0021bb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.667
+      value: -6.06
       objectReference: {fileID: 0}
     - target: {fileID: 7355129273569808443, guid: ade5c04061077a3459ebce2c4a0021bb,
         type: 3}
