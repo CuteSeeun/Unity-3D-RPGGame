@@ -84,23 +84,15 @@ namespace HJ
         public int potionNumber { get => _potionNumber; set => _potionNumber = value; }
         [SerializeField] int _potionNumber;
         [SerializeField] float _potionHp;
-        public GameObject potiondrinking;
         private void PotionStart()
         {
             _potionNumber = _maxPotion;
         }
-        protected void UsePotion()
+        protected void Potion()
         {
             potionNumber--;
             RecoverHp(_potionHp);
-            GameObject _potiondrinking = Instantiate(potiondrinking, transform.position + new Vector3 (0, 0.5f, 0), Quaternion.identity);
-            Destroy(_potiondrinking, 1.5f);
         }
-        
-            
-            
-                
-            
         
 
         #region InputSystem ===============================================
@@ -166,8 +158,6 @@ namespace HJ
             }
         }
         #endregion ========================================================
-
-
         // 개편 필요
         public override void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
