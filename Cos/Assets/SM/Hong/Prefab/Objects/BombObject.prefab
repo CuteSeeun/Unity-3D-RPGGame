@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0182e13175163784ba36bface60b7aba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.35
+      value: 2.45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0182e13175163784ba36bface60b7aba,
         type: 3}
@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0182e13175163784ba36bface60b7aba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.43
+      value: -6.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0182e13175163784ba36bface60b7aba,
         type: 3}
@@ -77,6 +77,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BombObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0182e13175163784ba36bface60b7aba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -157,7 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd4a4956ede26b4fad5ac785ff0508e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
   bombEffect: {fileID: 9137617729014624717, guid: 14a2f9d938ad80e45bed485f8bd4d906,
     type: 3}
-  damegeAmount: 5
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 6144
+  _hp: 0
+  _hpMax: 1

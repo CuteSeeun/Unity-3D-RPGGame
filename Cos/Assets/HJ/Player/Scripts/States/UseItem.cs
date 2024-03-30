@@ -12,7 +12,7 @@ namespace HJ
         {
             base.OnStateEnter(animator, stateInfo, layerIndex);
 
-            _playerController.Invoke("UsePotion", _delayTime * _stateLength);
+            //_playerController.Invoke("UsePotion", _delayTime * _stateLength);
         }
     }
 }
