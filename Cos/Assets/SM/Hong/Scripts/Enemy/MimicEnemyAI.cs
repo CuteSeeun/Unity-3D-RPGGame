@@ -68,7 +68,7 @@ public class MimicEnemyAI : MonoBehaviour, IHp
 
     public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
     {
-        if (!isDeath)
+        if (!isDeath && isOpen)
         {
             transform.rotation = hitRotation;
             transform.Rotate(0, 180, 0);

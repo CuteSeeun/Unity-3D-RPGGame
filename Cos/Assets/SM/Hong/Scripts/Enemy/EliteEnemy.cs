@@ -32,6 +32,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     private bool isAttack;
     private bool isJumping;
     private bool jump;
+    private bool isStand;
     private float attackTimer;
     private int attackStack = 0;
 
@@ -117,87 +118,90 @@ public class EliteEnemy : MonoBehaviour, IHp
 
     void Update()
     {
-        if (!isDeath)
+        if (isStand && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("StandUp_Golem"))
         {
-            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
-            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
-
-            foreach (Collider collider in colliders)
+            if (!isDeath)
             {
-                if (collider.CompareTag("Player") && !isChasing)
-                {
-                    isChasing = true;
-                }
-            }
+                // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+                Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
 
-            if (isChasing)
-            {
-                agent.speed = chaseSpeed;
-                if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")
-                    || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                foreach (Collider collider in colliders)
                 {
-                    agent.isStopped = false;
-                    m_Animator.SetInteger("state", 1);
-                    transform.LookAt(player.position);
-                    agent.SetDestination(player.position);
-                    agent.stoppingDistance = 3;
+                    if (collider.CompareTag("Player") && !isChasing)
+                    {
+                        isChasing = true;
+                    }
                 }
-                else if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("isRush_Golem"))
+
+                if (isChasing)
                 {
-                    transform.LookAt(player.position);
-                    agent.isStopped = true;
-                }
-                else
-                {
-                    agent.isStopped = true;
-                    agent.SetDestination(transform.position);
-                    transform.LookAt(transform.position + transform.forward);
-                }
-                if (Vector3.Distance(transform.position, player.position) < attackRange
-                    && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))
-                {
-                    agent.isStopped = true;
-                    m_Animator.SetInteger("state", 0);
-                    if (attackTimer == 0 && !isAttack && !jump)
-                        switch (attackStack)
-                        {
-                            case 0:
-                                Attack();
-                                isCrushEffect.SetActive(false);
-                                isAttack = true;
-                                break;
-                            case 1:
-                                Attack();
-                                isAttack = true;
-                                break;
-                            case 2:
-                                Rush();
-                                isAttack = true;
-                                break;
-                            case 3:
-                                Attack();
-                                rushImpact.SetActive(false);
-                                isAttack = true;
-                                break;
-                            case 4:
-                                Attack();
-                                isAttack = true;
-                                break;
-                            case 5:                             
-                                jump = true;
-                                agent.enabled = false;
-                                rb.isKinematic = false;
-                                m_Animator.SetTrigger("Jump");
-                                jumpEffect.SetActive(true);
-                                Invoke("Jump", 0.5f);
-                                isAttack = true;
-                                break;
-                            case 6:
-                                Crush();
-                                jumpImpact.SetActive(false);
-                                isAttack = true;
-                                break;
-                        }
+                    agent.speed = chaseSpeed;
+                    if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")
+                        || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                    {
+                        agent.isStopped = false;
+                        m_Animator.SetInteger("state", 1);
+                        transform.LookAt(player.position);
+                        agent.SetDestination(player.position);
+                        agent.stoppingDistance = 3;
+                    }
+                    else if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("isRush_Golem"))
+                    {
+                        transform.LookAt(player.position);
+                        agent.isStopped = true;
+                    }
+                    else
+                    {
+                        agent.isStopped = true;
+                        agent.SetDestination(transform.position);
+                        transform.LookAt(transform.position + transform.forward);
+                    }
+                    if (Vector3.Distance(transform.position, player.position) < attackRange
+                        && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))
+                    {
+                        agent.isStopped = true;
+                        m_Animator.SetInteger("state", 0);
+                        if (attackTimer == 0 && !isAttack && !jump)
+                            switch (attackStack)
+                            {
+                                case 0:
+                                    Attack();
+                                    isCrushEffect.SetActive(false);
+                                    isAttack = true;
+                                    break;
+                                case 1:
+                                    Attack();
+                                    isAttack = true;
+                                    break;
+                                case 2:
+                                    Rush();
+                                    isAttack = true;
+                                    break;
+                                case 3:
+                                    Attack();
+                                    rushImpact.SetActive(false);
+                                    isAttack = true;
+                                    break;
+                                case 4:
+                                    Attack();
+                                    isAttack = true;
+                                    break;
+                                case 5:
+                                    jump = true;
+                                    agent.enabled = false;
+                                    rb.isKinematic = false;
+                                    m_Animator.SetTrigger("Jump");
+                                    jumpEffect.SetActive(true);
+                                    Invoke("Jump", 0.5f);
+                                    isAttack = true;
+                                    break;
+                                case 6:
+                                    Crush();
+                                    jumpImpact.SetActive(false);
+                                    isAttack = true;
+                                    break;
+                            }
+                    }
                 }
             }
         }
@@ -490,6 +494,18 @@ public class EliteEnemy : MonoBehaviour, IHp
             }
 
             
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Collider col = GetComponent<SphereCollider>();
+
+            m_Animator.SetTrigger("isStand");
+            isStand = true;
+            col.enabled = false;
         }
     }
 }
