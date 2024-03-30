@@ -5,6 +5,15 @@ namespace HJ
 {
     public class AniOnEvent_Rogue : MonoBehaviour
     {
+        [Header("Potion")] //============================================================================
+        [SerializeField] GameObject _potionEffect;
+        [SerializeField] string _potionSoundName;
+        [SerializeField] float _potionDelay;
+        public void Potion()
+        {
+            StartCoroutine(Effect(_potionEffect, _potionSoundName, _potionDelay));
+        }
+
         [Header("Slash1")] //============================================================================
         public GameObject _rogueSlash1Effect;
         [SerializeField] string _rogueSlash1SoundName;

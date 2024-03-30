@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 94ceb90243a27c845bb693c45a157d81,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.91
+      value: 7.65
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94ceb90243a27c845bb693c45a157d81,
         type: 3}
@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 94ceb90243a27c845bb693c45a157d81,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.28
+      value: -6.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94ceb90243a27c845bb693c45a157d81,
         type: 3}
@@ -76,7 +76,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 94ceb90243a27c845bb693c45a157d81,
         type: 3}
       propertyPath: m_Name
-      value: barrel
+      value: DestroyObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 94ceb90243a27c845bb693c45a157d81,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -132,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24c187fb3e03aa44a9c1dbaddf8cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
   bombEffect: {fileID: 3429282237436523571, guid: 935b7c3f05759414d9b713ef797ebc8f,
     type: 3}
+  _hp: 0
+  _hpMax: 1
