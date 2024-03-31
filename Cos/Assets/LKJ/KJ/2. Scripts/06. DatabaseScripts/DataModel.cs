@@ -53,10 +53,14 @@ namespace KJ
 
     /* PlayerDB.Json 종합적으로 관리 */
     [System.Serializable]
-    public class GameData
+    public class GameData : SingletonLazy<GameData>
     {
+        /* 플레이어 데이터를 저장할 Dictionary. */
         public Dictionary<string, Player> players = new Dictionary<string, Player>();
+        /* 클래스 데이터를 저장할 Dictionary. */
         public Dictionary<ClassType, Class> classes = new Dictionary<ClassType, Class>();
+        /* 아이템 데이터를 저장할 Dictionary. */
+        public Dictionary<string, Item> itmes = new Dictionary<string, Item>();
     }
 
     [System.Serializable]

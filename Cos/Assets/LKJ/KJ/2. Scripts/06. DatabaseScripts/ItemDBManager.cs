@@ -23,27 +23,43 @@ namespace KJ
                 GameObject obj = new GameObject("SingletonLazy");
                 instance = obj.AddComponent(typeof(T)) as T;
 
+                /* 씬 전환시 Gameobject가 파괴되지 않도록 설정. */
                 DontDestroyOnLoad(obj);
             }
             else
             {
+                /* 이미 인스턴스가 있을 경우 새로 생성된 GameObject 파괴 */
                 Destroy(instance as GameObject);
             }
 
+            /* 생성된 인스턴스 반환. */
             return instance;
         });
 
+        /* 싱글톤 인스턴스에 접근하기 위한 정적 속성. */
         public static T Instance
         {
             get 
             { 
+                /* Lazy 인스턴스의 Value 속성을 통해 싱글톤 인스턴스 반환
+                 접근 하는 순간 Lazy 객체가 실제 값을 생성. */
                 return _instance.Value; 
             }
         }
     }
 
+    /* SingletonLazy<T> 를 상속받아서 싱글톤 구현하는 클래스 */
     public class ItemDBManager : SingletonLazy<ItemDBManager>
     {
-        public Dictionary<string, Item> itmes = new Dictionary<string, Item>();
+        GameData gameData = GameData.Instance;
+        
+        public IEnumerator LoadItemDB()
+        {
+            Debug.Log(" 로드 완료 " + gameData);
+            TextAsset itemData = Resources.Load<TextAsset>("ItemDB");
+            gameData = JsonUtility.FromJson<GameData>(itemData.text);
+
+            yield return null;
+        }
     }
 }
