@@ -1,3 +1,4 @@
+using HJ;
 using Ricimi;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,7 +42,6 @@ public class BarsManager : MonoBehaviour
         /* 슬라이더의 최대값을 최대 체력으로 설정. */
         healthSlider.maxValue = maxHealth;
         UpdateHealthUI();
-
         /* 초기 스테미나 설정 */
         _currentStamina = maxStamina;
         /* 슬라이더의 최대값을 최대 스테미너로 설정. */

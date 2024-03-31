@@ -16,6 +16,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     Animator animator;
     NavMeshAgent agent;
     Transform player;
+    EnemyHealthBar healthBar;
     public GameObject skulMissile;
     public GameObject explosion;
     public GameObject teleportIn;
@@ -69,6 +70,10 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "타락한 마법사");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -102,6 +107,11 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
         explosion.SetActive(false);
         teleportIn.SetActive(false);
         teleportOut.SetActive(false);
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "타락한 마법사");
+        }
     }
 
     void Update()

@@ -140,7 +140,7 @@ public class MenuUIManager : MonoBehaviour
     #endregion
     #region 버튼 동적 할당
 
-    /*  */
+    /* 동적 할당 */
     public void CheckUIWithAction(string situation)
     {
         switch (situation)

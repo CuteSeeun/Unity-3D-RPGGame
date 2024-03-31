@@ -17,6 +17,8 @@ public class LongEnemyAI : MonoBehaviour, IHp
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private EnemyHealthBar healthBar;
+    private GetItemManager getItem;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isAiming;
@@ -64,6 +66,10 @@ public class LongEnemyAI : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 궁수");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -113,11 +119,17 @@ public class LongEnemyAI : MonoBehaviour, IHp
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        getItem = FindAnyObjectByType<GetItemManager>();
         patrolDestination = GetRandomPatrolDestination();
         isPatrolling = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 궁수");
+        }
     }
 
     void Update()
@@ -169,6 +181,8 @@ public class LongEnemyAI : MonoBehaviour, IHp
             m_Animator.SetTrigger("isDeath");
             isDeath = true;
             Invoke("Death", 2);
+            getItem.GetItem("뼈");
+            getItem.GetItem("야채바구니");
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using HJ;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class CloseEnemyAI : MonoBehaviour, IHp
@@ -11,12 +12,12 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     float patrolWaitTime = 3f;
     public float detectionRange;
     public float attackRange;
-    float detectionAngle = 360f;
-    
 
+    private EnemyHealthBar healthBar;
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private GetItemManager getItem;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isChasing;
@@ -40,7 +41,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
 
             if (_hp == value)
                 return;
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
             if (value < 1)
             {
                 onHpMin?.Invoke();
@@ -66,6 +67,10 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 미니언");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -117,10 +122,16 @@ public class CloseEnemyAI : MonoBehaviour, IHp
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         patrolDestination = GetRandomPatrolDestination();
+        getItem = FindAnyObjectByType<GetItemManager>();
         isPatrolling = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if(healthBar != null )
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 미니언");
+        }
     }
 
     void Update()
@@ -197,6 +208,8 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
+            getItem.GetItem("뼈");
+            getItem.GetItem("고기");
         }
     }
 
