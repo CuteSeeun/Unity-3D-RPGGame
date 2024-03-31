@@ -1640,6 +1640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc5c1ba6f02e1f4ba24623bff3c4a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _potionEffect: {fileID: 0}
+  _potionSoundName: 
+  _potionDelay: 0
   _knightSlash1Effect: {fileID: 2837760572684895673, guid: f8dba7672736b9244982d852ed921cfd,
     type: 3}
   _knightSlash1SoundName: Player_Knight_attack
@@ -1695,8 +1698,6 @@ MonoBehaviour:
   _maxPotion: 5
   _potionNumber: 0
   _potionHp: 50
-  potiondrinking: {fileID: 5023353015567381922, guid: e747544088e0b8842a0eca8697a4f65a,
-    type: 3}
 --- !u!95 &7243156815149692018
 Animator:
   serializedVersion: 5
@@ -1934,7 +1935,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 10
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

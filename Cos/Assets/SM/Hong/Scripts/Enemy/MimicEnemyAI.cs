@@ -12,6 +12,8 @@ public class MimicEnemyAI : MonoBehaviour, IHp
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private EnemyHealthBar healthBar;
+    private GetItemManager getItem;
     private bool isChasing;
     private bool isDeath;
     private bool isOpen;
@@ -58,6 +60,10 @@ public class MimicEnemyAI : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "미믹");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -107,11 +113,17 @@ public class MimicEnemyAI : MonoBehaviour, IHp
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        getItem = FindAnyObjectByType<GetItemManager>();
         isChasing = true;
         agent.isStopped = false;
         agent.stoppingDistance = 3;
         attackTimer = 3;
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "미믹");
+        }
     }
 
     void Update()
@@ -154,6 +166,8 @@ public class MimicEnemyAI : MonoBehaviour, IHp
                     m_Animator.SetTrigger("isDeath");
                     isDeath = true;
                     Invoke("Death", 2);
+                    getItem.GetItem("향신료");
+                    getItem.GetItem("하급강화석");                 
                 }
                 if (attackTimer > 0)
                 {

@@ -12,7 +12,7 @@ namespace KJ
     {
         void Start()
         {
-            #region 슬라이더를 이용해 로딩창에서 다음 씬으로 넘어가기.
+            #region 로딩 씬 데이터 로드 및 shortUID 체크 후 상황에 따라 씬 변경. (슬라이더) 
             // LoadAsyncSceneCoroutine() 을 코루틴으로 시작.
             StartCoroutine(LoadAsyncSceneCoroutine());
             #endregion
@@ -36,16 +36,49 @@ namespace KJ
             randomStory.gameObject.SetActive(true);
             #endregion
         }
-        #region 슬라이더를 이용해 로딩창에서 다음 씬으로 넘어가기. 
+
+        void Update()
+        {
+            currentProgress = Mathf.Lerp(currentProgress, targetProgress, Time.deltaTime * 10);
+            /* 슬라이더 값 업데이트 */
+            slider.value = currentProgress;
+        }
+
+        #region 로딩 씬 데이터 로드 및 shortUID 체크 후 상황에 따라 씬 변경. (슬라이더) 
         [Header("Slider")]
         public Slider slider;
         public string sceneName;
-
-        private float _time;
-
+        /* 현재 진행 상태 */
+        float currentProgress = 0f;
+        /* 목표 진행 상태 */
+        float targetProgress = 0f;
 
         IEnumerator LoadAsyncSceneCoroutine()
         {
+            /* 플레이어 데이터 로드 */
+            yield return StartCoroutine(PlayerDBManager.Instance.LoadPlayerDB());
+            targetProgress += 0.5f;
+            /* 아이템 데이터 로드 */
+            yield return StartCoroutine(ItemDBManager.Instance.LoadItemDB());
+            targetProgress += 0.5f;
+
+            /* 저장된 데이터 확인 */
+            bool hasSavedData = PlayerDBManager.Instance.CheckPlayerData(PlayerDBManager.Instance.CurrentShortUID);
+
+            if (hasSavedData)
+            {
+                /* 저장된 데이터가 있으면 로딩씬을 통해 게임 진행. */
+                PlayerDBManager.Instance.LoadGameData(PlayerDBManager.Instance.CurrentShortUID);
+                sceneName = "VillageScene";
+            }
+            else
+            {
+                /* 없으면 캐릭터 선택창으로 이동. */
+                sceneName = "CharacterSelectScene";
+            }
+
+            targetProgress = 1f;
+
             // sceneName 으로 비동기 형식으로 넘어가게 하는 operation 생성.
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
             // operation 이 완료되어도 다음 씬으로 넘어가는걸 막음.
@@ -54,15 +87,8 @@ namespace KJ
             // operation.isDone 이 false 일 동안 반복.
             while (!operation.isDone)
             {
-                // 경과 시간을 정확하게 누적.
-                _time += Time.deltaTime;
-                // slider의 밸류값을 10초까지 진행상태 표시
-                slider.value = _time / 10f;
-
-                // 10초가 지나면
-                if (_time > 10)
+                if (targetProgress >= 1f)
                 {
-                    // 다음 씬으로 넘어가도록 활성화.
                     operation.allowSceneActivation = true;
                 }
 

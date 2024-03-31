@@ -2671,6 +2671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e1f76b653e1c74e86e0eab969c4244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _potionEffect: {fileID: 0}
+  _potionSoundName: 
+  _potionDelay: 0
   _mageSpell1effect: {fileID: 290910824477090013, guid: 7a93e31f227233b42ae1a6c5bab3c2ba,
     type: 3}
   _mageSpell1SoundName: magicmissile
@@ -2714,7 +2717,6 @@ MonoBehaviour:
   _maxPotion: 0
   _potionNumber: 0
   _potionHp: 50
-  potiondrinking: {fileID: 0}
 --- !u!95 &5105053903146675633
 Animator:
   serializedVersion: 5
@@ -2952,7 +2954,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 10
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
