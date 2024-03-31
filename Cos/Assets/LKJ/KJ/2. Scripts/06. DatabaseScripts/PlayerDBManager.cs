@@ -1,8 +1,10 @@
 using KJ;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 
 namespace KJ
@@ -30,35 +32,59 @@ namespace KJ
         }
     }
 
-    public class PlayerDBManager : MonoBehaviour
+
+
+    public class PlayerDBManager : SingletonLazy<PlayerDBManager>
     {
-        public static PlayerDBManager Instance { get; private set; }
+        GameData gameData = GameData.Instance;
 
-
-        void Awake()
+        public IEnumerator LoadPlayerDB()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                /* Scene 전환시 파괴 방지 */
-                DontDestroyOnLoad(gameObject);
-            }
-            else if (Instance != this)
-            {
-                /* 중복 인스턴스 생성 방지 */
-                Destroy(gameObject);
-            }
-        }
-
-        void DataLoad()
-        {
-            /* 데이터 로드, Player 로드하면 class 도 같이 로드됨 */
+            Debug.Log(" 로드 완료 " + gameData);
             TextAsset playerData = Resources.Load<TextAsset>("PlayerDB");
-            /* Passing */
-            GameData gameData = JsonUtility.FromJson<GameData>(playerData.text);
+            gameData = JsonUtility.FromJson<GameData>(playerData.text);
 
+            yield return null;
         }
 
+        public string CurrentShortUID { get; private set; }
+
+        public void SaveOrUpdatePlayerData(string UID, Player playerData)
+        {
+            string shortUID = UIDHelper.GenerateShortUID(UID);
+            CurrentShortUID = shortUID;
+
+            playerData.shortUID = shortUID;
+
+            if (gameData.players.ContainsKey(shortUID))
+            {
+                gameData.players[shortUID] = playerData;
+            }
+            else
+            {
+                gameData.players.Add(shortUID, playerData);
+            }
+        }
+
+        public bool CheckPlayerData(string shortUID)
+        {
+            if (string.IsNullOrEmpty(shortUID)) return false;
+            return gameData.players.ContainsKey(shortUID);
+        }
+
+        public Player LoadGameData(string shortUID)
+        {
+            if (gameData.players.TryGetValue(shortUID, out Player playerData))
+            {
+                /* 플레이어 위치나 인벤토리 그리고 능력치 및 설정 저장. */
+                return playerData;
+            }
+            else
+            {
+                /* 새 플레이어 생성 로직 추가. */
+                return null;
+            }
+        }
     }
 }
 
