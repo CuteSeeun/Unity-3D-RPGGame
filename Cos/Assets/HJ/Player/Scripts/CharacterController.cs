@@ -52,7 +52,7 @@ namespace HJ
         public float attackWeapon;
         public float attackItem;
         public float attackSkill;
-        public float armor { get => (armor + armorArmor +armorItem) * armorSkill; }
+        public float armor { get => (armorArmor +armorItem) * armorSkill; }
         public float armorArmor;
         public float armorItem;
         public float armorSkill;
