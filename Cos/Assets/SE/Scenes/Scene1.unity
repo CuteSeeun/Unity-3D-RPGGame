@@ -9623,12 +9623,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1629948290}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &513201520 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4471475425882303949, guid: 24d3e25caaff32c44ae09b7ed74acb07,
-    type: 3}
-  m_PrefabInstance: {fileID: 1600490761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &513652024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9a668cd9424029a4babcce3760b2bbfd,
@@ -15084,7 +15078,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 513201520}
+      objectReference: {fileID: 0}
     - target: {fileID: 1595980075153985144, guid: 6cf463481d2cb284da7ec562d4bc8a41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18308,8 +18302,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb48fe242a17be48b7ce136b89b8c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLocked: 0
+  _wallsToDestroy: []
   _interactorLight: {fileID: 0}
-  isOpen: 0
+  _LockedLight: {fileID: 0}
+  _enemies: []
 --- !u!4 &1025695337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 516e0a6b461a3ec45978802b8bd20d3d,
@@ -32668,17 +32665,17 @@ PrefabInstance:
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -327.9601
+      value: 128.7
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5200005
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -321.60004
+      value: -125.9
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
@@ -57791,6 +57788,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 363304191}
     m_Modifications:
+    - target: {fileID: 6079287942008939611, guid: ade5c04061077a3459ebce2c4a0021bb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7924895925618489153, guid: ade5c04061077a3459ebce2c4a0021bb,
         type: 3}
       propertyPath: m_Name
