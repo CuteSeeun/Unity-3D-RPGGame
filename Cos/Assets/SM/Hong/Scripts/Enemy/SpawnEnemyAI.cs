@@ -12,6 +12,8 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private EnemyHealthBar healthBar;
+    private GetItemManager getItem;
     private bool isChasing;
     private bool isDeath;
     private bool isSpawn;
@@ -59,6 +61,10 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 미니언");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -108,10 +114,16 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        getItem = FindAnyObjectByType<GetItemManager>();
         isChasing = true;
         agent.isStopped = false;
         Invoke("Spawn", 3);
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 미니언");
+        }
     }
 
     void Update()
@@ -149,6 +161,8 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
                 m_Animator.SetTrigger("isDeath");
                 isDeath = true;
                 Invoke("Death", 2);
+                getItem.GetItem("뼈");
+                getItem.GetItem("고기");
             }
             if(attackTimer > 0)
             {
