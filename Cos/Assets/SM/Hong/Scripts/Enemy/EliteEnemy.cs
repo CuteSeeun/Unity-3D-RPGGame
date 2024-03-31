@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EliteEnemy : MonoBehaviour, IHp
 {
@@ -22,6 +23,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     private NavMeshAgent agent;
     private Transform player;
     private Rigidbody rb;
+    private GetItemManager getItem;
     public GameObject grounded;
     public GameObject jumpImpact;
     public GameObject rushImpact;
@@ -111,6 +113,7 @@ public class EliteEnemy : MonoBehaviour, IHp
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        getItem = FindAnyObjectByType<GetItemManager>();
         isChasing = true;
         agent.isStopped = false;
         jumpImpact.SetActive(false);
@@ -252,10 +255,24 @@ public class EliteEnemy : MonoBehaviour, IHp
         }
         if (_hp <= 0 && !isDeath)
         {
+            int acc = Random.Range(0, 3);
             m_Animator.SetTrigger("isDeath");
             agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
+            getItem.GetItem("상급강화석");
+            switch(acc)
+            {
+                case 0:
+                    getItem.GetItem("반지");
+                    break;
+                case 1:
+                    getItem.GetItem("목걸이");
+                    break;
+                case 2:
+                    getItem.GetItem("귀걸이");
+                    break;
+            }
         }
         if(m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Rush_Golem"))
         {

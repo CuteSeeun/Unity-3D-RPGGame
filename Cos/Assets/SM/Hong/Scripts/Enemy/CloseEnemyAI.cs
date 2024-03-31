@@ -17,6 +17,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private GetItemManager getItem;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isChasing;
@@ -121,6 +122,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         patrolDestination = GetRandomPatrolDestination();
+        getItem = FindAnyObjectByType<GetItemManager>();
         isPatrolling = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
@@ -206,6 +208,8 @@ public class CloseEnemyAI : MonoBehaviour, IHp
             agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
+            getItem.GetItem("뼈");
+            getItem.GetItem("고기");
         }
     }
 

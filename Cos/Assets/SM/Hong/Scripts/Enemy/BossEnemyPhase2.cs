@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using HJ;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -19,6 +20,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     public GameObject lightningRange;
     public GameObject tornado;
     public GameObject spawnEnemy;
+    public GameObject deathEffect;
     private float missileSpeed;
     private float spawnRange = 50f;
 
@@ -96,6 +98,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
         animator = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player").transform;
         lightningRange.SetActive(false);
+        deathEffect.SetActive(false);
         _hp = _hpMax;
         healthBar = FindObjectOfType<EnemyHealthBar>();
         if (healthBar != null)
@@ -106,107 +109,121 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
 
     void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Spawn"))
+        if (!isDeath)
         {
-            isSpawn = true;
-            if (isSpawn)
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Spawn"))
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+                isSpawn = true;
+                if (isSpawn)
                 {
-                    transform.LookAt(player.position);
-                }
-                if (attackTimer == 0 && !isAttack)
-                {
-                    switch (attackStack)
+                    if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
                     {
-                        case 0:
-                            animator.SetTrigger("missile");
-                            MissileAttack();
-                            isAttack = true;
-                            attackTimer = 8;
-                            break;
-                        case 1:
-                            animator.SetTrigger("explosion");
-                            transform.LookAt(transform.position + transform.forward);
-                            ExplosionAttack();
-                            isAttack = true;
-                            attackTimer = 8;
-                            break;
-                        case 2:
-                            animator.SetTrigger("armsUp");
-                            transform.LookAt(transform.position + transform.forward);
-                            SpawnArms(); SpawnArms(); SpawnArms(); SpawnArms(); SpawnArms();
-                            isAttack = true;
-                            attackTimer = 3;
-                            break;
-                        case 3:
-                            animator.SetTrigger("lightning");
-                            transform.LookAt(transform.position + transform.forward);
-                            lightningRange.SetActive(true);
-                            Instantiate(lightning, transform.position, Quaternion.identity);
-                            isAttack = true;
-                            attackTimer = 8;
-                            break;
-                        case 4:
-                            animator.SetTrigger("tornado");
-                            transform.LookAt(transform.position + transform.forward);
-                            SpawnTornado();
-                            isAttack = true;
-                            attackTimer = 8;
-                            break;
-                        case 5:
-                            animator.SetTrigger("armsUp");
-                            transform.LookAt(transform.position + transform.forward);
-                            SpawnEnemy();
-                            if (!isEnemy)
-                            {
-                                attackStack = 0;
-                            }
-                            isAttack = true;
-                            attackTimer = 3;
-                            break;
+                        transform.LookAt(player.position);
+                    }
+                    if (attackTimer == 0 && !isAttack)
+                    {
+                        switch (attackStack)
+                        {
+                            case 0:
+                                animator.SetTrigger("missile");
+                                MissileAttack();
+                                isAttack = true;
+                                attackTimer = 8;
+                                break;
+                            case 1:
+                                animator.SetTrigger("explosion");
+                                transform.LookAt(transform.position + transform.forward);
+                                ExplosionAttack();
+                                isAttack = true;
+                                attackTimer = 8;
+                                break;
+                            case 2:
+                                animator.SetTrigger("armsUp");
+                                transform.LookAt(transform.position + transform.forward);
+                                SpawnArms(); SpawnArms(); SpawnArms(); SpawnArms(); SpawnArms();
+                                isAttack = true;
+                                attackTimer = 3;
+                                break;
+                            case 3:
+                                animator.SetTrigger("lightning");
+                                transform.LookAt(transform.position + transform.forward);
+                                lightningRange.SetActive(true);
+                                Instantiate(lightning, transform.position, Quaternion.identity);
+                                isAttack = true;
+                                attackTimer = 8;
+                                break;
+                            case 4:
+                                animator.SetTrigger("tornado");
+                                transform.LookAt(transform.position + transform.forward);
+                                SpawnTornado();
+                                isAttack = true;
+                                attackTimer = 8;
+                                break;
+                            case 5:
+                                animator.SetTrigger("armsUp");
+                                transform.LookAt(transform.position + transform.forward);
+                                SpawnEnemy();
+                                if (!isEnemy)
+                                {
+                                    attackStack = 0;
+                                }
+                                isAttack = true;
+                                attackTimer = 3;
+                                break;
+                        }
                     }
                 }
             }
-        }
 
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
-        {
-            Invoke("Setcol", 3f);
-        }
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
-        {
-            Collider col = GetComponent<SphereCollider>();
-            col.enabled = false;
-        }
-        if (attackTimer > 0)
-        {
-            attackTimer -= Time.deltaTime;
-        }
-        else if (attackTimer < 0)
-        {
-            attackTimer = 0;
-        }
-        // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
-        Collider[] colliders = Physics.OverlapSphere(transform.position, spawnRange);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Enemy"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
             {
-                // Enemy 태그를 가진 오브젝트가 감지되면 isEnemy를 true로 설정합니다.
-                isEnemy = true;
-                return;
+                Invoke("Setcol", 3f);
             }
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
+            {
+                Collider col = GetComponent<SphereCollider>();
+                col.enabled = false;
+            }
+            if (_hp <= 0)
+            {
+                animator.SetTrigger("isDeath");
+                deathEffect.SetActive(true);
+                isDeath = true;
+                Invoke("Death", 2);
+            }
+            if (attackTimer > 0)
+            {
+                attackTimer -= Time.deltaTime;
+            }
+            else if (attackTimer < 0)
+            {
+                attackTimer = 0;
+            }
+            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+            Collider[] colliders = Physics.OverlapSphere(transform.position, spawnRange);
+
+            foreach (Collider collider in colliders)
+            {
+                if (collider.CompareTag("Enemy"))
+                {
+                    // Enemy 태그를 가진 오브젝트가 감지되면 isEnemy를 true로 설정합니다.
+                    isEnemy = true;
+                    return;
+                }
+            }
+            isEnemy = false;
         }
-        isEnemy = false;      
+    }
+
+    void Death()
+    {
+        Destroy(gameObject);
     }
     void Setcol()
     {
         Collider col = GetComponent<SphereCollider>();
         col.enabled = true;
     }
-
 
     void MissileAttack()
     {
@@ -345,8 +362,11 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     {
         if(other.gameObject.TryGetComponent(out IHp iHp))
         {
-            isDamage = true;
-            StartCoroutine(Damage(iHp));
+            if (!isDamage)
+            {
+                isDamage = true;
+                StartCoroutine(Damage(iHp));
+            }
         }
     }
     private void OnTriggerExit(Collider other)

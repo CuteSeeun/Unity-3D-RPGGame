@@ -1,13 +1,19 @@
 using HJ;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using CharacterController = HJ.CharacterController;
 
 public class BarsTset: MonoBehaviour
 {
     CharacterController playerHp;
     PlayerController playerSp;
+
+    /* 캐릭터 사망 UI*/
+    [Header("Player Death UI")]
+    public GameObject playerDeathUI;
     /* 슬라이더 */
     [Header("Slider")]
     public Slider healthSlider;
@@ -54,12 +60,18 @@ public class BarsTset: MonoBehaviour
         /* 슬라이더의 값 초기화. */
         staminaSlider.value = playerSp.stamina;
         menuStaminaSlider.value = playerSp.stamina;
+        /* 플레이어 사망 시 노출되는 UI 숨김*/
+        playerDeathUI.SetActive(false);
     }
 
     void Update()
     {
         UpdateHealthUI();
         UpdateStaminaUI();
+        if(playerHp.hp <= 0)
+        {
+            Invoke("Gameover", 3);
+        }
     }
     
     /* 체력바 업데이트 */
@@ -91,7 +103,20 @@ public class BarsTset: MonoBehaviour
         /* 정수로 변환하여 소수점 안나오게 함. */
         staminaCur.text = Mathf.RoundToInt(playerSp.stamina).ToString();
         menuStaminaCur.text = Mathf.RoundToInt(playerSp.stamina).ToString();
-        staminaMax.text = $"{maxStamina}";
-        
+        staminaMax.text = $"{maxStamina}";      
+    }
+
+    //플레이어 사망 시
+    void Gameover()
+    {
+        playerDeathUI.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    //마을로 이동
+    public void LoadVillage()
+    {
+        // 데이터베이스에 현재 씬 데이터 저장 
+        // 마을 씬으로 이동
     }
 }

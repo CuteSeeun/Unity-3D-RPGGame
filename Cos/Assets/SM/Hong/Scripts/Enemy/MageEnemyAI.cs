@@ -25,6 +25,7 @@ public class MageEnemyAI : MonoBehaviour, IHp
     private NavMeshAgent agent;
     private Transform player;
     private EnemyHealthBar healthBar;
+    private GetItemManager getItem;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isChasing;
@@ -130,6 +131,7 @@ public class MageEnemyAI : MonoBehaviour, IHp
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        getItem = FindAnyObjectByType<GetItemManager>();
         patrolDestination = GetRandomPatrolDestination();
         isPatrolling = true;
         agent.isStopped = false;
@@ -202,6 +204,8 @@ public class MageEnemyAI : MonoBehaviour, IHp
             m_Animator.SetTrigger("isDeath");
             isDeath = true;
             Invoke("Death", 2);
+            getItem.GetItem("뼈");
+            getItem.GetItem("호박");
         }
     }
 
