@@ -5,28 +5,73 @@ using HJ;
 
 public class Door1 : MonoBehaviour, IInteractable
 {
-    [SerializeField] GameObject _interactorLight;
     private Animator _animator; //애니메이터 컴포넌트 참조
-    public bool isOpen; //문 초기 상태 닫힘
+    private Collider _collider;
+
+    private bool isOpen; //문 초기 상태 닫힘
+    public bool isLocked;
+    [SerializeField] List<GameObject> _wallsToDestroy;
+
+    [SerializeField] GameObject _interactorLight;
+    [SerializeField] GameObject _LockedLight;
+
+    [SerializeField] List<GameObject> _enemies;
+
 
     private void Start()
     {
         _animator = GetComponent<Animator>(); //가져오기: 스크립트에서 애니메이션 제어.
+        _collider = GetComponent<Collider>();
     }
 
     public void InteractableOn()
     {
-        _interactorLight.SetActive(true);
+        if (isOpen == false)
+        {
+            if (isLocked == false)
+            {
+                _interactorLight.SetActive(true);
+            }
+            else
+            {
+                _LockedLight.SetActive(true);
+            }
+        }
     }
 
     public void InteractableOff()
     {
-        _interactorLight.SetActive(false);
+        if (isOpen == false)
+        {
+            if (isLocked == false)
+            {
+                _interactorLight.SetActive(false);
+            }
+            else
+            {
+                _LockedLight.SetActive(false);
+            }
+        }
     }
 
     public void Interaction(GameObject interactor)
     {
-        isOpen = true;
-        _animator.SetBool("isOpen", true);
+        InteractableOff();
+        if (isLocked == false)
+        {
+            isOpen = true;
+            _animator.SetBool("isOpen", true);
+            _collider.enabled = false;
+
+            foreach (var wall in _wallsToDestroy)
+            {
+                Destroy(wall);
+            }
+
+            foreach (var enemy in _enemies)
+            {
+                // 적들 깨우기
+            }
+        }
     }
 }

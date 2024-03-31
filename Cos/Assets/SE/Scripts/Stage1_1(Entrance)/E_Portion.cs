@@ -5,11 +5,9 @@ using HJ;
 
 public class E_Portion : MonoBehaviour, IInteractable
 {
+    [SerializeField] GameObject _potion;
     [SerializeField] GameObject _interactorLight;
-
-    public GameObject DoorLock;
-    public GameObject Portion;
-    public GameObject Gate;
+    public Door1 _door;
 
     public void InteractableOn()
     {
@@ -24,13 +22,7 @@ public class E_Portion : MonoBehaviour, IInteractable
     public void Interaction(GameObject interactor)
     {
         interactor.GetComponent<PlayerController>().potionNumber++;
-        Destroy(Portion);
-
-        DoorLock.SetActive(false);
-        Animator animator = Gate.GetComponent<Animator>();
-        if (animator != null)
-        {
-            animator.SetTrigger("isOpen");
-        }
+        _door.isLocked = false;
+        Destroy(_potion);
     }
 }

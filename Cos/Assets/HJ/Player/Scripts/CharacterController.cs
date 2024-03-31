@@ -48,9 +48,14 @@ namespace HJ
         public float speed { get => _speed; }
         [SerializeField] float _speed = 5f;
 
-        public float attack { get => _attack; }
-        [SerializeField] float _attack;
-        [SerializeField] protected float _armor;
+        public float attack { get => (attackWeapon + attackItem) * attackSkill; }
+        public float attackWeapon;
+        public float attackItem;
+        public float attackSkill;
+        public float armor { get => (armor + armorArmor +armorItem) * armorSkill; }
+        public float armorArmor;
+        public float armorItem;
+        public float armorSkill;
 
         private void CharacterInfoStart()
         {
@@ -66,7 +71,7 @@ namespace HJ
             }
             set
             {
-                _hp = Mathf.Clamp(value, 0, _hpMax); // _hp를 value를 0~_hpMax 사잇값으로 변환해서 대입
+                _hp = Mathf.Clamp(value, 0, hpMax); // _hp를 value를 0~_hpMax 사잇값으로 변환해서 대입
 
                 if (_hp == value) // 문제없이 들어가면 return
                 {
@@ -84,8 +89,10 @@ namespace HJ
             }
         }
         [SerializeField] private float _hp;
-        public float hpMax { get => _hpMax; }
+        public float hpMax { get => (_hpMax + hpMaxItem); }
         private float _hpMax = 100;
+        public float hpMaxItem;
+        public float skillHP;
 
         public event Action<float> onHpChanged;
         public event Action<float> onHpDepleted;
@@ -99,8 +106,6 @@ namespace HJ
 
         public virtual void Hit(float damage, bool powerAttack, Quaternion hitRotation)
         {
-            Debug.Log(damage * (10 / _armor));
-
             if (_invincible == false)
             {
                 transform.rotation = hitRotation;
@@ -115,7 +120,7 @@ namespace HJ
                     HitB();
                 }
 
-                DepleteHp(damage * (10 / _armor));
+                DepleteHp(damage * (10 / armor));
             }
         }
 
@@ -136,7 +141,7 @@ namespace HJ
         // [("Health")] ===================================================================================================================================================================
         private void HealthStart()
         {
-            _hp = _hpMax;
+            _hp = hpMax;
         }
 
         // [("Defending")] ================================================================================================================================================================
@@ -196,7 +201,7 @@ namespace HJ
                     if (hit.collider.TryGetComponent(out IHp iHp))
                     {
                         float _random = UnityEngine.Random.Range(0.75f, 1.25f);
-                        iHp.Hit(_attack * _attackDamageRate * _random, _isPowerAttack, transform.rotation);
+                        iHp.Hit(attack * _attackDamageRate * _random, _isPowerAttack, transform.rotation);
                     }
                 }
             }
@@ -209,7 +214,7 @@ namespace HJ
             //_missile.missileTimer = missileTimer;
             //_missile.isPiercing = _isPiercing;
             //_missile.isExplosive = _isExplosive;
-            _missile.attack = _attack;
+            _missile.attack = attack;
             //_missile.attackDamageRate = _attackDamageRate;
             //_missile.attackRange = _attackRange;
             //_missile.attackAngle = _attackAngle;
