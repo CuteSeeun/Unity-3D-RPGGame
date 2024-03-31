@@ -1,47 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HJ;
 
-public class G_Light : MonoBehaviour
+public class G_Light : MonoBehaviour, IInteractable
 {
-    public GameObject Light1;
-    public GameObject Light2;
-    
+    public GameObject LightWhite;
+    public GameObject LightYellow;
+    private Collider _collider;
 
-    // Start is called before the first frame update
-    void Start()
+    private bool _isOn;
+
+    [SerializeField] List<GameObject> interactables;
+
+    private void Start()
     {
-        //myLight = GetComponent<Light>();
-        //myLight.enabled = false;
-
-        //addLight = GetComponent<Light>();
-        //addLight.enabled = false;
-
-        Light lightComponent = Light1.GetComponent<Light>();
-        if (lightComponent != null)
-        {
-            lightComponent.enabled = false; // Light 컴포넌트를 초기에 비활성화
-        }
-
-        Light lightComponent2 = Light2.GetComponent<Light>();
-        if (lightComponent2 != null) 
-        {
-            lightComponent2.enabled = false;
-        }
-
-
+        _collider = GetComponent<CapsuleCollider>();
     }
 
-    private void OnTriggerStay(Collider other)
+    public void InteractableOn()
     {
-        if (other.CompareTag("Player"))
+        if (_isOn == false)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            LightWhite.SetActive(true);
+        }
+    }
+
+    public void InteractableOff()
+    {
+        if (_isOn == false)
+        {
+            LightWhite.SetActive(false);
+        }
+    }
+
+    public void Interaction(GameObject interactor)
+    {
+        InteractableOff();
+        _collider.enabled = false;
+        if (_isOn == false)
+        {
+            _isOn = true;
+            LightYellow.SetActive(true);
+
+            foreach ( var item in interactables)
             {
-                Light1.GetComponent<Light>().enabled = true;
-                Light2.GetComponent<Light>().enabled = true;
-
-
+                item.GetComponent<IInteractable>().Interaction(gameObject);
             }
         }
     }

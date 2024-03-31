@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EliteEnemy : MonoBehaviour, IHp
 {
@@ -17,10 +18,12 @@ public class EliteEnemy : MonoBehaviour, IHp
     private float stopThreshold = 0.1f; // 오브젝트가 멈춘 것으로 간주하는 속도 임계값
 
 
+    private EnemyHealthBar healthBar;
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
     private Rigidbody rb;
+    private GetItemManager getItem;
     public GameObject grounded;
     public GameObject jumpImpact;
     public GameObject rushImpact;
@@ -78,6 +81,10 @@ public class EliteEnemy : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 골렘");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -106,6 +113,7 @@ public class EliteEnemy : MonoBehaviour, IHp
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        getItem = FindAnyObjectByType<GetItemManager>();
         isChasing = true;
         agent.isStopped = false;
         jumpImpact.SetActive(false);
@@ -114,6 +122,11 @@ public class EliteEnemy : MonoBehaviour, IHp
         isCrushEffect.SetActive(false);
         isRush.Stop();
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 골렘");
+        }
     }
 
     void Update()
@@ -242,10 +255,24 @@ public class EliteEnemy : MonoBehaviour, IHp
         }
         if (_hp <= 0 && !isDeath)
         {
+            int acc = Random.Range(0, 3);
             m_Animator.SetTrigger("isDeath");
             agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
+            getItem.GetItem("상급강화석");
+            switch(acc)
+            {
+                case 0:
+                    getItem.GetItem("반지");
+                    break;
+                case 1:
+                    getItem.GetItem("목걸이");
+                    break;
+                case 2:
+                    getItem.GetItem("귀걸이");
+                    break;
+            }
         }
         if(m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Rush_Golem"))
         {

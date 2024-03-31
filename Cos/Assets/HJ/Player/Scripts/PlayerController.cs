@@ -34,8 +34,14 @@ namespace HJ
             set { _stamina = Mathf.Clamp(value, 0, _spMax); }
         }
         [SerializeField] float _stamina;
+        public float spMax { get => _spMax + spMaxItem + spMaxSkill; }
         private float _spMax = 100;
+        public float spMaxItem;
+        public float spMaxSkill;
+        public float spRecovery { get => (_spRecovery + spRecoveryItem) * spRecoverySkill; }
         private float _spRecovery = 35;
+        public float spRecoveryItem;
+        public float spRecoverySkill;
         public bool isSpRecover { get => _isSpRecover; set => _isSpRecover = value; }
         private bool _isSpRecover;
         public float staminaRequired { set => _staminaRequired = value; }
@@ -43,15 +49,15 @@ namespace HJ
 
         private void StaminaStart()
         {
-            stamina = _spMax;
+            stamina = spMax;
         }
         private void StaminaUpdate()
         {
             if (_isSpRecover)
             {
-                if (stamina < _spMax)
+                if (stamina < spMax)
                 {
-                    stamina += _spRecovery * Time.deltaTime;
+                    stamina += spRecovery * Time.deltaTime;
                 }
             }
         }
@@ -80,20 +86,28 @@ namespace HJ
         }
 
         // [Potion] ====================================================================================================================================================================
-        [SerializeField] int _maxPotion;
-        public int potionNumber { get => _potionNumber; set => _potionNumber = value; }
+        [SerializeField] int maxPotion { get => _maxPotion + maxPotionItem;  }
+        private int _maxPotion = 5;
+        public int maxPotionItem;
+        public int potionNumber { get => _potionNumber; set => _potionNumber = Mathf.Clamp(value, 0, maxPotion); }
         [SerializeField] int _potionNumber;
+        public float potionHp { get => _potionHp + potionHpItem; }
         [SerializeField] float _potionHp;
+        public float potionHpItem;
+
         private void PotionStart()
         {
-            _potionNumber = _maxPotion;
+            _potionNumber = maxPotion;
         }
         protected void Potion()
         {
             potionNumber--;
-            RecoverHp(_potionHp);
+            RecoverHp(potionHp);
         }
-        
+        public void PotionFull()
+        {
+            potionNumber = _maxPotion;
+        }
 
         #region InputSystem ===============================================
         public void OnMove(InputAction.CallbackContext context)
@@ -166,14 +180,14 @@ namespace HJ
                 transform.rotation = hitRotation;
                 transform.Rotate(0, 180, 0);
 
-                if (stamina > damage * (10 / _armor))
+                if (stamina > damage * (10 / armor))
                 {
-                    stamina -= damage * (10 / _armor);
+                    stamina -= damage * (10 / armor);
                     animator.SetInteger("state", 11);
                 }
                 else
                 {
-                    hp -= ((damage * (10 / _armor)) - stamina);
+                    hp -= ((damage * (10 / armor)) - stamina);
                     stamina = 0;
                     animator.SetInteger("state", 3);
                 }

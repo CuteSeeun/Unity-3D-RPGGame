@@ -10,11 +10,12 @@ public class EnemyS_AI : MonoBehaviour, IHp
     float chaseSpeed = 5f;
     public float detectionRange;
     public float attackRange;
-    float detectionAngle = 360f;
 
+    private EnemyHealthBar healthBar;
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
+    private GetItemManager getItem;
     private bool isChasing;
     private bool isDeath;
     private int attackStack = 0;
@@ -66,6 +67,10 @@ public class EnemyS_AI : MonoBehaviour, IHp
             return;
 
         _hp -= amount;
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 광전사");
+        }
         onHpDepleted?.Invoke(amount);
     }
 
@@ -116,11 +121,17 @@ public class EnemyS_AI : MonoBehaviour, IHp
     {
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;     
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        getItem = FindAnyObjectByType<GetItemManager>();
         agent.isStopped = true;
         agent.speed = chaseSpeed;
         agent.stoppingDistance = 3;
         _hp = _hpMax;
+        healthBar = FindObjectOfType<EnemyHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealth(_hp, _hpMax, "스켈레톤 광전사");
+        }
     }
 
     void Update()
@@ -198,12 +209,14 @@ public class EnemyS_AI : MonoBehaviour, IHp
             }
         }
 
-            if (_hp <= 0 && !isDeath)
-            {
-                m_Animator.SetTrigger("isDeath");
-                isDeath = true;
-                Invoke("Death", 2);
-            }
+        if (_hp <= 0 && !isDeath)
+        {
+            m_Animator.SetTrigger("isDeath");
+            isDeath = true;
+            Invoke("Death", 2);
+            getItem.GetItem("뼈");
+            getItem.GetItem("향신료");
+        }
     }
 
     void Move()
