@@ -37,8 +37,8 @@ public class Stage1_2Trigger : MonoBehaviour, IInteractable
     {
         foreach (var door in doors)
         {
-            yield return new WaitForSeconds(_openTime);
             door.Interaction(gameObject);
+            yield return new WaitForSeconds(_openTime);
         }
         yield return new WaitForSeconds(_artifactTime);
         artifact.LockOff();

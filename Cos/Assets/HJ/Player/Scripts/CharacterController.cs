@@ -48,14 +48,16 @@ namespace HJ
         public float speed { get => _speed; }
         [SerializeField] float _speed = 5f;
 
-        public float attack { get => (attackWeapon + attackItem) * attackSkill; }
+        public float attack { get => (attackWeapon + attackItem) * ( 1 + attackSkill + attackFood); }
         public float attackWeapon;
         public float attackItem;
         public float attackSkill;
-        public float armor { get => (armor + armorArmor +armorItem) * armorSkill; }
+        public float attackFood;
+        public float armor { get => (armorArmor +armorItem) * ( 1 + armorSkill + armorFood); }
         public float armorArmor;
         public float armorItem;
         public float armorSkill;
+        public float armorFood;
 
         private void CharacterInfoStart()
         {
@@ -89,10 +91,11 @@ namespace HJ
             }
         }
         [SerializeField] private float _hp;
-        public float hpMax { get => (_hpMax + hpMaxItem); }
+        public float hpMax { get => (_hpMax + hpMaxItem) * (1 + hpSkill + hpFood); }
         private float _hpMax = 100;
         public float hpMaxItem;
-        public float skillHP;
+        public float hpSkill;
+        public float hpFood;
 
         public event Action<float> onHpChanged;
         public event Action<float> onHpDepleted;
