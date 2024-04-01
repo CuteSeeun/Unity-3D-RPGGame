@@ -48,16 +48,21 @@ namespace KJ
         }
     }
 
+
     /* SingletonLazy<T> 를 상속받아서 싱글톤 구현하는 클래스 */
     public class ItemDBManager : SingletonLazy<ItemDBManager>
     {
-        GameData gameData = GameData.Instance;
-        
+        private ItemData _itemData;
+
         public IEnumerator LoadItemDB()
         {
-            Debug.Log(" 로드 완료 " + gameData);
+            Debug.Log(" 로드 완료 " + _itemData);
             TextAsset itemData = Resources.Load<TextAsset>("ItemDB");
-            gameData = JsonUtility.FromJson<GameData>(itemData.text);
+            Debug.Log(" 로드 완료 " + itemData.text);
+            _itemData = JsonUtility.FromJson<ItemData>(itemData.text);
+
+            //yield return new WaitForSeconds(0.5f);
+            //_itemData = Newtonsoft.Json.JsonConvert.DeserializeObject<ItemData>(itemData.text);
 
             yield return null;
         }

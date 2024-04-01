@@ -1,3 +1,4 @@
+using KJ;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
@@ -30,7 +31,7 @@ public class ConversationManager : MonoBehaviour
     private string _currentSentence = "";
     [Header("Buttons")]
     /* 버튼들 */
-    public GameObject[] choiceButtons;      
+    public GameObject[] choiceButtons;
     /* 텍스트 오브젝트  (분기 활성화시 텍스트만 사라지도록)*/
     public GameObject dialogueObjectText;
     /* 강화 수락 버튼 텍스트 */
@@ -38,7 +39,7 @@ public class ConversationManager : MonoBehaviour
     /* 제작 수락 버튼 텍스트 */
     public TextMeshProUGUI craftText;
     /* 대화 UI 종료 버튼 텍스트 */
-    public TextMeshProUGUI leaveText; 
+    public TextMeshProUGUI leaveText;
     [Header("Popup UI")]
     /* 팝업 UI */
     public GameObject enhanceUI;    // 강화 UI 팝업 창
@@ -70,6 +71,11 @@ public class ConversationManager : MonoBehaviour
 
     void Start()
     {
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;
+        }
+
         /* sentence 에 새로운 Queue 할당. */
         _sentences = new Queue<string>();
         /* 대화창 UI, 팝업 UI 비활성화. */
@@ -152,7 +158,7 @@ public class ConversationManager : MonoBehaviour
 
     public void InteractionWithNPC(GameObject npc)
     {
-      
+
         _currentNpcTag = npc.tag;
         /* npc 태그에 따라 다른 대화 출력. */
         switch (_currentNpcTag)
@@ -168,7 +174,7 @@ public class ConversationManager : MonoBehaviour
                     ""
                 });
                 break;
-                /* 제작 NPC */
+            /* 제작 NPC */
             case "Craft":
                 StartDialogue(_currentNpcTag, new string[]
                 {
@@ -212,7 +218,7 @@ public class ConversationManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(_currentSentence));
     }
-    
+
     /* 타이핑 상태 결정 */
     IEnumerator TypeSentence(string sentence)
     {
@@ -226,7 +232,7 @@ public class ConversationManager : MonoBehaviour
         }
 
         _isTyping = false;
-        
+
         yield break;
     }
 
@@ -272,8 +278,8 @@ public class ConversationManager : MonoBehaviour
         /* 대화 상태 비활성화 */
         isDialogueActive = false;
         /* NPC 참조 초기화 */
-        Debug.Log("NPC 참조 초기화");        
-        _currentNpc = null;        
+        Debug.Log("NPC 참조 초기화");
+        _currentNpc = null;
         /* NPC Tag 에 따라 적절한 버튼 활성화. */
         Debug.Log("호출");
         SetupInteractionButton();
@@ -307,7 +313,7 @@ public class ConversationManager : MonoBehaviour
                 choiceButtons[2].SetActive(true);
                 /* 떠나기 버튼 텍스트 */
                 leaveText.text = " 하하..... (다음에 다시 와야겠다.)";
-                break; 
+                break;
         }
     }
 
@@ -389,7 +395,7 @@ public class ConversationManager : MonoBehaviour
                 RectTransform canvasRect = canvas.GetComponent<RectTransform>();
                 /* 캔버스 좌표계로 변환 */
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPosition, Camera.main, out canvasPosition);
-                
+
                 /*캔버스 좌표계에서 추가적인 조정*/
                 canvasPosition += new Vector2(1350, 200);
                 Debug.Log($"캔버스 좌표값 {canvasPosition}");
