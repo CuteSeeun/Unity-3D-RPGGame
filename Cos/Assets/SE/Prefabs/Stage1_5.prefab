@@ -17404,8 +17404,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb48fe242a17be48b7ce136b89b8c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLocked: 0
+  _wallsToDestroy: []
   _interactorLight: {fileID: 0}
-  isOpen: 0
+  _LockedLight: {fileID: 0}
+  _enemies: []
 --- !u!64 &5701695311157927884
 MeshCollider:
   m_ObjectHideFlags: 0
