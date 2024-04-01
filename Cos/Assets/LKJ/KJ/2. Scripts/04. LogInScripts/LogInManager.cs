@@ -1,7 +1,9 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -267,6 +269,53 @@ namespace KJ
 
         }
         #endregion
+
+        //#
+        private void OnGUI()
+        {
+            if( GUI.Button(new Rect(0, 0, 100, 50), "Create file"))
+            {
+                GameData gameData = new GameData();
+
+                /*유저 정보 틀*/
+                //Player temp = new Player();
+                //temp.uid = string.Empty;
+                //temp.shortUID = string.Empty;
+                //temp.userName = string.Empty;
+                //temp.inventory = new Inventory();
+                //temp.gold = 0;
+                //temp.combatPower = 0;
+                //temp.buffs = new List<string>();
+
+                /*직업 기본 정보*/
+                Class knight = new Class();
+                knight.name = "Knight";
+                knight.baseHp = 100;
+                knight.baseSp = 100;
+                knight.inventory = new Inventory();
+                knight.inventory.items.Add(new Item() { id = "12", quantity = 1}) ;
+                knight.inventory.items.Add(new Item() { id = "24", quantity = 1 });
+                knight.skills.Add(new Skill() { id = "33", name = "기사의 검술", description = "검을 휘둘러 벤다. 연속해서 베어낸 후 강하게 찌르며 밀쳐낸다." });
+                knight.skills.Add(new Skill() { id = "34", name = "방어 태세", description = "방패를 들어 체력 대신 스태미나를 소비하여 적의 공격을 받아낸다. 방어에 성공할 경우 반격을 가해 밀쳐낼 수 있다." });
+                knight.skills.Add(new Skill() { id = "30", name = "체력 단련", description = "훈련을 통해 더욱 격렬한 전투에도 견딜 수 있게 한다." });
+                knight.skills.Add(new Skill() { id = "31", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
+                knight.gold = 100;
+
+                gameData.classes.Add("Knight", knight);
+
+                //Class barbarian;
+                //Class rogue;
+                //Class mage;
+
+                string jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(gameData);
+
+                string path = "C:/Users/LKJ/Documents/GitHub/Bootcamp-Team-Project/Cos/Assets/LKJ/KJ/Resources/test.txt";
+                StreamWriter w = new StreamWriter(path);
+                w.Write(jsondata);
+
+                w.Close();
+            }
+        }
     }
 
 }

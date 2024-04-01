@@ -30,44 +30,50 @@ namespace KJ
         public int quantity;
         public string imagePath;
         public bool enhanceable;
-        public string enhanceLevel;
-        public Attribute attribute;
+        public int enhanceLevel;
+        public Attribute attributes;
     }
 
     /* 아이템 데이터의 Atrribute 데이터 */
     [System.Serializable]
     public class Attribute
     {
-        public float healthRestore;
-        public float attackPowerUp;
-        public float defensePowerUp;
-        public float staminaRecovery;
-        public float successRateIncrease;
-        public int maxUseLevel;
+        public float healthRestore = 0;
+        public float attackPowerUp = 0;
+        public float defensePowerUp = 0;
+        public float staminaRecovery = 0;
+        public float successRateIncrease = 0;
+        public int maxUseLevel = 0;
         public List<string> usedIn = new List<string>();
-        public List<int> quantityRequired = new List<int>();
-        public float attack;
-        public float defense;
-        public float skillDamage;
+        public List<ItemRequirement> quantityRequired = new List<ItemRequirement>();
+        public float attack = 0;
+        public float defense = 0;
+        public float skillDamage = 0;
+    }
+
+    [System.Serializable]
+    public class ItemRequirement
+    {
+        public string id;
+        public int quantity;
     }
 
     /* PlayerDB.Json 종합적으로 관리 */
     [System.Serializable]
-    public class GameData : SingletonLazy<GameData>
+    public class GameData 
     {
         /* 플레이어 데이터를 저장할 Dictionary. */
         public Dictionary<string, Player> players = new Dictionary<string, Player>();
         /* 클래스 데이터를 저장할 Dictionary. */
-        public Dictionary<ClassType, Class> classes = new Dictionary<ClassType, Class>();
-        /* 아이템 데이터를 저장할 Dictionary. */
-        public Dictionary<string, Item> itmes = new Dictionary<string, Item>();
+        public Dictionary<string, Class> classes = new Dictionary<string, Class>();
+
     }
 
     [System.Serializable]
     /* Player 데이터 */
     public class Player
     {
-        public string UID;
+        public string uid;
         public string shortUID;
         public string userName;
         public string classType;
@@ -106,10 +112,10 @@ namespace KJ
     /* 클래스 enum 타입으로 분류 */
     public enum ClassType
     {
-        Knight,
-        Barbarian,
-        Rogue,
-        Mage
+        knight,
+        barbarian,
+        rogue,
+        mage
     }
 
     /* Class 데이터 */
@@ -121,13 +127,13 @@ namespace KJ
         public float baseHp;
         public float baseSp;
         public Inventory inventory;
-        public List<string> skills;
+        public List<Skill> skills;
         public int gold;
 
         public Class()
         {
             inventory = new Inventory();
-            skills = new List<string>();
+            skills = new List<Skill>();
         }
 
     }
