@@ -325,7 +325,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     IEnumerator SKEffect(GameObject effect, string soundName, float delay)
     {
         GameObject effectInstanse = Instantiate(effect, transform.position, transform.rotation);
-        SFX_Manager.Instance.VFX("Skull_Attack");
+        SFX_Manager.Instance.VFX(1);
 
         yield return new WaitForSeconds(delay);
         Destroy(effectInstanse);
