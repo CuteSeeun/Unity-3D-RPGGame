@@ -44,12 +44,6 @@ public class Artifact : MonoBehaviour, IInteractable
     {
         if (_isLocked == false)
         {
-            /*
-            _interactorLight.SetActive(false);
-            Destroy(_interactorLight);
-            _LockedLight.SetActive(false);
-            Destroy(_LockedLight);
-            */
             interactor.GetComponent<PlayerController>().PotionFull();
 
             foreach (var item in interactables)
