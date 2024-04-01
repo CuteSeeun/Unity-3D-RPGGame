@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using HJ;
 
-public class Artifact : MonoBehaviour, IInteractable
+public class Chest : MonoBehaviour, IInteractable
 {
+    private Animator animator;
     public bool _isLocked;
+    private Collider _collider;
     [SerializeField] GameObject _interactorLight;
     [SerializeField] GameObject _LockedLight;
     [SerializeField] List<GameObject> interactables;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        _collider = GetComponent<Collider>();
+    }
 
     public void InteractableOn()
     {
@@ -44,14 +52,14 @@ public class Artifact : MonoBehaviour, IInteractable
     {
         if (_isLocked == false)
         {
-            interactor.GetComponent<PlayerController>().PotionFull();
+            Destroy(_collider);
+            InteractableOff();
+            animator.SetBool("isBox", true);
 
             foreach (var item in interactables)
             {
                 item.GetComponent<IInteractable>().Interaction(gameObject);
             }
-
-            Destroy(gameObject);
         }
     }
 }

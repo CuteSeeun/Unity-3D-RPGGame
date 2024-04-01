@@ -16,6 +16,7 @@ public class Door1 : MonoBehaviour, IInteractable
     [SerializeField] GameObject _LockedLight;
 
     [SerializeField] List<GameObject> _enemies;
+    [SerializeField] List<GameObject> interactables;
 
 
     private void Start()
@@ -66,6 +67,11 @@ public class Door1 : MonoBehaviour, IInteractable
             foreach (var wall in _wallsToDestroy)
             {
                 Destroy(wall);
+            }
+
+            foreach (var item in interactables)
+            {
+                item.GetComponent<IInteractable>().Interaction(gameObject);
             }
 
             foreach (var enemy in _enemies)

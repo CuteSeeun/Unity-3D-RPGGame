@@ -34,14 +34,16 @@ namespace HJ
             set { _stamina = Mathf.Clamp(value, 0, _spMax); }
         }
         [SerializeField] float _stamina;
-        public float spMax { get => _spMax + spMaxItem + spMaxSkill; }
+        public float spMax { get => ( _spMax + spMaxItem ) * ( 1 + spMaxSkill + spMaxFood ); }
         private float _spMax = 100;
         public float spMaxItem;
         public float spMaxSkill;
-        public float spRecovery { get => (_spRecovery + spRecoveryItem) * spRecoverySkill; }
+        public float spMaxFood;
+        public float spRecovery { get => (_spRecovery + spRecoveryItem) * (1 + spRecoverySkill + spRecoveryFood); }
         private float _spRecovery = 35;
         public float spRecoveryItem;
         public float spRecoverySkill;
+        public float spRecoveryFood;
         public bool isSpRecover { get => _isSpRecover; set => _isSpRecover = value; }
         private bool _isSpRecover;
         public float staminaRequired { set => _staminaRequired = value; }
