@@ -16,6 +16,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
     private NavMeshAgent agent;
     private Transform player;
     private GetItemManager getItem;
+    public GameObject[] attackEffect;
     private bool isChasing;
     private bool isDeath;
     private int attackStack = 0;
@@ -229,6 +230,8 @@ public class EnemyS_AI : MonoBehaviour, IHp
         agent.isStopped = true;
         m_Animator.SetInteger("state", 2);
         m_Animator.SetBool("isAttack",true);
+        attackEffect[0].SetActive(true);
+        attackEffect[1].SetActive(true);
         attackTimer = 3;
     }
 
@@ -237,6 +240,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
         agent.isStopped = true;
         m_Animator.SetInteger("state", 2);
         m_Animator.SetBool("isAttackS", true);
+        attackEffect[2].SetActive(true);
         attackTimer = 3;
     }
 
@@ -265,6 +269,9 @@ public class EnemyS_AI : MonoBehaviour, IHp
         isAttack = false;
         isChasing = true;
         attackStack++;
+        attackEffect[0].SetActive(false);
+        attackEffect[1].SetActive(false);
+        attackEffect[2].SetActive(false);
         if (attackStack > 2)
         {
             attackStack = 0;
