@@ -1,5 +1,6 @@
 using HJ;
 using UnityEngine;
+using UnityEngine.InputSystem.Switch;
 
 public class BombBox : MonoBehaviour, IHp
 {

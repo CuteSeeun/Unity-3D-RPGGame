@@ -56,10 +56,10 @@ namespace KJ
         IEnumerator LoadAsyncSceneCoroutine()
         {
             /* 플레이어 데이터 로드 */
-            yield return StartCoroutine(PlayerDBManager.Instance.LoadPlayerDB());
+            yield return  PlayerDBManager.Instance.LoadPlayerDB();
             targetProgress += 0.5f;
             /* 아이템 데이터 로드 */
-            yield return StartCoroutine(ItemDBManager.Instance.LoadItemDB());
+            yield return ItemDBManager.Instance.LoadItemDB();
             targetProgress += 0.5f;
 
             /* 저장된 데이터 확인 */

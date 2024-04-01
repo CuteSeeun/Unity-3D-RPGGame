@@ -11,9 +11,9 @@ public class BuffOnOff : MonoBehaviour
     public Image specialBuffImage;
 
     [Header("Bool Buffs")]
-    [SerializeField] private bool _powerBuff = false;
-    [SerializeField] private bool _healthBuff = false;
-    [SerializeField] private bool _specialBuff = false;
+    [SerializeField] public bool _powerBuff = false;
+    [SerializeField] public bool _healthBuff = false;
+    [SerializeField] public bool _specialBuff = false;
 
     void Start()
     {

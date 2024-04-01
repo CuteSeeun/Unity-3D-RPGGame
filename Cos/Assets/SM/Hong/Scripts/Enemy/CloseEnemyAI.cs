@@ -24,6 +24,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     private bool isDeath;
     private float attackTimer;
     private bool isHit;
+    public bool isAct;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
@@ -136,51 +137,54 @@ public class CloseEnemyAI : MonoBehaviour, IHp
 
     void Update()
     {
-        if (!isDeath)
+        if (isAct)
         {
-            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
-            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
+            if (!isDeath)
+            {
+                // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+                Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
 
-            foreach (Collider collider in colliders)
-            {
-                if (collider.CompareTag("Player") && !isChasing)
+                foreach (Collider collider in colliders)
                 {
-                    isChasing = true;
+                    if (collider.CompareTag("Player") && !isChasing)
+                    {
+                        isChasing = true;
+                    }
                 }
-            }
 
-            if (isPatrolling)
-            {
-                if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                if (isPatrolling)
                 {
-                    m_Animator.SetInteger("state", 0);
-                    StartCoroutine(Patrol());
+                    if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                    {
+                        m_Animator.SetInteger("state", 0);
+                        StartCoroutine(Patrol());
+                    }
                 }
-            }
-            else if (isChasing)
-            {
-                agent.speed = chaseSpeed;
-                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+                else if (isChasing)
                 {
-                    agent.isStopped = false;
-                    m_Animator.SetInteger("state", 2);
-                    transform.LookAt(player.position);
-                    agent.SetDestination(player.position);
-                    agent.stoppingDistance = 2;
-                }
-                else
-                {
-                    agent.isStopped = true;
-                    agent.SetDestination(transform.position);
-                    transform.LookAt(transform.position + transform.forward);
-                }
-                if (Vector3.Distance(transform.position, player.position) < attackRange
-                    && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
-                {
-                    agent.isStopped = true;
-                    m_Animator.SetInteger("state", 0);
-                    if (attackTimer == 0)
-                        Attack();
+                    agent.speed = chaseSpeed;
+                    if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+                    {
+                        agent.isStopped = false;
+                        m_Animator.SetInteger("state", 2);
+                        transform.LookAt(player.position);
+                        agent.SetDestination(player.position);
+                        agent.stoppingDistance = 2;
+                    }
+                    else
+                    {
+                        agent.isStopped = true;
+                        agent.SetDestination(transform.position);
+                        transform.LookAt(transform.position + transform.forward);
+                    }
+                    if (Vector3.Distance(transform.position, player.position) < attackRange
+                        && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+                    {
+                        agent.isStopped = true;
+                        m_Animator.SetInteger("state", 0);
+                        if (attackTimer == 0)
+                            Attack();
+                    }
                 }
             }
         }
