@@ -241,6 +241,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
         m_Animator.SetTrigger("isAttack");
         attackTimer = 3;
         // 공격 동작 구현
+       
     }
 
     Vector3 GetRandomPatrolDestination()
@@ -311,5 +312,22 @@ public class CloseEnemyAI : MonoBehaviour, IHp
                 }
             }
         }
-    }   
+    }
+   [Header("Skeleton_Attack")] //============================================================================
+   [SerializeField] GameObject _SKAttack_Effect;
+   [SerializeField] string _SKAttackSoundName;
+   [SerializeField] float _SKAttackDelay;
+   public void Skeleton_Attack()
+    {
+        StartCoroutine(SKEffect(_SKAttack_Effect, _SKAttackSoundName, _SKAttackDelay));
+    }
+
+    IEnumerator SKEffect(GameObject effect, string soundName, float delay)
+    {
+        GameObject effectInstanse = Instantiate(effect, transform.position, transform.rotation);
+        SFX_Manager.Instance.VFX("Skull_Attack");
+
+        yield return new WaitForSeconds(delay);
+        Destroy(effectInstanse);
+    }
 }
