@@ -31,6 +31,7 @@ public class MageEnemyAI : MonoBehaviour, IHp
     private bool isChasing;
     private bool isDeath;
     private bool isAttack;
+    public bool isAct;
 
     public GameObject magic;
     public GameObject owner;
@@ -146,56 +147,57 @@ public class MageEnemyAI : MonoBehaviour, IHp
 
     void Update()
     {
-        if (!isDeath)
+        if (isAct)
         {
-            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
-            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, targetMask);
-
-            if (colliders.Length > 0)
+            if (!isDeath)
             {
-                foreach (Collider collider in colliders)
+                // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+                Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, targetMask);
+
+                if (colliders.Length > 0)
                 {
-                    if (collider.CompareTag("Player") && !isChasing)
+                    foreach (Collider collider in colliders)
                     {
-                        isChasing = true;
-                        return;
+                        if (collider.CompareTag("Player") && !isChasing)
+                        {
+                            isChasing = true;
+                            return;
+                        }
                     }
                 }
-            }
-            
 
-            if (isPatrolling)
-            {
-                if (!agent.pathPending && agent.remainingDistance < 0.5f)
-                {
-                    m_Animator.SetInteger("state", 0);
-                    isPatrolling = false;
-                    StartCoroutine(Patrol());
-                }
-            }
-            else if (isChasing)
-            {
-                agent.speed = chaseSpeed;
-                if (GameObject.FindWithTag("Magic") == true)
-                    transform.LookAt(player.position);
 
-                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")
-                    && (GameObject.FindWithTag("Magic") == false))
+                if (isPatrolling)
                 {
-                    m_Animator.SetInteger("state", 1);
-                    transform.LookAt(player.position);
-                    agent.SetDestination(player.position);
+                    if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                    {
+                        m_Animator.SetInteger("state", 0);
+                        isPatrolling = false;
+                        StartCoroutine(Patrol());
+                    }
                 }
-                else
+                else if (isChasing)
                 {
-                    agent.SetDestination(transform.position);
-                    transform.LookAt(transform.position + transform.forward);
-                }
-                if ((Vector3.Distance(transform.position, player.position) < attackRange)
-                    && (GameObject.FindWithTag("Magic") == false))
-                {
-                    Attack();
-                    isAttack = true;
+                    agent.speed = chaseSpeed;
+                    if (GameObject.FindWithTag("Magic") == true)
+                        transform.LookAt(player.position);
+
+                    if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !isAttack)
+                    {
+                        m_Animator.SetInteger("state", 1);
+                        transform.LookAt(player.position);
+                        agent.SetDestination(player.position);
+                    }
+                    else
+                    {
+                        agent.SetDestination(transform.position);
+                        transform.LookAt(transform.position + transform.forward);
+                    }
+                    if ((Vector3.Distance(transform.position, player.position) < attackRange) && !isAttack)
+                    {
+                        Attack();
+                        isAttack = true;
+                    }
                 }
             }
         }
@@ -263,9 +265,14 @@ public class MageEnemyAI : MonoBehaviour, IHp
 
     public void AttackEnd()
     {
-        agent.isStopped = false;
-        isAttack = false;
+        agent.isStopped = false;       
         m_Animator.SetBool("isAttack",false);
+        Invoke("ReA",4);
+    }
+
+    void ReA()
+    {
+        isAttack = false;
     }
 
     public void Death()

@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,22 +24,53 @@ namespace KJ
         [Header("Loading")]
         public GameObject loadingUI;
 
+        
+        /**/
+        private string _class;
+
+        void Awake()
+        {
+            //_gameData = NetData.Instance._gameData;
+        }
+        private void Start()
+        {
+          
+        }
 
         public void CreateCharacter(string className)
         {
+            Debug.Log("호출1");
             string shortUID = PlayerDBManager.Instance.CurrentShortUID;
-            GameData gameData = GameData.Instance;
-
+            
             ClassType classType;
             if (Enum.TryParse(className, true, out classType))
             {
+                Debug.Log("호출2");
                 Class classData;
                 /* Classes 에서 선택된 class 데이터 찾기 */
-                if (gameData.classes.TryGetValue(classType, out classData))
+                //if (_gameData.classes.TryGetValue(classType, out classData))
+                GameData gameData = NetData.Instance._gameData;
+                classData = gameData.classes["Knight"];
+                
+                if (classData != null)
                 {
+                    Debug.Log("호출3");
                     Player playerData;
-                    if (gameData.players.TryGetValue(shortUID, out playerData))
+
+                    //foreach(string key in gameData.players.Keys)
+                    //{
+                    //    Debug.Log("key shortUID : " + shortUID);
+                    //    Debug.Log("key : "+key);
+                    //}
+                    //FirebaseAuthManager
+
+                    Player p = new Player();
+                    p.uid = FirebaseAuthManager.Instance._user.UserId;
+                    PlayerDBManager.Instance.SaveOrUpdatePlayerData(p.uid, p);
+
+                    if (gameData.players.TryGetValue(p.shortUID, out playerData))
                     {
+                        Debug.Log("호출4");
                         /* Player 객체에 Class 데이터 적용. */
                         playerData.classType = className;
                         playerData.inventory.items.Clear();
@@ -48,12 +80,16 @@ namespace KJ
                         }
                         playerData.gold = classData.gold;
 
+
+                        Debug.Log("캐릭터 프리팹" + className);
+
                         /* 프리팹 로드 및 인스턴스화. */
                         GameObject characterPrefab = Resources.Load<GameObject>($"Prefabs/{className}");
                         /* spawn 위치 Vector3 값 설정. */
-                        Vector3 spawnPosition = new Vector3(-400, -2, -5);
+                        Vector3 spawnPosition = new Vector3(-400, 3, -5);
                         if (characterPrefab != null)
                         {
+                            Debug.Log("호출5");
                             GameObject characterInstance = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
                             /* 씬 전환시 파괴 방지 */
                             DontDestroyOnLoad(characterInstance);
@@ -82,7 +118,7 @@ namespace KJ
                 }
             }
         }
-        public void LoadiToVillage()
+        public void LoadToVillage()
         {
             SceneManager.LoadScene("VillageScene");
         }
@@ -91,6 +127,8 @@ namespace KJ
         /* 동적 할당 */
         public void OpenCheckPopupText(string className)
         {
+            _class = className;
+
             switch (className)
             {
                 case "Knight":
@@ -106,22 +144,44 @@ namespace KJ
                     selectText.text = "메이지로 캐릭터를 생성하시겠습니까?";
                     break;
             }
-        }
-
-        public void OpenCheckPopupButton(string className)
-        {
-            /* 팝업 텍스트 설정. */
-            OpenCheckPopupText(className);
-
-            /* 확인 버튼 기존 리스너를 모두 제거. */
-            yesButton.onClick.RemoveAllListeners();
-
-            /* 확인 버튼에 새로운 리스너 할당. */
-            yesButton.onClick.AddListener(() => CreateCharacter(className));
-
-            /* 확인창 UI 활성화 */
             _checkPopupUI.SetActive(true);
         }
+
+        public void ConfigureYesButton()
+        {
+
+            ///* 확인 버튼 기존 리스너를 모두 제거. */
+            //yesButton.onClick.RemoveAllListeners();
+
+            /* 확인 버튼에 새로운 리스너 할당. */
+            Debug.Log("새로운 리스너 할당됨.");
+            //yesButton.onClick.AddListener(() => 
+            CreateCharacter(_class);
+
+            //Debug.Log("확인창 자동으로 닫음.");
+            ///* 확인창 자동으로 닫는 리스너 추가 */
+            //yesButton.onClick.AddListener(CloseCheckPopup);
+        }
+
+        //public void OpenCheckButtonWithAction(string className)
+        //{
+        //    switch (className)
+        //    {
+        //        case "Knight":
+        //            ConfigureYesButton(className);
+        //            break;
+        //        case "Barbarian":
+        //            ConfigureYesButton(className);
+        //            break;
+        //        case "Rogue":
+        //            ConfigureYesButton(className);
+        //            break;
+        //        case "Mage":
+        //            ConfigureYesButton(className);
+        //            break;
+        //    }
+        //    OpenCheckPopupText(className);
+        //}
 
         public void CloseCheckPopup()
         {

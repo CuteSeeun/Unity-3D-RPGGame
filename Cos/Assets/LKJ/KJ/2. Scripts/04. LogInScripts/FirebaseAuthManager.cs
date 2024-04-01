@@ -18,7 +18,7 @@ namespace KJ
         // 로그인, 회원가입에 사용.
         private FirebaseAuth _auth;
         // 인증이 완료된 유저 정보.
-        private FirebaseUser _user;
+        public FirebaseUser _user { get; private set; }
 
         [Header("LogIn")]
         // email 입력을 받음.
@@ -117,6 +117,7 @@ namespace KJ
             // LoginTask.IsCompleted 가 참이 될 때 까지 기다림.
             yield return new WaitUntil(predicate: () => LoginTask.IsCompleted);
             _user = LoginTask.Result.User;
+            
             if (LoginTask.Exception != null)
             {
                 // 만약 예외가 발생하여 오류가 나타나면
@@ -157,8 +158,9 @@ namespace KJ
                 Debug.LogFormat("로그인 성공 : {0} {1}", _user.Email, _user.DisplayName);
                 warningLoginText.text = "";
                 confirmLoginText.text = "로그인 성공!!";
-                onLoginCompleted?.Invoke(true);
+                yield return NetData.Instance.LoadPlayerDB(_user, string.Empty);
 
+                onLoginCompleted?.Invoke(true);
             }
         }
 
