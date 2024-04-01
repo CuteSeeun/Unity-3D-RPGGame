@@ -23,6 +23,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
     private bool isPatrolling;
     private bool isAiming;
     private bool isDeath;
+    public bool isAct;
 
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
@@ -134,45 +135,48 @@ public class LongEnemyAI : MonoBehaviour, IHp
 
     void Update()
     {
-        if (!isDeath)
+        if (isAct)
         {
-            // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
-            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
-
-            foreach (Collider collider in colliders)
+            if (!isDeath)
             {
-                if (collider.CompareTag("Player") && !isAiming)
-                {
-                    isAiming = true;
-                }
-            }
+                // 일정 범위 내에 Enemy 태그를 가진 오브젝트를 감지하는 OverlapSphere를 사용합니다.
+                Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
 
-            if (isPatrolling)
-            {
-                if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                foreach (Collider collider in colliders)
                 {
-                    m_Animator.SetInteger("state", 0);
-                    StartCoroutine(Patrol());
+                    if (collider.CompareTag("Player") && !isAiming)
+                    {
+                        isAiming = true;
+                    }
                 }
-            }
-            else if (isAiming)
-            {
-                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
-                {
-                    agent.isStopped = false;
-                    m_Animator.SetInteger("state", 2);
-                    transform.LookAt(player.position);
-                    Attack();
-                }
-                else
-                {
-                    agent.isStopped = true;
-                    agent.SetDestination(transform.position);
-                    transform.LookAt(player.position);
-                }
-                if (Vector3.Distance(transform.position, player.position) < attackRange)
-                {
 
+                if (isPatrolling)
+                {
+                    if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                    {
+                        m_Animator.SetInteger("state", 0);
+                        StartCoroutine(Patrol());
+                    }
+                }
+                else if (isAiming)
+                {
+                    if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+                    {
+                        agent.isStopped = false;
+                        m_Animator.SetInteger("state", 2);
+                        transform.LookAt(player.position);
+                        Attack();
+                    }
+                    else
+                    {
+                        agent.isStopped = true;
+                        agent.SetDestination(transform.position);
+                        transform.LookAt(player.position);
+                    }
+                    if (Vector3.Distance(transform.position, player.position) < attackRange)
+                    {
+
+                    }
                 }
             }
         }
@@ -182,7 +186,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
             isDeath = true;
             Invoke("Death", 2);
             getItem.GetItem("뼈");
-            getItem.GetItem("야채바구니");
+            getItem.GetItem("야채 바구니");
         }
     }
 
