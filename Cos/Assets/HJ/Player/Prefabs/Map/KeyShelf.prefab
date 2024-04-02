@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 8967146165053291547}
   - component: {fileID: 5466921862800798654}
   - component: {fileID: 7798720741660034932}
-  - component: {fileID: 1732086933912006932}
   - component: {fileID: 4147566178395756785}
   - component: {fileID: 3274977742576627235}
   m_Layer: 9
@@ -288,7 +287,7 @@ Transform:
   m_GameObject: {fileID: 8591288373269866145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: 2.1, z: 0}
+  m_LocalPosition: {x: -0.2, y: 2.1, z: -0.124}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -344,19 +343,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1732086933912006932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8591288373269866145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4f46c9a7068f374d8133b8724aede99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Gate: {fileID: 0}
 --- !u!114 &4147566178395756785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactorLight: {fileID: 739491548892660500}
   interactables: []
+  gate: {fileID: 0}
 --- !u!136 &3274977742576627235
 CapsuleCollider:
   m_ObjectHideFlags: 0
