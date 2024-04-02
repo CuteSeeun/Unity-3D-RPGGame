@@ -14,6 +14,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
     private Transform player;
     private EnemyHealthBar healthBar;
     private GetItemManager getItem;
+    private SFX_Manager sound;
     public GameObject attackEffect;
     private bool isChasing;
     private bool isDeath;
@@ -95,7 +96,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
                 Vector3 pushDirection = -transform.forward * 4f;
                 ApplyPush(pushDirection);
             }
-
+            sound.VFX(18);
             DepleteHp(damage);
         }
     }
@@ -112,6 +113,8 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
+        sound.VFX(24);
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -163,6 +166,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
             if (_hp <= 0 && !isDeath)
             {
                 m_Animator.SetTrigger("isDeath");
+                sound.VFX(19);
                 isDeath = true;
                 Invoke("Death", 2);
                 getItem.GetItem("뼈");
@@ -203,6 +207,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
     void EffectA()
     {
         attackEffect.SetActive(true);
+        sound.VFX(21);
     }
 
     void OnDrawGizmosSelected()

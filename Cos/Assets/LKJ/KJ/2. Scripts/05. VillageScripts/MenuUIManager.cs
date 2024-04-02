@@ -1,4 +1,6 @@
+using KJ;
 using Ricimi;
+using Scene_Teleportation_Kit.Scripts.player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +11,9 @@ using UnityEngine.UI;
 
 public class MenuUIManager : MonoBehaviour
 {
+    PlayerDBManager playerDBManager = PlayerDBManager.Instance;
+
+
     /* 메뉴 UI */
     [Header("Menu UI")]
     public GameObject menuUI;
@@ -33,6 +38,10 @@ public class MenuUIManager : MonoBehaviour
     public TMP_Text goldText;
     private int _currentGold;
 
+    [Header("Class")]
+    public TMP_Text classType;
+
+
     void Update()
     {
         /* esc 누르면 메뉴 호출 */
@@ -40,7 +49,7 @@ public class MenuUIManager : MonoBehaviour
         {
             Debug.Log("ESC!!");
             menuUI.SetActive(true);
-
+            classType.text = playerDBManager.LoadGameData(playerDBManager.CurrentShortUID).classType;
             Cursor.visible = true;
 
             PauseGame();

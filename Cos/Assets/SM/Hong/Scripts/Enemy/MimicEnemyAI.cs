@@ -9,6 +9,7 @@ public class MimicEnemyAI : MonoBehaviour, IHp
     float chaseSpeed = 3f;
     public float attackRange;
 
+    private SFX_Manager sound;
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
@@ -93,7 +94,7 @@ public class MimicEnemyAI : MonoBehaviour, IHp
                 Vector3 pushDirection = -transform.forward * 4f;
                 ApplyPush(pushDirection);
             }
-
+            sound.VFX(28);
             DepleteHp(damage);
         }
     }
@@ -110,6 +111,7 @@ public class MimicEnemyAI : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -163,6 +165,7 @@ public class MimicEnemyAI : MonoBehaviour, IHp
                 }
                 if (_hp <= 0)
                 {
+                    sound.VFX(29);
                     m_Animator.SetTrigger("isDeath");
                     isDeath = true;
                     Invoke("Death", 2);
@@ -225,6 +228,7 @@ public class MimicEnemyAI : MonoBehaviour, IHp
     float attackDamage = 5;
     void Damage()
     {
+        sound.VFX(27);
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   attackRange,
@@ -247,5 +251,15 @@ public class MimicEnemyAI : MonoBehaviour, IHp
                 }
             }
         }
+    }
+
+    void OpenSound()
+    {
+        sound.VFX(25);
+    }
+
+    void ReadySound()
+    {
+        sound.VFX(26);
     }
 }

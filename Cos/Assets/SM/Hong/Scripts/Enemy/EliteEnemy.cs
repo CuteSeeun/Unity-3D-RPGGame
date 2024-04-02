@@ -24,6 +24,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     private Transform player;
     private Rigidbody rb;
     private GetItemManager getItem;
+    private SFX_Manager sound;
     public GameObject grounded;
     public GameObject jumpImpact;
     public GameObject rushImpact;
@@ -112,6 +113,7 @@ public class EliteEnemy : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -247,6 +249,7 @@ public class EliteEnemy : MonoBehaviour, IHp
             transform.position = new Vector3((player.position  - (player.forward * 2)).x, 
                 transform.position.y,(player.position - (player.forward * 2)).z);
             rb.velocity = Vector3.down * fallSpeed;
+            sound.VFX(36);
         }
         if (attackTimer > 0)
         {
@@ -286,6 +289,7 @@ public class EliteEnemy : MonoBehaviour, IHp
             isRush.Stop();
             Vector3 rush = transform.forward;
             rb.velocity = rush * rushSpeed;
+            sound.VFX(17);
             transform.LookAt(transform.position + transform.forward);
         }
     }
@@ -300,6 +304,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     void Rush()
     {
         m_Animator.SetTrigger("isRush");
+        sound.VFX(34);
         isRush.Play();
         attackTimer = 6;
     }
@@ -307,6 +312,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     void Jump()
     {
         rb.velocity = Vector3.up * jumpForce;
+        sound.VFX(35);
         Debug.Log("점프");
         isJumping = true;
         attackTimer = 3;
@@ -318,6 +324,7 @@ public class EliteEnemy : MonoBehaviour, IHp
         m_Animator.SetTrigger("isCrush");
         isCrushEffect.SetActive(true);
         attackTimer = 5;
+        sound.VFX(34);
         Invoke("Grounded", 2f);
     }
 
@@ -483,6 +490,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     }
     void DamageC()
     {
+        sound.VFX(36);
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   16,
@@ -510,16 +518,19 @@ public class EliteEnemy : MonoBehaviour, IHp
     void EffectR()
     {
         effectR.SetActive(true);
+        sound.VFX(31);
     }
 
     void EffectL()
     {
         effectL.SetActive(true);
+        sound.VFX(32);
     }
 
     void EffectB()
     {
         effectB.SetActive(true);
+        sound.VFX(33);
     }
 
     private void OnCollisionEnter(Collision collision)

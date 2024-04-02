@@ -18,6 +18,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     private NavMeshAgent agent;
     private Transform player;
     private GetItemManager getItem;
+    private SFX_Manager sound;
     public GameObject attackEffect;
     private Vector3 patrolDestination;
     private bool isPatrolling;
@@ -43,7 +44,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
 
             if (_hp == value)
                 return;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
             if (value < 1)
             {
                 onHpMin?.Invoke();
@@ -104,7 +105,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
                 Vector3 pushDirection = -transform.forward * 4f;
                 ApplyPush(pushDirection);
             }
-
+            sound.VFX(18);
             DepleteHp(damage);
         }
     }
@@ -120,6 +121,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     }
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -211,6 +213,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
         if (_hp <= 0 && !isDeath)
         {
             m_Animator.SetTrigger("isDeath");
+            sound.VFX(19);
             agent.isStopped = true;
             isDeath = true;
             Invoke("Death", 2);
@@ -294,6 +297,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     void Damage()
     {
         attackEffect.SetActive(true);
+        sound.VFX(21);
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   attackRange,
@@ -316,22 +320,5 @@ public class CloseEnemyAI : MonoBehaviour, IHp
                 }
             }
         }
-    }
-   [Header("Skeleton_Attack")] //============================================================================
-   [SerializeField] GameObject _SKAttack_Effect;
-   [SerializeField] string _SKAttackSoundName;
-   [SerializeField] float _SKAttackDelay;
-   public void Skeleton_Attack()
-    {
-        StartCoroutine(SKEffect(_SKAttack_Effect, _SKAttackSoundName, _SKAttackDelay));
-    }
-
-    IEnumerator SKEffect(GameObject effect, string soundName, float delay)
-    {
-        GameObject effectInstanse = Instantiate(effect, transform.position, transform.rotation);
-        SFX_Manager.Instance.VFX(1);
-
-        yield return new WaitForSeconds(delay);
-        Destroy(effectInstanse);
     }
 }
