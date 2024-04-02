@@ -49,14 +49,15 @@ namespace KJ
                 Class classData;
                 /* Classes 에서 선택된 class 데이터 찾기 */
                 //if (_gameData.classes.TryGetValue(classType, out classData))
-                GameData gameData = NetData.Instance._gameData;
-                classData = gameData.classes["Knight"];
+                GameData gameData = NetData.Instance.gameData;
+                Debug.Log($"변환 성공: {classType}");
+                classData = gameData.classes[classType];
                 
                 if (classData != null)
                 {
                     Debug.Log("호출3");
                     Player playerData;
-
+                    GameData _gameData = NetData.Instance._gameData;
                     //foreach(string key in gameData.players.Keys)
                     //{
                     //    Debug.Log("key shortUID : " + shortUID);
@@ -68,7 +69,7 @@ namespace KJ
                     p.uid = FirebaseAuthManager.Instance._user.UserId;
                     PlayerDBManager.Instance.SaveOrUpdatePlayerData(p.uid, p);
 
-                    if (gameData.players.TryGetValue(p.shortUID, out playerData))
+                    if (_gameData.players.TryGetValue(p.shortUID, out playerData))
                     {
                         Debug.Log("호출4");
                         /* Player 객체에 Class 데이터 적용. */
@@ -79,7 +80,7 @@ namespace KJ
                             playerData.inventory.items.Add(new Item { id = item.id, quantity = item.quantity });
                         }
                         playerData.gold = classData.gold;
-
+                        Debug.Log($"클래스 타입 : {playerData.classType}");
 
                         Debug.Log("캐릭터 프리팹" + className);
 
@@ -106,6 +107,8 @@ namespace KJ
                         // 클래스 데이터 로딩 성공 시
                         Debug.Log($"Creating character of class: {className}");
 
+                        Debug.Log($"PlayerShorUID: {playerData.shortUID}");
+
                         // 인벤토리 아이템 적용 후
                         Debug.Log($"Applied inventory items to character. Item count: {playerData.inventory.items.Count}");
 
@@ -114,6 +117,8 @@ namespace KJ
 
                         // 프리팹 로드 및 인스턴스화 후 (예시 위치를 Vector3.zero로 가정)
                         Debug.Log($"Character spawned at position: {spawnPosition}");
+                        /* 스킬 개수가 온전히 다 있는지 확인. */
+                        Debug.Log($" 스킬 {classData.skills.Count}");
                     }
                 }
             }
@@ -146,7 +151,7 @@ namespace KJ
             }
             _checkPopupUI.SetActive(true);
         }
-
+        
         public void ConfigureYesButton()
         {
 
