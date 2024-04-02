@@ -1106,18 +1106,18 @@ GameObject:
   m_Component:
   - component: {fileID: 7847954845431315274}
   - component: {fileID: 8141655838646537716}
-  - component: {fileID: 1346489119434670283}
+  - component: {fileID: 2037324956822290950}
   - component: {fileID: 8779470545690256105}
   - component: {fileID: 3012359346041678390}
   - component: {fileID: 6611698696509365275}
   - component: {fileID: 4561190179462001386}
   m_Layer: 11
-  m_Name: Rogue
+  m_Name: RogueForTest
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7847954845431315274
 Transform:
   m_ObjectHideFlags: 0
@@ -1154,18 +1154,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3925bd9fc83d4243b72d1b13c45d5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashEffect: {fileID: 0}
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
   _dashSoundNum: 17
   _dashDelay: 1
-  _potionEffect: {fileID: 0}
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
   _potionSoundNum: 16
   _potionDelay: 1
-  _hitEffect: {fileID: 0}
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
   _hitSoundNum: 14
-  _hitDelay: 0
-  _dieEffect: {fileID: 0}
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
   _dieSoundNum: 15
-  _dieDelay: 0
+  _dieDelay: 1
   _rogueSlash1Effect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
     type: 3}
   _rogueSlash1SoundNum: 9
@@ -1184,7 +1188,7 @@ MonoBehaviour:
     type: 3}
   _rogueCrossbowSoundNum: 11
   _rogueCrossbow2Delay: 1
---- !u!114 &1346489119434670283
+--- !u!114 &2037324956822290950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1193,7 +1197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3145698477173681061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be11e4895dbbda248afd07b889ba6ba6, type: 3}
+  m_Script: {fileID: 11500000, guid: 97210c4c7f3ab5442a31252f4c7a2067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
@@ -1204,11 +1208,11 @@ MonoBehaviour:
   potion: {fileID: 4390448168507416641}
   isPlayer: 1
   _speed: 5
-  attackWeapon: 0
+  attackWeapon: 10
   attackItem: 0
   attackSkill: 0
   attackFood: 0
-  armorArmor: 0
+  armorArmor: 10
   armorItem: 0
   armorSkill: 0
   armorFood: 0
@@ -1229,7 +1233,7 @@ MonoBehaviour:
   spRecoveryFood: 0
   maxPotionItem: 0
   _potionNumber: 0
-  _potionHp: 50
+  _potionHp: 0
   potionHpItem: 0
 --- !u!95 &8779470545690256105
 Animator:
@@ -1241,7 +1245,7 @@ Animator:
   m_GameObject: {fileID: 3145698477173681061}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d26d0c190deeacc4bacb969d79e9c21f, type: 2}
+  m_Controller: {fileID: 9100000, guid: ff1a6eeb2ee8a2740a3d2edb0b1195d2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
@@ -1280,8 +1284,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1346489119434670283}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037324956822290950}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -1296,8 +1300,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1346489119434670283}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037324956822290950}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnWalk
         m_Mode: 0
         m_Arguments:
@@ -1312,8 +1316,8 @@ MonoBehaviour:
     m_ActionName: Player/Walk[/Keyboard/leftCtrl]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1346489119434670283}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037324956822290950}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnDodge
         m_Mode: 0
         m_Arguments:
@@ -1328,8 +1332,8 @@ MonoBehaviour:
     m_ActionName: Player/Dodge[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1346489119434670283}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037324956822290950}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnAttackA
         m_Mode: 0
         m_Arguments:
@@ -1344,8 +1348,8 @@ MonoBehaviour:
     m_ActionName: Player/Attack1[/Keyboard/j]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1346489119434670283}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037324956822290950}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnAttackB
         m_Mode: 0
         m_Arguments:
@@ -1400,8 +1404,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1346489119434670283}
-        m_TargetAssemblyTypeName: HJ.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037324956822290950}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
@@ -1416,8 +1420,8 @@ MonoBehaviour:
     m_ActionName: Player/Interact[/Keyboard/f]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1346489119434670283}
-        m_TargetAssemblyTypeName: HJ.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037324956822290950}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnUseItem
         m_Mode: 0
         m_Arguments:
@@ -1467,8 +1471,8 @@ Rigidbody:
   m_GameObject: {fileID: 3145698477173681061}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 10
-  m_AngularDrag: 10
+  m_Drag: 100
+  m_AngularDrag: 100
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

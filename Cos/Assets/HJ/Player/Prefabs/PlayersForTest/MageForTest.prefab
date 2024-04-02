@@ -2708,18 +2708,18 @@ GameObject:
   m_Component:
   - component: {fileID: 3587126592412609114}
   - component: {fileID: 6161436637298984682}
-  - component: {fileID: 5494113418399504232}
+  - component: {fileID: 6555699239792084220}
   - component: {fileID: 5105053903146675633}
   - component: {fileID: 2077308320590480268}
   - component: {fileID: 598281949004524522}
   - component: {fileID: 1110814747894879192}
   m_Layer: 11
-  m_Name: Mage
+  m_Name: MageForTest
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3587126592412609114
 Transform:
   m_ObjectHideFlags: 0
@@ -2756,19 +2756,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e1f76b653e1c74e86e0eab969c4244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashEffect: {fileID: 0}
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
   _dashSoundNum: 17
   _dashDelay: 1
-  _potionEffect: {fileID: 0}
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
   _potionSoundNum: 16
   _potionDelay: 1
-  _hitEffect: {fileID: 0}
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
   _hitSoundNum: 14
-  _hitDelay: 0
-  _dieEffect: {fileID: 0}
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
   _dieSoundNum: 15
-  _dieDelay: 0
-  _mageSpell1effect: {fileID: 290910824477090013, guid: 7a93e31f227233b42ae1a6c5bab3c2ba,
+  _dieDelay: 1
+  _mageSpell1effect: {fileID: 4774871216263188542, guid: 0fb1e47634932234ba15633f7e09dffb,
     type: 3}
   _mageSpell1SoundNum: 5
   _mageSpell1Delay: 1
@@ -2780,7 +2784,7 @@ MonoBehaviour:
     type: 3}
   _mageSpell3SoundNum: 7
   _mageSpell3Delay: 5
---- !u!114 &5494113418399504232
+--- !u!114 &6555699239792084220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2789,7 +2793,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7821405845134238349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be11e4895dbbda248afd07b889ba6ba6, type: 3}
+  m_Script: {fileID: 11500000, guid: 97210c4c7f3ab5442a31252f4c7a2067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
@@ -2800,11 +2804,11 @@ MonoBehaviour:
   potion: {fileID: 2340268482088149434}
   isPlayer: 1
   _speed: 5
-  attackWeapon: 0
+  attackWeapon: 10
   attackItem: 0
   attackSkill: 0
   attackFood: 0
-  armorArmor: 0
+  armorArmor: 10
   armorItem: 0
   armorSkill: 0
   armorFood: 0
@@ -2825,7 +2829,7 @@ MonoBehaviour:
   spRecoveryFood: 0
   maxPotionItem: 0
   _potionNumber: 0
-  _potionHp: 50
+  _potionHp: 0
   potionHpItem: 0
 --- !u!95 &5105053903146675633
 Animator:
@@ -2837,7 +2841,7 @@ Animator:
   m_GameObject: {fileID: 7821405845134238349}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d26d0c190deeacc4bacb969d79e9c21f, type: 2}
+  m_Controller: {fileID: 9100000, guid: ff1a6eeb2ee8a2740a3d2edb0b1195d2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
@@ -2876,8 +2880,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494113418399504232}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 6555699239792084220}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -2892,8 +2896,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494113418399504232}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 6555699239792084220}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnWalk
         m_Mode: 0
         m_Arguments:
@@ -2908,8 +2912,8 @@ MonoBehaviour:
     m_ActionName: Player/Walk[/Keyboard/leftCtrl]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494113418399504232}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 6555699239792084220}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnDodge
         m_Mode: 0
         m_Arguments:
@@ -2924,8 +2928,8 @@ MonoBehaviour:
     m_ActionName: Player/Dodge[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494113418399504232}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 6555699239792084220}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnAttackA
         m_Mode: 0
         m_Arguments:
@@ -2940,8 +2944,8 @@ MonoBehaviour:
     m_ActionName: Player/Attack1[/Keyboard/j]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494113418399504232}
-        m_TargetAssemblyTypeName: Assets.Player.Scripts.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 6555699239792084220}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnAttackB
         m_Mode: 0
         m_Arguments:
@@ -2996,8 +3000,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494113418399504232}
-        m_TargetAssemblyTypeName: HJ.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 6555699239792084220}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
@@ -3012,8 +3016,8 @@ MonoBehaviour:
     m_ActionName: Player/Interact[/Keyboard/f]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5494113418399504232}
-        m_TargetAssemblyTypeName: HJ.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 6555699239792084220}
+        m_TargetAssemblyTypeName: HJ.PlayerControllerForTest, Assembly-CSharp
         m_MethodName: OnUseItem
         m_Mode: 0
         m_Arguments:
@@ -3063,8 +3067,8 @@ Rigidbody:
   m_GameObject: {fileID: 7821405845134238349}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 10
-  m_AngularDrag: 10
+  m_Drag: 100
+  m_AngularDrag: 100
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

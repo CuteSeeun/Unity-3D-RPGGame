@@ -2237,6 +2237,7 @@ GameObject:
   - component: {fileID: 2636136580591099847}
   - component: {fileID: 8716699542432747771}
   - component: {fileID: 1124765054116504648}
+  - component: {fileID: 2406675467147311874}
   m_Layer: 12
   m_Name: Rogue Dummy
   m_TagString: Player
@@ -2287,17 +2288,33 @@ MonoBehaviour:
   potion: {fileID: 2990314809043949092}
   isPlayer: 1
   _speed: 5
-  _attack: 1
-  _armor: 10
+  attackWeapon: 1
+  attackItem: 0
+  attackSkill: 0
+  attackFood: 0
+  armorArmor: 10
+  armorItem: 0
+  armorSkill: 0
+  armorFood: 0
   _hp: 0
+  hpMaxItem: 0
+  hpSkill: 0
+  hpFood: 0
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
     m_Bits: 0
   _stamina: 0
-  _maxPotion: 0
+  spMaxItem: 0
+  spMaxSkill: 0
+  spMaxFood: 0
+  spRecoveryItem: 0
+  spRecoverySkill: 0
+  spRecoveryFood: 0
+  maxPotionItem: 0
   _potionNumber: 0
   _potionHp: 0
+  potionHpItem: 0
 --- !u!95 &2636136580591099847
 Animator:
   serializedVersion: 5
@@ -2369,6 +2386,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2406675467147311874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187502738920674815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3925bd9fc83d4243b72d1b13c45d5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dashEffect: {fileID: 0}
+  _dashSoundNum: 10
+  _dashDelay: 1
+  _potionEffect: {fileID: 0}
+  _potionSoundNum: 48
+  _potionDelay: 1
+  _hitEffect: {fileID: 0}
+  _hitSoundNum: 0
+  _hitDelay: 0
+  _dieEffect: {fileID: 0}
+  _dieSoundNum: 0
+  _dieDelay: 0
+  _rogueSlash1Effect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
+    type: 3}
+  _rogueSlash1SoundNum: 8
+  _rogueSlash1Delay: 1
+  _rogueSlash2Effect: {fileID: 3263452941602113375, guid: 72a33e7e58c7efc478a728450668a590,
+    type: 3}
+  _rogueSlash2SoundNum: 8
+  _rogueSlash2Delay: 1
+  _rogueSlash3_1Effect: {fileID: 7043183771742762698, guid: 19490df282716bf4fba4bf5544fd26ff,
+    type: 3}
+  _rogueSlash3_2Effect: {fileID: 7043183771742762698, guid: 1b084599ef6e9974ab3f1e5b6c37799d,
+    type: 3}
+  _rogueSlash3SoundNum: 8
+  _rogueSlash3Delay: 1
+  _rogueCrossbowEffect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
+    type: 3}
+  _rogueCrossbowSoundNum: 10
+  _rogueCrossbow2Delay: 1
 --- !u!1 &7612030876893962618
 GameObject:
   m_ObjectHideFlags: 0
