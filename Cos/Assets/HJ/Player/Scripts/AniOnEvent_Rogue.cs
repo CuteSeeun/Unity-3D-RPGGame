@@ -23,6 +23,24 @@ namespace HJ
             StartCoroutine(Effect(_potionEffect, _potionSoundNum, _potionDelay));
         }
 
+        [Header("HitEffect")] //=========================================================================
+        [SerializeField] GameObject _hitEffect;
+        [SerializeField] int _hitSoundNum;
+        [SerializeField] float _hitDelay;
+        public void HitEffect()
+        {
+            StartCoroutine(Effect(_hitEffect, _hitSoundNum, _hitDelay));
+        }
+
+        [Header("DieEffect")] //=========================================================================
+        [SerializeField] GameObject _dieEffect;
+        [SerializeField] int _dieSoundNum;
+        [SerializeField] float _dieDelay;
+        public void DieEffect()
+        {
+            StartCoroutine(Effect(_dieEffect, _dieSoundNum, _dieDelay));
+        }
+
         [Header("Slash1")] //============================================================================
         public GameObject _rogueSlash1Effect;
         [SerializeField] int _rogueSlash1SoundNum;
@@ -67,7 +85,7 @@ namespace HJ
         IEnumerator Effect(GameObject effect, int soundNum, float delay)
         {
             GameObject effectInstanse = Instantiate(effect, transform.position, transform.rotation);
-            //SFX_Manager.Instance.VFX(soundNum);
+            SFX_Manager.Instance.VFX(soundNum);
 
             yield return new WaitForSeconds(delay);
             Destroy(effectInstanse);

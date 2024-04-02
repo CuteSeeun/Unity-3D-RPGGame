@@ -10,6 +10,7 @@ public class Chest : MonoBehaviour, IInteractable
     private Collider _collider;
     [SerializeField] GameObject _interactorLight;
     [SerializeField] GameObject _LockedLight;
+    [SerializeField] GameObject _yellowLight;
     [SerializeField] List<GameObject> interactables;
 
     private void Start()
@@ -55,6 +56,7 @@ public class Chest : MonoBehaviour, IInteractable
             Destroy(_collider);
             InteractableOff();
             animator.SetBool("isBox", true);
+            _yellowLight.SetActive(true);
 
             foreach (var item in interactables)
             {

@@ -8,6 +8,8 @@ public class Artifact : MonoBehaviour, IInteractable
     public bool _isLocked;
     [SerializeField] GameObject _interactorLight;
     [SerializeField] GameObject _LockedLight;
+    [SerializeField] GameObject _effect;
+    [SerializeField] int _sound;
     [SerializeField] List<GameObject> interactables;
 
     public void InteractableOn()
@@ -51,7 +53,18 @@ public class Artifact : MonoBehaviour, IInteractable
                 item.GetComponent<IInteractable>().Interaction(gameObject);
             }
 
+            StartCoroutine(Effect(_effect, _sound, 1));
+
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator Effect(GameObject effect, int soundNum, float delay)
+    {
+        GameObject effectInstanse = Instantiate(effect, transform.position, transform.rotation);
+        SFX_Manager.Instance.VFX(soundNum);
+
+        yield return new WaitForSeconds(delay);
+        Destroy(effectInstanse);
     }
 }

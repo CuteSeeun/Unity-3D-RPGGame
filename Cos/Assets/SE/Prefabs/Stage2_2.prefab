@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3083138288229191010}
   - component: {fileID: 6236665526330478763}
   - component: {fileID: 6483636043382010721}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4087781680643572036}
   - component: {fileID: 5198253739372218992}
   - component: {fileID: 7946884447099235296}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 360685424500779947}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 7628082229879995811}
   - component: {fileID: 8458470639541009593}
   - component: {fileID: 6817839499659260146}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,6 +412,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1891252463525571404}
   - {fileID: 5721538352202937308}
   - {fileID: 7742163869137641714}
   - {fileID: 360685424500779947}
@@ -765,7 +766,7 @@ GameObject:
   - component: {fileID: 8371813533493057363}
   - component: {fileID: 1206393202557611482}
   - component: {fileID: 6344402181958864822}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5721538352202937308}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: pillar_broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,7 +1079,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5122502505835086468}
-  - {fileID: 1891252463525571404}
   m_Father: {fileID: 3712652901427949314}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &4989772995911899990
@@ -1092,7 +1092,7 @@ GameObject:
   - component: {fileID: 509079209361159642}
   - component: {fileID: 4675046184523401757}
   - component: {fileID: 4820488553700266415}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1363,7 +1363,7 @@ GameObject:
   - component: {fileID: 4344204081480116007}
   - component: {fileID: 4600699225293662948}
   - component: {fileID: 1371272741415777683}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 261812966020658572}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1499,7 +1499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2187387409768972458
 Transform:
   m_ObjectHideFlags: 0
@@ -1528,7 +1528,7 @@ GameObject:
   - component: {fileID: 2080718858043604051}
   - component: {fileID: 8753182396959284271}
   - component: {fileID: 2098317842281388193}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1611,7 +1611,7 @@ GameObject:
   - component: {fileID: 5390448929217736994}
   - component: {fileID: 2648398262185564694}
   - component: {fileID: 3918484420142974558}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +1930,7 @@ GameObject:
   - component: {fileID: 1124783781868791749}
   - component: {fileID: 8840435531213313123}
   - component: {fileID: 469151332212956028}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2118,7 @@ GameObject:
   - component: {fileID: 8069086078953138312}
   - component: {fileID: 8620539201657922537}
   - component: {fileID: 4707336294601455777}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2252,6 +2252,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_half (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2595,6 +2605,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_doorway_Tsplit
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4cb624ef202bd5942a237a9ef0563ba9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 4cb624ef202bd5942a237a9ef0563ba9,
         type: 3}
       propertyPath: m_Layer
@@ -2706,6 +2721,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63c42951e66202248996799ee649ca83,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 63c42951e66202248996799ee649ca83,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2779,6 +2804,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_corner_gated
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d016bfaebb288ea499404838eca240b8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -2933,6 +2963,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3006,6 +3046,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_large (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3081,6 +3131,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3154,6 +3214,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63c42951e66202248996799ee649ca83,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 63c42951e66202248996799ee649ca83,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3248,6 +3318,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_half (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -3432,6 +3507,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_large
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3907,6 +3992,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a, type: 3}
@@ -3981,6 +4071,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_large (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4218,6 +4318,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_large (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
         type: 3}
@@ -4655,6 +4760,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_largeCrackedB
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4728,6 +4843,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_half
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4824,6 +4944,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4897,6 +5027,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_largeCrackedB (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4972,6 +5112,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_largeCrackedB (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5045,6 +5195,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_large (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5194,6 +5354,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_arched
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 75c7ea98afdea854da3a78d359c5dc7b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 75c7ea98afdea854da3a78d359c5dc7b,
         type: 3}
       propertyPath: m_Layer
@@ -5303,6 +5468,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: shelf_large
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: af1b0cad971d4b141ab1654b36b0f650,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -5453,6 +5623,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5527,6 +5707,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 2846265b95f2cdc4eac5b19e5e77133a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5536,6 +5721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.68718356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5695,6 +5885,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5769,6 +5969,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_half (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5842,6 +6052,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_gated
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5b0b1034fe45944781c4d3334438ab3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -5935,7 +6150,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5721538352202937308}
+    m_TransformParent: {fileID: 3712652901427949314}
     m_Modifications:
     - target: {fileID: 4816732418569918673, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
@@ -5950,22 +6165,22 @@ PrefabInstance:
     - target: {fileID: 6063973351916342070, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.3399963
       objectReference: {fileID: 0}
     - target: {fileID: 6063973351916342070, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6063973351916342070, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.75
+      value: -13.040001
       objectReference: {fileID: 0}
     - target: {fileID: 6063973351916342070, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6063973351916342070, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
@@ -5975,7 +6190,7 @@ PrefabInstance:
     - target: {fileID: 6063973351916342070, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6063973351916342070, guid: 792e2a8c6a6f7524b81dd803f2963917,
         type: 3}
@@ -6076,6 +6291,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_endcap
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c10f6a1751dbe394694bcc4057ee095f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: c10f6a1751dbe394694bcc4057ee095f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6149,6 +6374,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_shelves
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 25788a779aca17246b490709be081b76,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 25788a779aca17246b490709be081b76,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6224,6 +6459,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_large (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6297,6 +6542,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_large (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
         type: 3}
@@ -6407,6 +6657,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_gated (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5b0b1034fe45944781c4d3334438ab3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -6572,6 +6827,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_half (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 2f27d4c1a349bc847a69f37ddea63836,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6645,6 +6910,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_gated (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5b0b1034fe45944781c4d3334438ab3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: d5b0b1034fe45944781c4d3334438ab3,
         type: 3}
@@ -6919,6 +7189,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_gated (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5b0b1034fe45944781c4d3334438ab3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: d5b0b1034fe45944781c4d3334438ab3,
         type: 3}
       propertyPath: m_Layer
@@ -7025,6 +7300,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor_dirt_small_A
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 924c29252923fc549a5eef9393d0a73f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7130,6 +7410,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tileBrickB_largeCrackedB (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: ed0e8f90593f1ad469ff6e76f10571af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7208,6 +7498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tileBrickB_large (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2846265b95f2cdc4eac5b19e5e77133a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 2846265b95f2cdc4eac5b19e5e77133a,
         type: 3}
@@ -7318,6 +7613,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall_doorway_sides
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e2d5887cced12ce4c970980553fe1d86,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: e2d5887cced12ce4c970980553fe1d86,
         type: 3}
