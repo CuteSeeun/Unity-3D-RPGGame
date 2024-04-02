@@ -49,14 +49,14 @@ public class BarsTset: MonoBehaviour
         /* 초기 체력 설정. */
         //playerHp.hp = maxHealth;
         /* 슬라이더의 최대값을 최대 체력으로 설정. */
-        healthSlider.maxValue = maxHealth;
-        menuHealthSlider.maxValue = maxHealth;
+        healthSlider.maxValue = playerHp.hpMax;
+        menuHealthSlider.maxValue = playerHp.hpMax;
         UpdateHealthUI();
         /* 초기 스테미나 설정 */
         //playerSp.stamina = maxStamina;
         /* 슬라이더의 최대값을 최대 스테미너로 설정. */
-        staminaSlider.maxValue = maxStamina;
-        menuStaminaSlider.maxValue = maxStamina;
+        staminaSlider.maxValue = playerSp.spMax;
+        menuStaminaSlider.maxValue = playerSp.spMax;
         /* 슬라이더의 값 초기화. */
         staminaSlider.value = playerSp.stamina;
         menuStaminaSlider.value = playerSp.stamina;
