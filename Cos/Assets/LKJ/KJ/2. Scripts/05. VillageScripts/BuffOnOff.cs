@@ -1,10 +1,11 @@
+using System.Linq;
+using HJ;
 using KJ;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuffOnOff : MonoBehaviour
 {
-    //private GameData gameData;
     [Header("Buff Images")]
     public Image powerBuffImage;
     public Image healthBuffImage;
@@ -15,27 +16,28 @@ public class BuffOnOff : MonoBehaviour
     [SerializeField] public bool _healthBuff = false;
     [SerializeField] public bool _specialBuff = false;
 
-    
+    PlayerController playerController;
 
     void Start()
     {
-        //gameData = NetData.Instance._gameData;
-        //Class playerData;
         powerBuffImage.color = Color.gray;
         healthBuffImage.color = Color.gray;
         specialBuffImage.color = Color.gray;
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     public void PowerBuff()
     {
+
         if (_powerBuff == true)
         {
             powerBuffImage.color = new Color(214 / 255f, 150 / 255f, 150 / 255f, 1f);
-            
+            playerController.attackFood = 0.2f;
         }
         else
         {
             powerBuffImage.color = Color.gray;
+            playerController.attackFood = 0;
         }
     }
 
@@ -44,10 +46,12 @@ public class BuffOnOff : MonoBehaviour
         if (_healthBuff == true)
         {
             healthBuffImage.color = new Color(1f, 0f, 0f, 1f);
+            playerController.armorFood = 0.2f;
         }
         else
         {
             healthBuffImage.color = Color.gray;
+            playerController.armorFood = 0;
         }
     }
 
@@ -56,10 +60,12 @@ public class BuffOnOff : MonoBehaviour
         if (_specialBuff == true)
         {
             specialBuffImage.color = new Color(1f, 1f, 0f, 1f);
+            playerController.spRecoveryFood = 0.4f;
         }
         else
         {
             specialBuffImage.color = Color.gray;
+            playerController.spRecoveryFood = 0;
         }
     }
 
