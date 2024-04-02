@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 7839954860694376579}
   - component: {fileID: 7237923179356632733}
   - component: {fileID: 8575320577241104593}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: door_gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocked: 0
   _wallsToDestroy: []
+  _objectsToActivate: []
   _interactorLight: {fileID: 7253937161124767172}
   _LockedLight: {fileID: 6455561129076976400}
   _enemies: []

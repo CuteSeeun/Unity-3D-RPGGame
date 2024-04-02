@@ -52,7 +52,12 @@ namespace KJ
     /* SingletonLazy<T> 를 상속받아서 싱글톤 구현하는 클래스 */
     public class ItemDBManager : SingletonLazy<ItemDBManager>
     {
-        private ItemData _itemData;
+        public ItemData _itemData { get; private set; }
+
+        public Item GetItem(string id) 
+        {
+            return _itemData.items.Find(x => x.id == id);
+        }
 
         public IEnumerator LoadItemDB()
         {
@@ -65,6 +70,22 @@ namespace KJ
             //_itemData = Newtonsoft.Json.JsonConvert.DeserializeObject<ItemData>(itemData.text);
 
             yield return null;
+        }
+
+        Dictionary<string, Sprite> _loadpool = new Dictionary<string, Sprite>();
+        public Sprite LoadItemSprite(string imagePath)
+        {
+            if(_loadpool.ContainsKey(imagePath))
+            {
+                return _loadpool[imagePath];
+            }
+            else
+            {
+                Sprite s = Resources.Load<Sprite>(imagePath);
+                _loadpool.Add(imagePath, s);
+                return s;
+            }
+            
         }
     }
 }

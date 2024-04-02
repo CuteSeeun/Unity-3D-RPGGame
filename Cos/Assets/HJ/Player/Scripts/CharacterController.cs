@@ -1,3 +1,4 @@
+using KJ;
 using Scene_Teleportation_Kit.Scripts.player;
 using System;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace HJ
         }
         protected virtual void Start()
         {
+            GameData gameData = NetData.Instance.gameData;
+            Class classKnight = gameData.classes[ClassType.knight];
+            _hpMax = classKnight.baseHp;
             HealthStart();
             onHpMin += () => Death();
 
@@ -90,12 +94,14 @@ namespace HJ
                 onHpChanged?.Invoke(_hp);
             }
         }
+        
         [SerializeField] private float _hp;
         public float hpMax { get => (_hpMax + hpMaxItem) * (1 + hpSkill + hpFood); }
-        private float _hpMax = 100;
+        private float _hpMax;
         public float hpMaxItem;
         public float hpSkill;
         public float hpFood;
+        
 
         public event Action<float> onHpChanged;
         public event Action<float> onHpDepleted;
@@ -203,7 +209,7 @@ namespace HJ
                     // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달
                     if (hit.collider.TryGetComponent(out IHp iHp))
                     {
-                        float _random = UnityEngine.Random.Range(0.75f, 1.25f);
+                        float _random = UnityEngine.Random.Range(0.85f, 1.15f);
                         iHp.Hit(attack * _attackDamageRate * _random, _isPowerAttack, transform.rotation);
                     }
                 }
