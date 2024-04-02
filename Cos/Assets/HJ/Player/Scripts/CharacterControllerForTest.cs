@@ -97,7 +97,7 @@ namespace HJ
         
         [SerializeField] private float _hp;
         public float hpMax { get => (_hpMax + hpMaxItem) * (1 + hpSkill + hpFood); }
-        private float _hpMax;
+        private float _hpMax = 100;
         public float hpMaxItem;
         public float hpSkill;
         public float hpFood;

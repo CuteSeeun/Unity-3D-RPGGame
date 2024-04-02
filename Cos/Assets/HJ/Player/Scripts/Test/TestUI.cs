@@ -9,8 +9,8 @@ namespace HJ
     public class TestUI : MonoBehaviour
     {
         [SerializeField] GameObject player;
-        CharacterController _characterController;
-        PlayerController _playerController;
+        CharacterControllerForTest _characterController;
+        PlayerControllerForTest _playerController;
 
         [SerializeField] TextMeshProUGUI HP;
         [SerializeField] TextMeshProUGUI SP;
@@ -18,8 +18,8 @@ namespace HJ
 
         private void Awake()
         {
-            _characterController = player.GetComponent<CharacterController>();
-            _playerController = player.GetComponent<PlayerController>();
+            _characterController = player.GetComponent<CharacterControllerForTest>();
+            _playerController = player.GetComponent<PlayerControllerForTest>();
         }
 
         void Start()

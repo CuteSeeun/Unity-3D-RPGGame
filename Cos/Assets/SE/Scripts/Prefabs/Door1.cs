@@ -83,6 +83,22 @@ public class Door1 : MonoBehaviour, IInteractable
             foreach (var enemy in _enemies)
             {
                 // 적들 깨우기
+                if (enemy.TryGetComponent(out CloseEnemyAI closeEnemy))
+                {
+                    closeEnemy.isAct = true;
+                }
+                else if (enemy.TryGetComponent(out LongEnemyAI longEnemy))
+                {
+                    longEnemy.isAct = true;
+                }
+                else if (enemy.TryGetComponent(out MageEnemyAI mageEnemy))
+                {
+                    mageEnemy.isAct = true;
+                }
+                else if (enemy.TryGetComponent(out SpawnEnemyAI spawnEnemy))
+                {
+                    enemy.gameObject.SetActive(true);
+                }
             }
         }
     }
