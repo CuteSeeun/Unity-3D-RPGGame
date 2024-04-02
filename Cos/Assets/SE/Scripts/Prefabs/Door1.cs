@@ -11,6 +11,7 @@ public class Door1 : MonoBehaviour, IInteractable
     private bool isOpen; //문 초기 상태 닫힘
     public bool isLocked;
     [SerializeField] List<GameObject> _wallsToDestroy;
+    [SerializeField] List<GameObject> _objectsToActivate;
 
     [SerializeField] GameObject _interactorLight;
     [SerializeField] GameObject _LockedLight;
@@ -67,6 +68,11 @@ public class Door1 : MonoBehaviour, IInteractable
             foreach (var wall in _wallsToDestroy)
             {
                 Destroy(wall);
+            }
+
+            foreach (var activate in _objectsToActivate)
+            {
+                activate.SetActive(true);
             }
 
             foreach (var item in interactables)
