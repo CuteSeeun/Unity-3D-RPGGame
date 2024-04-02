@@ -9,7 +9,6 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     float chaseSpeed = 8f;
     public float detectionRange;
     public float attackRange;
-    float detectionAngle = 360f;
     public float skulSpeed;
 
 
@@ -21,6 +20,9 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     public GameObject explosion;
     public GameObject teleportIn;
     public GameObject teleportOut;
+    public GameObject effectR;
+    public GameObject effectL;
+    public GameObject effectB;
     public ParticleSystem fire;
     private bool isChasing;
     private bool isDeath;
@@ -347,6 +349,9 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
         isAttack = false;
         isSkul = false;
         explosion.SetActive(false);
+        effectR.SetActive(false);
+        effectL.SetActive(false);
+        effectB.SetActive(false);
         attackStack++;
         if (attackStack > 6)
         {
@@ -406,6 +411,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     }
     void DamageA()
     {
+        effectB.SetActive(true);
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   attackRange,
@@ -454,4 +460,13 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
             }
         }
     }
+
+    void EffectR()
+    {
+        effectR.SetActive(true);
+    }
+    void EffectL()
+    {
+        effectL.SetActive(true);
+    }   
 }

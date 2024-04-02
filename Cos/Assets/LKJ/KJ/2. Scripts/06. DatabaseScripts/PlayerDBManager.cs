@@ -71,15 +71,15 @@ namespace KJ
             CurrentShortUID = shortUID;
 
             playerData.shortUID = shortUID;
-            GameData gamedata = NetData.Instance._gameData;
+            GameData _gamedata = NetData.Instance._gameData;
 
-            if (gamedata.players.ContainsKey(shortUID))
+            if (_gamedata.players.ContainsKey(shortUID))
             {
-                gamedata.players[shortUID] = playerData;
+                _gamedata.players[shortUID] = playerData;
             }
             else
             {
-                gamedata.players.Add(shortUID, playerData);
+                _gamedata.players.Add(shortUID, playerData);
             }
         }
 
@@ -87,14 +87,14 @@ namespace KJ
         {
             if (string.IsNullOrEmpty(shortUID)) return false;
 
-            GameData gamedata = NetData.Instance._gameData;
-            return gamedata.players.ContainsKey(shortUID);
+            GameData _gamedata = NetData.Instance._gameData;
+            return _gamedata.players.ContainsKey(shortUID);
         }
 
         public Player LoadGameData(string shortUID)
         {
-            GameData gamedata = NetData.Instance._gameData;
-            if (gamedata.players.TryGetValue(shortUID, out Player playerData))
+            GameData _gamedata = NetData.Instance._gameData;
+            if (_gamedata.players.TryGetValue(shortUID, out Player playerData))
             {
                 /* 플레이어 위치나 인벤토리 그리고 능력치 및 설정 저장. */
                 return playerData;
