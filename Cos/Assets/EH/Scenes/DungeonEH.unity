@@ -1469,74 +1469,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
         type: 3}
-      propertyPath: _audioBGM.Array.data[1]
+      propertyPath: BGM
       value: 
-      objectReference: {fileID: 8300000, guid: e7f743b1e8356ca4a8f50aab78286790, type: 3}
+      objectReference: {fileID: 1868557388}
     - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
         type: 3}
-      propertyPath: _audioBGM.Array.data[2]
+      propertyPath: Camera
       value: 
-      objectReference: {fileID: 8300000, guid: de251335e1d7645369bab5cd9afb5834, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 0aa1d0e070100784385622c7f7f5990b, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7b7f2ac757231174b996ff236429aaa5, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 65c5f083ba0507b4390e9635ccb638ee, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: 601453f73c6c89641a8e57e58403ff51, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9c0028750ff283b42b51ac2f613d463c, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1b9e660178696474cb7a33925e185013, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: fd65a9d888d7d0746b2bc4301ee39d50, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[10]
-      value: 
-      objectReference: {fileID: 8300000, guid: e6a14ccedf370e142ba49adceab56e2c, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: 20f9c9a896dd8804a976b4977ebec45c, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[12]
-      value: 
-      objectReference: {fileID: 8300000, guid: 29424de625a63034d9dcce188f7579e3, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[13]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1a6886c5d150d4d11bb1aaeceff69220, type: 3}
-    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
-        type: 3}
-      propertyPath: _audioBGM.Array.data[14]
-      value: 
-      objectReference: {fileID: 8300000, guid: c516392a139908841ab2456bd5f749ab, type: 3}
+      objectReference: {fileID: 1868557383}
     - target: {fileID: 2150894388557434624, guid: d2b4260715f96f04c8190665c6416cc7,
         type: 3}
       propertyPath: m_Name
@@ -5174,6 +5114,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238908602759269227, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _blockHitSoundNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238908602759269227, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _knightSlash4delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238908602759269227, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _blockAttackSoundNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238908602759269227, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _knightSlash1SoundNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238908602759269227, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _knightSlash2SoundNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238908602759269227, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _knightSlash3SoundNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238908602759269227, guid: 15eb6a126cfff65449b426592446b0de,
+        type: 3}
+      propertyPath: _knightSlash4soundNum
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7630361002812702112, guid: 15eb6a126cfff65449b426592446b0de,
         type: 3}
@@ -15752,6 +15727,7 @@ GameObject:
   - component: {fileID: 1868557385}
   - component: {fileID: 1868557386}
   - component: {fileID: 1868557387}
+  - component: {fileID: 1868557388}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -15905,6 +15881,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 664793566}
   _cameraOffset: {x: -15, y: 15, z: -15}
+--- !u!82 &1868557388
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868557381}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1884478069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d303b787d5366814488e488d14f67e11,
