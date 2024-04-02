@@ -34,6 +34,7 @@ namespace KJ
         }
         private void Start()
         {
+            
           
         }
 
@@ -108,6 +109,8 @@ namespace KJ
                         Debug.Log($"Creating character of class: {className}");
 
                         Debug.Log($"PlayerShorUID: {playerData.shortUID}");
+
+                        Debug.Log($"생성된 캐릭터 적용 여부: {classData.baseHp}");
 
                         // 인벤토리 아이템 적용 후
                         Debug.Log($"Applied inventory items to character. Item count: {playerData.inventory.items.Count}");
