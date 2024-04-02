@@ -241,7 +241,6 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     void Attack()
     {
         m_Animator.SetTrigger("isAttack");
-        Invoke("EffectA", 0.5f);
         attackTimer = 3;
         // 공격 동작 구현
        
@@ -283,11 +282,6 @@ public class CloseEnemyAI : MonoBehaviour, IHp
         attackEffect.SetActive(false);
     }
 
-    void EffectA()
-    {
-        attackEffect.SetActive(true);
-    }
-
     public void Death()
     {
         Destroy(gameObject);
@@ -299,6 +293,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     float attackDamage = 5;
     void Damage()
     {
+        attackEffect.SetActive(true);
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   attackRange,
