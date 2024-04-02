@@ -29,6 +29,9 @@ public class EliteEnemy : MonoBehaviour, IHp
     public GameObject rushImpact;
     public GameObject jumpEffect;
     public GameObject isCrushEffect;
+    public GameObject effectR;
+    public GameObject effectL;
+    public GameObject effectB;
     public ParticleSystem isRush;
     private bool isChasing;
     private bool isDeath;
@@ -346,6 +349,9 @@ public class EliteEnemy : MonoBehaviour, IHp
         isChasing = true;
         isAttack = false;
         jump = false;
+        effectR.SetActive(false);
+        effectL.SetActive(false);
+        effectB.SetActive(false);
         //rb.isKinematic = false;
         attackStack++;
         if(attackStack > 6)
@@ -499,6 +505,21 @@ public class EliteEnemy : MonoBehaviour, IHp
                 }
             }
         }
+    }
+
+    void EffectR()
+    {
+        effectR.SetActive(true);
+    }
+
+    void EffectL()
+    {
+        effectL.SetActive(true);
+    }
+
+    void EffectB()
+    {
+        effectB.SetActive(true);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -1,20 +1,24 @@
+using KJ;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
     public GameObject slotPrefab;
-    public GameObject slotPanel;
+    public Transform slotPanel;
+    public TMP_Text itemName;
+    public TMP_Text itemDescription;
+    public TMP_Text itemQuantity;
 
-    void Start()
+    private ItemData _itemData;
+    private GameData _gameData;
+
+    public void AddItem(Item item)
     {
         
-    }
 
-    
-    void Update()
-    {
-        
+        var slotInstance = Instantiate(slotPrefab, slotPanel);
     }
 }

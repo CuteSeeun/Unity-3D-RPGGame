@@ -75,7 +75,7 @@ namespace HJ
         IEnumerator Effect(GameObject effect, int soundNum, float delay)
         {
             GameObject effectInstanse = Instantiate(effect, transform.position, transform.rotation);
-            SFX_Manager.Instance.VFX(soundNum);
+            //SFX_Manager.Instance.VFX(soundNum);
 
             yield return new WaitForSeconds(delay);
             Destroy(effectInstanse);

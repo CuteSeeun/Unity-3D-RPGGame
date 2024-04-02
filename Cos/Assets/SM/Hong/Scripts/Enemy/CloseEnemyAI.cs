@@ -18,6 +18,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     private NavMeshAgent agent;
     private Transform player;
     private GetItemManager getItem;
+    public GameObject attackEffect;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isChasing;
@@ -124,6 +125,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
         player = GameObject.FindGameObjectWithTag("Player").transform;
         patrolDestination = GetRandomPatrolDestination();
         getItem = FindAnyObjectByType<GetItemManager>();
+        attackEffect.SetActive(false);
         isPatrolling = true;
         agent.isStopped = false;
         agent.speed = patrolSpeed;
@@ -239,6 +241,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     void Attack()
     {
         m_Animator.SetTrigger("isAttack");
+        Invoke("EffectA", 0.5f);
         attackTimer = 3;
         // 공격 동작 구현
        
@@ -277,6 +280,12 @@ public class CloseEnemyAI : MonoBehaviour, IHp
     {
         agent.isStopped = false;
         isChasing = true;
+        attackEffect.SetActive(false);
+    }
+
+    void EffectA()
+    {
+        attackEffect.SetActive(true);
     }
 
     public void Death()
