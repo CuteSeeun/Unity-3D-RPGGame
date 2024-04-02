@@ -65,7 +65,7 @@ namespace KJ
         /* 플레이어 데이터를 저장할 Dictionary. */
         public Dictionary<string, Player> players = new Dictionary<string, Player>();
         /* 클래스 데이터를 저장할 Dictionary. */
-        public Dictionary<string, Class> classes = new Dictionary<string, Class>();
+        public Dictionary<ClassType, Class> classes = new Dictionary<ClassType, Class>();
 
     }
 
