@@ -84,7 +84,6 @@ public class SFX_Manager : SingletonLazy<SFX_Manager>
     }
     public void VFX(int sfx)
     {
-
         if (sfx < 0 || sfx >= _audioClips_sfx.Count)
         {
             Debug.LogError("Can't play SFX");
@@ -93,17 +92,14 @@ public class SFX_Manager : SingletonLazy<SFX_Manager>
 
         AudioClip clip = _audioClips_sfx[sfx];
 
-        // audiosource 선언, destroysfx 선언
-        AudioSource audiosource = null;
-        DestroySFX destroysfx = null;
-
         //go 가 sfx 쓰는 게임오브젝트임
-        GameObject go = new GameObject(sfx);
+        GameObject go = new GameObject(sfx.ToString());
 
+        // audiosource 선언, destroysfx 선언
         // 위에서 선언한 audiosource에 go 게임오브젝트(오디오소스 인스펙터창을 추가한)넣음
-        audiosource = go.AddComponent<AudioSource>();
+        AudioSource audiosource = go.AddComponent<AudioSource>();
         //위에서 선언한 destrosfx에 go 게임오브젝트(DestroySFX 다른 스크립트 인스펙터창)를 넣음
-        destroysfx = go.AddComponent<DestroySFX>();
+        DestroySFX destroysfx = go.AddComponent<DestroySFX>();
 
         //destroysfx에 있는 _audioSource는 audiosource이다
         destroysfx._audioSource = audiosource;
