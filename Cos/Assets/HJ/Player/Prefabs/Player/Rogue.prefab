@@ -1154,28 +1154,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3925bd9fc83d4243b72d1b13c45d5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dashEffect: {fileID: 0}
+  _dashSoundNum: 10
+  _dashDelay: 1
   _potionEffect: {fileID: 0}
-  _potionSoundName: 
-  _potionDelay: 0
+  _potionSoundNum: 48
+  _potionDelay: 1
   _rogueSlash1Effect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
     type: 3}
-  _rogueSlash1SoundName: Thief attack
+  _rogueSlash1SoundNum: 56
   _rogueSlash1Delay: 1
   _rogueSlash2Effect: {fileID: 3263452941602113375, guid: 72a33e7e58c7efc478a728450668a590,
     type: 3}
-  _rogueSlash2SoundName: Thief attack
+  _rogueSlash2SoundNum: 56
   _rogueSlash2Delay: 1
   _rogueSlash3_1Effect: {fileID: 7043183771742762698, guid: 19490df282716bf4fba4bf5544fd26ff,
     type: 3}
   _rogueSlash3_2Effect: {fileID: 7043183771742762698, guid: 1b084599ef6e9974ab3f1e5b6c37799d,
     type: 3}
-  _rogueSlash3_1SoundName: Thief attack
-  _rogueSlash3_2SoundName: Thief attack
-  _rogueSlash3_1Delay: 1
-  _rogueSlash3_2Delay: 1
+  _rogueSlash3SoundNum: 56
+  _rogueSlash3Delay: 1
   _rogueCrossbowEffect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
     type: 3}
-  _rogueCrossbowSoundName: Shield_defending
+  _rogueCrossbowSoundNum: 46
   _rogueCrossbow2Delay: 1
 --- !u!114 &1346489119434670283
 MonoBehaviour:
@@ -1200,12 +1201,15 @@ MonoBehaviour:
   attackWeapon: 0
   attackItem: 0
   attackSkill: 0
+  attackFood: 0
   armorArmor: 0
   armorItem: 0
   armorSkill: 0
+  armorFood: 0
   _hp: 0
   hpMaxItem: 0
-  skillHP: 0
+  hpSkill: 0
+  hpFood: 0
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
@@ -1213,8 +1217,10 @@ MonoBehaviour:
   _stamina: 0
   spMaxItem: 0
   spMaxSkill: 0
+  spMaxFood: 0
   spRecoveryItem: 0
   spRecoverySkill: 0
+  spRecoveryFood: 0
   maxPotionItem: 0
   _potionNumber: 0
   _potionHp: 50

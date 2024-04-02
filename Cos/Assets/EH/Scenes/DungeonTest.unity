@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 168688384}
   - component: {fileID: 168688388}
   - component: {fileID: 168688387}
+  - component: {fileID: 168688389}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -357,6 +358,23 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &168688389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168688383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89271c3afc851841a1f8e2d46d42a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  offsetX: -0
+  offsetY: 8
+  offsetZ: -4
+  CameraSpeed: 10
 --- !u!1 &1803054159
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803054161}
   - component: {fileID: 1803054160}
+  - component: {fileID: 1803054162}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -451,6 +470,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1803054162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803054159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1001 &1920983637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -468,7 +510,17 @@ PrefabInstance:
         type: 3}
       propertyPath: Camera
       value: 
-      objectReference: {fileID: 168688385}
+      objectReference: {fileID: 168688389}
+    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
+        type: 3}
+      propertyPath: _audioClips_sfx.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
+        type: 3}
+      propertyPath: _audioClips_sfx.Array.data[20]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3303d94f99918204e9cf89d86cadfc88, type: 3}
     - target: {fileID: 2150894388557434624, guid: d2b4260715f96f04c8190665c6416cc7,
         type: 3}
       propertyPath: m_Name

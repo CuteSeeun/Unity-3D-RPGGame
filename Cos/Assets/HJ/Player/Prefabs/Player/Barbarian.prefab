@@ -2533,28 +2533,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9132470b74b702428649bde2301eec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dashEffect: {fileID: 0}
+  _dashSoundNum: 10
+  _dashDelay: 1
   _potionEffect: {fileID: 0}
-  _potionSoundName: 
-  _potionDelay: 0
+  _potionSoundNum: 48
+  _potionDelay: 1
   _barvarianSwing1Effect: {fileID: 6113692818315101535, guid: c4eb36c36c0f9394e98921d70514e0fb,
     type: 3}
-  _barvarianSwing1SoundName: Player_barbarian_attack
+  _barvarianSwing1SoundNum: 42
   _barvarianSwing1Delay: 1
   _barvarianSwing2Effect: {fileID: 6113692818315101535, guid: b291107c73758bb4bb628623353c1727,
     type: 3}
-  _barvarianSwing2SoundName: Player_barbarian_attack
+  _barvarianSwing2SoundNum: 42
   _barvarianSwing2Delay: 1
   _barvarianSwing3Effect: {fileID: 8557211520283143189, guid: 89e2419da055c7546be255f6bc472a02,
     type: 3}
-  _barvarianSwing3SoundName: Player_barbarian_attack
+  _barvarianSwing3SoundNum: 42
   _barvarianSwing3Delay: 1
   _barvarianSpin1Effect: {fileID: 7823224943387381617, guid: b970f057735f22c4fa72fb7fc87f480a,
     type: 3}
-  _barvarianSpin1SoundName: '"Player_barbarian_spinningattack"'
+  _barvarianSpin1SoundNum: 43
   _barvarianSpin1Delay: 1
   _barvarianSpin2Effect: {fileID: 7823224943387381617, guid: 676bc19b4a91ebc4eb799985a1ecacc4,
     type: 3}
-  _barvarianSpin2SoundName: '"Player_barbarian_spinningattack"'
+  _barvarianSpin2SoundNum: 43
   _barvarianSpin2Delay: 1
 --- !u!114 &6887089794517959137
 MonoBehaviour:
@@ -2579,12 +2582,15 @@ MonoBehaviour:
   attackWeapon: 0
   attackItem: 0
   attackSkill: 0
+  attackFood: 0
   armorArmor: 0
   armorItem: 0
   armorSkill: 0
+  armorFood: 0
   _hp: 0
   hpMaxItem: 0
-  skillHP: 0
+  hpSkill: 0
+  hpFood: 0
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
@@ -2592,8 +2598,10 @@ MonoBehaviour:
   _stamina: 0
   spMaxItem: 0
   spMaxSkill: 0
+  spMaxFood: 0
   spRecoveryItem: 0
   spRecoverySkill: 0
+  spRecoveryFood: 0
   maxPotionItem: 0
   _potionNumber: 0
   _potionHp: 50

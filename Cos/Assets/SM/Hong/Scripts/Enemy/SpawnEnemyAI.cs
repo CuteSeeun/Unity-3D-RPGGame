@@ -14,6 +14,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
     private Transform player;
     private EnemyHealthBar healthBar;
     private GetItemManager getItem;
+    public GameObject attackEffect;
     private bool isChasing;
     private bool isDeath;
     private bool isSpawn;
@@ -115,6 +116,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         getItem = FindAnyObjectByType<GetItemManager>();
+        attackEffect.SetActive(false);
         isChasing = true;
         agent.isStopped = false;
         Invoke("Spawn", 3);
@@ -130,7 +132,6 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
     {
         if (isSpawn)
         {
-            agent.isStopped = false;           
             if (isChasing)
             {
                 agent.speed = chaseSpeed;
@@ -140,6 +141,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
                     m_Animator.SetInteger("state", 2);
                     transform.LookAt(player.position);
                     agent.SetDestination(player.position);
+                    agent.stoppingDistance = 2;
                 }
                 else
                 {
@@ -147,9 +149,11 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
                     agent.SetDestination(transform.position);
                     transform.LookAt(transform.position + transform.forward);
                 }
-                if (Vector3.Distance(transform.position, player.position) < attackRange)
+                if (Vector3.Distance(transform.position, player.position) < attackRange
+                                            && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
                 {
-                    agent.stoppingDistance = 2;
+                    agent.isStopped = true;
+                    m_Animator.SetInteger("state", 0);
                     if (attackTimer == 0)
                     {
                         Attack();
@@ -192,7 +196,13 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
         attackTimer = 3;
         m_Animator.SetInteger("state", 0);
         m_Animator.SetTrigger("isAttack");
+        Invoke("EffectA", 0.5f);
         // 공격 동작 구현
+    }
+
+    void EffectA()
+    {
+        attackEffect.SetActive(true);
     }
 
     void OnDrawGizmosSelected()
@@ -206,6 +216,7 @@ public class SpawnEnemyAI : MonoBehaviour, IHp
     {
         agent.isStopped = false;
         isChasing = true;
+        attackEffect.SetActive(false);
     }
 
     public void Death()
