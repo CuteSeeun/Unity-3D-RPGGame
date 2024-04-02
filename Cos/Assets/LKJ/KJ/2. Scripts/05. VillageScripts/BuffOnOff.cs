@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using KJ;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuffOnOff : MonoBehaviour
 {
+    //private GameData gameData;
     [Header("Buff Images")]
     public Image powerBuffImage;
     public Image healthBuffImage;
@@ -15,8 +15,12 @@ public class BuffOnOff : MonoBehaviour
     [SerializeField] public bool _healthBuff = false;
     [SerializeField] public bool _specialBuff = false;
 
+    
+
     void Start()
     {
+        //gameData = NetData.Instance._gameData;
+        //Class playerData;
         powerBuffImage.color = Color.gray;
         healthBuffImage.color = Color.gray;
         specialBuffImage.color = Color.gray;
@@ -27,6 +31,7 @@ public class BuffOnOff : MonoBehaviour
         if (_powerBuff == true)
         {
             powerBuffImage.color = new Color(214 / 255f, 150 / 255f, 150 / 255f, 1f);
+            
         }
         else
         {
