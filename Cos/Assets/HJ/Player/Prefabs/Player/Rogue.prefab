@@ -1154,18 +1154,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3925bd9fc83d4243b72d1b13c45d5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashEffect: {fileID: 0}
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
   _dashSoundNum: 17
   _dashDelay: 1
-  _potionEffect: {fileID: 0}
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
   _potionSoundNum: 16
   _potionDelay: 1
-  _hitEffect: {fileID: 0}
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
   _hitSoundNum: 14
-  _hitDelay: 0
-  _dieEffect: {fileID: 0}
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
   _dieSoundNum: 15
-  _dieDelay: 0
+  _dieDelay: 1
   _rogueSlash1Effect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
     type: 3}
   _rogueSlash1SoundNum: 9
@@ -1180,10 +1184,18 @@ MonoBehaviour:
     type: 3}
   _rogueSlash3SoundNum: 9
   _rogueSlash3Delay: 1
-  _rogueCrossbowEffect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
+  _rogueCrossbowLoadingEffect: {fileID: 4774871216263188542, guid: 0fb1e47634932234ba15633f7e09dffb,
     type: 3}
-  _rogueCrossbowSoundNum: 11
+  _rogueCrossbowLoadingSoundNum: 11
+  _rogueCrossbowLoadingDelay: 0
+  _rogueCrossbowEffect: {fileID: 9207046399644064553, guid: bcc670a6d6d51eb4b99a93e9fdc5659a,
+    type: 3}
+  _rogueCrossbowSoundNum: -1
   _rogueCrossbow2Delay: 1
+  _rogueCrossbowShotEffect: {fileID: 4774871216263188542, guid: 0fb1e47634932234ba15633f7e09dffb,
+    type: 3}
+  _rogueCrossbowShotSoundNum: 10
+  _rogueCrossbowShotDelay: 0
 --- !u!114 &1346489119434670283
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -59,7 +59,7 @@ public class Door1 : MonoBehaviour, IInteractable
     public void Interaction(GameObject interactor)
     {
         InteractableOff();
-        if (isLocked == false)
+        if (isLocked == false && isOpen == false)
         {
             isOpen = true;
             _animator.SetBool("isOpen", true);
