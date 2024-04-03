@@ -14,8 +14,8 @@ namespace HJ
         }
         protected virtual void Start()
         {
-            Attribute attribute = ItemDBManager.Instance._itemData.items[0].attributes;       
             GameData gameData = NetData.Instance.gameData;
+            ItemDBManager itemDBManager = ItemDBManager.Instance;
             Class classKnight = GetClass(ClassType.knight);
             Class classbabarian = GetClass(ClassType.barbarian);
             Class GetClass(ClassType classType)
@@ -23,9 +23,32 @@ namespace HJ
                 return gameData.classes[classType];
             }
             _hpMax = classKnight.baseHp;
-            attackItem = attribute.attack;
-            armorItem = attribute.defense;
-            attackSkill = attribute.skillDamage;
+            for (int i = 0; i < itemDBManager._itemData.items.Count; i++)
+            {
+                if (itemDBManager._itemData.items[i].type == "weapon")
+                {
+                    attackItem = itemDBManager._itemData.items[i].attributes.attack;
+                }
+                if (itemDBManager._itemData.items[i].type == "armor")
+                {
+                    armorItem = itemDBManager._itemData.items[i].attributes.defense;
+                }
+            }
+            for (int i = 0; i < itemDBManager._itemData.items.Count; i++)
+            {
+                if (itemDBManager._itemData.items[i].name == "귀걸이")
+                {
+                    attackSkill = 0.3f;
+                }
+                else if(itemDBManager._itemData.items[i].name == "목걸이")
+                {
+                    attackSkill = 0.2f;
+                }
+                else if(itemDBManager._itemData.items[i].name == "반지")
+                {
+                    attackSkill = 0.1f;
+                }
+            }
             
             HealthStart();
             onHpMin += () => Death();

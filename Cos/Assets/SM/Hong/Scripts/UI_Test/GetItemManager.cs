@@ -1,17 +1,22 @@
 using KJ;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class GetItemManager : MonoBehaviour
 {
-    InventoryUI ui;
+    InventoryUI _inventory;
 
     public TMP_Text itemText; // UI 텍스트(Text) 요소를 연결합니다.
     public float displayTime = 3f; // 텍스트가 표시되는 시간을 정의합니다.
 
     private float timer; // 텍스트가 표시된 후의 경과 시간을 추적합니다.
 
+    private void Start()
+    {
+        _inventory = FindObjectOfType<InventoryUI>();
+    }
     public void GetItem(string itemName)
     {
         if (itemText != null)
@@ -31,35 +36,34 @@ public class GetItemManager : MonoBehaviour
         switch (itemName)
         {
             case "뼈":
-                //id = 7
-                ui.AddItem("7");
+                _inventory.AddItem("7");
                 break;
             case "고기":
-                //id = 9
+                _inventory.AddItem("9");
                 break;
             case "야채 바구니":
-                //id = 11
+                _inventory.AddItem("11");
                 break;
             case "호박":
-                //id = 10
+                _inventory.AddItem("10");
                 break;
             case "향신료":
-                //id = 8
+                _inventory.AddItem("8");
                 break;
             case "하급 강화석":
-                //id = 5
+                _inventory.AddItem("5");
                 break;
             case "상급 강화석":
-                //id = 6
+                _inventory.AddItem("6");
                 break;
             case "반지":
-                //id = 27
+                _inventory.AddItem("27");
                 break;
             case "목걸이":
-                //id = 28
+                _inventory.AddItem("28");
                 break;
             case "귀걸이":
-                //id = 29
+                _inventory.AddItem("29");
                 break;
         }
     }
