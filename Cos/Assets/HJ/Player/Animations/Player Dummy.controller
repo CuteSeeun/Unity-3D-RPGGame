@@ -519,9 +519,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -821,9 +821,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -1749,56 +1749,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &-2782523123902491786
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a31f4246c8347145aab39bbbb379d91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useStamina: 0
-  _staminaRequired: 20
-  _isStaminaDelayEnd: 0
-  _isStaminaDelayTime: 0
-  _StaminaDelayTime: 0.95
-  _resetStart: 1
-  _resetEnd: 0
-  _resetDelayed: 0
-  _stateResetTime: 0
-  _canMove: 0
-  _canRotate: 0
-  _moveSpeed: 0
-  _isAdvance: 0
-  _canTurn: 0
-  _advanceSpeed: 0
-  _advanceSpeedReduce: 0
-  _attackDamageRate: 1.5
-  _attackRange: 2.5
-  _attackAngle: 0
-  _attackLayerMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  _isAttack: 0
-  _isPowerAttack: 1
-  _isRangedAttack: 1
-  _missile: {fileID: 7109357882407759783, guid: f236c8749a325b9458f688f715452434,
-    type: 3}
-  _attackDelayTime: 0.3
-  _isDoubleAttack: 0
-  _doubleAttackDelayTime: 0
-  _isRepeatingAttack: 0
-  _attackRepeatingTime: 0
-  _isInvincible: 0
-  _invincibleTime: 0
-  _weapon1: 1
-  _weapon2: 1
-  _weapon3: 0
-  _potion: 0
 --- !u!1102 &-2490055132595510963
 AnimatorState:
   serializedVersion: 6
@@ -2490,7 +2440,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -5058025091149720876}
   m_StateMachineBehaviours:
-  - {fileID: -2782523123902491786}
+  - {fileID: 8715234468854283143}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2572,25 +2522,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 1
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: type
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 0
+    m_DefaultInt: 4
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: moveFloat
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -3149,9 +3099,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -3225,9 +3175,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -3553,9 +3503,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -4038,9 +3988,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -4492,9 +4442,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -4759,9 +4709,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 7
     m_ConditionEvent: state
-    m_EventTreshold: 1
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1471582379689710303}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -4793,6 +4743,56 @@ AnimatorTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 1
+--- !u!114 &8715234468854283143
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7a744564383c74fa2077c963bbe0ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useStamina: 1
+  _staminaRequired: 20
+  _isStaminaDelayEnd: 1
+  _isStaminaDelayTime: 0
+  _StaminaDelayTime: 0
+  _resetStart: 1
+  _resetEnd: 0
+  _resetDelayed: 0
+  _stateResetTime: 0
+  _canMove: 0
+  _canRotate: 0
+  _moveSpeed: 0
+  _isAdvance: 0
+  _canTurn: 1
+  _advanceSpeed: 0
+  _advanceSpeedReduce: 0
+  _attackDamageRate: 1.5
+  _attackRange: 2.5
+  _attackAngle: 0
+  _attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 331776
+  _isAttack: 0
+  _isPowerAttack: 0
+  _isRangedAttack: 1
+  _missile: {fileID: 7109357882407759783, guid: f236c8749a325b9458f688f715452434,
+    type: 3}
+  _attackDelayTime: 0.3
+  _isDoubleAttack: 0
+  _doubleAttackDelayTime: 0
+  _isRepeatingAttack: 0
+  _attackRepeatingTime: 0
+  _isInvincible: 0
+  _invincibleTime: 0
+  _weapon1: 1
+  _weapon2: 1
+  _weapon3: 0
+  _potion: 0
 --- !u!1101 &8727105794323467803
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -73,6 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6740247937152664080}
+  - component: {fileID: 6919321203954397858}
   - component: {fileID: 7700206751172399143}
   - component: {fileID: 2912319449345523652}
   - component: {fileID: 7307625846061064543}
@@ -107,6 +108,58 @@ Transform:
   - {fileID: 2490104877719758627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &6919321203954397858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472461773665107022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc5c1ba6f02e1f4ba24623bff3c4a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
+  _dashSoundNum: 17
+  _dashDelay: 1
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
+  _potionSoundNum: 16
+  _potionDelay: 1
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
+  _hitSoundNum: 12
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
+  _dieSoundNum: 13
+  _dieDelay: 1
+  _knightSlash1Effect: {fileID: 2837760572684895673, guid: f8dba7672736b9244982d852ed921cfd,
+    type: 3}
+  _knightSlash1SoundNum: 0
+  _knightSlash1Delay: 1
+  _knightSlash2Effect: {fileID: 2837760572684895673, guid: dcde38f41beb6f1478f4facdec0d76a3,
+    type: 3}
+  _knightSlash2SoundNum: 0
+  _knightSlash2Delay: 1
+  _knightSlash3Effect: {fileID: 2837760572684895673, guid: fb927641f62d50f48a4706c37e633b12,
+    type: 3}
+  _knightSlash3SoundNum: 0
+  _knightSlash3Delay: 1
+  _knightSlash4Effect: {fileID: 3001654169633478907, guid: 5824fd616e6d2954697cdebff4f32f96,
+    type: 3}
+  _knightSlash4soundNum: 0
+  _knightSlash4delay: 1
+  _blockHitEffect: {fileID: 3152348574391057968, guid: 8d00ab128abc9ae458b77aa946247f7b,
+    type: 3}
+  _blockHitSoundNum: 1
+  _blockHitDelay: 1
+  _blockAttackEffect: {fileID: 5529006257024881963, guid: 7e4924ef83ec56e44985d6e35e478254,
+    type: 3}
+  _blockAttackSoundNum: 2
+  _blockAttackDelay: 1
 --- !u!114 &7700206751172399143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,17 +180,33 @@ MonoBehaviour:
   potion: {fileID: 2194900340725885826}
   isPlayer: 1
   _speed: 5
-  _attack: 1
-  _armor: 10
+  attackWeapon: 1
+  attackItem: 0
+  attackSkill: 0
+  attackFood: 0
+  armorArmor: 10
+  armorItem: 0
+  armorSkill: 0
+  armorFood: 0
   _hp: 0
+  hpMaxItem: 0
+  hpSkill: 0
+  hpFood: 0
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
     m_Bits: 0
   _stamina: 0
-  _maxPotion: 5
+  spMaxItem: 0
+  spMaxSkill: 0
+  spMaxFood: 0
+  spRecoveryItem: 0
+  spRecoverySkill: 0
+  spRecoveryFood: 0
+  maxPotionItem: 0
   _potionNumber: 0
   _potionHp: 35
+  potionHpItem: 0
 --- !u!95 &2912319449345523652
 Animator:
   serializedVersion: 5

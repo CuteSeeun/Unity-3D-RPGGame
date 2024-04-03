@@ -19,7 +19,23 @@ public class Trapdoor : MonoBehaviour
         _animator.SetTrigger("isOpen");
         foreach (var enemy in enemies)
         {
-            // 적 스폰
+            if (enemy.TryGetComponent(out CloseEnemyAI closeEnemy))
+            {
+                closeEnemy.isAct = true;
+            }
+            else if (enemy.TryGetComponent(out LongEnemyAI longEnemy))
+            {
+                longEnemy.isAct = true;
+            }
+            else if (enemy.TryGetComponent(out MageEnemyAI mageEnemy))
+            {
+                mageEnemy.isAct = true;
+            }
+            else if (enemy.TryGetComponent(out SpawnEnemyAI spawnEnemy))
+            {
+                enemy.gameObject.SetActive(true);
+            }
+
             yield return new WaitForSeconds(enemyTime);
         }
     }
