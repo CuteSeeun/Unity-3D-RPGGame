@@ -2,6 +2,7 @@ using KJ;
 using Scene_Teleportation_Kit.Scripts.player;
 using System;
 using UnityEngine;
+using Attribute = KJ.Attribute;
 
 namespace HJ
 {
@@ -13,9 +14,19 @@ namespace HJ
         }
         protected virtual void Start()
         {
+            Attribute attribute = ItemDBManager.Instance._itemData.items[0].attributes;       
             GameData gameData = NetData.Instance.gameData;
-            Class classKnight = gameData.classes[ClassType.knight];
+            Class classKnight = GetClass(ClassType.knight);
+            Class classbabarian = GetClass(ClassType.barbarian);
+            Class GetClass(ClassType classType)
+            {
+                return gameData.classes[classType];
+            }
             _hpMax = classKnight.baseHp;
+            attackItem = attribute.attack;
+            armorItem = attribute.defense;
+            attackSkill = attribute.skillDamage;
+            
             HealthStart();
             onHpMin += () => Death();
 

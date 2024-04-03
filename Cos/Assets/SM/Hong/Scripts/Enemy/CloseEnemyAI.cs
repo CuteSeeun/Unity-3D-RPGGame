@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class CloseEnemyAI : MonoBehaviour, IHp
 {
     float patrolSpeed = 2f;
-    float chaseSpeed = 5f;
+    float chaseSpeed = 4f;
     float patrolWaitTime = 3f;
     public float detectionRange;
     public float attackRange;

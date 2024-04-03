@@ -397,7 +397,7 @@ public class ConversationManager : MonoBehaviour
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPosition, Camera.main, out canvasPosition);
 
                 /*캔버스 좌표계에서 추가적인 조정*/
-                canvasPosition += new Vector2(1350, 200);
+                canvasPosition += new Vector2(1000, 200);
                 Debug.Log($"캔버스 좌표값 {canvasPosition}");
                 /* RectTransfrom 의 anchoredPosition 사용, screenPosition 을 RectTranform 의 좌표계로 반환. */
                 /* UI 의 RectTransform 컴포넌트 가져옴. */
