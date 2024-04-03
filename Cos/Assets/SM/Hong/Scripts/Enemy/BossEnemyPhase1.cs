@@ -16,6 +16,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     NavMeshAgent agent;
     Transform player;
     EnemyHealthBar healthBar;
+    SFX_Manager sound;
     public GameObject skulMissile;
     public GameObject explosion;
     public GameObject teleportIn;
@@ -99,6 +100,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         fire = GetComponentInChildren<ParticleSystem>();
@@ -237,6 +239,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
         animator.SetTrigger("isCharge");
         attackTimer = 4;
         explosion.SetActive(true);
+        sound.VFX(38);
     }
 
     void Tel()
@@ -245,6 +248,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
         animator.SetTrigger("isTel");
         teleportIn.SetActive(true);
         teleportOut.SetActive(false);
+        sound.VFX(39);
         if (attackStack == 5)
         {
             Invoke("Raid", 0.5f);
@@ -259,6 +263,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     {
         transform.position = player.position - player.forward * 2f;
         teleportOut.SetActive(true);
+        sound.VFX(39);
         transform.LookAt(player.position);
         animator.SetTrigger("isRaid");
         teleportIn.SetActive(false);
@@ -289,6 +294,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     void SkulMissileCross()
     {
         GameObject projectile;
+        sound.VFX(41);
 
         // 발사할 방향들을 배열에 저장합니다.
         Vector3[] directions =
@@ -310,6 +316,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     void SkulMissileX()
     {
         GameObject projectile;
+        sound.VFX(41);
 
         // 발사할 방향들을 배열에 저장합니다.
         Vector3[] directions =
@@ -412,6 +419,16 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     void DamageA()
     {
         effectB.SetActive(true);
+        
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("RaidAttack_Boss"))
+        {
+            sound.VFX(40);
+        }
+        else
+        {
+            sound.VFX(0);
+        }
+
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   attackRange,
@@ -464,6 +481,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     void EffectR()
     {
         effectR.SetActive(true);
+        sound.VFX(8);
     }
     void EffectL()
     {

@@ -14,7 +14,9 @@ public class P_Gate : MonoBehaviour  //애니메이션 재생 스크립트
     public void PlayAnimation()
     {
         animator.Play("P_Gate");
+        SFX_Manager.Instance.VFX(51);
+
     }
 
-    
+
 }

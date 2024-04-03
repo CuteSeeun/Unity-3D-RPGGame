@@ -19,6 +19,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
     private Transform player;
     private EnemyHealthBar healthBar;
     private GetItemManager getItem;
+    private SFX_Manager sound;
     private Vector3 patrolDestination;
     private bool isPatrolling;
     private bool isAiming;
@@ -85,6 +86,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
         {
             transform.rotation = hitRotation;
             transform.Rotate(0, 180, 0);
+            sound.VFX(18);
 
             if (powerAttack == false)
             {
@@ -117,6 +119,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -187,6 +190,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
             Invoke("Death", 2);
             getItem.GetItem("뼈");
             getItem.GetItem("야채 바구니");
+            sound.VFX(19);
         }
     }
 
@@ -262,6 +266,7 @@ public class LongEnemyAI : MonoBehaviour, IHp
         arrowScript.target = GameObject.FindWithTag("Player");
         arrowScript.owner = owner;
         transform.LookAt(transform.position + transform.forward);
+        sound.VFX(22);
     }
 
     public void Death()

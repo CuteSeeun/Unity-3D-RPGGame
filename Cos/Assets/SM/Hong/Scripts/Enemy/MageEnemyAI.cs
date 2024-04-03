@@ -21,6 +21,7 @@ public class MageEnemyAI : MonoBehaviour, IHp
     public float detectionRange;
     public float attackRange;
 
+    private SFX_Manager sound;
     private Animator m_Animator;
     private NavMeshAgent agent;
     private Transform player;
@@ -129,6 +130,7 @@ public class MageEnemyAI : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -261,6 +263,7 @@ public class MageEnemyAI : MonoBehaviour, IHp
         magicScript.target = GameObject.FindWithTag("Player");
         magicScript.owner = owner;
         transform.LookAt(transform.position + transform.forward);
+        sound.VFX(23);
     }
 
     public void AttackEnd()

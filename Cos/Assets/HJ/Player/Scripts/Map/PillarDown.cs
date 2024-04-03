@@ -23,5 +23,7 @@ public class PillarDown : MonoBehaviour, IInteractable
     public void Interaction(GameObject interactor)
     {
         _animator.SetTrigger("isDown");
+        SFX_Manager.Instance.VFX(51);
+
     }
 }

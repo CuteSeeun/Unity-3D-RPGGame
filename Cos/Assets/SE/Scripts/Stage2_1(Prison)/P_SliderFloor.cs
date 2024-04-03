@@ -22,7 +22,9 @@ public class P_SliderFloor : MonoBehaviour //조건이 맞으면 애니메이션
             !Item)
         {
             animator.SetTrigger("isOpen");
-            
+            SFX_Manager.Instance.VFX(51);
+
+
         }
     }
 

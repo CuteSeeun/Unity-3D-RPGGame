@@ -7,7 +7,7 @@ public class DungeonInteraction : MonoBehaviour
 {
     [Header("InteractionUI")]
     /* 플레이어 위치에 고정 */
-    public Transform player;
+    private Transform player;
     /* 상호작용 UI */
     public GameObject interactUI;
     /* UI 플레이어로부터 얼마만큼 올릴건지 */
@@ -21,6 +21,7 @@ public class DungeonInteraction : MonoBehaviour
     {
         Debug.Log("비활성화");
         interactUI.SetActive(false);
+        player = GameObject.FindWithTag("Player").transform;
     }
 
  
@@ -59,7 +60,11 @@ public class DungeonInteraction : MonoBehaviour
         /* UI 위치 */
         interactUI.transform.position = player.position + Vector3.up * moveUI;
         /* UI 를 카메라로부터 항상 정면으로 보이게 설정. */
-        interactUI.transform.LookAt(Camera.main.transform);
+        //interactUI.transform.LookAt(Camera.main.transform);
+        Vector3 direction = Camera.main.transform.position - interactUI.transform.position;
+        direction.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        interactUI.transform.rotation = Quaternion.Slerp(interactUI.transform.rotation, rotation, Time.deltaTime * 10);
     }
 
     /* UI 비활성화 */
