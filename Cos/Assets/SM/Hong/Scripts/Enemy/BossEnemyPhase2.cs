@@ -21,6 +21,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     public GameObject tornado;
     public GameObject spawnEnemy;
     public GameObject deathEffect;
+    private SFX_Manager sound;
     private float missileSpeed;
     private float spawnRange = 50f;
 
@@ -95,6 +96,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         animator = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player").transform;
         lightningRange.SetActive(false);
@@ -146,6 +148,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
                                 break;
                             case 3:
                                 animator.SetTrigger("lightning");
+                                Invoke("Setcol", 3f);
                                 transform.LookAt(transform.position + transform.forward);
                                 lightningRange.SetActive(true);
                                 Instantiate(lightning, transform.position, Quaternion.identity);
@@ -175,10 +178,6 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
                 }
             }
 
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
-            {
-                Invoke("Setcol", 3f);
-            }
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("LightningAttack_Boss"))
             {
                 Collider col = GetComponent<SphereCollider>();
@@ -223,6 +222,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     {
         Collider col = GetComponent<SphereCollider>();
         col.enabled = true;
+        sound.VFX(43);
     }
 
     void MissileAttack()
@@ -262,6 +262,8 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             rb.velocity = direction.normalized * missileSpeed;
         }
+
+        sound.VFX(41);
     }
     
     void ExplosionAttack()
@@ -276,12 +278,14 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     void Explosion()
     {
         Instantiate(explosion, player.position, Quaternion.identity);
+        sound.VFX(38);
     }
 
     void SpawnArms()
     {
         Vector3 spawnPoint = GetRandomPatrolDestination();
         Instantiate(arm, spawnPoint, Quaternion.identity);
+        sound.VFX(24);
     }
 
     Vector3 GetRandomPatrolDestination()
@@ -297,7 +301,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     void SpawnTornado()
     {
         float distance = 20f;
-
+        sound.VFX(44);
         Vector3[] directions =
         {
         transform.forward,

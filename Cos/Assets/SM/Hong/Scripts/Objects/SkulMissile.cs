@@ -9,6 +9,12 @@ public class SkulMissile : MonoBehaviour
     public float moveSpeed = 10f;
     public GameObject explosion;
     private float attackDamage = 5;
+    SFX_Manager sound;
+
+    void Start()
+    {
+        sound = FindObjectOfType<SFX_Manager>();
+    }
 
     void Update()
     {
@@ -24,6 +30,7 @@ public class SkulMissile : MonoBehaviour
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             iHp.Hit(attackDamage, true, transform.rotation);
+            sound.VFX(42);
         }
     }
 }
