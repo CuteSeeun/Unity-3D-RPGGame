@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using HJ;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+//using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;

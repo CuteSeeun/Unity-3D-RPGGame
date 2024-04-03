@@ -2058,7 +2058,7 @@ PrefabInstance:
     - target: {fileID: 7899678003113064216, guid: 664a0df9a82564490a0473ee4eabb8e5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 450
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 7899678003113064216, guid: 664a0df9a82564490a0473ee4eabb8e5,
         type: 3}
@@ -6595,13 +6595,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823614629}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: -0.27059805, w: 0.6532815}
   m_LocalPosition: {x: -56, y: 25.5, z: 9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 45, z: 0}
 --- !u!4 &824698648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
@@ -11299,6 +11299,11 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 1402602286}
+    - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
+        type: 3}
+      propertyPath: _audioBGM.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 03abbed0efcb68e4793d2242cbf9a373, type: 3}
     - target: {fileID: 863265189229171117, guid: d2b4260715f96f04c8190665c6416cc7,
         type: 3}
       propertyPath: _audioClips_sfx.Array.size
