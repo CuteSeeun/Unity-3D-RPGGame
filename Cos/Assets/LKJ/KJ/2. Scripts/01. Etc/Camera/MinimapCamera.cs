@@ -10,6 +10,10 @@ public class MinimapCamera : MonoBehaviour
     /* 쫓아가야할 대상 */
     [SerializeField] private Transform target;
 
+    private void Start()
+    {
+        target = GameObject.FindWithTag("Player").transform;
+    }
     void Update()
     {
         if (!target) return;

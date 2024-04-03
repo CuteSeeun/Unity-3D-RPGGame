@@ -4,7 +4,7 @@ using KJ;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Portal : MonoBehaviour
+public class ReturnPortal : MonoBehaviour
 {
     void Awake()
     {
@@ -16,7 +16,7 @@ public class Portal : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("GotoDungeon");
+            SceneManager.LoadScene("GotoVillage");
         }
     }
 }

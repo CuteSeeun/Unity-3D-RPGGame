@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     // 토글형식으로 효과음, 배경음악을 따로 음소거할 수 있음.
     [Header("Slider")]
     public Slider volumeSlider;
-    public TMP_Text volumeText;
+    //public TMP_Text volumeText;
     [Header("Volume Image")]
     /* 볼륨 이미지들 */
     public Image volumeImage;
@@ -56,7 +56,7 @@ public class SoundManager : MonoBehaviour
     {
         /* 오디오 소스 볼륨 슬라이더의 값에 맞춤. */
         audioSource.volume = value * 0.1f;
-        volumeText.text = $"{value}";
+        //volumeText.text = $"{value}";
         if (value <= 0)
         {
             volumeImage.sprite = muteSprite;
