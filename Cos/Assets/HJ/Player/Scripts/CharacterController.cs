@@ -14,8 +14,9 @@ namespace HJ
         }
         protected virtual void Start()
         {
-            GameData gameData = NetData.Instance.gameData;
+            
             ItemDBManager itemDBManager = ItemDBManager.Instance;
+            GameData gameData = NetData.Instance.gameData;
             Class classKnight = GetClass(ClassType.knight);
             Class classbabarian = GetClass(ClassType.barbarian);
             Class GetClass(ClassType classType)
@@ -40,16 +41,16 @@ namespace HJ
                 {
                     attackSkill = 0.3f;
                 }
-                else if(itemDBManager._itemData.items[i].name == "목걸이")
+                else if (itemDBManager._itemData.items[i].name == "목걸이")
                 {
                     attackSkill = 0.2f;
                 }
-                else if(itemDBManager._itemData.items[i].name == "반지")
+                else if (itemDBManager._itemData.items[i].name == "반지")
                 {
                     attackSkill = 0.1f;
                 }
             }
-            
+
             HealthStart();
             onHpMin += () => Death();
 

@@ -372,6 +372,13 @@ namespace KJ
             {
                 NetData.Instance.SavePlayerDB(null);
             }
+
+            if (GUI.Button(new Rect(0, 200, 100, 50), "firebase"))
+            {
+                NetData.Instance.ReadDataItem("Items");
+                NetData.Instance.ReadDataPlayer("players");
+            }
+
         }
 #endif
 #endregion

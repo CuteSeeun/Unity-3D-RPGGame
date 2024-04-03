@@ -14,6 +14,7 @@ public class NetData : SingletonLazy<NetData>
     public GameData gameData { get; private set; }
     public GameData _gameData { get; private set; }
 
+
     private IEnumerator Start()
     {
         //TextAsset playerData = Resources.Load<TextAsset>("test");
@@ -54,7 +55,7 @@ public class NetData : SingletonLazy<NetData>
         yield return null;
     }
 
-    public void ReadDataItem(string userkey, Action callback = null)
+    public void ReadDataPlayer(string userkey, Action callback = null)
     {
         DatabaseReference db = FirebaseDatabase.DefaultInstance.GetReference("players");
 
@@ -67,24 +68,68 @@ public class NetData : SingletonLazy<NetData>
                 DataSnapshot snapshot = task.Result;
                 Debug.Log("childerenCount" + snapshot.ChildrenCount);
 
-                DataSnapshot duserinfo = null;
-                foreach (var child in snapshot.Children)
-                {
-                    if (child.Child("userkey").Value.ToString().Equals(userkey))
-                    {
-                        duserinfo = child;
-                    }
-                }
+                //DataSnapshot duserinfo = null;
+                //foreach (var child in snapshot.Children)
+                //{
+                //    if (child.Child("player").Value.ToString().Equals(userkey))
+                //    {
+                //        duserinfo = child;
+                //    }
+                //}
 
-                if (duserinfo != null)
+                //if (duserinfo != null)
+                //{
+                /*유저 데이터를 복원 한다.*/
+                string strplayerdata = snapshot.Value.ToString();
+                if (!string.IsNullOrEmpty(strplayerdata))
                 {
-                    /*유저 데이터를 복원 한다.*/
-                    string strauthdata = duserinfo.Child("authdata").Value.ToString();
-                    if (!string.IsNullOrEmpty(strauthdata))
-                    {
-                        //_a = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthData>(strauthdata);
-                    }
+                    Debug.Log("복원완료!" + _gameData);
+                    _gameData = Newtonsoft.Json.JsonConvert.DeserializeObject<GameData>(strplayerdata);
                 }
+                //}
+
+                if (callback != null)
+                {
+                    callback();
+                }
+            }
+        });
+
+    }
+
+    public void ReadDataItem(string userkey, Action callback = null)
+    {
+        DatabaseReference db = FirebaseDatabase.DefaultInstance.GetReference("Items");
+
+        db.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+                Debug.LogError("ReadData  IsFaulted");
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                Debug.Log("childerenCount" + snapshot.ChildrenCount);
+
+                //DataSnapshot duserinfo = null;
+                //foreach (var child in snapshot.Children)
+                //{
+                //    if (child.Child("Items").Value.ToString().Equals(userkey))
+                //    {
+                //        duserinfo = child;
+                //    }
+                //}
+
+                //if (duserinfo != null)
+                //{
+                /* 아이템 데이터를 복원. */
+                string strItemdata = snapshot.Value.ToString();
+                Debug.Log($"{!string.IsNullOrEmpty(strItemdata)}");
+                if (!string.IsNullOrEmpty(strItemdata))
+                {
+                    Debug.Log("복원완료2!" + ItemDBManager.Instance._itemData);
+                    ItemDBManager.Instance._itemData = Newtonsoft.Json.JsonConvert.DeserializeObject<ItemData>(strItemdata);
+                }
+                //}
 
                 if (callback != null)
                 {
