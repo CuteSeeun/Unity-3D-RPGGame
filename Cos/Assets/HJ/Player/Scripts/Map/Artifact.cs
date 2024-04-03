@@ -46,7 +46,8 @@ public class Artifact : MonoBehaviour, IInteractable
     {
         if (_isLocked == false)
         {
-            interactor.GetComponent<PlayerControllerForTest>().PotionFull();
+            //interactor.GetComponent<PlayerControllerForTest>().PotionFull();
+            interactor.GetComponent<PlayerController>().PotionFull();
 
             foreach (var item in interactables)
             {

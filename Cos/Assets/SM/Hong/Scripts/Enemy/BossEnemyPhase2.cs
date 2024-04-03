@@ -32,6 +32,10 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     private float attackTimer;
     private int attackStack;
 
+    [SerializeField] GameObject _hitEffect;
+    [SerializeField] int _hitSoundNum;
+    [SerializeField] float _hitDelay;
+
     float IHp.hp
     {
         get
@@ -86,12 +90,22 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     {
         if (!isDeath)
         {
+            StartCoroutine(Effect(_hitEffect, _hitSoundNum, _hitDelay, hitRotation));
             DepleteHp(damage);
         }
     }
     public void Hit(float damage)
     {
         DepleteHp(damage);
+    }
+
+    IEnumerator Effect(GameObject effect, int soundNum, float delay, Quaternion hitRotation)
+    {
+        GameObject effectInstanse = Instantiate(effect, transform.position, hitRotation);
+        SFX_Manager.Instance.VFX(soundNum);
+
+        yield return new WaitForSeconds(delay);
+        Destroy(effectInstanse);
     }
 
     void Start()
@@ -265,7 +279,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
 
         sound.VFX(41);
     }
-    
+
     void ExplosionAttack()
     {
         Invoke("Explosion", 1f);
@@ -327,7 +341,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
         float distance = 10f;
 
         Vector3[] directions =
-        {       
+        {
         transform.right,
         -transform.right
         };
@@ -344,12 +358,12 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     void AttackEnd()
     {
         isAttack = false;
-        if(!isEnemy)
+        if (!isEnemy)
         {
             attackStack++;
         }
         lightningRange.SetActive(false);
-        if(attackStack > 5)
+        if (attackStack > 5)
         {
             attackStack = 0;
         }
@@ -364,7 +378,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
     bool isDamage;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out IHp iHp))
+        if (other.gameObject.TryGetComponent(out IHp iHp))
         {
             if (!isDamage)
             {

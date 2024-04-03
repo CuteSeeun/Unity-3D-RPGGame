@@ -82,7 +82,7 @@ public class NetData : SingletonLazy<NetData>
                     string strauthdata = duserinfo.Child("authdata").Value.ToString();
                     if (!string.IsNullOrEmpty(strauthdata))
                     {
-                        _a = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthData>(strauthdata);
+                        //_a = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthData>(strauthdata);
                     }
                 }
 
