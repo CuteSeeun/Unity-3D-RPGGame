@@ -1,9 +1,12 @@
+using KJ;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GetItemManager : MonoBehaviour
 {
+    InventoryUI ui;
+
     public TMP_Text itemText; // UI 텍스트(Text) 요소를 연결합니다.
     public float displayTime = 3f; // 텍스트가 표시되는 시간을 정의합니다.
 
@@ -29,6 +32,7 @@ public class GetItemManager : MonoBehaviour
         {
             case "뼈":
                 //id = 7
+                ui.AddItem("7");
                 break;
             case "고기":
                 //id = 9

@@ -6,11 +6,11 @@
       "name": "체력 포션",
       "description": "체력을 회복할 수 있는 포션이다. 마시면 체력이 50 회복된다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/HealthPotion",
+      "imagePath": "Images/Items/HealthPotion",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
-        "healthRestore": 50
+        "healthRestore": 35
       }
     },
     {
@@ -19,7 +19,7 @@
       "name": "고기 스튜",
       "description": "맛있는 고기 스튜, 먹으면 공격력이 강해진다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/MeatStew",
+      "imagePath": "Images/Items/MeatStew",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -46,7 +46,7 @@
       "name": "야채 스튜",
       "description": "건강한 야채 스튜, 먹으면 방어력이 증가한다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/VegitableStew",
+      "imagePath": "Images/Items/VegitableStew",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -73,7 +73,7 @@
       "name": "호박 파이",
       "description": "호박으로 만든 파이,  . 먹으면 SP 회복량이 증가한다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/PumpkinPie",
+      "imagePath": "Images/Items/PumpkinPie",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -100,7 +100,7 @@
       "name": "하급 강화석",
       "description": "비교적 쉽게 구할 수 있는 강화석, 기초적인 장비를 강화하는 데 쓰인다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/UncommonStone",
+      "imagePath": "Images/Items/UncommonStone",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -115,7 +115,7 @@
       "name": "상급 강화석",
       "description": "조금 보기 힘든 강화석, 고급 장비의 능력을 강화하는 데 쓰인다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/RareStone",
+      "imagePath": "Images/Items/RareStone",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -130,7 +130,7 @@
       "name": "뼈",
       "description": "탑의 해골들에서 쉽게 얻을 수 있는 아이템",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Bone",
+      "imagePath": "Images/Items/Bone",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -143,7 +143,7 @@
       "name": "향신료",
       "description": "미믹이 숨겨두었던 향신료",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Spice",
+      "imagePath": "Images/Items/Spice",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -156,7 +156,7 @@
       "name": "고기",
       "description": "해골 전사의 보급품, 상태가 조금 안 좋아 보이지만 먹을 만하다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Meat",
+      "imagePath": "Images/Items/Meat",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -169,7 +169,7 @@
       "name": "호박",
       "description": "탑 안에서 자란 호박, 크기는 조금 작다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Pumpkin",
+      "imagePath": "Images/Items/Pumpkin",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -182,7 +182,7 @@
       "name": "야채 바구니",
       "description": "갖가지 야채들이 들어있는 바구니",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Vergitables",
+      "imagePath": "Images/Items/Vergitables",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
@@ -195,7 +195,7 @@
       "name": "낡은 한손검",
       "description": "말 그대로 낡아빠진 한손검, 잘못하면 부러지기 쉽다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/SwordCommon",
+      "imagePath": "Images/Items/SwordCommon",
       "enhanceable": true,
       "enhanceLevel": 0,
       "attributes": {
@@ -208,11 +208,11 @@
       "name": "튼튼한 한손검",
       "description": "보급형 한손검, 특별한 건 없지만 무난하다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/SwordUncommon",
+      "imagePath": "Images/Items/SwordUncommon",
       "enhanceable": true,
       "enhanceLevel": 1,
       "attributes": {
-        "attack": 20
+        "attack": 14
       }
     },
     {
@@ -221,11 +221,11 @@
       "name": "훌륭한 한손검",
       "description": "마을의 이름난 대장장이가 만든 무기, 날이 굉장히 날카롭다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/SwordRare",
+      "imagePath": "Images/Items/SwordRare",
       "enhanceable": true,
       "enhanceLevel": 2,
       "attributes": {
-        "attack": 30
+        "attack": 20
       }
     },
     {
@@ -234,7 +234,7 @@
       "name": "낡은 양손 도끼",
       "description": "나무를 많이 베었던 도끼, 금방 부러질것같다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/AxeCommon",
+      "imagePath": "Images/Items/AxeCommon",
       "enhanceable": true,
       "enhanceLevel": 0,
       "attributes": {
@@ -247,11 +247,11 @@
       "name": "튼튼한 양손 도끼",
       "description": "보급형 양손 도끼, 나무를 베기에 모자람이 없다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/AxeUncommon",
+      "imagePath": "Images/Items/AxeUncommon",
       "enhanceable": true,
       "enhanceLevel": 1,
       "attributes": {
-        "attack": 20
+        "attack": 14
       }
     },
     {
@@ -260,11 +260,11 @@
       "name": "훌륭한 양손 도끼",
       "description": "산 하나를 몽땅 벨 정도로 훌륭한 도끼",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/AxeRare",
+      "imagePath": "Images/Items/AxeRare",
       "enhanceable": true,
       "enhanceLevel": 2,
       "attributes": {
-        "attack": 30
+        "attack": 20
       }
     },
     {
@@ -273,7 +273,7 @@
       "name": "낡은 석궁",
       "description": "간신히 발사만 되는 석궁",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/CrossbowCommon",
+      "imagePath": "Images/Items/CrossbowCommon",
       "enhanceable": true,
       "enhanceLevel": 0,
       "attributes": {
@@ -286,11 +286,11 @@
       "name": "튼튼한 석궁",
       "description": "마을의 경비병들이 즐겨 쓰던 석궁",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/CrossbowUncommon",
+      "imagePath": "Images/Items/CrossbowUncommon",
       "enhanceable": true,
       "enhanceLevel": 1,
       "attributes": {
-        "attack": 20
+        "attack": 14
       }
     },
     {
@@ -299,11 +299,11 @@
       "name": "훌륭한 석궁",
       "description": "백발백중 하는 명 사 수 -- - --",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/CrossbowRare",
+      "imagePath": "Images/Items/CrossbowRare",
       "enhanceable": true,
       "enhanceLevel": 2,
       "attributes": {
-        "attack": 30
+        "attack": 20
       }
     },
     {
@@ -312,7 +312,7 @@
       "name": "낡은 스태프",
       "description": "노인들이 쓰던 지팡이와 다를 게 없다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/StaffCommon",
+      "imagePath": "Images/Items/StaffCommon",
       "enhanceable": true,
       "enhanceLevel": 0,
       "attributes": {
@@ -325,11 +325,11 @@
       "name": "튼튼한 스태프",
       "description": "마력이 담긴 스태프",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/StaffUncommon",
+      "imagePath": "Images/Items/StaffUncommon",
       "enhanceable": true,
       "enhanceLevel": 1,
       "attributes": {
-        "attack": 20
+        "attack": 14
       }
     },
     {
@@ -338,11 +338,11 @@
       "name": "훌륭한 스태프",
       "description": "한번에 여러 마법을 구사할 수 있는 마력을 지녔다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/StaffRare",
+      "imagePath": "Images/Items/StaffRare",
       "enhanceable": true,
       "enhanceLevel": "3",
       "attributes": {
-        "attack": 30
+        "attack": 20
       }
     },
     {
@@ -351,11 +351,11 @@
       "name": "낡은 방어구",
       "description": "이름만 방어구고 거적때기를 얹은 거나 다름없다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/CommonArmor",
+      "imagePath": "Images/Items/Armorcommon",
       "enhanceable": true,
       "enhanceLevel": 0,
       "attributes": {
-        "defense": 5
+        "defense": 10
       }
     },
     {
@@ -364,11 +364,11 @@
       "name": "튼튼한 방어구",
       "description": "조금 튼튼해진 방어구, 보기와 다르게 가볍다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/UncommonArmor",
+      "imagePath": "Images/Items/ArmorUncommon",
       "enhanceable": true,
       "enhanceLevel": 1,
       "attributes": {
-        "defense": 10
+        "defense": 14
       }
     },
     {
@@ -377,11 +377,11 @@
       "name": "훌륭한 방어구",
       "description": "전장의 장수들만 입는다는 방어구, 내구도도 뛰어나 잘 손상되지 않는다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/RareArmor",
+      "imagePath": "Images/Items/ArmorRare",
       "enhanceable": true,
       "enhanceLevel": 2,
       "attributes": {
-        "defense": 15
+        "defense": 20
       }
     },
     {
@@ -390,11 +390,11 @@
       "name": "반지",
       "description": "누군가에게 프로포즈할 때 쓰였던 반지",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Ring",
+      "imagePath": "Images/Items/Ring",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
-        "skillDamage": 5
+        "skillDamage": 0.1
       }
     },
     {
@@ -403,11 +403,11 @@
       "name": "목걸이",
       "description": "다이아몬드가 박힌 고급 목걸이, 착용자에게 부귀를 누리게 해줄 수도 있다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Neckless",
+      "imagePath": "Images/Items/Neckless",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
-        "skillDamage": 7
+        "skillDamage": 0.2
       }
     },
     {
@@ -416,11 +416,11 @@
       "name": "귀걸이",
       "description": "한 쌍의 아름다운 금귀걸이, 한쪽 귀걸이 상태가 좋지 않다.",
       "quantity": 1,
-      "imagePath": "Assets/LKJ/KJ/Resources/Images/Items/Earing",
+      "imagePath": "Images/Items/Earing",
       "enhanceable": false,
       "enhanceLevel": 0,
       "attributes": {
-        "skillDamage": 9
+        "skillDamage": 0.3
       }
     }
   ]
