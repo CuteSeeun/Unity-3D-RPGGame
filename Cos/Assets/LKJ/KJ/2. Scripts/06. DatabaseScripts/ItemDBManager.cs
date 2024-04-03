@@ -56,7 +56,7 @@ namespace KJ
     /* SingletonLazy<T> 를 상속받아서 싱글톤 구현하는 클래스 */
     public class ItemDBManager : SingletonLazy<ItemDBManager>
     {
-        public ItemData _itemData { get; private set; }
+        public ItemData _itemData { get; set; }
 
         public Item GetItem(string id) 
         {

@@ -6,12 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
-    void Update()
+    void Awake()
     {
         
     }
