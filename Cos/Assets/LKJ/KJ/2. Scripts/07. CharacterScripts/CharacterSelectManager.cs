@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,7 +25,6 @@ namespace KJ
         [Header("Loading")]
         public GameObject loadingUI;
 
-        
         /**/
         private string _class;
 
@@ -32,11 +32,7 @@ namespace KJ
         {
             //_gameData = NetData.Instance._gameData;
         }
-        private void Start()
-        {
-            
-          
-        }
+
 
         public void CreateCharacter(string className)
         {
@@ -49,7 +45,6 @@ namespace KJ
                 Debug.Log("호출2");
                 Class classData;
                 /* Classes 에서 선택된 class 데이터 찾기 */
-                //if (_gameData.classes.TryGetValue(classType, out classData))
                 GameData gameData = NetData.Instance.gameData;
                 Debug.Log($"변환 성공: {classType}");
                 classData = gameData.classes[classType];
@@ -59,12 +54,6 @@ namespace KJ
                     Debug.Log("호출3");
                     Player playerData;
                     GameData _gameData = NetData.Instance._gameData;
-                    //foreach(string key in gameData.players.Keys)
-                    //{
-                    //    Debug.Log("key shortUID : " + shortUID);
-                    //    Debug.Log("key : "+key);
-                    //}
-                    //FirebaseAuthManager
 
                     Player p = new Player();
                     p.uid = FirebaseAuthManager.Instance._user.UserId;
@@ -78,7 +67,8 @@ namespace KJ
                         playerData.inventory.items.Clear();
                         foreach (var item in classData.inventory.items)
                         {
-                            playerData.inventory.items.Add(new Item { id = item.id, quantity = item.quantity });
+                            Debug.Log($"아이템 id : {item.id}");
+                            playerData.inventory.items.Add(new Item { id = item.id, quantity = item.quantity });                            
                         }
                         playerData.gold = classData.gold;
                         Debug.Log($"클래스 타입 : {playerData.classType}");
@@ -88,7 +78,7 @@ namespace KJ
                         /* 프리팹 로드 및 인스턴스화. */
                         GameObject characterPrefab = Resources.Load<GameObject>($"Prefabs/{className}");
                         /* spawn 위치 Vector3 값 설정. */
-                        Vector3 spawnPosition = new Vector3(-400, 3, -5);
+                        Vector3 spawnPosition = new Vector3(-45, 3, 0);
                         if (characterPrefab != null)
                         {
                             Debug.Log("호출5");
@@ -128,7 +118,7 @@ namespace KJ
         }
         public void LoadToVillage()
         {
-            SceneManager.LoadScene("VillageScene");
+            SceneManager.LoadScene("DungeonScene");
         }
 
         #region 팝업 UI
@@ -157,39 +147,9 @@ namespace KJ
         
         public void ConfigureYesButton()
         {
-
-            ///* 확인 버튼 기존 리스너를 모두 제거. */
-            //yesButton.onClick.RemoveAllListeners();
-
-            /* 확인 버튼에 새로운 리스너 할당. */
             Debug.Log("새로운 리스너 할당됨.");
-            //yesButton.onClick.AddListener(() => 
             CreateCharacter(_class);
-
-            //Debug.Log("확인창 자동으로 닫음.");
-            ///* 확인창 자동으로 닫는 리스너 추가 */
-            //yesButton.onClick.AddListener(CloseCheckPopup);
         }
-
-        //public void OpenCheckButtonWithAction(string className)
-        //{
-        //    switch (className)
-        //    {
-        //        case "Knight":
-        //            ConfigureYesButton(className);
-        //            break;
-        //        case "Barbarian":
-        //            ConfigureYesButton(className);
-        //            break;
-        //        case "Rogue":
-        //            ConfigureYesButton(className);
-        //            break;
-        //        case "Mage":
-        //            ConfigureYesButton(className);
-        //            break;
-        //    }
-        //    OpenCheckPopupText(className);
-        //}
 
         public void CloseCheckPopup()
         {

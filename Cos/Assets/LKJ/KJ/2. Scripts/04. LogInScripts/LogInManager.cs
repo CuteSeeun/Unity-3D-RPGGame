@@ -270,91 +270,99 @@ namespace KJ
         }
         #endregion
 
-        //#
-        private void Data()
+        #region 플레이어 정보
+#if UNITY_EDITOR
+        /* 직렬화된 플레이어 정보 */
+        //private void OnGUI()
+        private void OnGUI()
         {
+            if (GUI.Button(new Rect(0, 0, 100, 50), "Create file"))
+            {
 
-            /* 플레이어 기본 정보 */
-            GameData gameData = new GameData();
 
-            Player players = new Player();
-            players.uid = string.Empty;
-            players.shortUID = string.Empty;
-            players.userName = string.Empty;
-            players.inventory = new Inventory();
-            players.gold = 0;
-            players.combatPower = 0;
-            players.buffs = new List<string>();
+                ///* 플레이어 기본 정보 */
+                GameData gameData = new GameData();
 
-            gameData.players.Add(players.shortUID, players);
+                Player players = new Player();
+                players.uid = string.Empty;
+                players.shortUID = string.Empty;
+                players.userName = string.Empty;
+                players.inventory = new Inventory();
+                players.gold = 0;
+                players.combatPower = 0;
+                players.buffs = new List<string>();
 
-            /*직업 기본 정보*/
-            Class knight = new Class();
-            knight.name = "Knight";
-            knight.baseHp = 100;
-            knight.baseSp = 100;
-            knight.inventory = new Inventory();
-            knight.inventory.items.Add(new Item() { id = "12", quantity = 1 });
-            knight.inventory.items.Add(new Item() { id = "24", quantity = 1 });
-            knight.skills.Add(new Skill() { id = "33", name = "기사의 검술", description = "검을 휘둘러 벤다. 연속해서 베어낸 후 강하게 찌르며 밀쳐낸다." });
-            knight.skills.Add(new Skill() { id = "34", name = "방어 태세", description = "방패를 들어 체력 대신 스태미나를 소비하여 적의 공격을 받아낸다. 방어에 성공할 경우 반격을 가해 밀쳐낼 수 있다." });
-            knight.skills.Add(new Skill() { id = "30", name = "체력 단련", description = "훈련을 통해 더욱 격렬한 전투에도 견딜 수 있게 한다." });
-            knight.skills.Add(new Skill() { id = "31", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
-            knight.gold = 100;
+                gameData.players.Add(players.shortUID, players);
 
-            gameData.classes.Add(ClassType.knight, knight);
+                /*직업 기본 정보*/
+                Class knight = new Class();
+                knight.name = "Knight";
+                knight.baseHp = 100;
+                knight.baseSp = 100;
+                knight.inventory = new Inventory();
+                knight.inventory.items.Add(new Item() { id = "12", quantity = 1, imagePath = "Images/Items/SwordCommon" });
+                knight.inventory.items.Add(new Item() { id = "24", quantity = 1, imagePath = "Images/Items/ArmorCommon" });
+                knight.skills.Add(new Skill() { id = "33", name = "기사의 검술", description = "검을 휘둘러 벤다. 연속해서 베어낸 후 강하게 찌르며 밀쳐낸다." });
+                knight.skills.Add(new Skill() { id = "34", name = "방어 태세", description = "방패를 들어 체력 대신 스태미나를 소비하여 적의 공격을 받아낸다. 방어에 성공할 경우 반격을 가해 밀쳐낼 수 있다." });
+                knight.skills.Add(new Skill() { id = "30", name = "체력 단련", description = "훈련을 통해 더욱 격렬한 전투에도 견딜 수 있게 한다." });
+                knight.skills.Add(new Skill() { id = "31", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
+                knight.gold = 100;
 
-            Class barbarian = new Class();
-            barbarian.name = "Barbarian";
-            barbarian.baseHp = 100;
-            barbarian.baseSp = 100;
-            barbarian.inventory = new Inventory();
-            barbarian.inventory.items.Add(new Item() { id = "15", quantity = 1 });
-            barbarian.inventory.items.Add(new Item() { id = "24", quantity = 1 });
-            barbarian.skills.Add(new Skill() { id = "35", name = "광전사의 도끼", description = "적에게 거대한 도끼를 휘둘러 강력한 피해를 준다." });
-            barbarian.skills.Add(new Skill() { id = "36", name = "피바람", description = "도끼를 휘두르며 주위의 모든 것을 부수며 이동한다." });
-            barbarian.skills.Add(new Skill() { id = "30", name = "체력 단련", description = "훈련을 통해 더욱 격렬한 전투에도 견딜 수 있게 한다." });
-            barbarian.skills.Add(new Skill() { id = "32", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
+                gameData.classes.Add(ClassType.knight, knight);
 
-            gameData.classes.Add(ClassType.barbarian, barbarian);
+                Class barbarian = new Class();
+                barbarian.name = "Barbarian";
+                barbarian.baseHp = 100;
+                barbarian.baseSp = 100;
+                barbarian.inventory = new Inventory();
+                barbarian.inventory.items.Add(new Item() { id = "15", quantity = 1 });
+                barbarian.inventory.items.Add(new Item() { id = "24", quantity = 1 });
+                barbarian.skills.Add(new Skill() { id = "35", name = "광전사의 도끼", description = "적에게 거대한 도끼를 휘둘러 강력한 피해를 준다." });
+                barbarian.skills.Add(new Skill() { id = "36", name = "피바람", description = "도끼를 휘두르며 주위의 모든 것을 부수며 이동한다." });
+                barbarian.skills.Add(new Skill() { id = "30", name = "체력 단련", description = "훈련을 통해 더욱 격렬한 전투에도 견딜 수 있게 한다." });
+                barbarian.skills.Add(new Skill() { id = "32", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
 
-            Class rogue = new Class();
-            rogue.name = "Rogue";
-            rogue.baseHp = 100;
-            rogue.baseSp = 100;
-            rogue.inventory = new Inventory();
-            rogue.inventory.items.Add(new Item() { id = "18", quantity = 1 });
-            rogue.inventory.items.Add(new Item() { id = "24", quantity = 1 });
-            rogue.skills.Add(new Skill() { id = "33", name = "불한당의 단검", description = "치명적인 두 쌍의 단검으로 적을 갈기갈기 찢는다." });
-            rogue.skills.Add(new Skill() { id = "34", name = "눈먼 화살", description = "쇠뇌를 장전해 빠르게 발사한다." });
-            rogue.skills.Add(new Skill() { id = "30", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
-            rogue.skills.Add(new Skill() { id = "31", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
+                gameData.classes.Add(ClassType.barbarian, barbarian);
 
-            gameData.classes.Add(ClassType.rogue, rogue);
+                Class rogue = new Class();
+                rogue.name = "Rogue";
+                rogue.baseHp = 100;
+                rogue.baseSp = 100;
+                rogue.inventory = new Inventory();
+                rogue.inventory.items.Add(new Item() { id = "18", quantity = 1 });
+                rogue.inventory.items.Add(new Item() { id = "24", quantity = 1 });
+                rogue.skills.Add(new Skill() { id = "33", name = "불한당의 단검", description = "치명적인 두 쌍의 단검으로 적을 갈기갈기 찢는다." });
+                rogue.skills.Add(new Skill() { id = "34", name = "눈먼 화살", description = "쇠뇌를 장전해 빠르게 발사한다." });
+                rogue.skills.Add(new Skill() { id = "30", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
+                rogue.skills.Add(new Skill() { id = "31", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
 
-            Class mage = new Class();
-            mage.name = "Mage";
-            mage.baseHp = 100;
-            mage.baseSp = 100;
-            mage.inventory = new Inventory();
-            mage.inventory.items.Add(new Item() { id = "21", quantity = 1 });
-            mage.inventory.items.Add(new Item() { id = "24", quantity = 1 });
-            mage.skills.Add(new Skill() { id = "39", name = "마력 구체", description = "순수한 마력을 담은 구체를 발사한다." });
-            mage.skills.Add(new Skill() { id = "40", name = "마력 폭풍", description = "주변의 모든 마력을 흡수하는 소용돌이를 만들어 마력 폭발을 일으킨다." });
-            mage.skills.Add(new Skill() { id = "31", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
-            mage.skills.Add(new Skill() { id = "32", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
+                gameData.classes.Add(ClassType.rogue, rogue);
 
-            gameData.classes.Add(ClassType.mage, mage);
+                Class mage = new Class();
+                mage.name = "Mage";
+                mage.baseHp = 100;
+                mage.baseSp = 100;
+                mage.inventory = new Inventory();
+                mage.inventory.items.Add(new Item() { id = "21", quantity = 1 });
+                mage.inventory.items.Add(new Item() { id = "24", quantity = 1 });
+                mage.skills.Add(new Skill() { id = "39", name = "마력 구체", description = "순수한 마력을 담은 구체를 발사한다." });
+                mage.skills.Add(new Skill() { id = "40", name = "마력 폭풍", description = "주변의 모든 마력을 흡수하는 소용돌이를 만들어 마력 폭발을 일으킨다." });
+                mage.skills.Add(new Skill() { id = "31", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
+                mage.skills.Add(new Skill() { id = "32", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
 
-            string jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(gameData);
+                gameData.classes.Add(ClassType.mage, mage);
 
-            string path = "C:/Users/LKJ/Documents/GitHub/Bootcamp-Team-Project/Cos/Assets/LKJ/KJ/Resources/test.txt";
-            StreamWriter w = new StreamWriter(path);
-            w.Write(jsondata);
+                string jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(gameData);
 
-            w.Close();
+                string path = "C:/Users/LKJ/Documents/GitHub/Bootcamp-Team-Project/Cos/Assets/LKJ/KJ/Resources/ClassDB.txt";
+                StreamWriter w = new StreamWriter(path);
+                w.Write(jsondata);
 
+                w.Close();
+            }
 
         }
+#endif
+#endregion
     }
 }

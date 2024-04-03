@@ -22,12 +22,8 @@ public class MenuUIManager : MonoBehaviour
     public GameObject inventoryUI;
     /* 확인창 UI */
     [Header("Check UI")]
-    public GameObject checkUI;
-    public TMP_Text titleText;
-    public TMP_Text warningText;
-    /* 확인창 예 버튼 동적 할당 */
-    [Header("Dynamic Button")]
-    public Button yesButton;
+    public GameObject checkLogout;
+    public GameObject checkQuit;
     /* UI 골드 표시 */
     [Header("Gold")]
     public TMP_Text goldText;
@@ -41,7 +37,7 @@ public class MenuUIManager : MonoBehaviour
             Debug.Log("ESC!!");
             menuUI.SetActive(true);
 
-            Cursor.visible = true;
+            //Cursor.visible = true;
 
             PauseGame();
         }
@@ -52,7 +48,7 @@ public class MenuUIManager : MonoBehaviour
     {
         menuUI.SetActive(false);
 
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         ResumeGame();
     }
@@ -114,60 +110,20 @@ public class MenuUIManager : MonoBehaviour
     }
     #endregion
     #region 확인창 팝업
-    /* 확인창 내용에 따라 다르게 팝업 */
-    public void OpenCheck(string situation)
+
+    /* 게임 종료 하는 확인창 */
+    public void OpenCheckQuit()
     {
-        switch (situation)
-        {
-            case "Quit":
-                titleText.text = "정말 종료하시겠습니까?";
-                warningText.text = "저장 후 종료됩니다...";
-                break;
-            case "Login":
-                titleText.text = "로그인 화면으로 돌아가시겠습니까?";
-                warningText.text = "오늘 할 일 다하셨나요?";
-                break;
-        }
-        checkUI.SetActive(true);
+        checkQuit.SetActive(true);
     }
 
-    public void CloseCheck()
+    public void CloseCheckQuit()
     {
-        checkUI.SetActive(false);
-    }
-
-
-    #endregion
-    #region 버튼 동적 할당
-
-    /* 동적 할당 */
-    public void CheckUIWithAction(string situation)
-    {
-        switch (situation)
-        {
-            case "Quit":
-                ConfigureYesButton(Quit);
-                break;
-            case "Login":
-                ConfigureYesButton(Login);
-                break;
-        }
-        OpenCheck(situation);
-    }
-
-    /* 버튼 동적 할당 */
-    public void ConfigureYesButton(Action yesAction)
-    {
-        // 기존 리스너들 제거.
-        yesButton.onClick.RemoveAllListeners();
-        // 새로운 액션 할당.
-        yesButton.onClick.AddListener(() => yesAction());
-        // 확인창 자동으로 닫는 리스너 추가
-        yesButton.onClick.AddListener(CloseCheck);
+        checkQuit.SetActive(false);
     }
     #endregion
     #region 골드 표시 (테스트)
- 
+
     public void PlusGold(int amount)
     {
         _currentGold += amount;
@@ -204,17 +160,11 @@ public class MenuUIManager : MonoBehaviour
     /* 게임 종료 */
     public void Quit()
     {
-        // 자동으로 PlayerDB 를 저장 하고 종료해야 함.
-        // 저장할 때 로딩팝업창 5초 생성 후 종료.
-        SceneManager.LoadScene("TestGameQuit");
-    }
-
-    /* 로그인 화면으로 이동 */
-    public void Login()
-    {
-        // 자동으로 Player 를 저장하고 종료해야 함.
-        // 저장할 때 로딩팝업창 5초 생성 후 종료.
-        SceneManager.LoadScene("LoginScnen");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
     #endregion
 }

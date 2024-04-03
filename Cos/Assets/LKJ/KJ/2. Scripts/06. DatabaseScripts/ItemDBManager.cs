@@ -75,17 +75,9 @@ namespace KJ
         Dictionary<string, Sprite> _loadpool = new Dictionary<string, Sprite>();
         public Sprite LoadItemSprite(string imagePath)
         {
-            if(_loadpool.ContainsKey(imagePath))
-            {
-                return _loadpool[imagePath];
-            }
-            else
-            {
-                Sprite s = Resources.Load<Sprite>(imagePath);
-                _loadpool.Add(imagePath, s);
-                return s;
-            }
-            
+            Sprite s = Resources.Load<Sprite>(imagePath);
+            if (s == null) Debug.Log("LoadItemSprite == null : " + imagePath);
+            return s;
         }
     }
 }
