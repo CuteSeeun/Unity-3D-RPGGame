@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
+using Item = KJ.Item;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -13,7 +15,26 @@ public class InventoryUI : MonoBehaviour
     public TMP_Text itemDescription;
     public TMP_Text itemQuantity;
 
-    private GameData _gameData;
+    public string uid = PlayerDBManager.Instance.CurrentShortUID;
+
+
+    private GameData _gameData = NetData.Instance.gameData;
+    private Class _class
+    {
+        get
+        {
+            return _gameData.classes[ClassType.knight];
+        }
+    }
+
+    public Inventory _inventory
+    {
+        get
+        {
+            return _class.inventory;
+        }
+    }
+    
     private ItemData _itemData 
     {
         get
@@ -28,16 +49,25 @@ public class InventoryUI : MonoBehaviour
     }
 
 
-    Player playerData { get 
+
+    void Start()
+    {
+        AddItem("12");
+        AddItem("24");
+    }
+
+    public void UpdateInventoryUI()
+    {
+        foreach (var item in _inventory.items)
         {
-            string uid = PlayerDBManager.Instance.CurrentShortUID;
-            return NetData.Instance.gameData.players[uid];
-             
-        }}
-    
+            AddItem(item.id);
+        }
+    }
+
     /* 인벤토리에 아이템 추가 */
     public void AddItem(string itemId)
     {
+        Debug.Log($"{itemId} 추가");
         /*  근데 해당 아이템이 뭔지 알아야함 
             플레이어 인벤토리에 해당 아이템이 있는지 체크해야 함 
             이미 있는 아이템이면 수량만 +1, 없으면 플레이어 인벤토리에 아이템이 추가됨. 
@@ -47,16 +77,23 @@ public class InventoryUI : MonoBehaviour
         
         if (itemToAdd != null )
         {
-            Item item  = playerData.inventory.items.Find(item => item.id == itemId);
-            
-            if( item != null) 
+            Item item = _inventory.items.Find(item => item.id == itemId);
+
+            if (item != null && item.id == itemId) 
             {
+                Debug.Log($"제발 :{item.id}");
+                Debug.Log($"제발2 :{item.imagePath}");
+
                 item.quantity++;
                 itemQuantity.text = item.quantity.ToString();
+                CreateSlot(item);
             }
             else
             {
-                playerData.inventory.items.Add(itemToAdd);
+                
+                _inventory.items.Add(itemToAdd);
+                
+                Debug.Log($"이미지 : {item.id}");
                 CreateSlot(itemToAdd);
             }
             
@@ -70,7 +107,7 @@ public class InventoryUI : MonoBehaviour
 
         if (itemToRemove != null)
         {
-            Item item = playerData.inventory.items.Find(item => item.id == itemId);
+            Item item = _inventory.items.Find(item => item.id == itemId);
 
             if (item != null )
             {
@@ -79,7 +116,7 @@ public class InventoryUI : MonoBehaviour
 
                 if (itemToRemove.quantity <= 0)
                 {
-                    playerData.inventory.items.Remove(itemToRemove);
+                    _inventory.items.Remove(itemToRemove);
                     RemoveSlot(itemToRemove);
                 }
             }
@@ -94,16 +131,22 @@ public class InventoryUI : MonoBehaviour
     private void CreateSlot(Item item)
     {
         GameObject slot = Instantiate(slotPrefab, slotPanel);
+        Debug.Log("슬롯추가");
         slot.name = item.id;
+        
 
         Image itemImageComponent = slot.GetComponentInChildren<Image>();
 
         Sprite itemImage = ItemDBManager.Instance.LoadItemSprite(item.imagePath);
 
+        if( itemImage == null) Debug.Log("itemImage == null : "+ item.imagePath);
         if (itemImageComponent != null)
         {
+            Debug.Log("이미지 추가");
             itemImageComponent.sprite = itemImage;
+            itemImageComponent.enabled = true;
         }
+        
     }
 
     /* 슬롯 삭제 */
@@ -132,6 +175,8 @@ public class InventoryUI : MonoBehaviour
     public void ClickSlot(Item item)
     {
         itemName.text = item.id;
-        itemDescription.text = item.description;      
+        itemDescription.text = item.description;     
+        
+        /* 특정 타입(Weapon, Armor, Acc)을 클릭할 때 장비창에 해당 이미지 전달.*/
     }
 }

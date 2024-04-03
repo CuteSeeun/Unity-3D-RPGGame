@@ -2182,6 +2182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8974533327659127814}
+  - component: {fileID: 1376217337857999877}
   - component: {fileID: 8874362820093440957}
   - component: {fileID: 5198996372754976833}
   - component: {fileID: 7567952055910352202}
@@ -2216,6 +2217,46 @@ Transform:
   - {fileID: 7879785960983667662}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1376217337857999877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7545774342347280352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e1f76b653e1c74e86e0eab969c4244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
+  _dashSoundNum: 17
+  _dashDelay: 1
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
+  _potionSoundNum: 16
+  _potionDelay: 1
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
+  _hitSoundNum: 14
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
+  _dieSoundNum: 15
+  _dieDelay: 1
+  _mageSpell1effect: {fileID: 4774871216263188542, guid: 0fb1e47634932234ba15633f7e09dffb,
+    type: 3}
+  _mageSpell1SoundNum: 5
+  _mageSpell1Delay: 1
+  _mageSpell2effect: {fileID: 954729048775586091, guid: fe4c77cebed67fd4aa59e2c3f3817b56,
+    type: 3}
+  _mageSpell2SoundNum: 6
+  _mageSpell2Delay: 1
+  _mageSpell3effect: {fileID: 308975110133828682, guid: 54e492ad8a510884f93d4d7fd01991ef,
+    type: 3}
+  _mageSpell3SoundNum: 7
+  _mageSpell3Delay: 5
 --- !u!114 &8874362820093440957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,17 +2277,33 @@ MonoBehaviour:
   potion: {fileID: 7852168558967370381}
   isPlayer: 1
   _speed: 5
-  _attack: 1
-  _armor: 10
+  attackWeapon: 1
+  attackItem: 0
+  attackSkill: 0
+  attackFood: 0
+  armorArmor: 10
+  armorItem: 0
+  armorSkill: 0
+  armorFood: 0
   _hp: 0
+  hpMaxItem: 0
+  hpSkill: 0
+  hpFood: 0
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
     m_Bits: 0
   _stamina: 0
-  _maxPotion: 0
+  spMaxItem: 0
+  spMaxSkill: 0
+  spMaxFood: 0
+  spRecoveryItem: 0
+  spRecoverySkill: 0
+  spRecoveryFood: 0
+  maxPotionItem: 0
   _potionNumber: 0
   _potionHp: 0
+  potionHpItem: 0
 --- !u!95 &5198996372754976833
 Animator:
   serializedVersion: 5

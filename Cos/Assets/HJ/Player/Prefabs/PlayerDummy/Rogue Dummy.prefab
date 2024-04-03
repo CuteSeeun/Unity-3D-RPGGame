@@ -2233,6 +2233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3476115619201398917}
+  - component: {fileID: 2406675467147311874}
   - component: {fileID: 1303642953575578507}
   - component: {fileID: 2636136580591099847}
   - component: {fileID: 8716699542432747771}
@@ -2267,6 +2268,60 @@ Transform:
   - {fileID: 3831149015345294805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2406675467147311874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187502738920674815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3925bd9fc83d4243b72d1b13c45d5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
+  _dashSoundNum: 17
+  _dashDelay: 1
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
+  _potionSoundNum: 16
+  _potionDelay: 1
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
+  _hitSoundNum: 14
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
+  _dieSoundNum: 15
+  _dieDelay: 1
+  _rogueSlash1Effect: {fileID: 7043183771742762698, guid: 8e8067c8108bb494faf556053dbc793c,
+    type: 3}
+  _rogueSlash1SoundNum: 9
+  _rogueSlash1Delay: 1
+  _rogueSlash2Effect: {fileID: 3263452941602113375, guid: 72a33e7e58c7efc478a728450668a590,
+    type: 3}
+  _rogueSlash2SoundNum: 9
+  _rogueSlash2Delay: 1
+  _rogueSlash3_1Effect: {fileID: 7043183771742762698, guid: 19490df282716bf4fba4bf5544fd26ff,
+    type: 3}
+  _rogueSlash3_2Effect: {fileID: 7043183771742762698, guid: 1b084599ef6e9974ab3f1e5b6c37799d,
+    type: 3}
+  _rogueSlash3SoundNum: 9
+  _rogueSlash3Delay: 1
+  _rogueCrossbowLoadingEffect: {fileID: 4774871216263188542, guid: 0fb1e47634932234ba15633f7e09dffb,
+    type: 3}
+  _rogueCrossbowLoadingSoundNum: 11
+  _rogueCrossbowLoadingDelay: 0
+  _rogueCrossbowEffect: {fileID: 9207046399644064553, guid: bcc670a6d6d51eb4b99a93e9fdc5659a,
+    type: 3}
+  _rogueCrossbowSoundNum: -1
+  _rogueCrossbow2Delay: 1
+  _rogueCrossbowShotEffect: {fileID: 4774871216263188542, guid: 0fb1e47634932234ba15633f7e09dffb,
+    type: 3}
+  _rogueCrossbowShotSoundNum: 10
+  _rogueCrossbowShotDelay: 0
 --- !u!114 &1303642953575578507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,17 +2342,33 @@ MonoBehaviour:
   potion: {fileID: 2990314809043949092}
   isPlayer: 1
   _speed: 5
-  _attack: 1
-  _armor: 10
+  attackWeapon: 1
+  attackItem: 0
+  attackSkill: 0
+  attackFood: 0
+  armorArmor: 10
+  armorItem: 0
+  armorSkill: 0
+  armorFood: 0
   _hp: 0
+  hpMaxItem: 0
+  hpSkill: 0
+  hpFood: 0
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
     m_Bits: 0
   _stamina: 0
-  _maxPotion: 0
+  spMaxItem: 0
+  spMaxSkill: 0
+  spMaxFood: 0
+  spRecoveryItem: 0
+  spRecoverySkill: 0
+  spRecoveryFood: 0
+  maxPotionItem: 0
   _potionNumber: 0
   _potionHp: 0
+  potionHpItem: 0
 --- !u!95 &2636136580591099847
 Animator:
   serializedVersion: 5

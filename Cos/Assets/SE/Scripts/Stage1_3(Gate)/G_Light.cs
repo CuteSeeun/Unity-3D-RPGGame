@@ -42,6 +42,8 @@ public class G_Light : MonoBehaviour, IInteractable
         {
             _isOn = true;
             LightYellow.SetActive(true);
+            SFX_Manager.Instance.VFX(49);
+
 
             foreach ( var item in interactables)
             {

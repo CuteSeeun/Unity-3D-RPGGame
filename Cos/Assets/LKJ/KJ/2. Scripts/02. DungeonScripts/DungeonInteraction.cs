@@ -60,7 +60,11 @@ public class DungeonInteraction : MonoBehaviour
         /* UI 위치 */
         interactUI.transform.position = player.position + Vector3.up * moveUI;
         /* UI 를 카메라로부터 항상 정면으로 보이게 설정. */
-        interactUI.transform.LookAt(Camera.main.transform);
+        //interactUI.transform.LookAt(Camera.main.transform);
+        Vector3 direction = Camera.main.transform.position - interactUI.transform.position;
+        direction.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        interactUI.transform.rotation = Quaternion.Slerp(interactUI.transform.rotation, rotation, Time.deltaTime * 10);
     }
 
     /* UI 비활성화 */
