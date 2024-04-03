@@ -63,6 +63,7 @@ public class Door1 : MonoBehaviour, IInteractable
         {
             isOpen = true;
             _animator.SetBool("isOpen", true);
+            SFX_Manager.Instance.VFX(45);
             _collider.enabled = false;
 
             foreach (var wall in _wallsToDestroy)
