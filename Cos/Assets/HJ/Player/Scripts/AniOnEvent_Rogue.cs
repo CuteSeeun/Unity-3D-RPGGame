@@ -73,13 +73,31 @@ namespace HJ
             StartCoroutine(Effect(_rogueSlash3_2Effect, _rogueSlash3SoundNum, _rogueSlash3Delay));
         }
 
-        [Header("Crossbow")] //============================================================================
+        [Header("CrossbowLoading")] //===========================================================================
+        public GameObject _rogueCrossbowLoadingEffect;
+        [SerializeField] int _rogueCrossbowLoadingSoundNum;
+        [SerializeField] float _rogueCrossbowLoadingDelay;
+        public void CrossbowLoad()
+        {
+            StartCoroutine(Effect(_rogueCrossbowLoadingEffect, _rogueCrossbowLoadingSoundNum, _rogueCrossbowLoadingDelay));
+        }
+
+        [Header("CrossbowLoaded")] //============================================================================
         public GameObject _rogueCrossbowEffect;
         [SerializeField] int _rogueCrossbowSoundNum;
         [SerializeField] float _rogueCrossbow2Delay;
         public void USE_CROSSBOW()
         {
             StartCoroutine(Effect(_rogueCrossbowEffect, _rogueCrossbowSoundNum, _rogueCrossbow2Delay));
+        }
+
+        [Header("CrossbowShot")] //===========================================================================
+        public GameObject _rogueCrossbowShotEffect;
+        [SerializeField] int _rogueCrossbowShotSoundNum;
+        [SerializeField] float _rogueCrossbowShotDelay;
+        public void CrossbowShot()
+        {
+            StartCoroutine(Effect(_rogueCrossbowShotEffect, _rogueCrossbowShotSoundNum, _rogueCrossbowShotDelay));
         }
 
         IEnumerator Effect(GameObject effect, int soundNum, float delay)

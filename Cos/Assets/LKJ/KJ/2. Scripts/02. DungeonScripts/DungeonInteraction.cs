@@ -7,7 +7,7 @@ public class DungeonInteraction : MonoBehaviour
 {
     [Header("InteractionUI")]
     /* 플레이어 위치에 고정 */
-    public Transform player;
+    private Transform player;
     /* 상호작용 UI */
     public GameObject interactUI;
     /* UI 플레이어로부터 얼마만큼 올릴건지 */
@@ -21,11 +21,7 @@ public class DungeonInteraction : MonoBehaviour
     {
         Debug.Log("비활성화");
         interactUI.SetActive(false);
-
-        if (player == null)
-        {
-            player = GameObject.FindWithTag("Player").transform;
-        }
+        player = GameObject.FindWithTag("Player").transform;
     }
 
  

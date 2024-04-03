@@ -2533,31 +2533,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9132470b74b702428649bde2301eec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashEffect: {fileID: 0}
-  _dashSoundNum: 10
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
+  _dashSoundNum: 17
   _dashDelay: 1
-  _potionEffect: {fileID: 0}
-  _potionSoundNum: 48
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
+  _potionSoundNum: 16
   _potionDelay: 1
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
+  _hitSoundNum: 12
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
+  _dieSoundNum: 13
+  _dieDelay: 1
   _barvarianSwing1Effect: {fileID: 6113692818315101535, guid: c4eb36c36c0f9394e98921d70514e0fb,
     type: 3}
-  _barvarianSwing1SoundNum: 42
+  _barvarianSwing1SoundNum: 3
   _barvarianSwing1Delay: 1
   _barvarianSwing2Effect: {fileID: 6113692818315101535, guid: b291107c73758bb4bb628623353c1727,
     type: 3}
-  _barvarianSwing2SoundNum: 42
+  _barvarianSwing2SoundNum: 3
   _barvarianSwing2Delay: 1
   _barvarianSwing3Effect: {fileID: 8557211520283143189, guid: 89e2419da055c7546be255f6bc472a02,
     type: 3}
-  _barvarianSwing3SoundNum: 42
+  _barvarianSwing3SoundNum: 3
   _barvarianSwing3Delay: 1
   _barvarianSpin1Effect: {fileID: 7823224943387381617, guid: b970f057735f22c4fa72fb7fc87f480a,
     type: 3}
-  _barvarianSpin1SoundNum: 43
+  _barvarianSpin1SoundNum: 4
   _barvarianSpin1Delay: 1
   _barvarianSpin2Effect: {fileID: 7823224943387381617, guid: 676bc19b4a91ebc4eb799985a1ecacc4,
     type: 3}
-  _barvarianSpin2SoundNum: 43
+  _barvarianSpin2SoundNum: 4
   _barvarianSpin2Delay: 1
 --- !u!114 &6887089794517959137
 MonoBehaviour:
@@ -2594,7 +2604,7 @@ MonoBehaviour:
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 33280
   _stamina: 0
   spMaxItem: 0
   spMaxSkill: 0

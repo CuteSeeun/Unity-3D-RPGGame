@@ -16,6 +16,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
     private NavMeshAgent agent;
     private Transform player;
     private GetItemManager getItem;
+    private SFX_Manager sound;
     public GameObject[] attackEffect;
     private bool isChasing;
     private bool isDeath;
@@ -104,6 +105,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
                 ApplyPush(pushDirection);
             }
 
+            sound.VFX(18);
             DepleteHp(damage);
         }
     }
@@ -120,6 +122,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
 
     void Start()
     {
+        sound = FindObjectOfType<SFX_Manager>();
         m_Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -217,6 +220,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
             Invoke("Death", 2);
             getItem.GetItem("뼈");
             getItem.GetItem("향신료");
+            sound.VFX(19);
         }
     }
 
@@ -294,7 +298,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
     float attackDamage = 5;
     float attackDamageA = 8;
     void Damage()
-    {
+    {       
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   attackRange,
@@ -320,6 +324,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
     }
     void DamageA()
     {
+        sound.VFX(0);
         // 공격 거리 내 모든 적 탐색
         RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
                                                   attackRange,
@@ -342,5 +347,10 @@ public class EnemyS_AI : MonoBehaviour, IHp
                 }
             }
         }
+    }
+
+    void SoundA()
+    {
+        sound.VFX(8);
     }
 }

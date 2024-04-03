@@ -19857,16 +19857,20 @@ MonoBehaviour:
   _missileTimer: 0.5
   _isPiercing: 1
   _isExplosive: 0
+  _explosionEffect: {fileID: 0}
+  _explosionDestroyDelay: 0
   _attack: 0
   _attackDamageRate: 2.5
   _attackRange: 0
+  _attackAngle: 0
+  _attackAngleInnerProduct: 0
   _attackLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 36864
   _isPowerAttack: 0
   _layerMaskWall:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1048576
 --- !u!54 &-6766045888095025897
 Rigidbody:
   m_ObjectHideFlags: 0

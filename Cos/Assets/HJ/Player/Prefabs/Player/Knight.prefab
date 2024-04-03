@@ -1679,8 +1679,8 @@ GameObject:
   - component: {fileID: 5238908602759269227}
   - component: {fileID: 4146984308123209413}
   - component: {fileID: 7243156815149692018}
-  - component: {fileID: 778159948968593507}
   - component: {fileID: 727002511790039098}
+  - component: {fileID: 778159948968593507}
   - component: {fileID: 5586675006456709754}
   m_Layer: 11
   m_Name: Knight
@@ -1725,35 +1725,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc5c1ba6f02e1f4ba24623bff3c4a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashEffect: {fileID: 0}
-  _dashSoundNum: 10
+  _dashEffect: {fileID: 3152348574391057968, guid: dcf0498d098271d42bceec87ba9f9187,
+    type: 3}
+  _dashSoundNum: 17
   _dashDelay: 1
-  _potionEffect: {fileID: 0}
-  _potionSoundNum: 48
+  _potionEffect: {fileID: 5023353015567381922, guid: 16286735a1c57d74c82d7d5f2852e98d,
+    type: 3}
+  _potionSoundNum: 16
   _potionDelay: 1
+  _hitEffect: {fileID: 3152348574391057968, guid: 972ee0773f026094eb56b20958d6020b,
+    type: 3}
+  _hitSoundNum: 12
+  _hitDelay: 1
+  _dieEffect: {fileID: 3152348574391057968, guid: d9e00d57248f9e64493ca1e12b407fbb,
+    type: 3}
+  _dieSoundNum: 13
+  _dieDelay: 1
   _knightSlash1Effect: {fileID: 2837760572684895673, guid: f8dba7672736b9244982d852ed921cfd,
     type: 3}
-  _knightSlash1SoundNum: 44
+  _knightSlash1SoundNum: 0
   _knightSlash1Delay: 1
   _knightSlash2Effect: {fileID: 2837760572684895673, guid: dcde38f41beb6f1478f4facdec0d76a3,
     type: 3}
-  _knightSlash2SoundNum: 44
+  _knightSlash2SoundNum: 0
   _knightSlash2Delay: 1
   _knightSlash3Effect: {fileID: 2837760572684895673, guid: fb927641f62d50f48a4706c37e633b12,
     type: 3}
-  _knightSlash3SoundNum: 44
+  _knightSlash3SoundNum: 0
   _knightSlash3Delay: 1
   _knightSlash4Effect: {fileID: 3001654169633478907, guid: 5824fd616e6d2954697cdebff4f32f96,
     type: 3}
-  _knightSlash4soundNum: 44
+  _knightSlash4soundNum: 0
   _knightSlash4delay: 1
-  _blockHitEffect: {fileID: 5897356583279684138, guid: 489ffa5f3b4d87f40877cebeeacb5ef7,
+  _blockHitEffect: {fileID: 3152348574391057968, guid: 8d00ab128abc9ae458b77aa946247f7b,
     type: 3}
-  _blockHitSoundNum: 46
+  _blockHitSoundNum: 1
   _blockHitDelay: 1
   _blockAttackEffect: {fileID: 5529006257024881963, guid: 7e4924ef83ec56e44985d6e35e478254,
     type: 3}
-  _blockAttackSoundNum: 45
+  _blockAttackSoundNum: 2
   _blockAttackDelay: 1
 --- !u!114 &4146984308123209413
 MonoBehaviour:
@@ -1790,7 +1800,7 @@ MonoBehaviour:
   _invincible: 0
   _layerMaskInteractable:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 33280
   _stamina: 0
   spMaxItem: 0
   spMaxSkill: 0
@@ -1823,29 +1833,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &778159948968593507
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4980016502053825255}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.75
-  m_Height: 2.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &727002511790039098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2029,6 +2016,29 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!136 &778159948968593507
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4980016502053825255}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!54 &5586675006456709754
 Rigidbody:
   m_ObjectHideFlags: 0

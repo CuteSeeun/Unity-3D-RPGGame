@@ -7,7 +7,7 @@ public class BossMagicBallHit : MonoBehaviour
 {
     void Start()
     {
-        
+
     }
 
     void Update()

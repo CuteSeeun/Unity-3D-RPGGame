@@ -1,4 +1,6 @@
+using KJ;
 using Ricimi;
+using Scene_Teleportation_Kit.Scripts.player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +11,9 @@ using UnityEngine.UI;
 
 public class MenuUIManager : MonoBehaviour
 {
+    PlayerDBManager playerDBManager = PlayerDBManager.Instance;
+
+
     /* 메뉴 UI */
     [Header("Menu UI")]
     public GameObject menuUI;
@@ -29,6 +34,17 @@ public class MenuUIManager : MonoBehaviour
     public TMP_Text goldText;
     private int _currentGold;
 
+    [Header("Class")]
+    public TMP_Text classType;
+
+    [Header("ClassImage")]
+    public Image knghtImage;
+    public Image babarianImage;
+    public Image rogueImage;
+    public Image mageImage;
+
+
+
     void Update()
     {
         /* esc 누르면 메뉴 호출 */
@@ -36,8 +52,24 @@ public class MenuUIManager : MonoBehaviour
         {
             Debug.Log("ESC!!");
             menuUI.SetActive(true);
+            classType.text = playerDBManager.LoadGameData(playerDBManager.CurrentShortUID).classType;
 
-            //Cursor.visible = true;
+            switch(playerDBManager.LoadGameData(playerDBManager.CurrentShortUID).classType)
+            {
+                case "Knight":
+                    knghtImage.gameObject.SetActive(true);
+                    break;
+                case "Babarian":
+                    babarianImage.gameObject.SetActive(true);
+                    break;
+                case "Rogue":
+                    rogueImage.gameObject.SetActive(true);
+                    break;
+                case "Mage":
+                    mageImage.gameObject.SetActive(true);
+                    break;
+            }
+            Cursor.visible = true;
 
             PauseGame();
         }
