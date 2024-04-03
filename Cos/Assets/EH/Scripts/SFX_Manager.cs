@@ -59,7 +59,6 @@ public class SFX_Manager : SingletonLazy<SFX_Manager>
             Camera.GetComponent<AudioSource>();
         }
         BGMPLAY(1);
-
     }
 
     //브금플레이 함수는 브금 오디오소스가 플레이중일때 멈추면

@@ -118,7 +118,7 @@ namespace KJ
         }
         public void LoadToVillage()
         {
-            SceneManager.LoadScene("DungeonScene");
+            SceneManager.LoadScene("VillageScene");
         }
 
         #region 팝업 UI

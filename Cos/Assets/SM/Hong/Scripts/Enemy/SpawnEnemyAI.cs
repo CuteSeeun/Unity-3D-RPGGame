@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class SpawnEnemyAI : MonoBehaviour, IHp
 {
-    float chaseSpeed = 5f;
+    float chaseSpeed = 4f;
     public float attackRange;
 
     private Animator m_Animator;
