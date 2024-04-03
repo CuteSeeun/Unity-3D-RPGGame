@@ -32,8 +32,15 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     private float attackTimer;
     private int attackStack = 0;
 
+    public GameObject phase2;
+    public Vector3 centerVector = new Vector3(371, 32.3f, - 167);
+
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
+
+    [SerializeField] GameObject _hitEffect;
+    [SerializeField] int _hitSoundNum;
+    [SerializeField] float _hitDelay;
 
     float IHp.hp
     {
@@ -59,7 +66,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     [SerializeField] public float _hp;
 
     public float hpMax { get => _hpMax; }
-    public float _hpMax = 500;
+    public float _hpMax = 10;
 
     public event System.Action<float> onHpChanged;
     public event System.Action<float> onHpDepleted;
@@ -87,8 +94,10 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
     public void Hit(float damage, bool powerAttack, Quaternion hitRotation)
     {
+        Debug.Log(damage);
         if (!isDeath)
         {
+            StartCoroutine(Effect(_hitEffect, _hitSoundNum, _hitDelay, hitRotation));
             DepleteHp(damage);
         }
     }
@@ -96,6 +105,15 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     public void Hit(float damage)
     {
         DepleteHp(damage);
+    }
+
+    IEnumerator Effect(GameObject effect, int soundNum, float delay, Quaternion hitRotation)
+    {
+        GameObject effectInstanse = Instantiate(effect, transform.position, hitRotation);
+        SFX_Manager.Instance.VFX(soundNum);
+
+        yield return new WaitForSeconds(delay);
+        Destroy(effectInstanse);
     }
 
     void Start()
@@ -271,7 +289,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
     void Skul()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = centerVector;
         teleportOut.SetActive(true);
         transform.LookAt(transform.position - Vector3.forward);
         animator.SetTrigger("isSkul");
@@ -376,6 +394,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
     public void Death()
     {
+        Instantiate(phase2, centerVector, Quaternion.identity);
         Destroy(gameObject);
     }
 
