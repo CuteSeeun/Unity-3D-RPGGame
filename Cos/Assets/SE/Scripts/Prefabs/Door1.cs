@@ -16,6 +16,9 @@ public class Door1 : MonoBehaviour, IInteractable
     [SerializeField] GameObject _interactorLight;
     [SerializeField] GameObject _LockedLight;
 
+    [SerializeField] bool _bgmChanger;
+    [SerializeField] int _bgmNum;
+
     [SerializeField] List<GameObject> _enemies;
     [SerializeField] List<GameObject> interactables;
 
@@ -65,6 +68,11 @@ public class Door1 : MonoBehaviour, IInteractable
             _animator.SetBool("isOpen", true);
             SFX_Manager.Instance.VFX(45);
             _collider.enabled = false;
+
+            if (_bgmChanger)
+            {
+                SFX_Manager.Instance.BGMPLAY(_bgmNum);
+            }
 
             foreach (var wall in _wallsToDestroy)
             {

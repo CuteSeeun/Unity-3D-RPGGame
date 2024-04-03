@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour, IInteractable
 {
     private Animator animator;
     public bool _isLocked;
+    private bool _isOpen;
     private Collider _collider;
     [SerializeField] GameObject _interactorLight;
     [SerializeField] GameObject _LockedLight;
@@ -21,25 +22,31 @@ public class Chest : MonoBehaviour, IInteractable
 
     public void InteractableOn()
     {
-        if (_isLocked == false)
+        if (_isOpen == false)
         {
-            _interactorLight.SetActive(true);
-        }
-        else
-        {
-            _LockedLight.SetActive(true);
+            if (_isLocked == false)
+            {
+                _interactorLight.SetActive(true);
+            }
+            else
+            {
+                _LockedLight.SetActive(true);
+            }
         }
     }
 
     public void InteractableOff()
     {
-        if (_isLocked == false)
+        if (_isOpen == false)
         {
-            _interactorLight.SetActive(false);
-        }
-        else
-        {
-            _LockedLight.SetActive(false);
+            if (_isLocked == false)
+            {
+                _interactorLight.SetActive(false);
+            }
+            else
+            {
+                _LockedLight.SetActive(false);
+            }
         }
     }
 
@@ -51,8 +58,9 @@ public class Chest : MonoBehaviour, IInteractable
 
     public void Interaction(GameObject interactor)
     {
-        if (_isLocked == false)
+        if (_isLocked == false && _isOpen == false)
         {
+            _isOpen = true;
             Destroy(_collider);
             InteractableOff();
             animator.SetBool("isBox", true);

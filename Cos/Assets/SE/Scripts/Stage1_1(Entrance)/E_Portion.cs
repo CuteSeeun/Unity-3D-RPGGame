@@ -21,7 +21,7 @@ public class E_Portion : MonoBehaviour, IInteractable
 
     public void Interaction(GameObject interactor)
     {
-        interactor.GetComponent<PlayerController>().potionNumber++;
+        interactor.GetComponent<PlayerControllerForTest>().potionNumber++;
         Destroy(_potion);
         _door.isLocked = false;
     }
