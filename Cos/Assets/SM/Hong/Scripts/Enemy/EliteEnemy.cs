@@ -43,6 +43,10 @@ public class EliteEnemy : MonoBehaviour, IHp
     private float attackTimer;
     private int attackStack = 0;
 
+    [SerializeField] GameObject _hitEffect;
+    [SerializeField] int _hitSoundNum;
+    [SerializeField] float _hitDelay;
+
     // 추가된 코드: 감지 범위와 공격 범위를 시각화하기 위한 색상 변수
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
@@ -102,11 +106,21 @@ public class EliteEnemy : MonoBehaviour, IHp
         if (!isDeath)
         {          
             DepleteHp(damage);
+            StartCoroutine(Effect(_hitEffect, _hitSoundNum, _hitDelay, hitRotation));
         }
     }
     public void Hit(float damage)
     {
         DepleteHp(damage);
+    }
+
+    IEnumerator Effect(GameObject effect, int soundNum, float delay, Quaternion hitRotation)
+    {
+        GameObject effectInstanse = Instantiate(effect, transform.position, hitRotation);
+        SFX_Manager.Instance.VFX(soundNum);
+
+        yield return new WaitForSeconds(delay);
+        Destroy(effectInstanse);
     }
 
 
@@ -230,7 +244,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                 rb.velocity = Vector3.down * fallSpeed;
                 m_Animator.SetBool("Fall", true);
 
-                if (transform.position.y <= 0)
+                if (transform.position.y <= 16f)
                 {
                     DamageJ();
                     isJumping = false;
@@ -244,7 +258,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                 }
             }
         }
-        if (transform.position.y > 30)
+        if (transform.position.y > 46)
         {
             transform.position = new Vector3((player.position  - (player.forward * 2)).x, 
                 transform.position.y,(player.position - (player.forward * 2)).z);

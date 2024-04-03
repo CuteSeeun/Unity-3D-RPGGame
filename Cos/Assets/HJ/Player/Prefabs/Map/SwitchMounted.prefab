@@ -148,7 +148,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.48, z: 0.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2272879445102493399}
   m_Father: {fileID: 6063973351916342070}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6795278310439073954
@@ -480,3 +481,92 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &7778322786010764846
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8553528086150696770}
+    m_Modifications:
+    - target: {fileID: 4570176372794258927, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: LightsModule.intensityCurve.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547886849578048195, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Fire_01_Big_Simple (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547886849578048195, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7509abe763b93b845a7760e9a9e74ced, type: 3}
+--- !u!4 &2272879445102493399 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8392674015321352441, guid: 7509abe763b93b845a7760e9a9e74ced,
+    type: 3}
+  m_PrefabInstance: {fileID: 7778322786010764846}
+  m_PrefabAsset: {fileID: 0}

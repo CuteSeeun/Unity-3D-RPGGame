@@ -927,7 +927,7 @@ MonoBehaviour:
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
   _attackRange: 2.5
-  _attackAngle: 60
+  _attackAngle: 75
   _attackLayerMask:
     serializedVersion: 2
     m_Bits: 331776
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
   _attackRange: 2.5
-  _attackAngle: 60
+  _attackAngle: 75
   _attackLayerMask:
     serializedVersion: 2
     m_Bits: 331776
@@ -1657,7 +1657,7 @@ MonoBehaviour:
   _advanceSpeedReduce: 2
   _attackDamageRate: 1.5
   _attackRange: 3
-  _attackAngle: 60
+  _attackAngle: 75
   _attackLayerMask:
     serializedVersion: 2
     m_Bits: 331776
@@ -2337,9 +2337,9 @@ MonoBehaviour:
   _canTurn: 0
   _advanceSpeed: 2
   _advanceSpeedReduce: 2
-  _attackDamageRate: 1.5
-  _attackRange: 2.5
-  _attackAngle: 60
+  _attackDamageRate: 1
+  _attackRange: 3
+  _attackAngle: 90
   _attackLayerMask:
     serializedVersion: 2
     m_Bits: 331776
@@ -2388,7 +2388,7 @@ MonoBehaviour:
   _advanceSpeedReduce: 2
   _attackDamageRate: 1
   _attackRange: 2.5
-  _attackAngle: 60
+  _attackAngle: 75
   _attackLayerMask:
     serializedVersion: 2
     m_Bits: 331776
@@ -2772,7 +2772,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 2H_Melee_Attack_Slice
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6455689102542921663}
@@ -3224,7 +3224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41f5747fe2f40a4fa283e36357d2aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defendingAngle: 60
+  _defendingAngle: 90
 --- !u!1101 &3411267001432264310
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3543,7 +3543,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 2H_Melee_Attack_Chop
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8563041449952055680}
@@ -4346,7 +4346,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 1H_Ranged_Reload
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7744446823208456096}
@@ -4608,7 +4608,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 2H_Melee_Attack_Stab
-  m_Speed: 1
+  m_Speed: 1.75
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2497041772174897201}
