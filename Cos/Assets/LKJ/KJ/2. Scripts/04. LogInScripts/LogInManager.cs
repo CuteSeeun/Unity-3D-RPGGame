@@ -297,6 +297,7 @@ namespace KJ
                 /*직업 기본 정보*/
                 Class knight = new Class();
                 knight.name = "Knight";
+                knight.classType = ClassType.knight;
                 knight.baseHp = 100;
                 knight.baseSp = 100;
                 knight.inventory = new Inventory();
@@ -314,6 +315,7 @@ namespace KJ
                 barbarian.name = "Barbarian";
                 barbarian.baseHp = 100;
                 barbarian.baseSp = 100;
+                barbarian.classType = ClassType.barbarian;
                 barbarian.inventory = new Inventory();
                 barbarian.inventory.items.Add(new Item() { id = "15", quantity = 1 });
                 barbarian.inventory.items.Add(new Item() { id = "24", quantity = 1 });
@@ -321,6 +323,7 @@ namespace KJ
                 barbarian.skills.Add(new Skill() { id = "36", name = "피바람", description = "도끼를 휘두르며 주위의 모든 것을 부수며 이동한다." });
                 barbarian.skills.Add(new Skill() { id = "30", name = "체력 단련", description = "훈련을 통해 더욱 격렬한 전투에도 견딜 수 있게 한다." });
                 barbarian.skills.Add(new Skill() { id = "32", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
+                barbarian.gold = 100;
 
                 gameData.classes.Add(ClassType.barbarian, barbarian);
 
@@ -328,6 +331,7 @@ namespace KJ
                 rogue.name = "Rogue";
                 rogue.baseHp = 100;
                 rogue.baseSp = 100;
+                rogue.classType = ClassType.rogue;
                 rogue.inventory = new Inventory();
                 rogue.inventory.items.Add(new Item() { id = "18", quantity = 1 });
                 rogue.inventory.items.Add(new Item() { id = "24", quantity = 1 });
@@ -335,6 +339,7 @@ namespace KJ
                 rogue.skills.Add(new Skill() { id = "34", name = "눈먼 화살", description = "쇠뇌를 장전해 빠르게 발사한다." });
                 rogue.skills.Add(new Skill() { id = "30", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
                 rogue.skills.Add(new Skill() { id = "31", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
+                rogue.gold = 100;
 
                 gameData.classes.Add(ClassType.rogue, rogue);
 
@@ -342,6 +347,7 @@ namespace KJ
                 mage.name = "Mage";
                 mage.baseHp = 100;
                 mage.baseSp = 100;
+                mage.classType = ClassType.mage;
                 mage.inventory = new Inventory();
                 mage.inventory.items.Add(new Item() { id = "21", quantity = 1 });
                 mage.inventory.items.Add(new Item() { id = "24", quantity = 1 });
@@ -349,6 +355,7 @@ namespace KJ
                 mage.skills.Add(new Skill() { id = "40", name = "마력 폭풍", description = "주변의 모든 마력을 흡수하는 소용돌이를 만들어 마력 폭발을 일으킨다." });
                 mage.skills.Add(new Skill() { id = "31", name = "지구력 단련", description = "훈련으로 더욱 격렬한 움직임을 가능하게 한다." });
                 mage.skills.Add(new Skill() { id = "32", name = "공격력 단련", description = "훈련을 통해 더욱 치명적인 공격하는 법을 익힌다." });
+                mage.gold = 100;
 
                 gameData.classes.Add(ClassType.mage, mage);
 
@@ -361,6 +368,10 @@ namespace KJ
                 w.Close();
             }
 
+            if (GUI.Button(new Rect(0, 100, 100, 50), "firebase"))
+            {
+                NetData.Instance.SavePlayerDB(null);
+            }
         }
 #endif
 #endregion

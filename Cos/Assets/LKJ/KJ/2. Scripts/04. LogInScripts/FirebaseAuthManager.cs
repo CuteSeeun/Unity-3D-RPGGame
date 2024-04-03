@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
 using System;
+using Firebase.Database;
+using Firebase.Extensions;
 
 namespace KJ
 {
@@ -58,6 +60,7 @@ namespace KJ
             }
         }
 
+        private DatabaseReference _databaseReference;
         void Awake()
         {
             // 싱글톤 패턴
@@ -82,6 +85,10 @@ namespace KJ
                 {
                     // Firebase 초기화
                     InitializeFirebase();
+                    _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
+                    
+                   Debug.Log("firebase initalized successfull");
                 }
                 else
                 {
@@ -89,6 +96,28 @@ namespace KJ
                     Debug.LogError("Firebase 초기화 실패 : " + dependencyStatus);
                 }
             });
+        }
+
+        public void WriteData_Data(string userkey)
+        {
+            DatabaseReference db = null;
+            db = FirebaseDatabase.DefaultInstance.GetReference("userinfo");
+
+            /*데이터를 json 으로 변환한다.*/
+
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("userkey", "bbbbbbbb");
+            dic.Add("authdata", "aaaaa");
+
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data.Add(userkey, dic);
+
+            db.UpdateChildrenAsync(data).ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompleted)
+                    Debug.Log("dataupdate complete");
+            });
+
         }
 
         public void InitializeFirebase()

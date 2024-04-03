@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class MenuUIManager : MonoBehaviour
 {
     PlayerDBManager playerDBManager = PlayerDBManager.Instance;
-
+    public static MenuUIManager Instance = null;
 
     /* 메뉴 UI */
     [Header("Menu UI")]
@@ -44,6 +44,19 @@ public class MenuUIManager : MonoBehaviour
     public Image mageImage;
 
 
+    public Image _img_weapon;
+    public Image _img_armor;
+    public Image _img_accessory;
+
+
+    public void Awake()
+    {
+        Instance = this;
+
+
+    }
+
+    //public GameB
 
     void Update()
     {
