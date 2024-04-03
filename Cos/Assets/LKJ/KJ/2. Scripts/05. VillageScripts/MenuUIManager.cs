@@ -41,6 +41,13 @@ public class MenuUIManager : MonoBehaviour
     [Header("Class")]
     public TMP_Text classType;
 
+    [Header("ClassImage")]
+    public Image knghtImage;
+    public Image babarianImage;
+    public Image rogueImage;
+    public Image mageImage;
+
+
 
     void Update()
     {
@@ -50,6 +57,22 @@ public class MenuUIManager : MonoBehaviour
             Debug.Log("ESC!!");
             menuUI.SetActive(true);
             classType.text = playerDBManager.LoadGameData(playerDBManager.CurrentShortUID).classType;
+
+            switch(playerDBManager.LoadGameData(playerDBManager.CurrentShortUID).classType)
+            {
+                case "Knight":
+                    knghtImage.gameObject.SetActive(true);
+                    break;
+                case "Babarian":
+                    babarianImage.gameObject.SetActive(true);
+                    break;
+                case "Rogue":
+                    rogueImage.gameObject.SetActive(true);
+                    break;
+                case "Mage":
+                    mageImage.gameObject.SetActive(true);
+                    break;
+            }
             Cursor.visible = true;
 
             PauseGame();
