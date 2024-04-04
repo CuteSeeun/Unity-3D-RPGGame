@@ -33,7 +33,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     private int attackStack = 0;
 
     public GameObject phase2;
-    public Vector3 centerVector = new Vector3(371, 32.3f, - 167);
+    public Vector3 centerVector = new Vector3(670, 26, 160);
 
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;

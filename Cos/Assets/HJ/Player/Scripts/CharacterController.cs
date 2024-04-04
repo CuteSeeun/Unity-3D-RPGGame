@@ -28,26 +28,26 @@ namespace HJ
             {
                 if (itemDBManager._itemData.items[i].type == "weapon")
                 {
-                    attackItem = itemDBManager._itemData.items[i].attributes.attack;
+                    attackItem = 10;
                 }
                 if (itemDBManager._itemData.items[i].type == "armor")
                 {
-                    armorItem = itemDBManager._itemData.items[i].attributes.defense;
+                    armorItem = 10;
                 }
             }
-            for (int i = 0; i < itemDBManager._itemData.items.Count; i++)
+            for (int j = 0; j < itemDBManager._itemData.items.Count; j++)
             {
-                if (itemDBManager._itemData.items[i].name == "귀걸이")
+                if (itemDBManager._itemData.items[j].name == "귀걸이")
                 {
-                    attackSkill = 0.3f;
+                    //attackSkill = 0.3f;
                 }
-                else if (itemDBManager._itemData.items[i].name == "목걸이")
+                else if (itemDBManager._itemData.items[j].name == "목걸이")
                 {
-                    attackSkill = 0.2f;
+                    //attackSkill = 0.2f;
                 }
-                else if (itemDBManager._itemData.items[i].name == "반지")
+                else if (itemDBManager._itemData.items[j].name == "반지")
                 {
-                    attackSkill = 0.1f;
+                    //attackSkill = 0.1f;
                 }
             }
 

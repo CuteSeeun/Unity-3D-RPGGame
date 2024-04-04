@@ -29,6 +29,7 @@ public class BarsTset: MonoBehaviour
     public TMP_Text staminaMax;
     public TMP_Text menuHealthCur;
     public TMP_Text menuStaminaCur;
+    public TMP_Text potionNum;
     /* 최대 체력 */
     [Header("MaxHp")]
     public float maxHealth = 100f;
@@ -84,6 +85,7 @@ public class BarsTset: MonoBehaviour
         healthCur.text = $"{playerHp.hp}";
         menuHealthCur.text = $"{playerHp.hp}";
         healthMax.text = $"{playerHp.hpMax}";
+        potionNum.text = $"{playerSp.potionNumber} /";
     }
 
     // 스테미나 업데이트
