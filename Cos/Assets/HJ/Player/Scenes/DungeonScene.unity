@@ -7742,6 +7742,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage Final
       objectReference: {fileID: 0}
+    - target: {fileID: 5311133678112068465, guid: 7980ed1639732c541a6b946442849e16,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 1389747574}
     - target: {fileID: 7746314383920514251, guid: 7980ed1639732c541a6b946442849e16,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7793,8 +7798,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5431300636161930185, guid: 7980ed1639732c541a6b946442849e16, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7746314383920514251, guid: 7980ed1639732c541a6b946442849e16,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1389747573}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7980ed1639732c541a6b946442849e16, type: 3}
 --- !u!4 &1044304907 stripped
@@ -10502,6 +10512,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6379218568449406185, guid: 860c23196bfa09a419d0eaadc8d28ce2,
     type: 3}
   m_PrefabInstance: {fileID: 1374993853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1389747572
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 305573952}
+    m_Modifications:
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721668685912903960, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+        type: 3}
+      propertyPath: m_Name
+      value: Boss_Phase1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97d5316cdf6c1c446a28e53c1eb21201, type: 3}
+--- !u!4 &1389747573 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8233222068180405154, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+    type: 3}
+  m_PrefabInstance: {fileID: 1389747572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1389747574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8721668685912903960, guid: 97d5316cdf6c1c446a28e53c1eb21201,
+    type: 3}
+  m_PrefabInstance: {fileID: 1389747572}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1402602282
 GameObject:
