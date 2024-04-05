@@ -257,7 +257,10 @@ public class LongEnemyAI : MonoBehaviour, IHp
         agent.isStopped = false;
         isAiming = true;
     }
-
+    /// <summary>
+    /// 화살 오브젝트를 발사하는 함수. 화살을 발사하면 화살의 타겟과 화살의 오너를 지정.
+    /// 바라보는 방향으로 화살을 발사
+    /// </summary>
     public void Shoot()
     {
         //Instantiate(arrow,pos.position,Quaternion.identity);

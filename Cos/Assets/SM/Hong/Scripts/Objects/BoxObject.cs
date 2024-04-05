@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using HJ;
 using UnityEngine;
 
+/// <summary>
+/// 데미지를 받으면 파괴되면서 일정 확률로 아이템을 드롭하는 오브젝트
+/// </summary>
 public class BoxObject : MonoBehaviour, IHp
 {
     bool isDestroy;
@@ -72,6 +75,7 @@ public class BoxObject : MonoBehaviour, IHp
 
     void Update()
     {
+        //데미지를 받아 체력이 0이 되면 아이템을 스폰. 데미지를 입으면 이펙트 생성
         if(_hp <= 0 && !isDestroy)
         {
             isDestroy = true;
@@ -80,6 +84,9 @@ public class BoxObject : MonoBehaviour, IHp
         }
     }
 
+    /// <summary>
+    /// 20% 확률로 포션을, 80% 확률로 재료아이템을 드롭. 아이템 드롭 후 오브젝트는 파괴.
+    /// </summary>
     void ItemSpawn()
     {
         int spawnitem = Random.Range(0, 5);

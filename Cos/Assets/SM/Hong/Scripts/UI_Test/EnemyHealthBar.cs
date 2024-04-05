@@ -3,6 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Enemy가 데미지를 입었을때 해당 Enemy의 이름, 최대체력, 현재체력을 표시할 수 있게 함.
+/// Enemy 스크립트에서 참조받아 사용.
+/// </summary>
 public class EnemyHealthBar : MonoBehaviour
 {
     public Slider healthSlider;

@@ -4,6 +4,11 @@ using HJ;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// 보르 2페이즈가 Tornado 패턴 때 소환하는 오브젝트의 스크립트
+/// 보스 방향을 바라보며 보스 방향으로 이동
+/// 플레이어와 출돌 시 데미지를 부여하고 보스와 충돌 시 사라짐.
+/// </summary>
 public class MoveTornado : MonoBehaviour
 {
     public float speed = 5f;

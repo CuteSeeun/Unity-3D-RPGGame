@@ -156,11 +156,13 @@ public class EnemyS_AI : MonoBehaviour, IHp
                     }
                 }
 
+                
                 if (isAwake && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Basic"))
                 {
                     m_Animator.SetInteger("state", 2);
                     if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Spawn"))
                     {
+                        //일어나는 모션이 끝나고 추격 시작
                         isChasing = true;
                         if (isChasing)
                         {
@@ -178,6 +180,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
                                 agent.SetDestination(transform.position);
                                 transform.LookAt(transform.position + transform.forward);
                             }
+                            //공격범위 내 플레이어 감지 시 attackStack에 따라 공격모션 변경
                             if (Vector3.Distance(transform.position, player.position) < attackRange)
                             {
                                 m_Animator.SetInteger("state", 2);
@@ -204,7 +207,7 @@ public class EnemyS_AI : MonoBehaviour, IHp
                 }
             }
 
-            if (isHit)
+            if (isHit) // 피격 모션 중 플레이어를 추격하는것을 방지
             {
                 agent.isStopped = true;
                 agent.SetDestination(transform.position);

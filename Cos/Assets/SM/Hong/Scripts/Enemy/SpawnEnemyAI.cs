@@ -4,6 +4,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// CloseEmeyAI 스크립트와 기본적으로 동일. Patrol state가 제외되고 Spawn모션이 추가
+/// Spawn 후 즉시 Chasing state로 전환되어 플레이어를 추격
+/// </summary>
 public class SpawnEnemyAI : MonoBehaviour, IHp
 {
     float chaseSpeed = 4f;

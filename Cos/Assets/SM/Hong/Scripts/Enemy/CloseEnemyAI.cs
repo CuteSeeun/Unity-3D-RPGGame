@@ -167,6 +167,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
                 else if (isChasing)
                 {
                     agent.speed = chaseSpeed;
+                    //플레이어를 공격중이지 않을때 플레이어를 바라보면서 state를 Run으로 유지.
                     if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
                     {
                         agent.isStopped = false;
@@ -175,7 +176,7 @@ public class CloseEnemyAI : MonoBehaviour, IHp
                         agent.SetDestination(player.position);
                         agent.stoppingDistance = 2;
                     }
-                    else
+                    else //플레이어를 공격중일때 공격방향을 바라보고 플레이어에게 이동하는것을 멈춤.
                     {
                         agent.isStopped = true;
                         agent.SetDestination(transform.position);
@@ -249,6 +250,11 @@ public class CloseEnemyAI : MonoBehaviour, IHp
        
     }
 
+    /// <summary>
+    /// Patrol 상태일 때 랜덤한 좌표 생성 후 해당 위치로 이동
+    /// 아래 함수는 랜덤한 좌표 생성 함수
+    /// </summary>
+    /// <returns></returns>
     Vector3 GetRandomPatrolDestination()
     {
         float patrolRadius = 10f;

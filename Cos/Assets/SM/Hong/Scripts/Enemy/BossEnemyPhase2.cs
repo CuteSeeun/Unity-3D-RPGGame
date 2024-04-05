@@ -132,13 +132,14 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
                 isSpawn = true;
                 if (isSpawn)
                 {
+                    //Idle 상태일때 플레이어를 바라봄
                     if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
                     {
                         transform.LookAt(player.position);
                     }
                     if (attackTimer == 0 && !isAttack)
                     {
-                        switch (attackStack)
+                        switch (attackStack) //attackStack에 의한 공격패턴 순회
                         {
                             case 0:
                                 animator.SetTrigger("missile");
@@ -238,7 +239,7 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
         col.enabled = true;
         sound.VFX(43);
     }
-
+    #region 보스 공격패턴
     void MissileAttack()
     {
         Invoke("Missile", 0.5f);
@@ -354,7 +355,8 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
 
         }
     }
-
+    #endregion 보스 공격패턴
+    //공격모션이 끝날 때 애니메이션 이벤트로 호출되는 함수
     void AttackEnd()
     {
         isAttack = false;
@@ -392,11 +394,34 @@ public class BossEnemyPhase2 : MonoBehaviour, IHp
         isDamage = false;
     }
 
+    public LayerMask _attackLayerMask;
+    float _attackAngleInnerProduct;
+    public float _attackAngle = 180;
+    float attackDamage = 7;
     private IEnumerator Damage(IHp iHp)
     {
         while (isDamage)
         {
-            iHp.Hit(5);
+            // 공격 거리 내 모든 적 탐색
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position + new Vector3(0, 1, 0),
+                                                      3,
+                                                      Vector3.up,
+                                                      0,
+                                                      _attackLayerMask);
+
+            // 공격 각도에 따른 내적 계산
+            _attackAngleInnerProduct = Mathf.Cos(_attackAngle * Mathf.Deg2Rad);
+
+            // 내적으로 공격각도 구하기
+            foreach (RaycastHit hit in hits)
+            {
+                if (Vector3.Dot((hit.transform.position - transform.position).normalized, transform.forward) > _attackAngleInnerProduct)
+                {
+                    // 데미지 주고, 데미지, 공격 방향, 파워어택 여부 전달                 
+                    iHp.Hit(5);
+                    
+                }
+            }
             yield return new WaitForSeconds(0.5f);
         }
     }

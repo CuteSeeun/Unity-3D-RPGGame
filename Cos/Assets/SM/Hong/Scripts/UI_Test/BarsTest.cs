@@ -65,7 +65,10 @@ public class BarsTset: MonoBehaviour
         playerDeathUI.SetActive(false);
     }
 
-    void Update()
+    /// <summary>
+    /// 실시간으로 체력바와 스테미나바를 업데이트하고 플레이어의 체력이 0이 되면 3초 후 Gameover UI 호출
+    /// </summary>
+    void Update()       
     {
         UpdateHealthUI();
         UpdateStaminaUI();

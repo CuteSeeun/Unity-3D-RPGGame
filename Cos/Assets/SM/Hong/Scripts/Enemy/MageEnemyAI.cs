@@ -255,7 +255,10 @@ public class MageEnemyAI : MonoBehaviour, IHp
         Gizmos.color = attackColor;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-
+    /// <summary>
+    /// 발사할 MagicBall을 생성하여 타겟과 오너를 지정.
+    /// 바라보는 방향으로 MagicBall을 발사
+    /// </summary>
     public void Magic()
     {
         GameObject shootMagic = Instantiate(magic, transform.position + transform.forward, Quaternion.identity);

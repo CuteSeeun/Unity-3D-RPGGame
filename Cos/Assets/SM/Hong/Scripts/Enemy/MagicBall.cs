@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using HJ;
 using UnityEngine;
 
+/// <summary>
+/// MageEnemy가 발사하는 MagicBall 스크립트
+/// 플레이어를 주어준 속도로 추격하고 충돌 시 데미지 부여
+/// </summary>
 public class MagicBall : MonoBehaviour
 {
     public float speed;

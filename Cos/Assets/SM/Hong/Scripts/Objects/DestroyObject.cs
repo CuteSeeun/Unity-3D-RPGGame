@@ -1,6 +1,9 @@
 using HJ;
 using UnityEngine;
 
+/// <summary>
+/// hp를 1을 가지고, 데미지를 입으면 파괴이펙트를 생성하며 파괴되는 오브젝트
+/// </summary>
 public class DestroyObject : MonoBehaviour, IHp
 {
     bool isDestroy;

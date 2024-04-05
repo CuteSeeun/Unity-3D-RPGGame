@@ -33,6 +33,7 @@ public class GetItemManager : MonoBehaviour
             // 텍스트가 표시된 후의 경과 시간을 초기화합니다.
             timer = 0f;
         }
+        //해당 아이템을 획득하면 인벤토리에 추가합니다.
         switch (itemName)
         {
             case "뼈":

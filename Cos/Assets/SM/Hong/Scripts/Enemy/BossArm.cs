@@ -13,6 +13,7 @@ public class BossArm : MonoBehaviour
 
     void Start()
     {
+        //공격 타겟을 플레이어로 지정하고 10초후 오브젝트 파괴
         animator = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player").transform;
         Invoke("End", 10f);
@@ -20,9 +21,11 @@ public class BossArm : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.position) < attackRange)
+        // 공격범위 내 플레이어 감지 시 플레이어 공격
+        if (Vector3.Distance(transform.position, player.position) < attackRange && attackTimer == 0)
         {
             animator.SetTrigger("isAttack");
+            attackTimer = 3;
             transform.LookAt(player.position);
         }
 

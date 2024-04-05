@@ -2,6 +2,9 @@ using HJ;
 using UnityEngine;
 using UnityEngine.InputSystem.Switch;
 
+/// <summary>
+/// 체력을 1 보유하며 데미지를 받으면 2초 폭발하는 오브젝트.
+/// </summary>
 public class BombBox : MonoBehaviour, IHp
 {
     Animator animator;
@@ -77,6 +80,7 @@ public class BombBox : MonoBehaviour, IHp
     }
     private void Update()
     {
+        //데미지를 받아 hp가 0이 되면 2초후 폭발. 데미지를 입을떄 이펙트를 발생함.
         if (_hp <= 0 && !isBomb)
         {
             isBomb = true;
@@ -86,6 +90,9 @@ public class BombBox : MonoBehaviour, IHp
         }
     }
     
+    /// <summary>
+    /// 폭발 시 해당 범위 내 데미지를 부여 후 오브젝트 파괴.
+    /// </summary>
     void Explosion()
     {
         Instantiate(bombEffect, transform.position, Quaternion.identity);

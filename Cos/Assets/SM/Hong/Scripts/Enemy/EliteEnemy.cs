@@ -150,6 +150,7 @@ public class EliteEnemy : MonoBehaviour, IHp
 
     void Update()
     {
+        //골렘이 일어나는 모션이 끝났을때 행동 시작
         if (isStand && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("StandUp_Golem"))
         {
             if (!isDeath)
@@ -168,6 +169,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                 if (isChasing)
                 {
                     agent.speed = chaseSpeed;
+                    //플레이어를 공격중이지 않을 때 플레이어를 바라보고 walk state를 유지.
                     if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")
                         || m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
                     {
@@ -177,17 +179,19 @@ public class EliteEnemy : MonoBehaviour, IHp
                         agent.SetDestination(player.position);
                         agent.stoppingDistance = 3;
                     }
+                    //돌진 준비 모션일때도 플레이어를 계속 바라보게 함.
                     else if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("isRush_Golem"))
                     {
                         transform.LookAt(player.position);
                         agent.isStopped = true;
                     }
-                    else
+                    else // 플레이어를 공격중일때 공격방향을 바라보고 추격을 멈춤.
                     {
                         agent.isStopped = true;
                         agent.SetDestination(transform.position);
                         transform.LookAt(transform.position + transform.forward);
                     }
+                    //공격 범위 내에 플레이어 감지 시 attackStack에 따라 공격패천 순회
                     if (Vector3.Distance(transform.position, player.position) < attackRange
                         && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Golem"))
                     {
@@ -307,7 +311,7 @@ public class EliteEnemy : MonoBehaviour, IHp
             transform.LookAt(transform.position + transform.forward);
         }
     }
-
+    #region 보스 공격패턴
     void Attack()
     {
         m_Animator.SetTrigger("isAttack");
@@ -352,6 +356,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     {
         grounded.SetActive(false);
     }
+    #endregion 보스 공격패턴
     void OnDrawGizmosSelected()
     {
         // 감지 범위 시각화
@@ -393,7 +398,7 @@ public class EliteEnemy : MonoBehaviour, IHp
     {
         Destroy(gameObject);
     }
-
+    #region 데미지 함수
     public LayerMask _attackLayerMask;
     float _attackAngleInnerProduct;
     public float _attackAngle = 45;
@@ -528,7 +533,7 @@ public class EliteEnemy : MonoBehaviour, IHp
             }
         }
     }
-
+    #endregion 데미지 함수
     void EffectR()
     {
         effectR.SetActive(true);

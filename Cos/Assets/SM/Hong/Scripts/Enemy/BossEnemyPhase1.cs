@@ -66,7 +66,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     [SerializeField] public float _hp;
 
     public float hpMax { get => _hpMax; }
-    public float _hpMax = 10;
+    public float _hpMax = 500;
 
     public event System.Action<float> onHpChanged;
     public event System.Action<float> onHpDepleted;
@@ -138,10 +138,12 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
     void Update()
     {
+        //보스가 처음 움직이기 시작할떄 발생하는 3가지 모션이 끝났을때 행동 시작
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Sit_Boss")
             && !animator.GetCurrentAnimatorStateInfo(0).IsName("Stand_Boss")
             && !animator.GetCurrentAnimatorStateInfo(0).IsName("Start_Boss"))
         {
+            //감지 범위 내 플레이어 감지 시 플레이어 추격
             Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
 
             foreach (Collider collider in colliders)
@@ -154,6 +156,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
             if (isChasing)
             {
                 agent.speed = chaseSpeed;
+                //플레이어를 공격중이지 않을때 플레이어를 바라봄.
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle_Boss")
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Run_Boss"))
                 {
@@ -163,12 +166,13 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
                     agent.SetDestination(player.position);
                     agent.stoppingDistance = 3;
                 }
-                else
+                else // 플레이어를 공격중일때 공격 방향을 바라보고 이동을 멈춤
                 {
                     agent.isStopped = true;
                     agent.SetDestination(transform.position);
                     transform.LookAt(transform.position + transform.forward);
                 }
+                //공격범위 내 플레이어 감지 시 플레이어를 공격
                 if (Vector3.Distance(transform.position, player.position) < attackRange
                     && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Boss"))
                 {
@@ -176,7 +180,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
                     animator.SetInteger("state", 0);
                     if (attackTimer == 0 && !isAttack)
                     {
-                        switch (attackStack)
+                        switch (attackStack) // attackStack에 따른 공격패턴 변화
                         {
                             case 0:
                                 Attack();
@@ -209,6 +213,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
                         }
                     }
                 }
+                //skul공격중일때 skulMissile을 주기적으로 다른 방향으로 소환
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("SkulMissile_Boss") && !isSkul)
                 {
                     isSkul = true;
@@ -219,6 +224,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
                 }
             }
         }
+        //보스가 charge공격중일때만 콜라이더 생겅
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("ChargeAttack_Boss"))
         {
             Collider col = GetComponent<SphereCollider>();
@@ -245,7 +251,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
             Invoke("Death", 2);
         }
     }
-
+    #region 보스 공격패턴
     void Attack()
     {
         animator.SetTrigger("isAttack");
@@ -354,7 +360,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
         }
     }
-
+    #endregion 보스 공격패턴
     void OnDrawGizmosSelected()
     {
         // 감지 범위 시각화
@@ -366,6 +372,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+    //공격모션이 끝날 때 애니메이션 이벤트로 호출되는 함수
     public void AttackEnd()
     {
         animator.SetInteger("state", 0);
@@ -405,7 +412,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
             iHp.Hit(20, true, transform.rotation);
         }
     }
-
+    #region 데미지함수
     public LayerMask _attackLayerMask;
     float _attackAngleInnerProduct;
     public float _attackAngle = 45;
@@ -496,7 +503,9 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
             }
         }
     }
-
+    #endregion 데미지함수
+    #region 이펙트생성 함수
+    //공격모션 중 애니메이션 이벤트로 호출되는 이펙트 생성 함수
     void EffectR()
     {
         effectR.SetActive(true);
@@ -505,5 +514,6 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     void EffectL()
     {
         effectL.SetActive(true);
-    }   
+    }
+    #endregion 이펙트생성 함수
 }

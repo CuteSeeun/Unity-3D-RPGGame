@@ -211,6 +211,10 @@ public class MimicEnemyAI : MonoBehaviour, IHp
     {
         Destroy(gameObject);
     }
+    /// <summary>
+    /// 플레이어가 트리거 범위 내에서 상호작용 시 행동 시작
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player"))
