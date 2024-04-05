@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +31,8 @@ namespace KJ
         {
             //_gameData = NetData.Instance._gameData;
         }
+
+        public GameObject characterInstance { get; private set; }
 
 
         public void CreateCharacter(string className)
@@ -76,13 +77,14 @@ namespace KJ
                         Debug.Log("캐릭터 프리팹" + className);
 
                         /* 프리팹 로드 및 인스턴스화. */
+
                         GameObject characterPrefab = Resources.Load<GameObject>($"Prefabs/{className}");
                         /* spawn 위치 Vector3 값 설정. */
                         Vector3 spawnPosition = new Vector3(-45, 3, 0);
                         if (characterPrefab != null)
                         {
                             Debug.Log("호출5");
-                            GameObject characterInstance = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
+                            characterInstance = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
                             /* 씬 전환시 파괴 방지 */
                             DontDestroyOnLoad(characterInstance);
 

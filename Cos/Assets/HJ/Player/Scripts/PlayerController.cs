@@ -93,8 +93,8 @@ namespace HJ
         public int maxPotionItem;
         public int potionNumber { get => _potionNumber; set => _potionNumber = Mathf.Clamp(value, 0, maxPotion); }
         [SerializeField] int _potionNumber;
-        public float potionHp;
-        [SerializeField] float _potionHp;
+        public float potionHp = 30;
+        [SerializeField] float _potionHp = 35;
         public float potionHpItem;
         
         private void PotionStart()

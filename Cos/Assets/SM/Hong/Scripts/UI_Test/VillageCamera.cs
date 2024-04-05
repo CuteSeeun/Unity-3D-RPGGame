@@ -22,10 +22,7 @@ namespace HJ
 
         void Update()
         {
-            if (player.position.y <= 0)
-            {
-                _transform.position = player.position + _cameraOffset;
-            }
+            _transform.position = player.position + _cameraOffset;
         }
     }
 }

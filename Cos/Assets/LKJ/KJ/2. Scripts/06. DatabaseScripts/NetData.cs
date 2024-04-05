@@ -148,6 +148,7 @@ public class NetData : SingletonLazy<NetData>
 
         string jsondata2 = Newtonsoft.Json.JsonConvert.SerializeObject(ItemDBManager.Instance._itemData.items);
 
+        Debug.Log($"{ItemDBManager.Instance._itemData.items[0].id}");
         WriteItemData(ItemDBManager.Instance._itemData.items[0].id, "Items", jsondata2);
 
 

@@ -33,7 +33,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
     private int attackStack = 0;
 
     public GameObject phase2;
-    public Vector3 centerVector = new Vector3(371, 32.3f, - 167);
+    public Vector3 centerVector = new Vector3(670, 26, 160);
 
     public Color detectionColor = Color.yellow;
     public Color attackColor = Color.red;
@@ -289,7 +289,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
     void Skul()
     {
-        transform.position = centerVector;
+        transform.position = new Vector3(670, 26, 160);
         teleportOut.SetActive(true);
         transform.LookAt(transform.position - Vector3.forward);
         animator.SetTrigger("isSkul");
@@ -394,7 +394,7 @@ public class BossEnemyPhase1 : MonoBehaviour, IHp
 
     public void Death()
     {
-        Instantiate(phase2, centerVector, Quaternion.identity);
+        Instantiate(phase2, new Vector3(670,26,160), Quaternion.identity);
         Destroy(gameObject);
     }
 

@@ -8,14 +8,15 @@ public class Portal : MonoBehaviour
 {
     void Awake()
     {
-        
+        Debug.Log("저장 완료");
+        NetData.Instance.SavePlayerDB(null);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("LoadingScene");
+            SceneManager.LoadScene("GotoDungeon");
         }
     }
 }

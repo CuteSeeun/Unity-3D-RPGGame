@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 using Item = KJ.Item;
 
 public class InventoryUI : MonoBehaviour

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using HJ;
 using UnityEditor;
-using UnityEditor.Experimental.Rendering;
+//using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -244,7 +244,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                 rb.velocity = Vector3.down * fallSpeed;
                 m_Animator.SetBool("Fall", true);
 
-                if (transform.position.y <= 16f)
+                if (transform.position.y <= 11)
                 {
                     DamageJ();
                     isJumping = false;
@@ -258,7 +258,7 @@ public class EliteEnemy : MonoBehaviour, IHp
                 }
             }
         }
-        if (transform.position.y > 46)
+        if (transform.position.y > 41)
         {
             transform.position = new Vector3((player.position  - (player.forward * 2)).x, 
                 transform.position.y,(player.position - (player.forward * 2)).z);
