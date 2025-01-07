@@ -9,7 +9,7 @@ Unity로 약 1달간 개발한 3D RPG 인디게임입니다.
   <rect x="3" y="7" width="13" height="10" rx="2" ry="2"></rect>
   <polygon points="16 7 22 11 22 13 16 17 16 7"></polygon>
 </svg>
-    3D RPG 인디게임.mp4  :  이미지를 클릭해서 영상을 시청하세요 
+    3D RPG.mp4  :  이미지 클릭 -> 영상 시청 
   </summary>
 
   [![유튜브 미리보기 이미지](https://img.youtube.com/vi/hSVZGd3OLH0/0.jpg)](https://www.youtube.com/watch?v=hSVZGd3OLH0)
